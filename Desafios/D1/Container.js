@@ -32,19 +32,49 @@ class Container {
   }
 }
 
-const c = new Container();
+class Producto {
+  constructor(id,title,price,thumbnail){  
+    this.id=id;
+    this.title=title;
+    this.price=price;
+    this.thumbnail=thumbnail;
+  }
 
-c.save("a");
-c.save("b");
-c.save("c");
-c.save("d");
-c.save("e");
+  getId(){
+    return this.id;
+  }
 
-console.log(`getAll: ${c.getAll()}`);
-console.log(`getById (4): ${c.getById(4)}`);
-c.deleteById(2);
+  getTitle(){
+    return this.title;
+  }
+
+  getPrice(){
+    return this.price;
+  }
+
+  getThumbnail(){
+    return this.thumbnail;
+  }
+
+}
+
+const productos = new Container();
+
+productos.save(new Producto(0,"Teléfono",1200,"telefono.png"));
+productos.save(new Producto(1,"Televisor",5000,"televisor.png"));
+productos.save(new Producto(2,"Computadora",7800,"computadora.png"));
+productos.save(new Producto(3,"Auriculares",700,"auriculares.png"));
+
+console.log(`getAll: ${JSON.stringify(productos.getAll())}`);
+console.log(`getById (2): ${JSON.stringify(productos.getById(2))}`);
+productos.deleteById(2);
+console.log("");
+
 console.log("deleteById (2)");
-console.log(`getAll: ${c.getAll()}`);
-c.deleteAll();
+console.log(`getAll: ${JSON.stringify(productos.getAll())}`);
+console.log(`getById (2): ${JSON.stringify(productos.getById(2))}`);
+productos.deleteAll();
+console.log("");
+
 console.log("deleteAll ");
-console.log(`getAll: ${c.getAll()}`);
+console.log(`getAll: ${JSON.stringify(productos.getAll())}`);

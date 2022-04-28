@@ -34,19 +34,28 @@ async function main() {
         thumbnail: "auriculares.png"
     });
 
-    console.log(`getAll: ${JSON.stringify(await products.getAll())}`);
-    console.log(`getById (2): ${JSON.stringify(await products.getById(2))}`);
+    console.log(await products.getAll());
+    console.log("");
+    console.log(await products.getById(2));
+    console.log("");
     await products.deleteById(2);
+    console.log(await products.getAll());
+    console.log("");
+    console.log(await products.getById(2));
+    console.log("");
+    await products.deleteAll();
+    console.log(await products.getAll());
     console.log("");
 
-    console.log("deleteById (2)");
-    console.log(`getAll: ${JSON.stringify(await products.getAll())}`);
-    console.log(`getById (2): ${JSON.stringify(await products.getById(2))}`);
-    // await products.deleteAll();
-    // console.log("");
+    await products.save({
+        id: 5,
+        title: "Pantalla",
+        price: 4500,
+        thumbnail: "pantalla.png"
+    });
 
-    // console.log("deleteAll ");
-    // console.log(`getAll: ${JSON.stringify(await products.getAll())}`);
+    console.log(await products.getAll());
+    console.log("");
 }
 
 main();

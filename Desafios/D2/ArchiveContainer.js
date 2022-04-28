@@ -51,6 +51,14 @@ class ArchiveContainer {
         }
     }
 
+    async deleteAll() {
+        await this._readfile();
+        while (this.products.length > 0) {
+            this.products.pop();
+        }
+        await this._saveFile();
+    }
+
 }
 
 module.exports = ArchiveContainer

@@ -1,20 +1,8 @@
 [
   {
-    "id": 1,
-    "title": "Teléfono",
-    "price": 1200,
-    "thumbnail": "telefono.png"
-  },
-  {
-    "id": 3,
-    "title": "Computadora",
-    "price": 7800,
-    "thumbnail": "computadora.png"
-  },
-  {
-    "id": 4,
-    "title": "Auriculares",
-    "price": 700,
-    "thumbnail": "auriculares.png"
+    "id": 5,
+    "title": "Pantalla",
+    "price": 4500,
+    "thumbnail": "pantalla.png"
   }
 ]

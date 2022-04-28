@@ -1,58 +1,60 @@
 class Container {
-  static array = [];
+  constructor() {
+    this.container = [];
 
-  constructor() {}
+  }
 
   save(object) {
-    Container.array.push(object);
+    this.container.push(object);
   }
 
   getById(number) {
-    if (Container.array[number] == null) {
+    if (this.container[number] == null) {
       return null;
     } else {
-      return Container.array[number];
+      return this.container[number];
     }
+
   }
 
   getAll() {
-    return Container.array;
+    return this.container;
   }
 
   deleteById(number) {
-    if (Container.array[number] != null) {
-      Container.array.splice(number,1);
+    if (this.container[number] != null) {
+      this.container.splice(number, 1);
     }
   }
 
   deleteAll() {
-    while (Container.array.length > 0) {
-      Container.array.pop();
+    while (this.container.length > 0) {
+      this.container.pop();
     }
   }
 }
 
 class Producto {
-  constructor(id,title,price,thumbnail){  
-    this.id=id;
-    this.title=title;
-    this.price=price;
-    this.thumbnail=thumbnail;
+  constructor(id, title, price, thumbnail) {
+    this.id = id;
+    this.title = title;
+    this.price = price;
+    this.thumbnail = thumbnail;
   }
 
-  getId(){
+  getId() {
     return this.id;
   }
 
-  getTitle(){
+  getTitle() {
     return this.title;
   }
 
-  getPrice(){
+  getPrice() {
     return this.price;
   }
 
-  getThumbnail(){
+  getThumbnail() {
     return this.thumbnail;
   }
 
@@ -60,10 +62,10 @@ class Producto {
 
 const productos = new Container();
 
-productos.save(new Producto(0,"Teléfono",1200,"telefono.png"));
-productos.save(new Producto(1,"Televisor",5000,"televisor.png"));
-productos.save(new Producto(2,"Computadora",7800,"computadora.png"));
-productos.save(new Producto(3,"Auriculares",700,"auriculares.png"));
+productos.save(new Producto(0, "Teléfono", 1200, "telefono.png"));
+productos.save(new Producto(1, "Televisor", 5000, "televisor.png"));
+productos.save(new Producto(2, "Computadora", 7800, "computadora.png"));
+productos.save(new Producto(3, "Auriculares", 700, "auriculares.png"));
 
 console.log(`getAll: ${JSON.stringify(productos.getAll())}`);
 console.log(`getById (2): ${JSON.stringify(productos.getById(2))}`);

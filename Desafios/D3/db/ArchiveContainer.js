@@ -29,6 +29,7 @@ class ArchiveContainer {
 
     async getAll() {
         await this._readfile();
+        console.log(...this.products);
         return [...this.products];
     }
 
@@ -45,6 +46,7 @@ class ArchiveContainer {
     async getRandomProduct() {
         await this._readfile();
         const index = Math.floor(Math.random() * this.products.length);
+        console.log(this.products[index]);
         return this.products[index];
     }
 

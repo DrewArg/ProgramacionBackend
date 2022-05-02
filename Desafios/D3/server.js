@@ -1,4 +1,5 @@
 const express = require('express');
+const { apiControllers } = require('./controllers/apiControllers.js')
 
 const app = express();
 
@@ -6,14 +7,9 @@ app.get('/', (req, res) => {
     res.send('<h1 style="color:blue;">Bienvenidos al servidor express</h1>')
 })
 
-let visitors = 0;
-app.get('/visitors', (req, res) => {
-    res.send(`La cantidad de visitas es ${visitors++}`)
-})
 
-app.get('/fyh', (req, res) => {
-    res.send({ fyh: new Date().toLocaleString() })
-})
+app.get('/products', apiControllers.products)
+app.get('/randomProduct', apiControllers.randomProduct)
 
 const PORT = 8080;
 

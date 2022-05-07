@@ -10,6 +10,7 @@ const app = express()
 app.use(express.static('public'))
 
 app.engine('handlebars', engine())
+app.set('view engine', 'handlebars')
 
 // const fs = require('fs')
 // // con esto puedo generar un motor de plantillas propio
@@ -28,11 +29,10 @@ app.engine('handlebars', engine())
 
 // })
 
-app.set('view engine', 'handlebars')
 
-app.get('/', (req, res) => {
-    res.sendFile('index.html', { root: './views' })
-})
+// app.get('/', (req, res) => {
+//     res.sendFile('index.html', { root: './views' })
+// })
 
 app.use(webRouter)
 

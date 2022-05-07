@@ -27,7 +27,7 @@ webRouter.get('/', (req, res) => {
 // })
 
 webRouter.get('/datos', async (req, res) => {
-    res.render('datos.handlebars', { nombre: 'coder' })
+    res.render('datos', { nombre: 'coder' })
 })
 
 module.exports = { webRouter }

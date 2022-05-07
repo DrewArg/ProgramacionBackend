@@ -1,0 +1,2 @@
+Modelo vista controlador - MVC
+armar la vista desde el backend y no del frontend

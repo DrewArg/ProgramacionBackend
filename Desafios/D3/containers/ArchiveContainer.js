@@ -1,5 +1,5 @@
 const fs = require('fs');
-const Product = require('./Product.js')
+const Product = require('../db/Product.js')
 
 class ArchiveContainer {
     constructor(path) {

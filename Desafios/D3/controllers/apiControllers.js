@@ -1,4 +1,4 @@
-const ArchiveContainer = require("../db/ArchiveContainer.js");
+const ArchiveContainer = require("../containers/ArchiveContainer.js");
 
 const products = new ArchiveContainer('./db/products.txt');
 

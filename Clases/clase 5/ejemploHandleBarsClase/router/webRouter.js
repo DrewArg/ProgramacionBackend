@@ -12,7 +12,7 @@ const webRouter = express.Router()
 
 
 webRouter.get('/', (req, res) => {
-    res.sendFile('index.html', { root: 'views' })
+    res.sendFile('index.html', { root: './ejemploHandleBarsClase/views' })
 })
 
 // MIDDLEWARE
@@ -27,7 +27,19 @@ webRouter.get('/', (req, res) => {
 // })
 
 webRouter.get('/datos', async (req, res) => {
-    res.render('datos', { nombre: 'coder' })
+    const nombre = ''
+    const datos = {
+        nombres: [
+            { nombre: 'a' },
+            { nombre: 'b' },
+            { nombre: 'c' },
+
+        ],
+        hayNombres: Boolean(coleccion.length > 0),
+        //!! --> distinto de null y distinto de udefinded
+        coleccion: [1, 2, 3]
+    }
+    res.render('datos', datos)
 })
 
 module.exports = { webRouter }

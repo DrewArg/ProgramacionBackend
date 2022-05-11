@@ -1,1 +1,13 @@
-<h1>nombre: {{nombre}}</h1>
+<h1>Nombres</h1>
+{{#if hayNombres}}
+<ul>
+    {{#each coleccion}}
+    <li>
+        nombre: {{this}}//cada uno de los elementos de la coleccion
+    </li>
+    {{/each}}
+</ul>
+
+{{else}}
+<p>no hay nombres para mostrar</p>
+{{/if}}

@@ -42,7 +42,6 @@ class ArchiveContainer {
   async getById(productId) {
     await this._readFile();
     const index = this.products.findIndex((p) => p.id === productId);
-
     if (this.products[index] == null) {
       return null;
     } else {

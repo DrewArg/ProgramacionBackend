@@ -8,10 +8,11 @@ const app = express();
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 
+app.use("/public", express.static('./public/'));
 
-app.get("/", (req, res) => {
-  res.send('<h1 style="color:blue;">Bienvenidos al servidor express</h1>');
-});
+app.get("/", (req,res) =>{
+    res.sendFile(__dirname + '/public/index.html')
+})
 
 app.get('/api/products', apiControllers.products);
 app.get('/api/products/:id',apiControllers.productById)

@@ -1,8 +1,1 @@
-[
-  {
-    "id": 1652304433170,
-    "title": "Lalala",
-    "price": 2000,
-    "thumbnail": "hola.png"
-  }
-]
+[]

@@ -17,14 +17,14 @@ const apiControllers = {
     if (req.method === "GET") {
       res.json(products.getById(parseInt(id)));
     } else if (req.method === "PUT") {
-      
-      products.update(req.body)
-      
-      res.json(req.body.title + " updated correctly.");
+      products.update(req.body);
 
+      res.json(req.body.title + " updated correctly.");
     } else if (req.method === "DELETE") {
       products.deleteById(parseInt(id));
-      res.json(product.title + " was deleted correctly.");
+      res.json(req.body.id + " was deleted correctly.");
+    } else {
+      console.log(req.method);
     }
   },
 

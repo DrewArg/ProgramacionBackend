@@ -21,7 +21,7 @@ app.post('/api/products', apiControllers.products)
 
 app.put('/api/products/:id',apiControllers.productById)
 
-app.delete('api/products/:id',apiControllers.productById)
+app.delete('/api/products/:id',apiControllers.productById)
 
 const PORT = 8080;
 

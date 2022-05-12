@@ -42,8 +42,8 @@ class ArchiveContainer {
   async getById(productId) {
     await this._readFile();
     const index = this.products.findIndex((p) => p.id === productId);
-    if (this.products[index] == null) {
-      return null;
+    if (index === -1) {
+      return { error: "producto no encontrado" };
     } else {
       return this.products[index];
     }
@@ -61,11 +61,14 @@ class ArchiveContainer {
     if (index !== -1) {
       this.products.splice(index, 1);
       await this._saveFile();
+    } else {
+      return { error: "producto no encontrado" };
     }
   }
 
   async deleteAll() {
     await this._readFile();
+
     while (this.products.length > 0) {
       this.products.pop();
     }
@@ -77,9 +80,29 @@ class ArchiveContainer {
     await this._readFile();
 
     const index = this.products.findIndex((p) => p.id === productData.id);
-    if (this.products[index] == null) {
-      return null;
+    if (index === -1) {
+      //   throw new Error("el id no se encuentra en la base de datos");
+      return { error: "producto no encontrado" };
     } else {
+      if (!productData.id)
+        throw new Error("falta agregar el id al nuevo producto");
+      if (!productData.title)
+        throw new Error(
+          `falta agregar el título al producto ${productData.id} para poder cambiarlo`
+        );
+      if (productData.title === "")
+        throw new Error(`el producto ${productData.id} debe tener un título`);
+
+      if (!productData.price)
+        throw new Error("falta agregar el precio al nuevo producto");
+      if (productData.price === "")
+        throw new Error(`el producto ${productData.id} debe tener un precio`);
+      if (!productData.thumbnail)
+        throw new Error("fatala agregar la imagen al nuevo producto");
+      if (productData.thumbnail === "")
+        throw new Error(
+          `el producto ${productData.id} debe tener una url de imagen`
+        );
       this.products[index].title = productData.title;
       this.products[index].price = productData.price;
       this.products[index].thumbnail = productData.thumbnail;

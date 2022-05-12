@@ -1,8 +1,8 @@
 [
   {
     "id": 1652304433170,
-    "title": "Hola",
-    "price": 100,
+    "title": "Lalala",
+    "price": 2000,
     "thumbnail": "hola.png"
   }
 ]

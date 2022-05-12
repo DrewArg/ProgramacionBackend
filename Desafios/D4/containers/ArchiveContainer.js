@@ -72,6 +72,20 @@ class ArchiveContainer {
 
     await this._saveFile();
   }
+
+  async update(productData) {
+    await this._readFile();
+
+    const index = this.products.findIndex((p) => p.id === productData.id);
+    if (this.products[index] == null) {
+      return null;
+    } else {
+      this.products[index].title = productData.title;
+      this.products[index].price = productData.price;
+      this.products[index].thumbnail = productData.thumbnail;
+      await this._saveFile();
+    }
+  }
 }
 
 module.exports = ArchiveContainer;

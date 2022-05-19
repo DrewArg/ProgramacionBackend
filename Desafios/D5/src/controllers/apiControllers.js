@@ -1,6 +1,7 @@
-const ArchiveContainer = require("../containers/ArchiveContainer.js");
+// const ArchiveContainer = require('./src/containers/ArchiveContainer.js');
 
-const products = new ArchiveContainer("./db/products.txt");
+const ArchiveContainer = require("../containers/ArchiveContainer.js");
+const products = new ArchiveContainer("./src/db/products.txt");
 
 const apiControllers = {
   products: (req, res) => {

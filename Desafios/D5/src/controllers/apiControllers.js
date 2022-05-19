@@ -1,5 +1,3 @@
-// const ArchiveContainer = require('./src/containers/ArchiveContainer.js');
-
 const ArchiveContainer = require("../containers/ArchiveContainer.js");
 const products = new ArchiveContainer("./src/db/products.txt");
 
@@ -8,6 +6,7 @@ const apiControllers = {
     if (req.method === "GET") {
       res.json(products.getAll());
     } else if (req.method === "POST") {
+      console.log("aca:" + req.body.title);
       res.json(products.save(req.body));
     }
   },

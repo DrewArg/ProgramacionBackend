@@ -20,6 +20,7 @@ expressApp.use(bodyParser.text())
 expressApp.use(express.static('public'))
 
 expressApp.engine('handlebars', engine())
+expressApp.set('views', './views')
 expressApp.set('view engine', 'handlebars')
 
 expressApp.use(webRouter)

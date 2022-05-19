@@ -18,4 +18,14 @@ productRouter.put('/:id', apiControllers.productById)
 
 productRouter.delete('/:id', apiControllers.productById)
 
-module.exports = productRouter
+const randomProductRouter = express.Router();
+
+randomProductRouter.use((req, res, next) => {
+    console.log(req.ip);
+    next();
+})
+
+randomProductRouter.get('/', apiControllers.randomProduct);
+
+
+module.exports = { productRouter, randomProductRouter }

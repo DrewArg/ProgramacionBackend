@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const handlebars = require("handlebars")
 
 const productRouter = require('./src/routes/api/productRouter.js')
-const randomProduct = require('./src/routes/api/randomProduct.js')
+const randomProductRouter = require('./src/routes/api/randomProductRouter.js')
 
 dotenv.config();
 
@@ -22,8 +22,7 @@ expressApp.get("/", (req, res) => {
 })
 
 expressApp.use("/api/products",productRouter)
-expressApp.use("/api/randomProduct",randomProduct)
-
+expressApp.use("/api/randomProduct",randomProductRouter)
 
 const server = expressApp.listen(PORT, () => {
   console.log(`Servidor http escuchando en el puerto ${server.address().port}`);

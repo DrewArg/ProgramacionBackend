@@ -1,13 +1,3 @@
-// async function main() {
-//   const response = await fetch('/templates/inicio.handlebars')
-//   const templateText = await response.text()
-//   const templateFn = Handlebars.compile(templateText); // compila la plantilla
-//   const html = templateFn({ nombre: 'coder' }); // genera el html
-//   document.getElementById('espacioParaContenido').innerHTML = html; // inyecta el resultado en la vista
-// }
-
-// main()
-
 const buttonSubmit = document.getElementById("btn__submit");
 console.log("gola");
 buttonSubmit.addEventListener("click", addProduct);

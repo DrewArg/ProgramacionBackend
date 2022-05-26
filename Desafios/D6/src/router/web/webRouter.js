@@ -1,10 +1,9 @@
-const express = require('express')
+const { Router } = require('express')
+const { webGetRootController, webGet404 } = require('../../controllers/webControllers.js')
 
-const webRouter = express.Router()
+const webRouter = new Router();
 
-webRouter.get('/', (req, res) => {
-    res.render('layouts/main.handlebars', { root: 'views' })
-})
+webRouter.get('/', webGetRootController)
 
 webRouter.get('/datos', async (req, res) => {
     const nombres = [
@@ -41,12 +40,7 @@ webRouter.get('/equipo', (req, res) => {
 })
 
 
-webRouter.get('/*', (req, res, next) => {
-    res.status(404).render('./partials/404', {
-        titulo: '404',
-        descripcion: "Página no enconrtada"
-    })
-})
+webRouter.get('/*', webGet404)
 
 
 module.exports = { webRouter }

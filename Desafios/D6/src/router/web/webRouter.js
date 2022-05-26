@@ -3,7 +3,7 @@ const express = require('express')
 const webRouter = express.Router()
 
 webRouter.get('/', (req, res) => {
-    res.render('index.handlebars', { root: 'public' })
+    res.render('layouts/main.handlebars', { root: 'views' })
 })
 
 webRouter.get('/datos', async (req, res) => {

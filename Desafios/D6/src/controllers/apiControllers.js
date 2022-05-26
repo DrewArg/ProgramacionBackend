@@ -6,7 +6,8 @@ const apiControllers = {
     if (req.method === "GET") {
       res.json(products.getAll());
     } else if (req.method === "POST") {
-      console.log("aca:" + req.body.title);
+      console.log("aca:" + req.body);
+      console.log(JSON.stringify(req.body));
       res.json(products.save(req.body));
     }
   },

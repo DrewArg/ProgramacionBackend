@@ -4,5 +4,17 @@
     "title": "producto",
     "price": "12341",
     "thumbnail": "producto.png"
+  },
+  {
+    "id": 1653530726673,
+    "title": "producto ",
+    "price": "123",
+    "thumbnail": "producto.png"
+  },
+  {
+    "id": 1653530783998,
+    "title": "imagen",
+    "price": "1231254",
+    "thumbnail": "imagen.png"
   }
 ]

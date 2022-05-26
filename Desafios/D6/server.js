@@ -15,6 +15,10 @@ const PORT = process.env.PORT || 8080;
 const httpServer = new HttpServer(expressApp);
 const io = new IOServer(httpServer);
 
+expressApp.use(express.json())
+
+expressApp.use(express.urlencoded({ extended: true }))
+
 expressApp.use(express.static('public'))
 
 expressApp.engine('handlebars', engine())

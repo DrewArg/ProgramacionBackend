@@ -22,17 +22,12 @@ async function addProduct() {
     "price": price,
     "thumbnail": thumbnail
   }
-  // const formData = new FormData();
-
-  // formData.append("title", title);
-  // formData.append("price", price);
-  // formData.append("thumbnail", thumbnail);
 
   await fetch("/api/products", {
     method: "POST",
-    body: formData,
+    body: JSON.stringify(formData),
     headers: {
-      "Content-Type": "multipart/form-data",
+      "Content-Type": "application/json",
     },
     action: "api/products"
   })

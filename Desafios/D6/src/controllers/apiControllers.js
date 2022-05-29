@@ -6,8 +6,6 @@ const apiControllers = {
     if (req.method === "GET") {
       res.json(products.getAll());
     } else if (req.method === "POST") {
-      console.log("aca:" + req.body);
-      console.log(JSON.stringify(req.body));
       res.json(products.save(req.body));
     }
   },
@@ -25,7 +23,6 @@ const apiControllers = {
       products.deleteById(parseInt(id));
       res.json(req.body.id + " was deleted correctly.");
     } else {
-      console.log(req.method);
     }
   },
 

@@ -4,8 +4,6 @@ const { apiControllers } = require('../../controllers/apiControllers.js')
 const productRouter = express.Router();
 
 productRouter.use((req, res, next) => {
-    console.log(req.ip);
-
     next();
 })
 
@@ -21,7 +19,6 @@ productRouter.delete('/:id', apiControllers.productById)
 const randomProductRouter = express.Router();
 
 randomProductRouter.use((req, res, next) => {
-    console.log(req.ip);
     next();
 })
 

@@ -1,23 +1,22 @@
-const express = require("express");
-const dotenv = require("dotenv");
+const express = require('express');
+const dotenv = require('dotenv');
+
 const { Server: HttpServer } = require('http')
-const { Server: SocketServer } = require('socket.io');
+const { Server: Socket } = require('socket.io');
 
 const { productRouter, randomProductRouter } = require('./src/router/api/apiRouter.js')
 const { webRouter } = require('./src/router/web/webRouter.js')
 
-const { engine } = require('express-handlebars')
+const { engine } = require('express-handlebars');
 
-dotenv.config();
+//dotenv.config();
 
 const expressApp = express();
-const PORT = process.env.PORT || 8080;
-const httpServer = new HttpServer(expressApp);
-const io = new SocketServer(httpServer);
+
+expressApp.use(express.static('public'))
 
 expressApp.use(express.json())
 expressApp.use(express.urlencoded({ extended: true }))
-expressApp.use(express.static('public'))
 
 expressApp.engine('handlebars', engine())
 expressApp.set('views', './views')
@@ -28,7 +27,39 @@ expressApp.use(webRouter)
 expressApp.use("/api/products", productRouter)
 expressApp.use("/api/randomProduct", randomProductRouter)
 
-io.on('connection', socket => eventoCnxController(socket, io))
+const httpServer = new HttpServer(expressApp);
+const io = new Socket(httpServer);
+
+const products = [];
+// const clients = [];
+
+io.on('connection', () => {
+  console.log('Nuevo cliente conectado!');
+});
+
+// socket.emit('hola')
+// socket.on('chau', () => {
+//   console.log("saludando desde el cliente");
+// })
+
+// socket.emit("hello")
+// socket.emit('products', products);
+
+// socket.on('byebye'), () => {
+//   console.log("bye");
+// }
+
+// socket.on('update'), product => {
+//   console.log("update");
+// }
+
+// socket.on('update', product => {
+//   products.push(product);
+//   io.sockets.emit('products', products)
+//   console.log("products socket: " + products);
+// })
+
+const PORT = process.env.PORT || 8080;
 
 const connectedServer = expressApp.listen(PORT, () => {
   console.log(`Servidor http escuchando en el puerto ${connectedServer.address().port}`);

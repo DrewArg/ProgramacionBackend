@@ -1,23 +1,24 @@
-{{!-- <table>
+{{#if products.length}}
+<table>
     <tr>
         <th>Nombre</th>
         <th>Precio</th>
         <th>Imágen</th>
     </tr>
-    {{if products.length > 0}}
-    {{#each product}}
+    {{#each products}}
     <tr>
-        <td>{{this.title}}</td>
-        <td>{{this.price}}</td>
-        <td>{{this.thumbnail}}</td>
+        <td>
+            {{this.title}}
+        </td>
+        <td>
+            {{this.price}}
+        </td>
+        <td>
+            {{this.thumbnail}}
+        </td>
     </tr>
     {{/each}}
-    {{else}}
-    <tr>
-        <td>hol</td>
-        <td>aaa</td>
-        <td>manola</td>
-    </tr>
-    {{/endif}}
-
-</table> --}}
+</table>
+{{else}}
+<h3>no hay productos en el sistema actualmente...</h3>
+{{/if}}

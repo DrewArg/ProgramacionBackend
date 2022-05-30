@@ -1,24 +1,25 @@
-const {Server: Socket} = require('socket.io')
+const { Server: Socket } = require('socket.io')
 
-const ApiController = require('./apiControllers')
+const { productController } = require('./apiControllers')
 
-function socketController (server){
+function socketController(server) {
     const io = new Socket(server)
-    io.on('connection', socket =>{
+    io.on('connection', socket => {
         console.log("conexión nueva");
 
-        socket.on('disconnect',()=>{
+        socket.on('disconnect', () => {
             console.log("desconexión");
         })
 
-        socket.on('product',async product=>{
-                await ApiController.saveProduct(product)
-                io.sockets.emit('product',await ApiController.products)
+        socket.on('product', async () => {
+            io.sockets.emit('products', productController.getAllProducts())
         })
 
-        socket.on('getAllProducts',async () =>{
-            socket.emit('product',await ApiController.products)
+        socket.on('getAllProducts', async () => {
+            console.log("tomando productos..");
+            socket.emit('products', await productController.getAllProducts())
         })
+
     })
 
     return io

@@ -1,7 +1,15 @@
 const ArchiveContainer = require("../containers/ArchiveContainer.js");
 const products = new ArchiveContainer("./src/db/products.txt");
 
+const productController = {
+  getAllProducts: () => {
+    const prod = products.getAll();
+    return prod
+  }
+}
+
 const apiControllers = {
+
   products: (req, res) => {
     if (req.method === "GET") {
       res.json(products.getAll());
@@ -31,4 +39,4 @@ const apiControllers = {
   },
 };
 
-module.exports = { apiControllers };
+module.exports = { apiControllers, productController };

@@ -38,15 +38,20 @@ async function addProduct() {
   form.reset();
   console.log("aca");
 
+  socket.emit('getAllProducts');
+
 }
 
+socket.on('products', handleProductsEvent);
+
 async function handleProductsEvent(products) {
-  const productsTable = await fetch('./template/productTable.handlebars')
+  const productsTable = await fetch('/views/partials/productTable.handlebars')
 
   const templateText = await productsTable.text();
 
   const templateFunction = Handlebars.compile(templateText)
 
+  console.log(products);
   const html = templateFunction({ products })
 
   document.getElementById('productTable').innerHTML = html

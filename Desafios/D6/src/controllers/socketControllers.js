@@ -12,12 +12,14 @@ function socketController(server) {
         })
 
         socket.on('product', async () => {
-            io.sockets.emit('products', productController.getAllProducts())
+            io.sockets.emit('products', await productController.getAllProducts())
+            socket.emit('products', await productController.getAllProducts())
         })
 
         socket.on('getAllProducts', async () => {
             console.log("tomando productos..");
             socket.emit('products', await productController.getAllProducts())
+            io.sockets.emit('products', await productController.getAllProducts())
         })
 
     })

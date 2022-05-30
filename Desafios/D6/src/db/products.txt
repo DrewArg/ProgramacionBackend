@@ -4,35 +4,5 @@
     "title": "producto",
     "price": "12341",
     "thumbnail": "producto.png"
-  },
-  {
-    "id": 1653917833867,
-    "title": "otro",
-    "price": "123214",
-    "thumbnail": "2dseadas"
-  },
-  {
-    "id": 1653917932410,
-    "title": "asdas",
-    "price": "1232131",
-    "thumbnail": "dasasd"
-  },
-  {
-    "id": 1653918001941,
-    "title": "dasd",
-    "price": "31221",
-    "thumbnail": "dasad"
-  },
-  {
-    "id": 1653918007402,
-    "title": "asda",
-    "price": "12312",
-    "thumbnail": "das"
-  },
-  {
-    "id": 1653918014074,
-    "title": "dasdas",
-    "price": "1312312",
-    "thumbnail": "dasdas"
   }
 ]

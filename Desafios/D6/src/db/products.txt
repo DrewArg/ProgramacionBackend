@@ -4,35 +4,5 @@
     "title": "producto",
     "price": "12341",
     "thumbnail": "producto.png"
-  },
-  {
-    "id": 1653534055566,
-    "title": "prueba",
-    "price": "1000",
-    "thumbnail": "prueba.png"
-  },
-  {
-    "id": 1653848821253,
-    "title": "maelstrom",
-    "price": "123",
-    "thumbnail": "auriculares"
-  },
-  {
-    "id": 1653848983529,
-    "title": "asdas",
-    "price": "1231",
-    "thumbnail": "dasdas"
-  },
-  {
-    "id": 1653849059207,
-    "title": "sa",
-    "price": "21",
-    "thumbnail": "das"
-  },
-  {
-    "id": 1653849407531,
-    "title": "ada",
-    "price": "123",
-    "thumbnail": "dasda"
   }
 ]

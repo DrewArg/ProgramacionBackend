@@ -1,9 +1,12 @@
 const { Router } = require('express')
-const { webGetRootController, webGet404 } = require('../../controllers/webControllers.js')
+const { webGetRootController} = require('../../controllers/webControllers.js')
 
 const webRouter = new Router();
 
 webRouter.get('/', webGetRootController)
+webRouter.post('/', webGetRootController)
+
+module.exports = webRouter
 
 // webRouter.get('/datos', async (req, res) => {
 //     const nombres = [
@@ -43,4 +46,4 @@ webRouter.get('/', webGetRootController)
 // webRouter.get('/*', webGet404)
 
 
-module.exports = { webRouter }
+// module.exports = { webRouter }

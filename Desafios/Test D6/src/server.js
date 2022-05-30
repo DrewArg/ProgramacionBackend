@@ -23,8 +23,6 @@ expressApp.use(webRouter)
 expressApp.use("/api/products", productRouter)
 expressApp.use("/api/randomProduct", randomProductRouter)
 
-
-
 const PORT = 8080
 const server = httpServer.listen(PORT, ()=>{
     console.log(`Servidor escuchando en el puerto ${server.address().port}`);

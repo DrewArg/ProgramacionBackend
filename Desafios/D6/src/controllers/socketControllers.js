@@ -1,17 +1,27 @@
-const { obtenerMensajes, guardarMensaje } = require('../../mensajes.js')
+const {Server: Socket} = require('socket.io')
 
-function eventoCnxController(socket, io) {
-    const mensajes = obtenerMensajes()
-    socket.emit('mensajes', { mensajes })
-    socket.on('mensaje', mensaje => {
-        eventoMensajeController(socket, io, mensaje)
+const ApiController = require('./apiControllers')
+
+function socketController (server){
+    const io = new Socket(server)
+    io.on('connection', socket =>{
+        console.log("conexión nueva");
+
+        socket.on('disconnect',()=>{
+            console.log("desconexión");
+        })
+
+        socket.on('product',async product=>{
+                await ApiController.saveProduct(product)
+                io.sockets.emit('product',await ApiController.products)
+        })
+
+        socket.on('getAllProducts',async () =>{
+            socket.emit('product',await ApiController.products)
+        })
     })
+
+    return io
 }
 
-function eventoMensajeController(socket, io, mensaje) {
-    guardarMensaje(mensaje)
-    const mensajes = obtenerMensajes()
-    io.sockets.emit('mensajes', { mensajes })
-}
-
-module.exports = eventoCnxController
+module.exports = socketController

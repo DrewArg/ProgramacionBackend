@@ -1,17 +1,15 @@
 const socket = io.connect();
 
+console.log("index.js");
+
+socket.emit('getAllProducts');
+
 const form = document.getElementById('productForm');
 
 form.addEventListener('submit', e => {
   e.preventDefault();
   addProduct();
 })
-
-// socket.on('hola', saludo => {
-//   console.log("saludando");
-//   socket.emit("chau")
-// })
-
 
 async function addProduct() {
 
@@ -38,6 +36,7 @@ async function addProduct() {
 
 
   form.reset();
+  console.log("aca");
 
 }
 

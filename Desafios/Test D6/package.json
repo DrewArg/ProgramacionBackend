@@ -1,0 +1,24 @@
+{
+    "name": "express-server-sockets",
+    "version": "1.0.0",
+    "description":"",
+    "scripts": {
+      "start": "node .src/server.js",
+      "dev":"nodemon .src/server.js"
+    },
+    "author": "drewArg <andresfabbiano5@gmail.com>",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^16.0.1",
+        "express": "^4.17.1",
+        "express-handlebars": "^6.0.6",
+        "nodemon": "^2.0.16",
+        "socket.io": "^4.1.3",
+      "hbs": "^4.2.0"
+    },
+    "devDependencies": {
+      "nodemon": "^2.0.15"
+    },
+    "main": "src/server.js",
+    "keywords": []
+  }

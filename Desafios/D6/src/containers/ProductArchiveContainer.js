@@ -1,7 +1,7 @@
 const fs = require("fs");
 const Product = require("../db/Product.js");
 
-class ArchiveContainer {
+class ProductArchiveContainer {
   constructor(path) {
     this.path = path;
     this.products = [];
@@ -111,4 +111,4 @@ class ArchiveContainer {
   }
 }
 
-module.exports = ArchiveContainer;
+module.exports = ProductArchiveContainer;

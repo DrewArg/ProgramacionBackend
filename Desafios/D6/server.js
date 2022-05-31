@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 
 const { Server: HttpServer } = require('http')
 
-const { productRouter, randomProductRouter } = require('./src/router/api/apiRouter.js')
+const { productRouter, messageRouter } = require('./src/router/api/apiRouter.js')
 const webRouter = require('../D6/src/router/web/webRouter')
 
 const socketController = require('../D6/src/controllers/socketControllers.js')
@@ -26,8 +26,8 @@ expressApp.set('view engine', 'handlebars')
 
 expressApp.use(webRouter)
 
-expressApp.use("/api/products", productRouter)
-expressApp.use("/api/randomProduct", randomProductRouter)
+expressApp.use("/api", productRouter)
+expressApp.use("/api", messageRouter)
 
 const PORT = process.env.PORT || 8080;
 

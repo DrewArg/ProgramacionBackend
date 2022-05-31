@@ -7,14 +7,14 @@ productRouter.use((req, res, next) => {
     next();
 })
 
-productRouter.get('/', apiControllers.products);
-productRouter.get('/:id', apiControllers.productById)
+productRouter.get('/products', apiControllers.products);
+productRouter.get('/products/:id', apiControllers.productById)
 
-productRouter.post('/', apiControllers.products)
+productRouter.post('/products', apiControllers.products)
 
-productRouter.put('/:id', apiControllers.productById)
+productRouter.put('/products/:id', apiControllers.productById)
 
-productRouter.delete('/:id', apiControllers.productById)
+productRouter.delete('/products/:id', apiControllers.productById)
 
 const randomProductRouter = express.Router();
 
@@ -22,7 +22,11 @@ randomProductRouter.use((req, res, next) => {
     next();
 })
 
-randomProductRouter.get('/', apiControllers.randomProduct);
+randomProductRouter.get('/products', apiControllers.randomProduct);
+
+const messageRouter = express.Router();
+
+messageRouter.post('/messages', apiControllers.messages)
 
 
-module.exports = { productRouter, randomProductRouter }
+module.exports = { productRouter, messageRouter }

@@ -101,7 +101,7 @@ async function handleAllMessages(messages) {
 
 
 window.onload = () => {
-  setTimeout(loadAfterTime, 500)
+  setTimeout(loadAfterTime, 50)
 }
 
 function loadAfterTime() {

@@ -10,5 +10,17 @@
     "title": "Notebook",
     "price": "1500",
     "thumbnail": "note.png"
+  },
+  {
+    "id": 1654017195061,
+    "title": "Celular",
+    "price": "3000",
+    "thumbnail": "celular.png"
+  },
+  {
+    "id": 1654017385908,
+    "title": "producto nuevo",
+    "price": "1515",
+    "thumbnail": "prod.png"
   }
 ]

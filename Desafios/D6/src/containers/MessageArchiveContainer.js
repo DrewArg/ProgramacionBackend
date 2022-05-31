@@ -22,15 +22,13 @@ class MessageArchiveContainer {
 
     async save(messageData) {
         const date = new Date();
-        const month = date.getMonth();
+        const month = date.getMonth() + 1;
         const day = date.getDate();
         const year = date.getFullYear();
         const hour = date.getHours();
         const minutes = date.getMinutes();
         const seconds = date.getSeconds();
         const builtDate = day + "/" + month + "/" + year + " " + hour + ":" + minutes + ":" + seconds;
-
-        console.log(builtDate);
 
         const message = new Message(
             messageData.userEmail,

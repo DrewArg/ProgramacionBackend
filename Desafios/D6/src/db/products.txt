@@ -4,5 +4,11 @@
     "title": "producto",
     "price": "12341",
     "thumbnail": "producto.png"
+  },
+  {
+    "id": 1654005555437,
+    "title": "Notebook",
+    "price": "1500",
+    "thumbnail": "note.png"
   }
 ]

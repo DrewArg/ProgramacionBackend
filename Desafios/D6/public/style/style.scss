@@ -1,8 +1,72 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    ::first-letter {
+        text-transform: capitalize;
+    }
+}
+
 #productForm {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgb(5, 5, 52);
+    width: 70%;
+    border-radius: 5px;
+}
+
+#productTable {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: rgb(167, 194, 218);
+    align-items: center;
+    width: 60%;
+    text-align: left;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 3px;
+    margin: 1.5rem;
+    padding: 1.5rem;
+}
+
+.contenedorInput {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: left;
+    justify-content: center;
+    justify-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    &:hover {
+        background-color: rgba(151, 200, 237, 0.364);
+    }
+}
+
+.productTable {
+    color: white;
+    background-color: rgb(5, 5, 52);
+    width: 70%;
+    border-radius: 5px;
+}
+
+th {
+    background-color: rgb(4, 68, 121);
+    color: white;
+    text-align: center;
+}
+
+tr {
+    &:hover {
+        background-color: rgb(43, 138, 215);
+    }
 }
 
 body {
@@ -14,7 +78,7 @@ body {
 }
 
 .contenedorForm {
-    background-color: rgba(203, 225, 225, 0.689);
+    background-color: rgb(167, 194, 218);
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -23,35 +87,57 @@ body {
     border-radius: 10px;
     border-style: solid;
     border-width: 3px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 .tituloSeccion {
     font-size: 2em;
     font-weight: 600;
-    color: blue;
+    color: rgb(4, 68, 121);
+    padding-bottom: 1rem;
+    text-shadow: 1px 1px 2px rgb(216, 226, 241);
 }
 
 .formLabel {
-    font-size: 1.2em;
-    font-weight: 500;
+    font-size: 1em;
+    font-weight: 400;
+}
+
+input[type="text"],
+[type="number"] {
     padding-top: 1rem;
+    background: none;
+    outline: none;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: solid;
+    border-color: rgb(43, 138, 215);
+    color: white;
+}
+
+input[type="text"],
+[type="number"]:focus {
+    outline: none;
 }
 
 .formInput {
-    width: 100%;
+    width: 70%;
 }
 
-#btn__submit {
+.btn__submit {
     margin: 1.2rem;
     padding: 0.3rem;
     border-style: solid;
     border-width: 2px;
-    background-color: rgb(125, 221, 125);
+    background-color: rgb(4, 68, 121);
+    color: white;
     cursor: pointer;
     border-radius: 5px;
 
-    &:hover{
-        background-color: rgb(49, 78, 49);
-        color: white;
+    &:hover {
+        background-color: rgb(167, 194, 218);
+        color: rgb(5, 5, 52);
     }
 }

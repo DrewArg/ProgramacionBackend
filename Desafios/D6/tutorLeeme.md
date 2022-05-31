@@ -6,3 +6,12 @@ Ya lo solucioné!!! Pero no llegué a finalizar la otra parte.
 Lo estaré solucionando estos días-
 
 Saludos y gracias!
+
+----------------------------
+31/05/2022
+
+Ya está todo completo, 
+
+Nota: El botón de enviar mensaje tiene un pequeño delay de 50 milesimas de segundo antes de funcionar.
+
+Saludos!

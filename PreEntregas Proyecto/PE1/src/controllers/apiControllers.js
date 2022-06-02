@@ -20,12 +20,10 @@ const apiControllers = {
 
   productById: (req, res) => {
     const { id } = req.params;
-
     if (req.method === "GET") {
       res.json(products.getById(parseInt(id)));
     } else if (req.method === "PUT") {
       products.update(req.body);
-
       res.json(req.body.title + " updated correctly.");
     } else if (req.method === "DELETE") {
       products.deleteById(parseInt(id));

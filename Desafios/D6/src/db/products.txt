@@ -1,20 +1,8 @@
 [
-  {
-    "id": 1652328913648,
-    "title": "producto",
-    "price": "12341",
-    "thumbnail": "producto.png"
-  },
-  {
-    "id": 1654005555437,
-    "title": "Notebook",
-    "price": "1500",
-    "thumbnail": "note.png"
-  },
-  {
-    "id": 1654017195061,
-    "title": "Celular",
-    "price": "3000",
-    "thumbnail": "celular.png"
+   {
+    "id": 1654129312889,
+    "title": "prueba imagen",
+    "price": "156",
+    "thumbnail": "https://cdn.searchenginejournal.com/wp-content/uploads/2019/07/the-essential-guide-to-using-images-legally-online-1520x800.png"
   }
 ]

@@ -1,9 +1,6 @@
 const ProductArchiveContainer = require("../containers/ProductArchiveContainer.js");
 const products = new ProductArchiveContainer("./src/db/products.txt");
 
-const MessageArchiveContainer = require("../containers/MessageArchiveContainer.js")
-const messages = new MessageArchiveContainer("./src/db/messages.txt");
-
 const productController = {
   getAllProducts: () => {
     const prod = products.getAll();
@@ -11,22 +8,7 @@ const productController = {
   }
 }
 
-const messageController = {
-  getAllMessages: () => {
-    const msg = messages.getAll();
-    return msg
-  }
-}
-
 const apiControllers = {
-
-  messages: (req, res) => {
-    if (req.method === "POST") {
-      res.json(messages.save(req.body));
-    } else {
-      console.log("method not defined --> " + req.method);
-    }
-  },
 
   products: (req, res) => {
     if (req.method === "GET") {

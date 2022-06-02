@@ -24,9 +24,4 @@ randomProductRouter.use((req, res, next) => {
 
 randomProductRouter.get('/products', apiControllers.randomProduct);
 
-const messageRouter = express.Router();
-
-messageRouter.post('/messages', apiControllers.messages)
-
-
-module.exports = { productRouter, messageRouter }
+module.exports = { productRouter}

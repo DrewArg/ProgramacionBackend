@@ -1,27 +1,27 @@
-const express = require('express')
-const { apiControllers } = require('../../controllers/apiControllers.js')
+// const express = require('express')
+// const { apiControllers } = require('../../controllers/apiControllers.js')
 
-const productRouter = express.Router();
+// const productRouter = express.Router();
 
-productRouter.use((req, res, next) => {
-    next();
-})
+// productRouter.use((req, res, next) => {
+//     next();
+// })
 
-productRouter.get('/products', apiControllers.products);
-productRouter.get('/products/:id', apiControllers.productById)
+// productRouter.get('/products', apiControllers.products);
+// productRouter.get('/products/:id', apiControllers.productById)
 
-productRouter.post('/products', apiControllers.products)
+// productRouter.post('/products', apiControllers.products)
 
-productRouter.put('/products/:id', apiControllers.productById)
+// productRouter.put('/products/:id', apiControllers.productById)
 
-productRouter.delete('/products/:id', apiControllers.productById)
+// productRouter.delete('/products/:id', apiControllers.productById)
 
-const randomProductRouter = express.Router();
+// const randomProductRouter = express.Router();
 
-randomProductRouter.use((req, res, next) => {
-    next();
-})
+// randomProductRouter.use((req, res, next) => {
+//     next();
+// })
 
-randomProductRouter.get('/products', apiControllers.randomProduct);
+// randomProductRouter.get('/products', apiControllers.randomProduct);
 
-module.exports = { productRouter}
+// module.exports = { productRouter}

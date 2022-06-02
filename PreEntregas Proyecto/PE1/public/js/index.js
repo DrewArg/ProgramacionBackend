@@ -13,14 +13,20 @@ form.addEventListener('submit', e => {
 
 async function addProduct() {
 
-  const title = document.getElementById("title").value;
-  const price = document.getElementById("price").value;
+  const name = document.getElementById("name").value;
+  const description = document.getElementById("description").value;
+  const code = document.getElementById("code").value;
   const thumbnail = document.getElementById("thumbnail").value;
+  const price = document.getElementById("price").value;
+  const stock = document.getElementById("stock").value;
 
   const product = {
-    "title": title,
+    "name": name,
+    "description": description,
+    "code": code,
+    "thumbnail": thumbnail,
     "price": price,
-    "thumbnail": thumbnail
+    "stock": stock
   }
 
 

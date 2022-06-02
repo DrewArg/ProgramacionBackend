@@ -1,14 +1,18 @@
 const express = require("express");
-const { cartControllers } = require("../../controllers/cartControllers.js");
+const { cartController } = require("../../controllers/cartControllers.js");
 
 const cartRouter = express.Router();
 
-cartRouter.get("/cart/:id/products", cartControllers.productsInCart);
+cartRouter.use((req, res, next) => {
+    next();
+})
 
-cartRouter.post("/cart", cartControllers.createCart);
-cartRouter.post("/cart/:id/products", cartControllers.addProduct);
+cartRouter.get('/carts/:id/products', cartController.productsInCart);
 
-cartRouter.delete("/cart/:id", cartControllers.cartById);
-cartRouter.delete("/cart/:id/products/:id", cartControllers.productById);
+// cartRouter.post("/carts", cartController.createCart);
+// cartRouter.post("/carts/:id/products", cartController.addProduct);
 
-module.exports = { cartRouter };
+// cartRouter.delete("/carts/:id", cartController.cartById);
+// cartRouter.delete("/carts/:id/products/:id", cartController.productById);
+
+module.exports = cartRouter;

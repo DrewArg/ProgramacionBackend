@@ -1,6 +1,6 @@
 const { Server: Socket } = require('socket.io')
 
-const { productController } = require('./apiControllers')
+const { productController } = require('./productControllers')
 
 function socketController(server) {
     const io = new Socket(server)

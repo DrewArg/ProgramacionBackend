@@ -3,7 +3,7 @@ const products = new ProductArchiveContainer("./src/db/products.txt");
 
 const productController = {
   getAllProducts: () => {
-    return products.getAll();
+    return products.getAllProducts();
   },
 
   products: (req, res) => {
@@ -12,7 +12,7 @@ const productController = {
 
       //estos metodos deberian ser solo para el admin
     } else if (req.method === "POST") {
-      res.json(products.save(req.body));
+      res.json(products.createProduct(req.body));
     }
   },
 

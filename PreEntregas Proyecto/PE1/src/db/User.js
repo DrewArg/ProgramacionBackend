@@ -6,8 +6,6 @@ class User {
         this.name = name;
         this.password = password;
         this.isAdmin = isAdmin;
-        //cada usuario deberia tener su propio carrito
-        // this.cart = new ProductArchiveContainer()
     }
 }
 

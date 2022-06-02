@@ -19,13 +19,19 @@ class ProductArchiveContainer {
     });
   }
 
-  async save(productData) {
-    const productId = Date.now();
+  async createProduct(productData) {
+    const productId = new Date().getTime() * Math.random() * 100000;
+    const timestamp = Date.now();
+
     const product = new Product(
       productId,
-      productData.title,
+      timestamp,
+      productData.name,
+      productData.description,
+      productData.code,
+      productData.thumbnail,
       productData.price,
-      productData.thumbnail
+      productData.stock
     );
 
     await this._readFile();
@@ -34,7 +40,7 @@ class ProductArchiveContainer {
     return product;
   }
 
-  async getAll() {
+  async getAllProducts() {
     await this._readFile();
     return [...this.products];
   }
@@ -62,11 +68,7 @@ class ProductArchiveContainer {
 
   async deleteAll() {
     await this._readFile();
-
-    while (this.products.length > 0) {
-      this.products.pop();
-    }
-
+    this.products.splice(0, this.products.length);
     await this._saveFile();
   }
 

@@ -3,10 +3,11 @@ const dotenv = require('dotenv');
 
 const { Server: HttpServer } = require('http')
 
-const { productRouter } = require('./src/router/api/apiRouter.js')
-const webRouter = require('../D6/src/router/web/webRouter')
+const productRouter = require('./src/router/api/productRouter.js')
+const cartRouter = require('./src/router/api/cartRouter.js')
+const webRouter = require('./src/router/web/webRouter.js')
 
-const socketController = require('../D6/src/controllers/socketControllers.js')
+const socketController = require('./src/controllers/socketControllers.js')
 
 const expressApp = express();
 const httpServer = new HttpServer(expressApp);
@@ -27,6 +28,7 @@ expressApp.set('view engine', 'handlebars')
 expressApp.use(webRouter)
 
 expressApp.use("/api", productRouter)
+expressApp.use("/api", cartRouter)
 
 const PORT = process.env.PORT || 8080;
 

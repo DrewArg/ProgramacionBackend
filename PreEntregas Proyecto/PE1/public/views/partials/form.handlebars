@@ -1,5 +1,5 @@
-<div class="contenedorForm">
-    <h3 class="tituloSeccion">Ingresar Producto</h3>
+<div class="sectionContainer">
+    <h3 class="sectionTitle">Ingresar Producto</h3>
     <form id="productForm">
         <div class="contenedorInput">
             <label class="formLabel">Ingrese el nombre</label>
@@ -19,11 +19,11 @@
         </div>
         <div class="contenedorInput">
             <label class="formLabel">Ingrese el precio</label>
-            <input class="formInput" type="number" placeholder="precio" id="price" name="price">
+            <input class="formInput" type="number" placeholder="precio" min="0" id="price" name="price">
         </div>
         <div class="contenedorInput">
             <label class="formLabel">Ingrese el stock</label>
-            <input class="formInput" type="number" placeholder="stock" id="stock" name="stock">
+            <input class="formInput" type="number" placeholder="stock" min="0" id="stock" name="stock">
         </div>
         <input type="submit" class="btn__submit" value="Add Product">
 

@@ -2,17 +2,16 @@ const socket = io.connect();
 
 console.log("index.js");
 
-socket.emit('getAllProducts');
+socket.emit("getAllProducts");
 
-const form = document.getElementById('productForm');
+const form = document.getElementById("productForm");
 
-form.addEventListener('submit', e => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
   addProduct();
-})
+});
 
 async function addProduct() {
-
   const name = document.getElementById("name").value;
   const description = document.getElementById("description").value;
   const code = document.getElementById("code").value;
@@ -21,43 +20,40 @@ async function addProduct() {
   const stock = document.getElementById("stock").value;
 
   const product = {
-    "name": name,
-    "description": description,
-    "code": code,
-    "thumbnail": thumbnail,
-    "price": price,
-    "stock": stock
-  }
-
+    name: name,
+    description: description,
+    code: code,
+    thumbnail: thumbnail,
+    price: price,
+    stock: stock,
+  };
 
   await fetch("/api/products", {
     method: "POST",
     body: JSON.stringify(product),
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    action: "api/products"
-  })
-    .catch((err) => console.log(err));
-
+    action: "api/products",
+  }).catch((err) => console.log(err));
 
   form.reset();
 
-  socket.emit('getAllProducts');
-
+  socket.emit("getAllProducts");
 }
 
-socket.on('products', handleProductsEvent);
+socket.on("products", handleProductsEvent);
 
 async function handleProductsEvent(products) {
-  const productsTable = await fetch('/views/partials/productTable.handlebars')
+  const productsTable = await fetch(
+    "/views/partials/productSection.handlebars"
+  );
 
   const templateText = await productsTable.text();
 
-  const templateFunction = Handlebars.compile(templateText)
+  const templateFunction = Handlebars.compile(templateText);
 
-  const html = templateFunction({ products })
-
-  document.getElementById('productTable').innerHTML = html
+  const html = templateFunction({ products });
+  console.log({ products });
+  document.getElementById('sectionContainer2').innerHTML = html;
 }
-

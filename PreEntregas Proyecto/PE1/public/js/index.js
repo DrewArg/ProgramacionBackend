@@ -48,12 +48,12 @@ async function handleProductsEvent(products) {
   const productsTable = await fetch(
     "/views/partials/productSection.handlebars"
   );
-
   const templateText = await productsTable.text();
 
   const templateFunction = Handlebars.compile(templateText);
 
   const html = templateFunction({ products });
-  console.log({ products });
-  document.getElementById('sectionContainer2').innerHTML = html;
+  document.getElementById('cartProductSection').innerHTML = html;
 }
+
+

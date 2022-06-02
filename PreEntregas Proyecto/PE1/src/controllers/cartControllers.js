@@ -4,7 +4,7 @@ const carts = new CartArchiveContainer("./src/db/carts.txt");
 const cartController = {
   createCart: (req, res) => {
     if (req.method === "POST") {
-      res.json(carts.createCart(req.body));
+      res.json(carts.save(req.body));
     }
   },
 
@@ -16,8 +16,9 @@ const cartController = {
   },
 
   productsInCart: (req, res) => {
+    const { cartId } = req.params;
     if (req.method === "GET") {
-      res.json(carts.getAllProducts());
+      res.json(carts.getAllProducts(parseInt(cartId)));
     }
   },
 
@@ -28,12 +29,12 @@ const cartController = {
     }
   },
 
-  addProduct: (req,res)=>{
-      const {cartId} = req.params;
-      if(req.method === "POST"){
-          res.json(carts.saveProduct(req.body,cartId))
-      }
+  addProduct: (req, res) => {
+    const { cartId } = req.params;
+    if (req.method === "POST") {
+      res.json(carts.addProduct(req.body, cartId))
+    }
   }
 };
 
-module.exports = {cartController}
+module.exports = { cartController }

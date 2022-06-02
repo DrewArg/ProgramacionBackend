@@ -1,113 +1,95 @@
-const fs =require('fs')
+const fs = require('fs')
 const Cart = require('../db/Cart.js')
 
-class CartArchiveContainer{
-    constructor (path){
-        this.path = path;
-        this.carts = []
-    }
-
+class CartArchiveContainer {
+  constructor(path) {
+    this.path = path;
+    this.carts = []
+  }
 
   _saveFile() {
-    const textFile = JSON.stringify(this.products, null, 2);
+    const textFile = JSON.stringify(this.carts, null, 2);
     return fs.promises.writeFile(this.path, textFile);
   }
 
   _readFile() {
     return fs.promises.readFile(this.path, "utf-8").then((text) => {
-      const productsArray = JSON.parse(text);
-      this.products = productsArray;
+      const cartsArray = JSON.parse(text);
+      this.carts = cartsArray;
     });
   }
 
-  async save(productData) {
-    const productId = Date.now();
-    const product = new Product(
-      productId,
-      productData.title,
-      productData.price,
-      productData.thumbnail
+  async createCart(cartData) {
+    const cartId = new Date().getTime() * Math.random() * 100000;
+    const timestamp = Date.now();
+    const cart = new Cart(
+      cartId,
+      timestamp,
+      cartData.products
     );
 
     await this._readFile();
-    this.products.push(product);
+    this.carts.push(cart);
     await this._saveFile();
-    return product;
+
+    return cartId;
   }
 
-  async getAll() {
+  async deleteById(cartId) {
     await this._readFile();
-    return [...this.products];
-  }
-
-  async getById(productId) {
-    await this._readFile();
-    const index = this.products.findIndex((p) => p.id === productId);
+    const index = this.carts.findIndex((c) => c.id === cartId);
     if (index === -1) {
-      return { error: "producto no encontrado" };
+      return { error: "carrito no encontrado" };
     } else {
-      return this.products[index];
-    }
-  }
-
-  async getRandomProduct() {
-    await this._readFile();
-    const index = Math.floor(Math.random() * this.products.length);
-    return this.products[index];
-  }
-
-  async deleteById(productId) {
-    await this._readFile();
-    const index = this.products.findIndex((p) => p.id === productId);
-    if (index !== -1) {
-      this.products.splice(index, 1);
+      const cartProducts = this.carts[index].products
+      cartProducts.splice(0, cartProducts.length);
+      this.carts.splice(index, 1);
       await this._saveFile();
-    } else {
-      return { error: "producto no encontrado" };
+      return { response: `el carrito ${cartId} fue vaciado y eliminado correctamente.` }
     }
   }
 
-  async deleteAll() {
+  async getAllProducts(cartId) {
     await this._readFile();
+    const index = this.products.findIndex((c) => c.id === cartId)
 
-    while (this.products.length > 0) {
-      this.products.pop();
-    }
-
-    await this._saveFile();
-  }
-
-  async update(productData) {
-    await this._readFile();
-
-    const index = this.products.findIndex((p) => p.id === productData.id);
     if (index === -1) {
-      //   throw new Error("el id no se encuentra en la base de datos");
-      return { error: "producto no encontrado" };
+      return { error: "carrito no encontrado" }
     } else {
-      if (!productData.id)
-        throw new Error("falta agregar el id al nuevo producto");
-      if (!productData.title)
-        throw new Error(
-          `falta agregar el título al producto ${productData.id} para poder cambiarlo`
-        );
-      if (productData.title === "")
-        throw new Error(`el producto ${productData.id} debe tener un título`);
+      return this.carts[index].products;
+    }
+  }
 
-      if (!productData.price)
-        throw new Error("falta agregar el precio al nuevo producto");
-      if (productData.price === "")
-        throw new Error(`el producto ${productData.id} debe tener un precio`);
-      if (!productData.thumbnail)
-        throw new Error("falta agregar la imagen al nuevo producto");
-      if (productData.thumbnail === "")
-        throw new Error(
-          `el producto ${productData.id} debe tener una url de imagen`
-        );
-      this.products[index].title = productData.title;
-      this.products[index].price = productData.price;
-      this.products[index].thumbnail = productData.thumbnail;
+  async addProduct(product, cartId) {
+    await this._readFile();
+
+    const index = this.products.findIndex((c) => c.id === cartId)
+
+    if (index === -1) {
+      return { error: "carrito no encontrado" }
+    } else {
+      this.carts[index].products.push(product);
       await this._saveFile();
+    }
+  }
+
+  async removeProduct(productId, cartId) {
+    await this._readFile();
+
+    const index = this.products.findIndex((c) => c.id === cartId)
+    if (index === -1) {
+      return { error: "carrito no encontrado" }
+    } else {
+      const productsInCart = this.getAllProducts(cartId);
+
+      const productIndex = productsInCart.findIndex((p) => p.id === productId);
+
+      if (productIndex === -1) {
+        return { error: "producto no encontrado" }
+      } else {
+        productsInCart.splice(productIndex, 1);
+        return { respose: `el producto ${productId} ha sido elminado del carrito correctamente` }
+      }
     }
   }
 }

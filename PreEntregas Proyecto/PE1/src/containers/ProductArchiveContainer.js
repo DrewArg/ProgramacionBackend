@@ -49,12 +49,6 @@ class ProductArchiveContainer {
     }
   }
 
-  async getRandomProduct() {
-    await this._readFile();
-    const index = Math.floor(Math.random() * this.products.length);
-    return this.products[index];
-  }
-
   async deleteById(productId) {
     await this._readFile();
     const index = this.products.findIndex((p) => p.id === productId);

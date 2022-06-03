@@ -50,6 +50,19 @@
   flex-wrap: wrap;
 }
 
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-self: center;
+  align-items: center;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 2px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .card {
   width: 120px;
   height: 220px;
@@ -61,7 +74,6 @@
   border-radius: 10px;
   border-style: solid;
   border-width: 2px;
-  margin: 1rem;
   background-color: rgb(5, 5, 52);
   color: white;
 }

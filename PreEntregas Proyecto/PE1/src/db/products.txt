@@ -16,5 +16,14 @@
     "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_633373-MLA41293958095_032020-O.webp",
     "price": "8000",
     "stock": "50"
+  },
+  {
+    "id": 89522634290660910,
+    "name": "cubo Rubik",
+    "description": "Cubo mágico. Marca: Rubik",
+    "code": "CR001",
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_625640-MLA43518333116_092020-O.webp",
+    "price": "850",
+    "stock": "300"
   }
 ]

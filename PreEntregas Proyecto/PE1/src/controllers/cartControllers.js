@@ -4,7 +4,7 @@ const carts = new CartArchiveContainer("./src/db/carts.txt");
 const cartController = {
   createCart: (req, res) => {
     if (req.method === "POST") {
-      res.json(carts.save(req.body));
+      res.json(carts.createCart(req.body));
     }
   },
 

@@ -4,7 +4,7 @@ console.log("index.js");
 
 socket.emit("getAllProducts");
 
-const form = document.getElementById("productForm");
+const form = document.getElementById("form");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();

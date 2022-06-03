@@ -13,10 +13,11 @@ class ProductArchiveContainer {
   }
 
   _readFile() {
-    return fs.promises.readFile(this.path, "utf-8").then((text) => {
-      const productsArray = JSON.parse(text);
-      this.products = productsArray;
-    });
+    return fs.promises.readFile(this.path, "utf-8")
+      .then((text) => {
+        const productsArray = JSON.parse(text);
+        this.products = productsArray;
+      });
   }
 
   async createProduct(productData) {
@@ -77,7 +78,6 @@ class ProductArchiveContainer {
 
     const index = this.products.findIndex((p) => p.id === productData.id);
     if (index === -1) {
-      //   throw new Error("el id no se encuentra en la base de datos");
       return { error: "producto no encontrado" };
     } else {
       if (!productData.id)

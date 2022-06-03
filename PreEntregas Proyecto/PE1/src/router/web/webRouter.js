@@ -3,8 +3,6 @@ const { webGetLoginController, webGetRootController, webGetCartController, webGe
 
 const webRouter = new Router();
 
-webRouter.get('/login', webGetLoginController)
-
 webRouter.get('/', webGetRootController)
 webRouter.post('/', webGetRootController)
 

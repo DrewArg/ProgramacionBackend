@@ -1,9 +1,3 @@
-function webGetLoginController(req, res) {
-    res.render('layouts/login.handlebars', {
-        layout: 'login', root: 'public'
-    })
-}
-
 function webGetRootController(req, res) {
     res.render('layouts/index.handlebars', {
         layout: 'index', root: 'public'
@@ -26,4 +20,4 @@ function webGet404Controller() {
     }
 }
 
-module.exports = { webGetLoginController, webGetRootController, webGetCartController, webGet404Controller };
+module.exports = { webGetRootController, webGetCartController, webGet404Controller };

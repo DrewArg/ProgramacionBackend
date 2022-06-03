@@ -4,12 +4,26 @@ console.log("index.js");
 
 socket.emit("getAllProducts");
 
+const btnTipoUsuario = document.getElementById("btn__userType");
+btnTipoUsuario.addEventListener('click', changeUser)
+
 const form = document.getElementById("form");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   addProduct();
 });
+
+function changeUser() {
+  const div = document.getElementById("currentUser");
+  const content = div.textContent
+  console.log(content);
+  if (content === "Normal") {
+    div.textContent = "Admin"
+  } else {
+    div.textContent = "Normal"
+  }
+}
 
 async function addProduct() {
   const name = document.getElementById("name").value;

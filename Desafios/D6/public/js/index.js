@@ -83,6 +83,8 @@ async function addMessage() {
 
 }
 
+let btnSendMessage;
+
 socket.on('messages', handleAllMessages)
 
 async function handleAllMessages(messages) {
@@ -96,16 +98,14 @@ async function handleAllMessages(messages) {
 
   document.getElementById('globalChat').innerHTML = html
 
-
-}
-
-
-window.onload = () => {
-  setTimeout(loadAfterTime, 50)
-}
-
-function loadAfterTime() {
-  const btnSendMessage = document.getElementById('btn__sendMessage')
+  btnSendMessage = document.getElementById('btn__sendMessage')
   btnSendMessage.addEventListener('click', addMessage)
 
 }
+
+
+
+
+
+
+

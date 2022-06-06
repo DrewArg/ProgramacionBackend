@@ -4,7 +4,7 @@ console.log("index.js");
 
 socket.emit("getAllProducts");
 
-const currentUser = document.getElementById('currentUser').value
+const currentUser = document.getElementById("currentUser").value;
 console.log(currentUser);
 
 const form2 = document.getElementById("form2");
@@ -15,20 +15,32 @@ form2.addEventListener("submit", (e) => {
 });
 
 async function searchProduct() {
-  const prodId = document.getElementById("prodId").value;
+  const id = document.getElementById("prodId").value;
 
-  alert("hola");
-
-  const prod = await fetch(`api/products/:${prodId}`, {
-    method: "GET",
+  await fetch("/api/products/:id", {
+    method: "POST",
+    body: JSON.stringify(id),
     headers: {
       "Content-Type": "application/json",
     },
-    action: `api/products/:${prodId}`,
+    action: "api/products/:id",
   }).catch((err) => console.log(err));
 
-  alert(prod);
-  form2.reset();
+  form2.reset()
+
+  socket.emit("searchProduct")
+}
+
+socket.on("foundProduct", showProduct);
+
+async function showProduct(foundProduct) {
+  const productsTable = await fetch("/views/partials/searchProduct.handlebars");
+  const templateText = await productsTable.text();
+
+  const templateFunction = Handlebars.compile(templateText);
+
+  const html = templateFunction({ foundProduct });
+  document.getElementById("productById").innerHTML = html;
 }
 
 const btnTipoUsuario = document.getElementById("btn__userType");

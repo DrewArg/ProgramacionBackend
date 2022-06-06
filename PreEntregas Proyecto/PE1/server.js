@@ -27,7 +27,7 @@ expressApp.set("views", "./public/views");
 expressApp.set("view engine", "handlebars");
 
 expressApp.use(webRouter);
-
+console.log("server");
 expressApp.use("/api", productRouter);
 expressApp.use("/api", cartRouter);
 expressApp.use("/", apiRouter);

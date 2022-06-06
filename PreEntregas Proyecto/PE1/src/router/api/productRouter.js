@@ -1,13 +1,12 @@
 const express = require("express");
 const {
   productController,
+  a,
 } = require("../../controllers/productControllers.js");
 
 const productRouter = express.Router();
 
-productController.getAllProducts
-
-function isAdmin(req,res,next){
+function isAdmin(req, res, next) {
   if (currentUser === "Admin") {
     next();
   } else {
@@ -16,12 +15,13 @@ function isAdmin(req,res,next){
 }
 
 productRouter.get("/products", productController.getAllProducts);
-productRouter.get("/products/:id", productController.getProductById);
 
-productRouter.post("/products", isAdmin,productController.createProduct);
+productRouter.get("/products/:id", productController.getById);
 
-productRouter.put("/products/:id", isAdmin,productController.productById);
+productRouter.post("/products", isAdmin, productController.createProduct);
 
-productRouter.delete("/products/:id", isAdmin,productController.productById);
+productRouter.put("/products/:id", isAdmin, productController.productById);
+
+productRouter.delete("/products/:id", isAdmin, productController.productById);
 
 module.exports = productRouter;

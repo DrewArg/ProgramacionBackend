@@ -20,6 +20,7 @@ function changeUser() {
     currentUser.textContent = "Normal";
   }
 }
+console.log(currentUser.textContent);
 
 /** cargo los productos iniciales */
 socket.emit("getAllProducts"); //server socket --> emit(products)
@@ -47,9 +48,11 @@ form.addEventListener("submit", (e) => {
 
 const btnAddProduct = document.getElementById("btn__addProduct");
 
-btnAddProduct.addEventListener('click', addProduct)
+btnAddProduct.addEventListener('click', () => { addProduct(currentUser.textContent) })
 
-async function addProduct() {
+async function addProduct(currentUser) {
+
+  console.log("client user: " + currentUser);
   const name = document.getElementById("name").value;
   const description = document.getElementById("description").value;
   const code = document.getElementById("code").value;
@@ -66,13 +69,17 @@ async function addProduct() {
     stock: stock,
   };
 
-  await fetch("/api/products", {
+  let headersList = {
+    "Content-Type": "application/json"
+  }
+
+  let bodyContent = JSON.stringify(product);
+
+  await fetch(`/api/products?currentUser=${currentUser}`, {
     method: "POST",
-    body: JSON.stringify(product),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    action: "api/products",
+    body: bodyContent,
+    headers: headersList,
+    action: `/api/products?currentUser=${currentUser}`,
   }).catch((err) => console.log(err));
 
   form.reset();
@@ -105,8 +112,6 @@ async function searchProduct() {
 socket.on("foundProduct", showProduct);
 
 async function showProduct(foundProduct) {
-
-  console.log("found: " + foundProduct.name);
 
   const productsTable = await fetch("/views/partials/searchProduct.handlebars");
   const templateText = await productsTable.text();

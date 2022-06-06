@@ -4,8 +4,47 @@ console.log("index.js");
 
 socket.emit("getAllProducts");
 
+const currentUser = document.getElementById("currentUser").value;
+console.log(currentUser);
+
+const form2 = document.getElementById("form2");
+
+form2.addEventListener("submit", (e) => {
+  e.preventDefault();
+  searchProduct();
+});
+
+async function searchProduct() {
+  const id = document.getElementById("prodId").value;
+
+  await fetch("/api/products/:id", {
+    method: "POST",
+    body: JSON.stringify(id),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    action: "api/products/:id",
+  }).catch((err) => console.log(err));
+
+  form2.reset()
+
+  socket.emit("searchProduct")
+}
+
+socket.on("foundProduct", showProduct);
+
+async function showProduct(foundProduct) {
+  const productsTable = await fetch("/views/partials/searchProduct.handlebars");
+  const templateText = await productsTable.text();
+
+  const templateFunction = Handlebars.compile(templateText);
+
+  const html = templateFunction({ foundProduct });
+  document.getElementById("productById").innerHTML = html;
+}
+
 const btnTipoUsuario = document.getElementById("btn__userType");
-btnTipoUsuario.addEventListener('click', changeUser)
+btnTipoUsuario.addEventListener("click", changeUser);
 
 const form = document.getElementById("form");
 
@@ -21,12 +60,12 @@ btnProductID.addEventListener('click', searchProduct)
 
 function changeUser() {
   const div = document.getElementById("currentUser");
-  const content = div.textContent
+  const content = div.textContent;
   console.log(content);
   if (content === "Normal") {
-    div.textContent = "Admin"
+    div.textContent = "Admin";
   } else {
-    div.textContent = "Normal"
+    div.textContent = "Normal";
   }
 }
 
@@ -89,7 +128,5 @@ async function handleProductsEvent(products) {
   const templateFunction = Handlebars.compile(templateText);
 
   const html = templateFunction({ products });
-  document.getElementById('cartProductSection').innerHTML = html;
+  document.getElementById("cartProductSection").innerHTML = html;
 }
-
-

@@ -1,15 +1,27 @@
 const express = require("express");
-const { productController } = require("../../controllers/productControllers.js");
+const {
+  productController,
+  a,
+} = require("../../controllers/productControllers.js");
 
 const productRouter = express.Router();
 
-productRouter.get("/products", productController.products);
-productRouter.get("/products/:id", productController.productById);
+function isAdmin(req, res, next) {
+  if (currentUser === "Admin") {
+    next();
+  } else {
+    res.status(401).json({ status: 404, description: "Usuario no autorizado" });
+  }
+}
 
-productRouter.post("/products", productController.products);
+productRouter.get("/products", productController.getAllProducts);
 
-productRouter.put("/products/:id", productController.productById);
+productRouter.get("/products/:id", productController.getById);
 
-productRouter.delete("/products/:id", productController.productById);
+productRouter.post("/products", isAdmin, productController.createProduct);
 
-module.exports =  productRouter ;
+productRouter.put("/products/:id", isAdmin, productController.productById);
+
+productRouter.delete("/products/:id", isAdmin, productController.productById);
+
+module.exports = productRouter;

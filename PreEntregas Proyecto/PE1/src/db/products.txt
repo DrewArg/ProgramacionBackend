@@ -25,14 +25,5 @@
     "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_625640-MLA43518333116_092020-O.webp",
     "price": "850",
     "stock": "300"
-  },
-  {
-    "id": 16828428141951740,
-    "name": "Auriculares",
-    "description": "Auriculares inalámbricos. Marca: Sony",
-    "code": "AI001",
-    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_933418-MLA40865317836_022020-O.webp",
-    "price": "5500",
-    "stock": "450"
   }
 ]

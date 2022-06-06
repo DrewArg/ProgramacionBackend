@@ -11,8 +11,13 @@ const form = document.getElementById("form");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  addProduct();
 });
+
+const btnAddProduct = document.getElementById("btn__addProduct");
+btnAddProduct.addEventListener('click', addProduct)
+
+const btnProductID = document.getElementById("btn__productID");
+btnProductID.addEventListener('click', searchProduct)
 
 function changeUser() {
   const div = document.getElementById("currentUser");
@@ -54,6 +59,23 @@ async function addProduct() {
   form.reset();
 
   socket.emit("getAllProducts");
+}
+
+async function searchProduct() {
+  const prodId = document.getElementById("searchById").value;
+  alert(prodId)
+
+  await fetch(`/api/products/:id`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    action: "api/products/:id",
+  }).catch((err) => console.log(err));
+
+  form.reset();
+
+  socket.emit("getAllProducts")
 }
 
 socket.on("products", handleProductsEvent);

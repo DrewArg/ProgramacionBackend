@@ -12,8 +12,8 @@ function socketController(server) {
         })
 
         socket.on('product', async () => {
-            io.sockets.emit('products', await productController.getAllProducts())
-            socket.emit('products', await productController.getAllProducts())
+            io.sockets.emit('productById', await productController.productById())
+            socket.emit('productById', await productController.productById())
         })
 
         socket.on('getAllProducts', async () => {

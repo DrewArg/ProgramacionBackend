@@ -201,4 +201,73 @@ async function showProduct(foundProduct) {
   document.getElementById("productById").innerHTML = html;
 }
 
+/** cargo los productos seleccionados al carrito */
+
+
+const cardsButtons = [];
+
+async function addToCart() {
+  console.log("add to cart");
+  for (let index = 0; index < cardsButtons.length; index++) {
+    const cardsProducts = document.getElementsByClassName("hiddenId");
+
+    const currentId = cardsProducts[index].textContent;
+
+    let headersList = {
+      "Content-Type": "application/json"
+    }
+
+    // let bodyContent = JSON.stringify(id);
+
+    const currentProd = await fetch(`/api/products/${currentId}`, {
+      method: "POST",
+      headers: headersList,
+      action: `/api/products/${currentId}`,
+    }).catch((err) => console.log(err));
+
+    const response = await currentProd.json();
+    console.log(response);
+
+
+  };
+
+  // let headersList = {
+  //   "Content-Type": "application/json"
+  // }
+
+  // let bodyContent = JSON.stringify(id);
+
+  // await fetch(`/api/carts`, {
+  //   method: "POST",
+  //   body: bodyContent,
+  //   headers: headersList,
+  //   action: `/api/carts`,
+  // }).catch((err) => console.log(err));
+
+}
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    console.log("domcontentloaded");
+    const cardsProducts = document.getElementsByClassName("hiddenId");
+
+    console.log(cardsProducts.length);
+
+    for (let i = 0; i < cardsProducts.length; i++) {
+      const currentId = cardsProducts[i].textContent;
+      console.log(currentId);
+      const currentBtn = document.getElementById(`btnAddToCart${currentId}`)
+      currentBtn.addEventListener('click', () => { addToCart() })
+      cardsButtons.push(currentBtn)
+      console.log("i: " + i);
+    }
+  }, 4000)
+
+});
 

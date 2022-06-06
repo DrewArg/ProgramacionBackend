@@ -31,8 +31,8 @@
                 {{product.stock}}
             </div>
         </div>
-        <button class="btn__submit" id="btnAddToCart">Add to Cart</button>
-        <div id="hiddenId">{{product.id}}</div>
+        <button class="btn__submit" id="btnAddToCart{{this.id}}">Add to Cart</button>
+        <div class="hiddenId">{{product.id}}</div>
     </div>
     {{/if}}
 </div>

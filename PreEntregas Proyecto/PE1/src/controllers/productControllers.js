@@ -4,15 +4,17 @@ const products = new ProductArchiveContainer("./src/db/products.txt");
 const productController = {
 
   async getById(req, res) {
+
     try {
-      const prod = await products.getById(req);
+      const prod = await products.getById(req.params.id);
+      console.log(prod);
       return (prod);
     } catch (e) {
       console.log(e);
     }
   },
 
-  async updateProduct(req,res){
+  async updateProduct(req, res) {
     try {
       const prod = await products.update(req);
       return (prod);

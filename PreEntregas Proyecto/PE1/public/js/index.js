@@ -116,7 +116,48 @@ async function deleteProduct(currentUser) {
 
 /** actualizo un producto y cargo productos nuvevamente */
 
+const btnUpdateProduct = document.getElementById("btn__updateProduct");
 
+btnUpdateProduct.addEventListener('click', () => { updateProduct(currentUser.textContent) })
+
+async function updateProduct(currentUser) {
+
+  console.log("client user: " + currentUser);
+  const prodId = document.getElementById("idProduct").value;
+  const name = document.getElementById("name").value;
+  const description = document.getElementById("description").value;
+  const code = document.getElementById("code").value;
+  const thumbnail = document.getElementById("thumbnail").value;
+  const price = document.getElementById("price").value;
+  const stock = document.getElementById("stock").value;
+
+  const product = {
+    id: prodId,
+    name: name,
+    description: description,
+    code: code,
+    thumbnail: thumbnail,
+    price: price,
+    stock: stock,
+  };
+
+  let headersList = {
+    "Content-Type": "application/json"
+  }
+
+  let bodyContent = JSON.stringify(product);
+
+  await fetch(`/api/products/${prodId}?currentUser=${currentUser}`, {
+    method: "PUT",
+    body: bodyContent,
+    headers: headersList,
+    action: `/api/products/${prodId}?currentUser=${currentUser}`,
+  }).catch((err) => console.log(err));
+
+  form.reset();
+
+  socket.emit("getAllProducts");
+}
 
 /** formulario de búsqueda de producto por ID */
 

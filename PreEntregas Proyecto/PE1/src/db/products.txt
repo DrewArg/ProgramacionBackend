@@ -3,10 +3,10 @@
     "id": 38216595234347080,
     "name": "Estufa",
     "description": "Estufa eléctrica marca Liliana.",
-    "code": "EE001",
+    "code": "VV001",
     "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_633373-MLA41293958095_032020-O.webp",
-    "price": "8000",
-    "stock": "50"
+    "price": "1231",
+    "stock": "1"
   },
   {
     "id": 89522634290660910,

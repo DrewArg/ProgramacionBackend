@@ -22,7 +22,7 @@ productRouter.post("/products/:id", productController.getById);
 
 productRouter.post("/products", isAdmin, productController.createProduct);
 
-productRouter.put("/products/:id", isAdmin, productController.productById);
+productRouter.put("/products/:id", isAdmin, productController.updateProduct);
 
 productRouter.delete("/products/:id", isAdmin, productController.deleteById);
 

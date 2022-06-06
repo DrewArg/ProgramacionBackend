@@ -77,34 +77,27 @@ class ProductArchiveContainer {
   }
 
   async update(productData) {
+    console.log(productData.body.id);
     await this._readFile();
 
-    const index = this.products.findIndex((p) => p.id === productData.id);
+    const index = this.products.findIndex((p) => p.id === parseInt(productData.body.id));
     if (index === -1) {
       return { error: "producto no encontrado" };
     } else {
-      if (!productData.id)
-        throw new Error("falta agregar el id al nuevo producto");
-      if (!productData.title)
-        throw new Error(
-          `falta agregar el título al producto ${productData.id} para poder cambiarlo`
-        );
-      if (productData.title === "")
-        throw new Error(`el producto ${productData.id} debe tener un título`);
+      if (!productData.body.name) throw new Error("falta agregar el nombre");
+      if (!productData.body.description) throw new Error("falta agregar la descripción");
+      if (!productData.body.code) throw new Error("falta agregar el código");
+      if (!productData.body.thumbnail) throw new Error("falta agregar la imágen");
+      if (!productData.body.price) throw new Error("falta agregar el precio");
+      if (!productData.body.stock) throw new Error("falta agregar el stock");
+      this.products[index].name = productData.body.name
+      this.products[index].description = productData.body.description
+      this.products[index].code = productData.body.code
+      this.products[index].thumbnail = productData.body.thumbnail
+      this.products[index].price = productData.body.price
+      this.products[index].stock = productData.body.stock
 
-      if (!productData.price)
-        throw new Error("falta agregar el precio al nuevo producto");
-      if (productData.price === "")
-        throw new Error(`el producto ${productData.id} debe tener un precio`);
-      if (!productData.thumbnail)
-        throw new Error("fatala agregar la imagen al nuevo producto");
-      if (productData.thumbnail === "")
-        throw new Error(
-          `el producto ${productData.id} debe tener una url de imagen`
-        );
-      this.products[index].title = productData.title;
-      this.products[index].price = productData.price;
-      this.products[index].thumbnail = productData.thumbnail;
+
       await this._saveFile();
     }
   }

@@ -49,7 +49,7 @@ class ProductArchiveContainer {
   async getById(productId) {
     await this._readFile();
     console.log("archive " + productId);
-    const index = this.products.findIndex((p) => p.id === productId);
+    const index = this.products.findIndex((p) => p.id === parseInt(productId));
 
     if (index === -1) {
       return { error: "producto no encontrado" };

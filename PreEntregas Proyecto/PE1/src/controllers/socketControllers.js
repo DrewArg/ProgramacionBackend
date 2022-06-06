@@ -11,8 +11,9 @@ function socketController(server) {
             console.log("desconexión");
         })
 
-        socket.on('searchProduct', async (req, res) => {
-            socket.emit('foundProduct', await productController.getById(req.params.id))
+        socket.on('searchProduct', async (id) => {
+            socket.emit('foundProduct', await productController.getById(id))
+
         })
 
         socket.on('product', async () => {

@@ -2,58 +2,10 @@ const socket = io.connect();
 
 console.log("index.js");
 
-socket.emit("getAllProducts");
-
-const form2 = document.getElementById("form2");
-
-form2.addEventListener("submit", (e) => {
-  e.preventDefault();
-  searchProduct();
-});
-
-async function searchProduct() {
-  const id = document.getElementById("prodId").value;
-
-  await fetch("/api/products/:id", {
-    method: "POST",
-    body: JSON.stringify(id),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    action: "api/products/:id",
-  }).catch((err) => console.log(err));
-
-  form2.reset()
-
-  socket.emit("searchProduct")
-}
-
-socket.on("foundProduct", showProduct);
-
-async function showProduct(foundProduct) {
-  const productsTable = await fetch("/views/partials/searchProduct.handlebars");
-  const templateText = await productsTable.text();
-
-  const templateFunction = Handlebars.compile(templateText);
-
-  const html = templateFunction({ foundProduct });
-  document.getElementById("productById").innerHTML = html;
-}
+/** asigno los permisos de usuario */
 
 const btnTipoUsuario = document.getElementById("btn__userType");
 btnTipoUsuario.addEventListener("click", changeUser);
-
-const form = document.getElementById("form");
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-});
-
-const btnAddProduct = document.getElementById("btn__addProduct");
-btnAddProduct.addEventListener('click', addProduct)
-
-const btnProductID = document.getElementById("btn__productID");
-btnProductID.addEventListener('click', searchProduct)
 
 const currentUser = document.getElementById("currentUser");
 if (currentUser == undefined) {
@@ -68,6 +20,34 @@ function changeUser() {
     currentUser.textContent = "Normal";
   }
 }
+
+/** cargo los productos iniciales */
+socket.emit("getAllProducts"); //server socket --> emit(products)
+
+socket.on("products", handleProductsEvent);
+
+async function handleProductsEvent(products) {
+  const productsTable = await fetch(
+    "/views/partials/productSection.handlebars"
+  );
+  const templateText = await productsTable.text();
+
+  const templateFunction = Handlebars.compile(templateText);
+
+  const html = templateFunction({ products });
+  document.getElementById("cartProductSection").innerHTML = html;
+}
+
+/** agrego un producto y cargo productos nuvevamente */
+const form = document.getElementById("form");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
+
+const btnAddProduct = document.getElementById("btn__addProduct");
+
+btnAddProduct.addEventListener('click', addProduct)
 
 async function addProduct() {
   const name = document.getElementById("name").value;
@@ -100,50 +80,35 @@ async function addProduct() {
   socket.emit("getAllProducts");
 }
 
-socket.on("products", handleProductsEvent);
+/** formulario de búsqueda de producto por ID */
 
-async function handleProductsEvent(products) {
-  const productsTable = await fetch(
-    "/views/partials/productSection.handlebars"
-  );
-  const templateText = await productsTable.text();
+const form2 = document.getElementById("form2");
 
-  const templateFunction = Handlebars.compile(templateText);
+form2.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
 
-  const html = templateFunction({ products });
-  document.getElementById("cartProductSection").innerHTML = html;
-}
-
+/** busco el producto */
+const btnProductID = document.getElementById("btn__searchProduct");
+btnProductID.addEventListener('click', searchProduct)
 
 async function searchProduct() {
-  const prodId = document.getElementById("searchById").value;
-  alert(prodId)
+  const id = document.getElementById("prodId").value;
 
-  const formData = {
-    productId: prodId,
-    auth: "admin"
-  }
-
-  await fetch(`/api/products/${prodId}` = {
-    method: "POST",
-    body: JSON.stringify(formData),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    action: `/api/products/${prodId}`,
-  }).catch((err) => console.log(err));
-
-  form.reset();
-
-  socket.emit("searchProduct")
+  socket.emit("searchProduct", id)//server socket --> emit(foundProduct)
+  form2.reset()
 }
 
-socket.on("foundProduct", handleFoundProduct);
 
-async function handleFoundProduct(foundProduct) {
-  const productsTable = await fetch(
-    "/views/partials/seachProduct.handlebars"
-  );
+/** muesrto el producto buscado por ID */
+
+socket.on("foundProduct", showProduct);
+
+async function showProduct(foundProduct) {
+
+  console.log("found: " + foundProduct.name);
+
+  const productsTable = await fetch("/views/partials/searchProduct.handlebars");
   const templateText = await productsTable.text();
 
   const templateFunction = Handlebars.compile(templateText);
@@ -151,4 +116,5 @@ async function handleFoundProduct(foundProduct) {
   const html = templateFunction({ foundProduct });
   document.getElementById("productById").innerHTML = html;
 }
+
 

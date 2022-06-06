@@ -30,7 +30,7 @@ expressApp.use(webRouter);
 console.log("server");
 expressApp.use("/api", productRouter);
 expressApp.use("/api", cartRouter);
-expressApp.use("/", apiRouter);
+expressApp.use(apiRouter);
 
 const PORT = process.env.PORT || 8080;
 

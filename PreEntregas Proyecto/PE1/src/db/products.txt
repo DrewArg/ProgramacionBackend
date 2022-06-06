@@ -25,5 +25,14 @@
     "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_625640-MLA43518333116_092020-O.webp",
     "price": "850",
     "stock": "300"
+  },
+  {
+    "id": 115664751944200590,
+    "name": "lapicera",
+    "description": "marca: bic",
+    "code": "lb001",
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_627774-MLA47236269033_082021-O.webp",
+    "price": 500,
+    "stock": 3000
   }
 ]

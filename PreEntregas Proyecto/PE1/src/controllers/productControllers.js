@@ -1,8 +1,5 @@
 const ProductArchiveContainer = require("../containers/ProductArchiveContainer.js");
 const products = new ProductArchiveContainer("./src/db/products.txt");
-const a = {
-  
-};
 
 const productController = {
 
@@ -11,7 +8,7 @@ const productController = {
     const id = req.params.id;
     try {
       const prod = await products.getById(parseInt(id));
-      console.log({prod});
+      console.log({ prod });
       await res.json(prod);
     } catch (e) {
       console.log(e);
@@ -22,32 +19,8 @@ const productController = {
     return products.getAllProducts();
   },
 
-  aaaaaa: () => {
-    console.log("nuevo");
-    try {
-      const prod = products.getById(parseInt(id));
-      res.status(200).json(prod);
-    } catch (error) {
-      console.log("producto no encontrado");
-    }
-  },
-
   createProduct: (req, res) => {
     res.status(201).json(products.createProduct(req.body));
-  },
-
-  hola: (req, res) => {
-    console.log("hola");
-  },
-
-  lll: (req, res) => {
-    console.log("get prod by id");
-    try {
-      const prod = products.getById(parseInt(id));
-      res.status(200).json(prod);
-    } catch (error) {
-      console.log("producto no encontrado");
-    }
   },
 
   // products: (req, res) => {
@@ -79,4 +52,4 @@ const productController = {
   },
 };
 
-module.exports = { productController ,a};
+module.exports = { productController };

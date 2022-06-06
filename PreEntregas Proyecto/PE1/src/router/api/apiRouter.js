@@ -2,7 +2,7 @@ const express = require("express");
 
 const apiRouter = express.Router();
 
-apiRouter.all("/*", (req, res) => {
+apiRouter.all("*", (req, res) => {
   res
     .status(404)
     .json({

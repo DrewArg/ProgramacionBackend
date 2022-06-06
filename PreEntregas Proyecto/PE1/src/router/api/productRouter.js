@@ -7,16 +7,18 @@ const {
 const productRouter = express.Router();
 
 function isAdmin(req, res, next) {
-  if (currentUser === "Admin") {
+  if (req.query.currentUser === "Admin") {
+    console.log("admin");
     next();
   } else {
+    console.log("normal");
     res.status(401).json({ status: 404, description: "Usuario no autorizado" });
   }
 }
 
 productRouter.get("/products", productController.getAllProducts);
 
-productRouter.get("/products/:id", productController.getById);
+productRouter.post("/products/:id", productController.getById);
 
 productRouter.post("/products", isAdmin, productController.createProduct);
 

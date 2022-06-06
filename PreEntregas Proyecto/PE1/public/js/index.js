@@ -4,9 +4,6 @@ console.log("index.js");
 
 socket.emit("getAllProducts");
 
-const currentUser = document.getElementById("currentUser").value;
-console.log(currentUser);
-
 const form2 = document.getElementById("form2");
 
 form2.addEventListener("submit", (e) => {
@@ -58,14 +55,17 @@ btnAddProduct.addEventListener('click', addProduct)
 const btnProductID = document.getElementById("btn__productID");
 btnProductID.addEventListener('click', searchProduct)
 
+const currentUser = document.getElementById("currentUser");
+if (currentUser == undefined) {
+  currentUser.textContent = "Normal";
+}
+
 function changeUser() {
-  const div = document.getElementById("currentUser");
-  const content = div.textContent;
-  console.log(content);
+  const content = currentUser.textContent;
   if (content === "Normal") {
-    div.textContent = "Admin";
+    currentUser.textContent = "Admin";
   } else {
-    div.textContent = "Normal";
+    currentUser.textContent = "Normal";
   }
 }
 
@@ -100,23 +100,6 @@ async function addProduct() {
   socket.emit("getAllProducts");
 }
 
-async function searchProduct() {
-  const prodId = document.getElementById("searchById").value;
-  alert(prodId)
-
-  await fetch(`/api/products/:id`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    action: "api/products/:id",
-  }).catch((err) => console.log(err));
-
-  form.reset();
-
-  socket.emit("getAllProducts")
-}
-
 socket.on("products", handleProductsEvent);
 
 async function handleProductsEvent(products) {
@@ -130,3 +113,42 @@ async function handleProductsEvent(products) {
   const html = templateFunction({ products });
   document.getElementById("cartProductSection").innerHTML = html;
 }
+
+
+async function searchProduct() {
+  const prodId = document.getElementById("searchById").value;
+  alert(prodId)
+
+  const formData = {
+    productId: prodId,
+    auth: "admin"
+  }
+
+  await fetch(`/api/products/${prodId}` = {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    action: `/api/products/${prodId}`,
+  }).catch((err) => console.log(err));
+
+  form.reset();
+
+  socket.emit("searchProduct")
+}
+
+socket.on("foundProduct", handleFoundProduct);
+
+async function handleFoundProduct(foundProduct) {
+  const productsTable = await fetch(
+    "/views/partials/seachProduct.handlebars"
+  );
+  const templateText = await productsTable.text();
+
+  const templateFunction = Handlebars.compile(templateText);
+
+  const html = templateFunction({ foundProduct });
+  document.getElementById("productById").innerHTML = html;
+}
+

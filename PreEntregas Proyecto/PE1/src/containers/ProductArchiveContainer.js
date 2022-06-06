@@ -60,10 +60,11 @@ class ProductArchiveContainer {
 
   async deleteById(productId) {
     await this._readFile();
-    const index = this.products.findIndex((p) => p.id === productId);
+    const index = this.products.findIndex((p) => p.id === parseInt(productId));
     if (index !== -1) {
       this.products.splice(index, 1);
       await this._saveFile();
+      return { success: "producto eliminado" }
     } else {
       return { error: "producto no encontrado" };
     }

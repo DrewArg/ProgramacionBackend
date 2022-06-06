@@ -38,7 +38,6 @@ async function handleProductsEvent(products) {
   const html = templateFunction({ products });
   document.getElementById("cartProductSection").innerHTML = html;
 }
-
 /** agrego un producto y cargo productos nuvevamente */
 const form = document.getElementById("form");
 
@@ -87,6 +86,38 @@ async function addProduct(currentUser) {
   socket.emit("getAllProducts");
 }
 
+
+/** borro un producto y cargo productos nuvevamente */
+
+const btnDeleteProduct = document.getElementById("btn__deleteProduct");
+
+btnDeleteProduct.addEventListener('click', () => { deleteProduct(currentUser.textContent) })
+
+async function deleteProduct(currentUser) {
+
+  console.log("client user: " + currentUser);
+  const prodId = document.getElementById("idProduct").value;
+
+  let headersList = {
+    "Content-Type": "application/json"
+  }
+
+  await fetch(`/api/products/${prodId}?currentUser=${currentUser}`, {
+    method: "DELETE",
+    headers: headersList,
+    action: `/api/products/${prodId}?currentUser=${currentUser}`,
+  }).catch((err) => console.log(err));
+
+  form.reset();
+
+  socket.emit("getAllProducts");
+}
+
+
+/** actualizo un producto y cargo productos nuvevamente */
+
+
+
 /** formulario de búsqueda de producto por ID */
 
 const form2 = document.getElementById("form2");
@@ -96,15 +127,22 @@ form2.addEventListener("submit", (e) => {
 });
 
 /** busco el producto */
+
+
 const btnProductID = document.getElementById("btn__searchProduct");
-btnProductID.addEventListener('click', searchProduct)
+btnProductID.addEventListener('click', () => { searchProduct() })
 
 async function searchProduct() {
+
   const id = document.getElementById("prodId").value;
 
   socket.emit("searchProduct", id)//server socket --> emit(foundProduct)
   form2.reset()
 }
+
+socket.on("deletedProduct", () => {
+  socket.emit("getAllProducts");
+})
 
 
 /** muesrto el producto buscado por ID */

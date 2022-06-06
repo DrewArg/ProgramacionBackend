@@ -15,6 +15,17 @@ function socketController(server) {
             socket.emit('foundProduct', await productController.getById(id))
 
         })
+        socket.on('updateProduct', async (id) => {
+            socket.emit('updatedProduct', await productController.getById(id))
+
+        })
+
+        socket.on('deleteProduct', async (id) => {
+            console.log("socket delete");
+            socket.emit('deletedProduct', await productController.deleteById(id))
+
+        })
+
 
         socket.on('product', async () => {
             io.sockets.emit('productById', await productController.productById())

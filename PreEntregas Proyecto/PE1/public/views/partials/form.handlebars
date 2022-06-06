@@ -1,6 +1,11 @@
 <div class="sectionContainer">
     <h3 class="sectionTitle">Ingresar Producto</h3>
     <form id="form">
+
+        <div class="contenedorInput">
+            <label class="formLabel">Ingrese el Id en caso de Delete o Update</label>
+            <input class="formInput" type="text" placeholder="id del producto" id="idProduct" name="idProduct">
+        </div>
         <div class="contenedorInput">
             <label class="formLabel">Ingrese el nombre</label>
             <input class="formInput" type="text" placeholder="nombre" id="name" name="name">
@@ -26,6 +31,8 @@
             <input class="formInput" type="number" placeholder="stock" min="0" id="stock" name="stock">
         </div>
         <button class="btn__submit" id="btn__addProduct">Add Product</button>
+        <button class="btn__submit" id="btn__updateProduct">Update Product</button>
+        <button class="btn__submit" id="btn__deleteProduct">Delete Product</button>
 
     </form>
 </div>

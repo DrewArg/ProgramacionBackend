@@ -5,21 +5,23 @@ const {
 
 const productRouter = express.Router();
 
-productRouter.use((req, res, next) => {
-  if (adminManage.isAdmin) {
+productController.getAllProducts
+
+function isAdmin(req,res,next){
+  if (currentUser === "Admin") {
     next();
   } else {
     res.status(401).json({ status: 404, description: "Usuario no autorizado" });
   }
-});
+}
 
-productRouter.get("/products", productController.products);
-productRouter.get("/products/:id", productController.productById);
+productRouter.get("/products", productController.getAllProducts);
+productRouter.get("/products/:id", productController.getProductById);
 
-productRouter.post("/products", productController.products);
+productRouter.post("/products", isAdmin,productController.createProduct);
 
-productRouter.put("/products/:id", productController.productById);
+productRouter.put("/products/:id", isAdmin,productController.productById);
 
-productRouter.delete("/products/:id", productController.productById);
+productRouter.delete("/products/:id", isAdmin,productController.productById);
 
 module.exports = productRouter;

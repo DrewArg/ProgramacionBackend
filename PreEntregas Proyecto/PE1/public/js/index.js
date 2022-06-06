@@ -4,6 +4,9 @@ console.log("index.js");
 
 socket.emit("getAllProducts");
 
+const currentUser = document.getElementById('currentUser').value
+console.log(currentUser);
+
 const form2 = document.getElementById("form2");
 
 form2.addEventListener("submit", (e) => {

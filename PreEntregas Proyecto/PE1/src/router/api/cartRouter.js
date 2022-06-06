@@ -3,16 +3,6 @@ const { cartController } = require("../../controllers/cartControllers.js");
 
 const cartRouter = express.Router();
 
-cartRouter.use((req, res, next) => {
-  if (adminManage.isAdmin) {
-    next();
-  } else {
-    res
-      .status(401)
-      .json({ status: 404, description: "Usuario no autorizado" });
-  }
-});
-
 cartRouter.get("/carts/:id/products", cartController.productsInCart);
 
 cartRouter.post("/carts", cartController.createCart);

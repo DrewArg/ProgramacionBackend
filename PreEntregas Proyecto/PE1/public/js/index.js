@@ -4,8 +4,32 @@ console.log("index.js");
 
 socket.emit("getAllProducts");
 
+const form2 = document.getElementById("form2");
+
+form2.addEventListener("submit", (e) => {
+  e.preventDefault();
+  searchProduct();
+});
+
+async function searchProduct() {
+  const prodId = document.getElementById("prodId").value;
+
+  alert("hola");
+
+  const prod = await fetch(`api/products/:${prodId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    action: `api/products/:${prodId}`,
+  }).catch((err) => console.log(err));
+
+  alert(prod);
+  form2.reset();
+}
+
 const btnTipoUsuario = document.getElementById("btn__userType");
-btnTipoUsuario.addEventListener('click', changeUser)
+btnTipoUsuario.addEventListener("click", changeUser);
 
 const form = document.getElementById("form");
 
@@ -16,12 +40,12 @@ form.addEventListener("submit", (e) => {
 
 function changeUser() {
   const div = document.getElementById("currentUser");
-  const content = div.textContent
+  const content = div.textContent;
   console.log(content);
   if (content === "Normal") {
-    div.textContent = "Admin"
+    div.textContent = "Admin";
   } else {
-    div.textContent = "Normal"
+    div.textContent = "Normal";
   }
 }
 
@@ -67,7 +91,5 @@ async function handleProductsEvent(products) {
   const templateFunction = Handlebars.compile(templateText);
 
   const html = templateFunction({ products });
-  document.getElementById('cartProductSection').innerHTML = html;
+  document.getElementById("cartProductSection").innerHTML = html;
 }
-
-

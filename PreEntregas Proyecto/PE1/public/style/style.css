@@ -110,7 +110,7 @@
   height: 10px;
 }
 
-#form {
+#form, #form2 {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;

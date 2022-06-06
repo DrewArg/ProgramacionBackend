@@ -17,6 +17,7 @@ const productController = {
   },
 
   productById: (req, res) => {
+    console.log(req.params);
     const { productId } = req.params;
 
     if (req.method === "GET") {

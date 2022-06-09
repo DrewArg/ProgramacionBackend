@@ -1,0 +1,37 @@
+[
+  {
+    "userEmail": "andy@mail.com",
+    "date": "31/5/2022 14:14:22",
+    "msgContent": "hola mundo!"
+  },
+  {
+    "userEmail": "dv@mail.com",
+    "date": "31/5/2022 14:15:26",
+    "msgContent": "chau"
+  },
+  {
+    "userEmail": "farmacity@mail.com",
+    "date": "31/5/2022 14:16:48",
+    "msgContent": "pañuelitos para todos"
+  },
+  {
+    "userEmail": "prueba@mail.com",
+    "date": "31/5/2022 18:49:36",
+    "msgContent": "caramelitos de miel!"
+  },
+  {
+    "userEmail": "ironman@marvel.com",
+    "date": "4/6/2022 23:37:15",
+    "msgContent": "ACDC Rocks!"
+  },
+  {
+    "userEmail": "andy",
+    "date": "8/6/2022 23:13:14",
+    "msgContent": "Hola santi!"
+  },
+  {
+    "userEmail": "andy",
+    "date": "8/6/2022 23:14:21",
+    "msgContent": "hola de nuevo"
+  }
+]

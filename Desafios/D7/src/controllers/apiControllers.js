@@ -1,7 +1,7 @@
-const ProductArchiveContainer = require("../containers/ProductArchiveContainer.js");
-const products = new ProductArchiveContainer("./src/db/products.txt");
+import ProductArchiveContainer from '../containers/ProductArchiveContainer.js'
+import MessageArchiveContainer from '../containers/MessageArchiveContainer.js'
 
-const MessageArchiveContainer = require("../containers/MessageArchiveContainer.js")
+const products = new ProductArchiveContainer("./src/db/products.txt");
 const messages = new MessageArchiveContainer("./src/db/messages.txt");
 
 const productController = {
@@ -57,4 +57,4 @@ const apiControllers = {
   },
 };
 
-module.exports = { apiControllers, productController, messageController };
+export { apiControllers, productController, messageController };

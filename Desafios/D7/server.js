@@ -1,18 +1,20 @@
-const express = require('express')
-const dotenv = require('dotenv');
+import express from 'express';
+import dotenv from 'dotenv';
 
-const { Server: HttpServer } = require('http')
+import {Server as HttpServer} from 'http'
 
-const { productRouter, messageRouter } = require('../D7/src/router/api/apiRouter.js')
-const webRouter = require('../D7/src/router/web/webRouter')
+import { productRouter, messageRouter } from './src/router/api/apiRouter.js'
+import { webRouter } from './src/router/web/webRouter.js';
 
-const socketController = require('../D7/src/controllers/socketControllers.js')
+import socketController from './src/controllers/socketControllers.js'
+
+import { sqlClientUser } from './src/db/sqlClient.js'
 
 const expressApp = express();
 const httpServer = new HttpServer(expressApp);
 const io = new socketController(httpServer);
 
-const { engine } = require('express-handlebars');
+import { engine } from 'express-handlebars';
 
 dotenv.config();
 
@@ -25,6 +27,12 @@ expressApp.set('views', './public/views')
 expressApp.set('view engine', 'handlebars')
 
 expressApp.use(webRouter)
+
+//cambiar esto
+expressApp.get('/api/products',async (req,res)=>{
+  const products = await sqlClientUser.select('*').from('products')
+  res.json(products)
+})
 
 expressApp.use("/api", productRouter)
 expressApp.use("/api", messageRouter)

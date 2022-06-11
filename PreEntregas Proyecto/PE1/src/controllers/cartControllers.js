@@ -32,9 +32,13 @@ const cartController = {
   addProduct: (req, res) => {
     const { cartId } = req.params;
     if (req.method === "POST") {
-      res.json(carts.addProduct(req.body, cartId))
+      res.json(carts.addProduct(req.body, cartId));
     }
-  }
+  },
+
+  cartQty: (req, res) => {
+    res.json(carts.getCartsQty());
+  },
 };
 
-module.exports = { cartController }
+module.exports = { cartController };

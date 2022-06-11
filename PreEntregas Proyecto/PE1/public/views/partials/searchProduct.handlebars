@@ -12,29 +12,29 @@
   <div class="cardContainer">
     <div class="card">
       <div class="card__header">
-        <div class="card__header--name">
+        <div class="card__header--name" id="nam--{{foundProduct.id}}">
           {{foundProduct.name}}
         </div>
       </div>
       <div class="card__image">
-        <img src={{foundProduct.thumbnail}} alt="" class="card__image--thumbnail" />
+        <img src={{foundProduct.thumbnail}} alt="" class="card__image--thumbnail" id="img--{{foundProduct.id}}"/>
       </div>
       <div class="card__information">
-        <div class="card__information--description">
+        <div class="card__information--description" id="des--{{foundProduct.id}}">
           {{foundProduct.description}}
 
         </div>
-        <div class="card__information--price">
+        <div class="card__information--price" id="pri--{{foundProduct.id}}">
           ${{foundProduct.price}}
         </div>
       </div>
-      <div class="card__footer">
+      <div class="card__footer" id="stk--{{foundProduct.id}}">
         stock:
         {{foundProduct.stock}}
       </div>
     </div>
-    <button class="btn__submit" id="btnAddToCart{{foundProduct.id}}">Add to Cart</button>
-    <div class="hiddenId">{{foundProduct.id}}</div>
+    <button class="btn__submit" id="btn--{{foundProduct.id}}" onClick=addToCart({{foundProduct.id}})>Add to Cart</button>
+    <div class="hiddenId" id="id--{{foundProduct.id}}">{{foundProduct.id}}</div>
   </div>
   {{else}}
   <h3>No haz buscado ningún producto aún</h3>

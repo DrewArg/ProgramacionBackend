@@ -1,0 +1,22 @@
+ {{#if cart.id}}
+  <div>Tu carrito actual: {{cart.id}}</div>
+<button class="btn__submit" id="btn__createNewCart">Crear nuevo carrito</button>  
+<div>Carritos disponibles: </div>
+{{#if carritos.length}}
+<ul>
+{{#each carrito}}
+  <li>Carrito: {{carrito.id}}</li>
+  {{/each}}
+</ul>
+{{else}}
+  <h3>actualmente no hay carritos en el sistema</h3>
+
+{{/if}}
+  <div class="contenedorInput">
+            <label class="formLabel">Ingresa el id del carrito</label>
+            <input class="formInput" type="text" placeholder="idCarrito" id="userCartId" name="userCartId">
+        </div>
+        <button class="btn__submit" id="btn__changeCart">Cambiar carrito</button>
+  {{else}}
+  <h3>actualmente no hay carritos en el sistema</h3>
+  {{/if}}

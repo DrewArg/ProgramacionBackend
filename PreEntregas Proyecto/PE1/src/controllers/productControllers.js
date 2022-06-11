@@ -2,34 +2,32 @@ const ProductArchiveContainer = require("../containers/ProductArchiveContainer.j
 const products = new ProductArchiveContainer("./src/db/products.txt");
 
 const productController = {
-
   async getById(req, res) {
-
     try {
       const prod = await products.getById(req.params.id);
       console.log(prod);
-      return (prod);
+      return prod;
     } catch (e) {
       console.log(e);
+      return { error: e };
     }
   },
 
   async updateProduct(req, res) {
     try {
       const prod = await products.update(req);
-      return (prod);
+      return prod;
     } catch (e) {
-      console.log(e);
+      return { error: e };
     }
   },
 
   async deleteById(req, res) {
-
     const id = req.params.id;
     try {
       return await products.deleteById(id);
     } catch (e) {
-      console.log(e);
+      return { error: e };
     }
   },
 
@@ -38,10 +36,12 @@ const productController = {
   },
 
   createProduct: (req, res) => {
-    res.status(201).json(products.createProduct(req.body));
+    try {
+      res.status(201).json(products.createProduct(req.body));
+    } catch (error) {
+      return { error: error.message };
+    }
   },
-
-
 };
 
 module.exports = { productController };

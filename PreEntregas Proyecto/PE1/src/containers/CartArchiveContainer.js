@@ -49,6 +49,11 @@ class CartArchiveContainer {
     }
   }
 
+  async getCartsQty() {
+    await this._readFile();
+    return this.carts.length;
+  }
+
   async getAllProducts(cartId) {
     await this._readFile();
     const index = this.products.findIndex((c) => c.id === cartId)

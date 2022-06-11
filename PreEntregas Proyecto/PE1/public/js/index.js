@@ -47,10 +47,11 @@ form.addEventListener("submit", (e) => {
 
 const btnAddProduct = document.getElementById("btn__addProduct");
 
-btnAddProduct.addEventListener('click', () => { addProduct(currentUser.textContent) })
+btnAddProduct.addEventListener("click", () => {
+  addProduct(currentUser.textContent);
+});
 
 async function addProduct(currentUser) {
-
   console.log("client user: " + currentUser);
   const name = document.getElementById("name").value;
   const description = document.getElementById("description").value;
@@ -69,8 +70,8 @@ async function addProduct(currentUser) {
   };
 
   let headersList = {
-    "Content-Type": "application/json"
-  }
+    "Content-Type": "application/json",
+  };
 
   let bodyContent = JSON.stringify(product);
 
@@ -86,21 +87,21 @@ async function addProduct(currentUser) {
   socket.emit("getAllProducts");
 }
 
-
 /** borro un producto y cargo productos nuvevamente */
 
 const btnDeleteProduct = document.getElementById("btn__deleteProduct");
 
-btnDeleteProduct.addEventListener('click', () => { deleteProduct(currentUser.textContent) })
+btnDeleteProduct.addEventListener("click", () => {
+  deleteProduct(currentUser.textContent);
+});
 
 async function deleteProduct(currentUser) {
-
   console.log("client user: " + currentUser);
   const prodId = document.getElementById("idProduct").value;
 
   let headersList = {
-    "Content-Type": "application/json"
-  }
+    "Content-Type": "application/json",
+  };
 
   await fetch(`/api/products/${prodId}?currentUser=${currentUser}`, {
     method: "DELETE",
@@ -113,15 +114,15 @@ async function deleteProduct(currentUser) {
   socket.emit("getAllProducts");
 }
 
-
 /** actualizo un producto y cargo productos nuvevamente */
 
 const btnUpdateProduct = document.getElementById("btn__updateProduct");
 
-btnUpdateProduct.addEventListener('click', () => { updateProduct(currentUser.textContent) })
+btnUpdateProduct.addEventListener("click", () => {
+  updateProduct(currentUser.textContent);
+});
 
 async function updateProduct(currentUser) {
-
   console.log("client user: " + currentUser);
   const prodId = document.getElementById("idProduct").value;
   const name = document.getElementById("name").value;
@@ -142,8 +143,8 @@ async function updateProduct(currentUser) {
   };
 
   let headersList = {
-    "Content-Type": "application/json"
-  }
+    "Content-Type": "application/json",
+  };
 
   let bodyContent = JSON.stringify(product);
 
@@ -169,31 +170,33 @@ form2.addEventListener("submit", (e) => {
 
 /** busco el producto */
 
-
 const btnProductID = document.getElementById("btn__searchProduct");
-btnProductID.addEventListener('click', () => { searchProduct() })
+btnProductID.addEventListener("click", () => {
+  searchProduct();
+});
 
 async function searchProduct() {
-
   const id = document.getElementById("prodId").value;
 
-  socket.emit("searchProduct", id)//server socket --> emit(foundProduct)
-  form2.reset()
+  socket.emit("searchProduct", id); //server socket --> emit(foundProduct)
+  form2.reset();
 }
 
 socket.on("deletedProduct", () => {
   socket.emit("getAllProducts");
-})
-
+});
 
 /** muesrto el producto buscado por ID */
 
 socket.on("foundProduct", showProduct);
 
 async function showProduct(foundProduct) {
-
+  console.log("Acaaaaa")
   const productsTable = await fetch("/views/partials/searchProduct.handlebars");
   const templateText = await productsTable.text();
+
+  console.log(templateText);
+  console.log({foundProduct});
 
   const templateFunction = Handlebars.compile(templateText);
 
@@ -203,71 +206,30 @@ async function showProduct(foundProduct) {
 
 /** cargo los productos seleccionados al carrito */
 
-
-const cardsButtons = [];
-
-async function addToCart() {
+async function addToCart(id) {
   console.log("add to cart");
-  for (let index = 0; index < cardsButtons.length; index++) {
-    const cardsProducts = document.getElementsByClassName("hiddenId");
-
-    const currentId = cardsProducts[index].textContent;
-
+  console.log("id: " +  id);
+  
     let headersList = {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    };
 
     // let bodyContent = JSON.stringify(id);
 
-    const currentProd = await fetch(`/api/products/${currentId}`, {
+    const currentProd = await fetch(`/api/products/${id}`, {
       method: "POST",
       headers: headersList,
-      action: `/api/products/${currentId}`,
+      action: `/api/products/${id}`,
     }).catch((err) => console.log(err));
 
     const response = await currentProd.json();
-    console.log(response);
+      
+  let bodyContent = JSON.stringify(id);
 
-
-  };
-
-  // let headersList = {
-  //   "Content-Type": "application/json"
-  // }
-
-  // let bodyContent = JSON.stringify(id);
-
-  // await fetch(`/api/carts`, {
-  //   method: "POST",
-  //   body: bodyContent,
-  //   headers: headersList,
-  //   action: `/api/carts`,
-  // }).catch((err) => console.log(err));
-
+  await fetch(`/api/carts`, {
+    method: "POST",
+    body: bodyContent,
+    headers: headersList,
+    action: `/api/carts`,
+  }).catch((err) => console.log(err));
 }
-
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => {
-    console.log("domcontentloaded");
-    const cardsProducts = document.getElementsByClassName("hiddenId");
-
-    console.log(cardsProducts.length);
-
-    for (let i = 0; i < cardsProducts.length; i++) {
-      const currentId = cardsProducts[i].textContent;
-      console.log(currentId);
-      const currentBtn = document.getElementById(`btnAddToCart${currentId}`)
-      currentBtn.addEventListener('click', () => { addToCart() })
-      cardsButtons.push(currentBtn)
-      console.log("i: " + i);
-    }
-  }, 4000)
-
-});
-

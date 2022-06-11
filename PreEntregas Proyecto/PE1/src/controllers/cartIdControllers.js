@@ -14,7 +14,6 @@ const cartIdController = {
   },
 
   resetCartId: async () => {
-    console.log("reseeet");
     const cartIdReset = "";
     await currentCartId.changeCartId(cartIdReset);
   },

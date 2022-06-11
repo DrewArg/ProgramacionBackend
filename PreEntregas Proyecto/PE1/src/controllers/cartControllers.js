@@ -16,7 +16,6 @@ const cartController = {
   },
 
   productsInCart: async (cartId) => {
-    console.log("pic: " + cartId);
         return await carts.getAllProducts(cartId);
   },
 

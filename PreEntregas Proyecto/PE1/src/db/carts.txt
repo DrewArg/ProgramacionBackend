@@ -1,52 +1,42 @@
 [
   {
-    "id": 53912183115314430,
+    "id": 151048462849425020,
     "products": [
-      {},
       {
-        "id": 38216595234347080,
-        "name": "Estufa",
-        "description": "Marca: Liliana",
-        "code": "EL001",
-        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_633373-MLA41293958095_032020-O.webp",
-        "price": "4500",
-        "stock": "150"
+        "id": 89522634290660910,
+        "name": "cubo Rubik",
+        "description": "Cubo mágico. Marca: Rubik",
+        "code": "CR001",
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_625640-MLA43518333116_092020-O.webp",
+        "price": "850",
+        "stock": "300"
       },
       {
-        "id": 38216595234347080,
-        "name": "Estufa",
-        "description": "Marca: Liliana",
-        "code": "EL001",
-        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_633373-MLA41293958095_032020-O.webp",
-        "price": "4500",
-        "stock": "150"
+        "id": 89522634290660910,
+        "name": "cubo Rubik",
+        "description": "Cubo mágico. Marca: Rubik",
+        "code": "CR001",
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_625640-MLA43518333116_092020-O.webp",
+        "price": "850",
+        "stock": "300"
       },
       {
-        "id": 38216595234347080,
-        "name": "Estufa",
-        "description": "Marca: Liliana",
-        "code": "EL001",
-        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_633373-MLA41293958095_032020-O.webp",
-        "price": "4500",
-        "stock": "150"
+        "id": 89522634290660910,
+        "name": "cubo Rubik",
+        "description": "Cubo mágico. Marca: Rubik",
+        "code": "CR001",
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_625640-MLA43518333116_092020-O.webp",
+        "price": "850",
+        "stock": "300"
       },
       {
-        "id": 38216595234347080,
-        "name": "Estufa",
-        "description": "Marca: Liliana",
-        "code": "EL001",
-        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_633373-MLA41293958095_032020-O.webp",
-        "price": "4500",
-        "stock": "150"
-      },
-      {
-        "id": 38216595234347080,
-        "name": "Estufa",
-        "description": "Marca: Liliana",
-        "code": "EL001",
-        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_633373-MLA41293958095_032020-O.webp",
-        "price": "4500",
-        "stock": "150"
+        "id": 89522634290660910,
+        "name": "cubo Rubik",
+        "description": "Cubo mágico. Marca: Rubik",
+        "code": "CR001",
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_625640-MLA43518333116_092020-O.webp",
+        "price": "850",
+        "stock": "300"
       },
       {
         "id": 38216595234347080,
@@ -58,5 +48,9 @@
         "stock": "150"
       }
     ]
+  },
+  {
+    "id": 125716770963413010,
+    "products": []
   }
 ]

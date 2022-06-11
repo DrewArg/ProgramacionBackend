@@ -22,12 +22,20 @@ class CartArchiveContainer {
     const cartId = new Date().getTime() * Math.random() * 100000;
     const timestamp = new Date();
     const newArray = [];
-    newArray.push(cartData);
     const cart = new Cart(cartId, timestamp, newArray);
-    await this._readFile();
-    this.carts.push(cart);
-    await this._saveFile();
-    return cartId;
+    try {
+      await this._readFile();
+      this.carts.push(cart);
+      try {
+        await this._saveFile();
+      } catch (error) {
+        return { error: `Error:  ${error}` };
+      }
+    } catch (error) {
+      return { error: `Error:  ${error}` };
+    } finally {
+      return cartId;
+    }
   }
 
   async deleteById(cartId) {
@@ -56,7 +64,9 @@ class CartArchiveContainer {
 
   async getAllProducts(cartId) {
     await this._readFile();
-    const index = this.carts.findIndex((c) => parseInt(c.id) === parseInt(cartId));
+    const index = this.carts.findIndex(
+      (c) => parseInt(c.id) === parseInt(cartId)
+    );
     if (index === -1) {
       return { error: "carrito no encontrado" };
     } else {

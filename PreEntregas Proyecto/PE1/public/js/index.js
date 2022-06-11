@@ -28,15 +28,24 @@ socket.emit("getCartsIds");
 socket.on("cartsIds", handleCartsIds);
 
 async function handleCartsIds(cartsIds) {
-  const cartIdsOnServer = await fetch(
-    "/views/partials/cartIdSection.handlebars"
-  );
-  const templateText = await cartIdsOnServer.text();
+  try {
+    const cartIdsOnServer = await fetch(
+      "/views/partials/cartIdSection.handlebars"
+    );
 
-  const templateFunction = Handlebars.compile(templateText);
+    try {
+      const templateText = await cartIdsOnServer.text();
 
-  const html = templateFunction({ cartsIds });
-  document.getElementById("cartIdSection").innerHTML = html;
+      const templateFunction = Handlebars.compile(templateText);
+
+      const html = templateFunction({ cartsIds });
+      document.getElementById("cartIdSection").innerHTML = html;
+    } catch (error) {
+      return { error: `Error:  ${error}` };
+    }
+  } catch (error) {
+    return { error: `Error:  ${error}` };
+  }
 }
 
 /** cargo los productos iniciales */
@@ -260,7 +269,7 @@ function changeCartId() {
   const activeCart = document.getElementById("activeCart");
 
   activeCart.textContent = userCartId.value;
-  userCartId.value = ""
+  userCartId.value = "";
 }
 
 async function createNewCart() {
@@ -296,7 +305,6 @@ async function saveCartId() {
     headers: headersList,
     action: `/api/activeCartId/${cartId}`,
   }).catch((err) => console.log(err));
-
 }
 
 socket.emit("getActiveCartId");
@@ -308,4 +316,3 @@ async function handleGetActiveCartId(activeCartId) {
     document.getElementById("activeCart").textContent = activeCartId;
   }, 1000);
 }
-

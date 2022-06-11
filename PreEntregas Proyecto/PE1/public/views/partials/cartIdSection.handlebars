@@ -1,9 +1,9 @@
 <button class="btn__submit" id="btn__createNewCart" onclick="createNewCart()">Crear nuevo carrito</button>
 <div>Carritos disponibles: </div>
 <div>Tu carrito actual:</div>
+<div id="activeCart"></div>
 {{#if cartsIds.length}}
-  <div id="activeCart">{{cartsIds.[0]}}</div>
-  <ul>
+<ul>
     {{#each cartsIds}}
       <li id="{{this}}">ID: {{this}}</li>
     {{/each}}

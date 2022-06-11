@@ -256,13 +256,12 @@ async function addToCart(productId) {
 }
 
 function changeCartId() {
-  const userCartId = document.getElementById("userCartId").value;
+  const userCartId = document.getElementById("userCartId");
 
   const activeCart = document.getElementById("activeCart");
 
-  console.log(userCartId);
-
-  activeCart.textContent = userCartId;
+  activeCart.textContent = userCartId.value;
+  userCartId.value = ""
 }
 
 async function createNewCart() {
@@ -300,3 +299,14 @@ async function saveCartId() {
   }).catch((err) => console.log(err));
 
 }
+
+socket.emit("getActiveCartId");
+
+socket.on("activeCartId", handleGetActiveCartId);
+
+async function handleGetActiveCartId(activeCartId) {
+  setTimeout(() => {
+    document.getElementById("activeCart").textContent = activeCartId;
+  }, 1000);
+}
+

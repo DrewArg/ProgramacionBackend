@@ -79,6 +79,24 @@
         "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_625640-MLA43518333116_092020-O.webp",
         "price": "850",
         "stock": "300"
+      },
+      {
+        "id": 38216595234347080,
+        "name": "Estufa",
+        "description": "Estufa eléctrica marca Liliana.",
+        "code": "VV001",
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_633373-MLA41293958095_032020-O.webp",
+        "price": "1231",
+        "stock": "1"
+      },
+      {
+        "id": 38216595234347080,
+        "name": "Estufa",
+        "description": "Estufa eléctrica marca Liliana.",
+        "code": "VV001",
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_633373-MLA41293958095_032020-O.webp",
+        "price": "1231",
+        "stock": "1"
       }
     ]
   },

@@ -8,10 +8,9 @@ const cartIdController = {
       currentCartId.changeCartId(cartId);
     }
   },
-  getCurrentId: (req, res) => {
-    if(req.method === "GET"){
-        res.json(currentCartId.getCartId())
-    }
+  getCurrentId: async () => {
+    const currCartId = await currentCartId.getCartId() 
+    return currCartId;
   },
 };
 

@@ -23,19 +23,10 @@ class CartArchiveContainer {
     const timestamp = new Date();
     const newArray = [];
     const cart = new Cart(cartId, timestamp, newArray);
-    try {
-      await this._readFile();
-      this.carts.push(cart);
-      try {
-        await this._saveFile();
-      } catch (error) {
-        return { error: `Error:  ${error}` };
-      }
-    } catch (error) {
-      return { error: `Error:  ${error}` };
-    } finally {
-      return cartId;
-    }
+    await this._readFile();
+    this.carts.push(cart);
+    await this._saveFile();
+    return cartId;
   }
 
   async deleteById(cartId) {

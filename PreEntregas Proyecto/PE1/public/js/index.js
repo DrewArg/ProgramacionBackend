@@ -28,24 +28,16 @@ socket.emit("getCartsIds");
 socket.on("cartsIds", handleCartsIds);
 
 async function handleCartsIds(cartsIds) {
-  try {
-    const cartIdsOnServer = await fetch(
-      "/views/partials/cartIdSection.handlebars"
-    );
+  const cartIdsOnServer = await fetch(
+    "/views/partials/cartIdSection.handlebars"
+  );
 
-    try {
-      const templateText = await cartIdsOnServer.text();
+  const templateText = await cartIdsOnServer.text();
 
-      const templateFunction = Handlebars.compile(templateText);
+  const templateFunction = Handlebars.compile(templateText);
 
-      const html = templateFunction({ cartsIds });
-      document.getElementById("cartIdSection").innerHTML = html;
-    } catch (error) {
-      return { error: `Error:  ${error}` };
-    }
-  } catch (error) {
-    return { error: `Error:  ${error}` };
-  }
+  const html = templateFunction({ cartsIds });
+  document.getElementById("cartIdSection").innerHTML = html;
 }
 
 /** cargo los productos iniciales */

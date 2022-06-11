@@ -7,52 +7,28 @@ socket.emit("getCartsIds");
 socket.on("cartsIds", handleCartsIds);
 
 async function handleCartsIds(cartsIds) {
-  try {
-    const cartIdsOnServer = await fetch(
-      "/views/partials/cartIdSection.handlebars"
-    );
+  const cartIdsOnServer = await fetch(
+    "/views/partials/cartIdSection.handlebars"
+  );
 
-    try {
-      const templateText = await cartIdsOnServer.text();
+  const templateText = await cartIdsOnServer.text();
 
-      const templateFunction = Handlebars.compile(templateText);
+  const templateFunction = Handlebars.compile(templateText);
 
-      const html = templateFunction({ cartsIds });
-      document.getElementById("cartIdSection").innerHTML = html;
-    } catch (error) {
-      return {
-        error: `no se pudo convertir el template a texto. Error:  ${error}`,
-      };
-    }
-  } catch (error) {
-    return {
-      error: `no se pudo recuperar el cartIdSection.handlebars. Error:  ${error}`,
-    };
-  }
+  const html = templateFunction({ cartsIds });
+  document.getElementById("cartIdSection").innerHTML = html;
 
-  try {
-    const removeCartSection = await fetch(
-      "/views/partials/removeCartSection.handlebars"
-    );
+  const removeCartSection = await fetch(
+    "/views/partials/removeCartSection.handlebars"
+  );
 
-    try {
-      const templateText2 = await removeCartSection.text();
+  const templateText2 = await removeCartSection.text();
 
-      const templateFunction2 = Handlebars.compile(templateText2);
+  const templateFunction2 = Handlebars.compile(templateText2);
 
-      const html2 = templateFunction2({ cartsIds });
-    } catch (error) {
-      return {
-        error: `no se pudo convertir el template a texto. Error:  ${error}`,
-      };
-    }
+  const html2 = templateFunction2({ cartsIds });
 
-    document.getElementById("removeCartSection").innerHTML = html2;
-  } catch (error) {
-    return {
-      error: `no se pudo obtener el removeCartSection.handlebars. Error:  ${error}`,
-    };
-  }
+  document.getElementById("removeCartSection").innerHTML = html2;
 }
 
 socket.emit("getActiveCartId");
@@ -75,22 +51,16 @@ socket.on("cartProductsById", handleCartProductsById);
 
 async function handleCartProductsById(cartProductsById) {
   console.log("prods: " + { cartProductsById });
-  try {
-    const productsInCart = await fetch(
-      "/views/partials/cartProductSection.handlebars"
-    );
-    try {
-      const templateText = await productsInCart.text();
-      const templateFunction = Handlebars.compile(templateText);
 
-      const html = templateFunction({ cartProductsById });
-      document.getElementById("cartProductSection").innerHTML = html;
-    } catch (error) {
-      return { error: `Error:  ${error}` };
-    }
-  } catch (error) {
-    return { error: `Error:  ${error}` };
-  }
+  const productsInCart = await fetch(
+    "/views/partials/cartProductSection.handlebars"
+  );
+
+  const templateText = await productsInCart.text();
+  const templateFunction = Handlebars.compile(templateText);
+
+  const html = templateFunction({ cartProductsById });
+  document.getElementById("cartProductSection").innerHTML = html;
 }
 /** cargo los productos seleccionados al carrito */
 
@@ -101,15 +71,11 @@ async function removeItemFromCart(productId) {
 
   const cartId = document.getElementById("activeCart").textContent;
 
-  try {
-    await fetch(`/api/carts/${cartId}/products/${productId}`, {
-      method: "DELETE",
-      headers: headersList,
-      action: `/api/carts/${cartId}/products/${productId}`,
-    }).catch((err) => console.log(err));
-  } catch (error) {
-    return { error: `Error:  ${error}` };
-  }
+  await fetch(`/api/carts/${cartId}/products/${productId}`, {
+    method: "DELETE",
+    headers: headersList,
+    action: `/api/carts/${cartId}/products/${productId}`,
+  }).catch((err) => console.log(err));
 
   socket.emit("getCartProductsById", cartId);
 }
@@ -119,51 +85,35 @@ async function addToCart(productId) {
     "Content-Type": "application/json",
   };
 
-  try {
-    const currentProd = await fetch(`/api/products/${productId}`, {
+  const currentProd = await fetch(`/api/products/${productId}`, {
+    method: "POST",
+    headers: headersList,
+    action: `/api/products/${productId}`,
+  }).catch((err) => console.log(err));
+
+  const productResponse = await currentProd.json();
+
+  const activeCartExist = document.getElementById("activeCart");
+  const cartId = activeCartExist.textContent;
+  let bodyContent = JSON.stringify(productResponse);
+
+  if (cartId !== "activeCartExist") {
+    await fetch(`/api/carts/${cartId}/products`, {
       method: "POST",
+      body: bodyContent,
       headers: headersList,
-      action: `/api/products/${productId}`,
+      action: `/api/carts/${cartId}/products`,
     }).catch((err) => console.log(err));
-  } catch (error) {
-    return { error: `Error:  ${error}` };
-  }
+  } else {
+    const newCartId = await fetch(`/api/carts`, {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList,
+      action: `/api/carts`,
+    }).catch((err) => console.log(err));
 
-  try {
-    const productResponse = await currentProd.json();
-
-    const activeCartExist = document.getElementById("activeCart");
-    const cartId = activeCartExist.textContent;
-    let bodyContent = JSON.stringify(productResponse);
-
-    if (cartId !== "activeCartExist") {
-      try {
-        await fetch(`/api/carts/${cartId}/products`, {
-          method: "POST",
-          body: bodyContent,
-          headers: headersList,
-          action: `/api/carts/${cartId}/products`,
-        }).catch((err) => console.log(err));
-      } catch (error) {
-        return { error: `Error:  ${error}` };
-      }
-    } else {
-      try {
-        const newCartId = await fetch(`/api/carts`, {
-          method: "POST",
-          body: bodyContent,
-          headers: headersList,
-          action: `/api/carts`,
-        }).catch((err) => console.log(err));
-
-        cartId.textContent = newCartId;
-        document.getElementById("activeCart2").textContent = newCartId;
-      } catch (error) {
-        return { error: `Error:  ${error}` };
-      }
-    }
-  } catch (error) {
-    return { error: `Error:  ${error}` };
+    cartId.textContent = newCartId;
+    document.getElementById("activeCart2").textContent = newCartId;
   }
 
   socket.emit("getCartsIds");
@@ -191,21 +141,16 @@ async function createNewCart() {
   const activeCartExist = document.getElementById("activeCart");
   const cartId = activeCartExist.textContent;
   let bodyContent = "";
-  try {
-    
-    const newCartId = await fetch(`/api/carts`, {
-      method: "POST",
-      body: bodyContent,
-      headers: headersList,
-      action: `/api/carts`,
-    }).catch((err) => console.log(err));
-  
-    cartId.textContent = newCartId;
-    document.getElementById("activeCart2").textContent = newCartId;
-  } catch (error) {
-    return {error:  `Error:  ${error}`}
 
-  }
+  const newCartId = await fetch(`/api/carts`, {
+    method: "POST",
+    body: bodyContent,
+    headers: headersList,
+    action: `/api/carts`,
+  }).catch((err) => console.log(err));
+
+  cartId.textContent = newCartId;
+  document.getElementById("activeCart2").textContent = newCartId;
 
   socket.emit("getCartsIds");
 }
@@ -218,17 +163,11 @@ async function saveCartId() {
   const activeCartExist = document.getElementById("activeCart");
   const cartId = activeCartExist.textContent;
 
-  try {
-    await fetch(`/api/activeCartId/${cartId}`, {
-      method: "POST",
-      headers: headersList,
-      action: `/api/activeCartId/${cartId}`,
-    }).catch((err) => console.log(err));
-    
-  } catch (error) {
-    return {error:  `Error:  ${error}`}
-
-  }
+  await fetch(`/api/activeCartId/${cartId}`, {
+    method: "POST",
+    headers: headersList,
+    action: `/api/activeCartId/${cartId}`,
+  }).catch((err) => console.log(err));
 }
 
 async function removeCartById() {
@@ -241,31 +180,19 @@ async function removeCartById() {
 
   const cartIdOk = removeCartId.textContent;
 
-  try {
-    await fetch(`/api/carts/${cartIdOk}`, {
-      method: "DELETE",
-      headers: headersList,
-      action: `/api/carts/${cartIdOk}`,
-    }).catch((err) => console.log(err));
-    removeCartId.textContent = "";
-    removeCartId2.textContent = "";
-    
-  } catch (error) {
-    return {error:  `Error:  ${error}`}
+  await fetch(`/api/carts/${cartIdOk}`, {
+    method: "DELETE",
+    headers: headersList,
+    action: `/api/carts/${cartIdOk}`,
+  }).catch((err) => console.log(err));
+  removeCartId.textContent = "";
+  removeCartId2.textContent = "";
 
-  }
-
-  try {
-    await fetch(`/api/resetCartId`, {
-      method: "POST",
-      headers: headersList,
-      action: `/api/resetCartId`,
-    }).catch((err) => console.log(err));
-    
-  } catch (error) {
-    return {error:  `Error:  ${error}`}
-
-  }
+  await fetch(`/api/resetCartId`, {
+    method: "POST",
+    headers: headersList,
+    action: `/api/resetCartId`,
+  }).catch((err) => console.log(err));
 
   // socket.emit("getCartProductsById", "");
 }

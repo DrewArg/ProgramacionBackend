@@ -5,6 +5,7 @@ const { Server: HttpServer } = require("http");
 
 const productRouter = require("./src/router/api/productRouter.js");
 const cartRouter = require("./src/router/api/cartRouter.js");
+const cartIdRouter = require("./src/router/api/cartIdRouter.js");
 const webRouter = require("./src/router/web/webRouter.js");
 const apiRouter = require("./src/router/api/apiRouter.js");
 
@@ -30,6 +31,8 @@ expressApp.use(webRouter);
 console.log("server");
 expressApp.use("/api", productRouter);
 expressApp.use("/api", cartRouter);
+expressApp.use("/api", cartIdRouter);
+
 expressApp.use(apiRouter);
 
 const PORT = process.env.PORT || 8080;

@@ -242,7 +242,6 @@ async function addToCart(productId) {
       action: `/api/carts/${cartId}/products`,
     }).catch((err) => console.log(err));
   } else {
-
     const newCartId = await fetch(`/api/carts`, {
       method: "POST",
       body: bodyContent,
@@ -266,14 +265,14 @@ function changeCartId() {
   activeCart.textContent = userCartId;
 }
 
-async function createNewCart(){
+async function createNewCart() {
   let headersList = {
     "Content-Type": "application/json",
   };
 
   const activeCartExist = document.getElementById("activeCart");
   const cartId = activeCartExist.textContent;
-  let bodyContent = '';
+  let bodyContent = "";
   const newCartId = await fetch(`/api/carts`, {
     method: "POST",
     body: bodyContent,
@@ -284,4 +283,20 @@ async function createNewCart(){
   cartId.textContent = newCartId;
 
   socket.emit("getCartsIds");
+}
+
+async function saveCartId() {
+  let headersList = {
+    "Content-Type": "application/json",
+  };
+
+  const activeCartExist = document.getElementById("activeCart");
+  const cartId = activeCartExist.textContent;
+
+  await fetch(`/api/activeCartId/${cartId}`, {
+    method: "POST",
+    headers: headersList,
+    action: `/api/activeCartId/${cartId}`,
+  }).catch((err) => console.log(err));
+
 }

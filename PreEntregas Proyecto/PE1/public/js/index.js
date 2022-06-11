@@ -265,3 +265,23 @@ function changeCartId() {
 
   activeCart.textContent = userCartId;
 }
+
+async function createNewCart(){
+  let headersList = {
+    "Content-Type": "application/json",
+  };
+
+  const activeCartExist = document.getElementById("activeCart");
+  const cartId = activeCartExist.textContent;
+  let bodyContent = '';
+  const newCartId = await fetch(`/api/carts`, {
+    method: "POST",
+    body: bodyContent,
+    headers: headersList,
+    action: `/api/carts`,
+  }).catch((err) => console.log(err));
+
+  cartId.textContent = newCartId;
+
+  socket.emit("getCartsIds");
+}

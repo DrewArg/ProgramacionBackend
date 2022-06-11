@@ -55,9 +55,9 @@ class CartArchiveContainer {
   }
 
   async getAllProducts(cartId) {
+    console.log("archive: " + cartId);
     await this._readFile();
-    const index = this.products.findIndex((c) => c.id === cartId);
-
+    const index = this.carts.findIndex((c) => parseInt(c.id) === parseInt(cartId));
     if (index === -1) {
       return { error: "carrito no encontrado" };
     } else {

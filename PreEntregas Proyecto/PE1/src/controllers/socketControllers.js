@@ -43,6 +43,10 @@ function socketController(server) {
       socket.emit("activeCartId", await cartIdController.getCurrentId());
       io.sockets.emit("activeCartId", await cartIdController.getCurrentId());
     });
+
+    socket.on("getCartProductsById", async (getCartProductsById) => {
+      socket.emit("cartProductsById", await cartController.productsInCart(getCartProductsById));
+    });
   });
 
   return io;

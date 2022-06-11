@@ -28,7 +28,6 @@ socket.emit("getCartsIds");
 socket.on("cartsIds", handleCartsIds);
 
 async function handleCartsIds(cartsIds) {
-  console.log("acaa");
   const cartIdsOnServer = await fetch(
     "/views/partials/cartIdSection.handlebars"
   );

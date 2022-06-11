@@ -7,7 +7,6 @@ socket.emit("getCartsIds");
 socket.on("cartsIds", handleCartsIds);
 
 async function handleCartsIds(cartsIds) {
-  console.log("acaa");
   const cartIdsOnServer = await fetch(
     "/views/partials/cartIdSection.handlebars"
   );
@@ -19,21 +18,21 @@ async function handleCartsIds(cartsIds) {
   document.getElementById("cartIdSection").innerHTML = html;
 }
 
-socket.emit("getAllProducts");
+// socket.emit("getAllProducts");
 
-socket.on("products", handleProductsEvent);
+// socket.on("products", handleProductsEvent);
 
-async function handleProductsEvent(products) {
-  const productsTable = await fetch(
-    "/views/partials/productSection.handlebars"
-  );
-  const templateText = await productsTable.text();
+// async function handleProductsEvent(products) {
+//   const productsTable = await fetch(
+//     "/views/partials/productSection.handlebars"
+//   );
+//   const templateText = await productsTable.text();
 
-  const templateFunction = Handlebars.compile(templateText);
+//   const templateFunction = Handlebars.compile(templateText);
 
-  const html = templateFunction({ products });
-  document.getElementById("cartProductSection").innerHTML = html;
-}
+//   const html = templateFunction({ products });
+//   document.getElementById("cartProductSection").innerHTML = html;
+// }
 
 socket.emit("getActiveCartId");
 
@@ -41,8 +40,24 @@ socket.on("activeCartId", handleGetActiveCartId);
 
 async function handleGetActiveCartId(activeCartId) {
   setTimeout(() => {
-    document.getElementById("activeCart").textContent = activeCartId;
+    const aci = document.getElementById("activeCart");
+    aci.textContent = activeCartId;
   }, 1000);
+
+  socket.emit("getCartProductsById", activeCartId);
+}
+
+socket.on("cartProductsById",handleCartProductsById)
+
+async function handleCartProductsById(cartProductsById){
+    const productsInCart = await fetch(
+        "/views/partials/cartProductSection.handlebars"
+      );
+      const templateText = await productsInCart.text();   
+      const templateFunction = Handlebars.compile(templateText);
+    
+      const html = templateFunction({ cartProductsById });
+      document.getElementById("cartProductSection").innerHTML = html;
 }
 /** cargo los productos seleccionados al carrito */
 

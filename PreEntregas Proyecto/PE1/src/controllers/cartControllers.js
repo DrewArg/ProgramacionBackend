@@ -15,11 +15,8 @@ const cartController = {
     }
   },
 
-  productsInCart: (req, res) => {
-    const { cartId } = req.params;
-    if (req.method === "GET") {
-      res.json(carts.getAllProducts(parseInt(cartId)));
-    }
+  productsInCart: async (cartId) => {
+    return await carts.getAllProducts(cartId);
   },
 
   productById: (req, res) => {

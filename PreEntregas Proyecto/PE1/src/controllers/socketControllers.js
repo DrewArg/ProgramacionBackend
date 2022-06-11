@@ -45,6 +45,7 @@ function socketController(server) {
     });
 
     socket.on("getCartProductsById", async (getCartProductsById) => {
+      console.log("socket:" + getCartProductsById);
       socket.emit("cartProductsById", await cartController.productsInCart(getCartProductsById));
     });
   });

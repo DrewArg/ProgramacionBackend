@@ -24,7 +24,6 @@ class CartArchiveContainer {
   }
 
   async changeCartId(cartId) {
-    console.log("archivex");
     await this._readFile();
     this.cartId = cartId;
     await this._saveFile();

@@ -1,6 +1,5 @@
 const fs = require("fs");
 const Cart = require("../db/Cart.js");
-
 class CartArchiveContainer {
   constructor(path) {
     this.path = path;
@@ -25,7 +24,6 @@ class CartArchiveContainer {
     const newArray = [];
     newArray.push(cartData);
     const cart = new Cart(cartId, timestamp, newArray);
-    console.log({ cart });
     await this._readFile();
     this.carts.push(cart);
     await this._saveFile();
@@ -34,7 +32,9 @@ class CartArchiveContainer {
 
   async deleteById(cartId) {
     await this._readFile();
-    const index = this.carts.findIndex((c) => c.id === cartId);
+    const index = this.carts.findIndex(
+      (c) => parseInt(c.id) === parseInt(cartId)
+    );
     if (index === -1) {
       return { error: "carrito no encontrado" };
     } else {
@@ -80,20 +80,21 @@ class CartArchiveContainer {
   async removeProduct(productId, cartId) {
     await this._readFile();
 
-    const index = this.carts.findIndex((c) => parseInt(c.id) === parseInt(cartId));
+    const index = this.carts.findIndex(
+      (c) => parseInt(c.id) === parseInt(cartId)
+    );
     if (index === -1) {
       return { error: "carrito no encontrado" };
     } else {
       const productsInCart = await this.getAllProducts(cartId);
 
-      const productIndex = productsInCart.findIndex((p) => parseInt(p.id) === parseInt(productId));
+      const productIndex = productsInCart.findIndex(
+        (p) => parseInt(p.id) === parseInt(productId)
+      );
 
       if (productIndex === -1) {
         return { error: "producto no encontrado" };
       } else {
-        console.log("producto");
-        console.log(productIndex);
-        console.log("prods: " + {productsInCart});
         productsInCart.splice(productIndex, 1);
         await this._saveFile();
         return {

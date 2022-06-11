@@ -9,14 +9,15 @@ const cartController = {
   },
 
   cartById: (req, res) => {
-    const { cartId } = req.params;
+    const cartId = req.params.cartId  ;
     if (req.method === "DELETE") {
-      res.json(carts.deleteById(parseInt(cartId)));
+      res.json(carts.deleteById(cartId));
     }
   },
 
   productsInCart: async (cartId) => {
-    return await carts.getAllProducts(cartId);
+    console.log("pic: " + cartId);
+        return await carts.getAllProducts(cartId);
   },
 
   productById: async (req, res) => {

@@ -9,6 +9,6 @@ cartRouter.post("/carts", cartController.createCart);
 cartRouter.post("/carts/:id/products", cartController.addProduct);
 
 cartRouter.delete("/carts/:id", cartController.cartById);
-cartRouter.delete("/carts/:id/products/:id", cartController.productById);
+cartRouter.delete("/carts/:cartId/products/:productId", cartController.productById);
 
 module.exports = cartRouter;

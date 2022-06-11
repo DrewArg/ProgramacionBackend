@@ -19,10 +19,11 @@ const cartController = {
     return await carts.getAllProducts(cartId);
   },
 
-  productById: (req, res) => {
-    const { productId, cartId } = req.params;
+  productById: async (req, res) => {
+    const productId = req.params.productId;
+    const cartId = req.params.cartId;
     if (req.method === "DELETE") {
-      res.json(carts.getProductById(parseInt(productId, cartId)));
+      await res.json(carts.removeProduct(productId, cartId));
     }
   },
 

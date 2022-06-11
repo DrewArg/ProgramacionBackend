@@ -18,22 +18,6 @@ async function handleCartsIds(cartsIds) {
   document.getElementById("cartIdSection").innerHTML = html;
 }
 
-// socket.emit("getAllProducts");
-
-// socket.on("products", handleProductsEvent);
-
-// async function handleProductsEvent(products) {
-//   const productsTable = await fetch(
-//     "/views/partials/productSection.handlebars"
-//   );
-//   const templateText = await productsTable.text();
-
-//   const templateFunction = Handlebars.compile(templateText);
-
-//   const html = templateFunction({ products });
-//   document.getElementById("cartProductSection").innerHTML = html;
-// }
-
 socket.emit("getActiveCartId");
 
 socket.on("activeCartId", handleGetActiveCartId);
@@ -47,19 +31,35 @@ async function handleGetActiveCartId(activeCartId) {
   socket.emit("getCartProductsById", activeCartId);
 }
 
-socket.on("cartProductsById",handleCartProductsById)
+socket.on("cartProductsById", handleCartProductsById);
 
-async function handleCartProductsById(cartProductsById){
-    const productsInCart = await fetch(
-        "/views/partials/cartProductSection.handlebars"
-      );
-      const templateText = await productsInCart.text();   
-      const templateFunction = Handlebars.compile(templateText);
-    
-      const html = templateFunction({ cartProductsById });
-      document.getElementById("cartProductSection").innerHTML = html;
+async function handleCartProductsById(cartProductsById) {
+  const productsInCart = await fetch(
+    "/views/partials/cartProductSection.handlebars"
+  );
+  const templateText = await productsInCart.text();
+  const templateFunction = Handlebars.compile(templateText);
+
+  const html = templateFunction({ cartProductsById });
+  document.getElementById("cartProductSection").innerHTML = html;
 }
 /** cargo los productos seleccionados al carrito */
+
+async function removeItemFromCart(productId) {
+  let headersList = {
+    "Content-Type": "application/json",
+  };
+
+  const cartId = document.getElementById("activeCart").textContent;
+
+  await fetch(`/api/carts/${cartId}/products/${productId}`, {
+    method: "DELETE",
+    headers: headersList,
+    action: `/api/carts/${cartId}/products/${productId}`,
+  }).catch((err) => console.log(err));
+
+  socket.emit("getCartProductsById", cartId);
+}
 
 async function addToCart(productId) {
   let headersList = {
@@ -105,7 +105,10 @@ function changeCartId() {
   const activeCart = document.getElementById("activeCart");
 
   activeCart.textContent = userCartId.value;
+  socket.emit("getCartProductsById", userCartId.value);
+
   userCartId.value = "";
+  
 }
 
 async function createNewCart() {

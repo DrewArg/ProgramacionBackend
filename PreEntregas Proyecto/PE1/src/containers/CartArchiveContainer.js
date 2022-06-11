@@ -55,7 +55,6 @@ class CartArchiveContainer {
   }
 
   async getAllProducts(cartId) {
-    console.log("archive: " + cartId);
     await this._readFile();
     const index = this.carts.findIndex((c) => parseInt(c.id) === parseInt(cartId));
     if (index === -1) {
@@ -81,18 +80,22 @@ class CartArchiveContainer {
   async removeProduct(productId, cartId) {
     await this._readFile();
 
-    const index = this.products.findIndex((c) => c.id === cartId);
+    const index = this.carts.findIndex((c) => parseInt(c.id) === parseInt(cartId));
     if (index === -1) {
       return { error: "carrito no encontrado" };
     } else {
-      const productsInCart = this.getAllProducts(cartId);
+      const productsInCart = await this.getAllProducts(cartId);
 
-      const productIndex = productsInCart.findIndex((p) => p.id === productId);
+      const productIndex = productsInCart.findIndex((p) => parseInt(p.id) === parseInt(productId));
 
       if (productIndex === -1) {
         return { error: "producto no encontrado" };
       } else {
+        console.log("producto");
+        console.log(productIndex);
+        console.log("prods: " + {productsInCart});
         productsInCart.splice(productIndex, 1);
+        await this._saveFile();
         return {
           respose: `el producto ${productId} ha sido elminado del carrito correctamente`,
         };

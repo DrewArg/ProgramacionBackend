@@ -5,8 +5,7 @@ const productController = {
   async getById(req, res) {
     try {
       const prod = await products.getById(req.params.id);
-      console.log(prod);
-      return prod;
+      res.json(prod);
     } catch (e) {
       console.log(e);
       return { error: e };
@@ -16,7 +15,7 @@ const productController = {
   async updateProduct(req, res) {
     try {
       const prod = await products.update(req);
-      return prod;
+      res.json(prod);
     } catch (e) {
       return { error: e };
     }

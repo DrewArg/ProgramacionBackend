@@ -1,6 +1,7 @@
 const { Server: Socket } = require('socket.io')
 
 const { productController } = require('./productControllers')
+const { cartController } = require('./cartControllers')
 
 function socketController(server) {
     const io = new Socket(server)
@@ -33,11 +34,13 @@ function socketController(server) {
         })
 
         socket.on('getAllProducts', async () => {
-            console.log("tomando productos..");
             socket.emit('products', await productController.getAllProducts())
             io.sockets.emit('products', await productController.getAllProducts())
         })
-
+        socket.on('getCartsIds', async () => {
+            socket.emit('cartsIds', await cartController.getCartsIds())
+            io.sockets.emit('cartsIds', await cartController.getCartsIds())
+        })
 
     })
 

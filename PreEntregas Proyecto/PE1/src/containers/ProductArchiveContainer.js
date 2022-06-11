@@ -22,7 +22,8 @@ class ProductArchiveContainer {
 
   async createProduct(productData) {
     const productId = new Date().getTime() * Math.random() * 100000;
-    const timestamp = Date.now();
+    const timestamp = Date.now().toString();
+    
 
     const product = new Product(
       productId,
@@ -48,14 +49,11 @@ class ProductArchiveContainer {
 
   async getById(productId) {
     await this._readFile();
-    console.log("archive " + productId);
-    console.log(typeof (parseInt(productId)));
     const index = this.products.findIndex((p) => p.id === parseInt(productId));
 
     if (index === -1) {
       return { error: "producto no encontrado" };
     } else {
-      console.log("encontrado");
       return this.products[index];
     }
   }
@@ -79,7 +77,6 @@ class ProductArchiveContainer {
   }
 
   async update(productData) {
-    console.log(productData.body.id);
     await this._readFile();
 
     const index = this.products.findIndex((p) => p.id === parseInt(productData.body.id));

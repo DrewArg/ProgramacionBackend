@@ -30,14 +30,14 @@ const cartController = {
   },
 
   addProduct: (req, res) => {
-    const { cartId } = req.params;
+    const cartId = req.params.id;
     if (req.method === "POST") {
       res.json(carts.addProduct(req.body, cartId));
     }
   },
 
-  cartQty: (req, res) => {
-    res.json(carts.getCartsQty());
+  getCartsIds: () => {
+    return carts.getCartsIds();
   },
 };
 

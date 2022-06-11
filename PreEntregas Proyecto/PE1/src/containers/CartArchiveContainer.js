@@ -1,10 +1,10 @@
-const fs = require('fs')
-const Cart = require('../db/Cart.js')
+const fs = require("fs");
+const Cart = require("../db/Cart.js");
 
 class CartArchiveContainer {
   constructor(path) {
     this.path = path;
-    this.carts = []
+    this.carts = [];
   }
 
   _saveFile() {
@@ -21,17 +21,14 @@ class CartArchiveContainer {
 
   async createCart(cartData) {
     const cartId = new Date().getTime() * Math.random() * 100000;
-    const timestamp = Date.now();
-    const cart = new Cart(
-      cartId,
-      timestamp,
-      cartData.products
-    );
-
+    const timestamp = new Date();
+    const newArray = [];
+    newArray.push(cartData);
+    const cart = new Cart(cartId, timestamp, newArray);
+    console.log({ cart });
     await this._readFile();
     this.carts.push(cart);
     await this._saveFile();
-
     return cartId;
   }
 
@@ -41,25 +38,28 @@ class CartArchiveContainer {
     if (index === -1) {
       return { error: "carrito no encontrado" };
     } else {
-      const cartProducts = this.carts[index].products
+      const cartProducts = this.carts[index].products;
       cartProducts.splice(0, cartProducts.length);
       this.carts.splice(index, 1);
       await this._saveFile();
-      return { response: `el carrito ${cartId} fue vaciado y eliminado correctamente.` }
+      return {
+        response: `el carrito ${cartId} fue vaciado y eliminado correctamente.`,
+      };
     }
   }
 
-  async getCartsQty() {
+  async getCartsIds() {
     await this._readFile();
-    return this.carts.length;
+    const cartsIds = this.carts.map((c) => c.id);
+    return cartsIds;
   }
 
   async getAllProducts(cartId) {
     await this._readFile();
-    const index = this.products.findIndex((c) => c.id === cartId)
+    const index = this.products.findIndex((c) => c.id === cartId);
 
     if (index === -1) {
-      return { error: "carrito no encontrado" }
+      return { error: "carrito no encontrado" };
     } else {
       return this.carts[index].products;
     }
@@ -67,11 +67,11 @@ class CartArchiveContainer {
 
   async addProduct(product, cartId) {
     await this._readFile();
-
-    const index = this.products.findIndex((c) => c.id === cartId)
-
+    const index = this.carts.findIndex(
+      (c) => parseInt(c.id) === parseInt(cartId)
+    );
     if (index === -1) {
-      return { error: "carrito no encontrado" }
+      return { error: "carrito no encontrado" };
     } else {
       this.carts[index].products.push(product);
       await this._saveFile();
@@ -81,23 +81,24 @@ class CartArchiveContainer {
   async removeProduct(productId, cartId) {
     await this._readFile();
 
-    const index = this.products.findIndex((c) => c.id === cartId)
+    const index = this.products.findIndex((c) => c.id === cartId);
     if (index === -1) {
-      return { error: "carrito no encontrado" }
+      return { error: "carrito no encontrado" };
     } else {
       const productsInCart = this.getAllProducts(cartId);
 
       const productIndex = productsInCart.findIndex((p) => p.id === productId);
 
       if (productIndex === -1) {
-        return { error: "producto no encontrado" }
+        return { error: "producto no encontrado" };
       } else {
         productsInCart.splice(productIndex, 1);
-        return { respose: `el producto ${productId} ha sido elminado del carrito correctamente` }
+        return {
+          respose: `el producto ${productId} ha sido elminado del carrito correctamente`,
+        };
       }
     }
   }
 }
 
 module.exports = CartArchiveContainer;
-

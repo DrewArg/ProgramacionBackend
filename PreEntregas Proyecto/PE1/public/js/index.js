@@ -20,7 +20,25 @@ function changeUser() {
     currentUser.textContent = "Normal";
   }
 }
-console.log(currentUser.textContent);
+
+/** cargo los carritos disponibles */
+
+socket.emit("getCartsIds");
+
+socket.on("cartsIds", handleCartsIds);
+
+async function handleCartsIds(cartsIds) {
+  console.log("acaa");
+  const cartIdsOnServer = await fetch(
+    "/views/partials/cartIdSection.handlebars"
+  );
+  const templateText = await cartIdsOnServer.text();
+
+  const templateFunction = Handlebars.compile(templateText);
+
+  const html = templateFunction({ cartsIds });
+  document.getElementById("cartIdSection").innerHTML = html;
+}
 
 /** cargo los productos iniciales */
 socket.emit("getAllProducts"); //server socket --> emit(products)
@@ -52,7 +70,6 @@ btnAddProduct.addEventListener("click", () => {
 });
 
 async function addProduct(currentUser) {
-  console.log("client user: " + currentUser);
   const name = document.getElementById("name").value;
   const description = document.getElementById("description").value;
   const code = document.getElementById("code").value;
@@ -96,7 +113,6 @@ btnDeleteProduct.addEventListener("click", () => {
 });
 
 async function deleteProduct(currentUser) {
-  console.log("client user: " + currentUser);
   const prodId = document.getElementById("idProduct").value;
 
   let headersList = {
@@ -123,7 +139,6 @@ btnUpdateProduct.addEventListener("click", () => {
 });
 
 async function updateProduct(currentUser) {
-  console.log("client user: " + currentUser);
   const prodId = document.getElementById("idProduct").value;
   const name = document.getElementById("name").value;
   const description = document.getElementById("description").value;
@@ -191,12 +206,8 @@ socket.on("deletedProduct", () => {
 socket.on("foundProduct", showProduct);
 
 async function showProduct(foundProduct) {
-  console.log("Acaaaaa")
   const productsTable = await fetch("/views/partials/searchProduct.handlebars");
   const templateText = await productsTable.text();
-
-  console.log(templateText);
-  console.log({foundProduct});
 
   const templateFunction = Handlebars.compile(templateText);
 
@@ -206,30 +217,51 @@ async function showProduct(foundProduct) {
 
 /** cargo los productos seleccionados al carrito */
 
-async function addToCart(id) {
-  console.log("add to cart");
-  console.log("id: " +  id);
-  
-    let headersList = {
-      "Content-Type": "application/json",
-    };
+async function addToCart(productId) {
+  let headersList = {
+    "Content-Type": "application/json",
+  };
 
-    // let bodyContent = JSON.stringify(id);
+  const currentProd = await fetch(`/api/products/${productId}`, {
+    method: "POST",
+    headers: headersList,
+    action: `/api/products/${productId}`,
+  }).catch((err) => console.log(err));
 
-    const currentProd = await fetch(`/api/products/${id}`, {
+  const productResponse = await currentProd.json();
+
+  const activeCartExist = document.getElementById("activeCart");
+  const cartId = activeCartExist.textContent;
+  let bodyContent = JSON.stringify(productResponse);
+
+  if (cartId !== "activeCartExist") {
+    await fetch(`/api/carts/${cartId}/products`, {
       method: "POST",
+      body: bodyContent,
       headers: headersList,
-      action: `/api/products/${id}`,
+      action: `/api/carts/${cartId}/products`,
+    }).catch((err) => console.log(err));
+  } else {
+
+    const newCartId = await fetch(`/api/carts`, {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList,
+      action: `/api/carts`,
     }).catch((err) => console.log(err));
 
-    const response = await currentProd.json();
-      
-  let bodyContent = JSON.stringify(id);
+    cartId.textContent = newCartId;
 
-  await fetch(`/api/carts`, {
-    method: "POST",
-    body: bodyContent,
-    headers: headersList,
-    action: `/api/carts`,
-  }).catch((err) => console.log(err));
+    socket.emit("getCartsIds");
+  }
+}
+
+function changeCartId() {
+  const userCartId = document.getElementById("userCartId").value;
+
+  const activeCart = document.getElementById("activeCart");
+
+  console.log(userCartId);
+
+  activeCart.textContent = userCartId;
 }

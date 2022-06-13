@@ -6,7 +6,7 @@ class ProductArchiveTable {
     this.sql = knex(config);
   }
 
-  async createTable() {
+  async _createTable() {
     try {
       const exist = await this.sql.schema.hasTable(this.table);
       if (!exist) {
@@ -28,7 +28,17 @@ class ProductArchiveTable {
   }
 
   async save(product) {
+    console.log(this.table);
+    if (this.table == null) {
+      try {
+        await this._createTable();
+      } catch (error) {
+        return {error: error}
+      }
+    }
     try {
+      console.log("archiveee");
+      console.log(product);
       const prod = await this.sql.insert(product).into(this.table);
       return prod;
     } catch (error) {

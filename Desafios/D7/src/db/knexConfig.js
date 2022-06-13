@@ -17,26 +17,27 @@ const userDbConfig = {
 };
 
 export function getConfig(mode) {
+  console.log(mode);
   switch (mode) {
     case "sqlite3":
       return {
         client: "sqlite3",
         connection: {
-          useNullAsDefault: true,
-          filename: "./ecommerce/db.sqlite",
+          filename: "src/db/ecommerce/db.sqlite",
         },
+        useNullAsDefault: true,
       };
 
-    case "mysql2":
+    case "mysql":
       return {
-        client: "mysql2",
-        connection: adminDbConfig,
+        client: "mysql",
+        connection: adminDbConfig
       };
 
     default:
       return {
-        client: "mysql2",
-        connection: adminDbConfig,
+        client: "mysql",
+        connection: adminDbConfig
       };
   }
 }

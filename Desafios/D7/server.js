@@ -8,9 +8,7 @@ import { webRouter } from './src/router/web/webRouter.js';
 
 import socketController from './src/controllers/socketControllers.js'
 
-import { sqlClientUser } from './src/db/sqlClient.js'
-
-const expressApp = express();
+  const expressApp = express();
 const httpServer = new HttpServer(expressApp);
 const io = new socketController(httpServer);
 
@@ -27,13 +25,6 @@ expressApp.set('views', './public/views')
 expressApp.set('view engine', 'handlebars')
 
 expressApp.use(webRouter)
-
-//cambiar esto
-expressApp.get('/api/products',async (req,res)=>{
-  const products = await sqlClientUser.select('*').from('products')
-  res.json(products)
-})
-
 expressApp.use("/api", productRouter)
 expressApp.use("/api", messageRouter)
 

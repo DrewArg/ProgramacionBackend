@@ -2,16 +2,20 @@ import ProductArchiveTable from "../db/ProductArchiveTable.js";
 import MessageArchiveTable from "../db/MessageArchiveTable.js";
 import { getConfig } from "../db/knexConfig.js";
 
-const products = new ProductArchiveTable(getConfig("sqlite3", "products"));
-const messages = new MessageArchiveTable(getConfig("mysql2"), "messages");
+const products = new ProductArchiveTable(getConfig("sqlite3"), "products");
+const messages = new MessageArchiveTable(getConfig("mysql"), "messages");
 
 const productController = {
   getAllProducts: () => {
     return products.getAll();
   },
 
-  save: (product) => {
-    return products.save(product);
+  save: async (req, res) => {
+    console.log("acaa");
+    console.log(req.body);
+    const prod = await products.save(req.body);
+    console.log(prod);
+    return prod;
   },
 };
 
@@ -20,8 +24,12 @@ const messageController = {
     return messages.getAll();
   },
 
-  save: (message) => {
-    return messages.save(message);
+  save: async (req, res) => {
+    console.log("acaa");
+    console.log(req.body);
+    const message = await messages.save(req.body);
+    console.log(message);
+    return message;
   },
 };
 

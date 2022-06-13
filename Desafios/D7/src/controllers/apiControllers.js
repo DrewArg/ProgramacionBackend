@@ -1,60 +1,44 @@
-import ProductArchiveContainer from '../containers/ProductArchiveContainer.js'
-import MessageArchiveContainer from '../containers/MessageArchiveContainer.js'
+import ProductArchiveTable from "../db/ProductArchiveTable.js";
+import MessageArchiveTable from "../db/MessageArchiveTable.js";
+import { getConfig } from "../db/knexConfig.js";
 
-const products = new ProductArchiveContainer("./src/db/products.txt");
-const messages = new MessageArchiveContainer("./src/db/messages.txt");
+const products = new ProductArchiveTable(getConfig("sqlite3", "products"));
+const messages = new MessageArchiveTable(getConfig("mysql2"), "messages");
 
 const productController = {
   getAllProducts: () => {
-    const prod = products.getAll();
-    return prod
-  }
-}
-
-const messageController = {
-  getAllMessages: () => {
-    const msg = messages.getAll();
-    return msg
-  }
-}
-
-const apiControllers = {
-
-  messages: (req, res) => {
-    if (req.method === "POST") {
-      res.json(messages.save(req.body));
-    } else {
-      console.log("method not defined --> " + req.method);
-    }
+    return products.getAll();
   },
 
-  products: (req, res) => {
-    if (req.method === "GET") {
-      res.json(products.getAll());
-    } else if (req.method === "POST") {
-      res.json(products.save(req.body));
-    }
-  },
-
-  productById: (req, res) => {
-    const { id } = req.params;
-
-    if (req.method === "GET") {
-      res.json(products.getById(parseInt(id)));
-    } else if (req.method === "PUT") {
-      products.update(req.body);
-
-      res.json(req.body.title + " updated correctly.");
-    } else if (req.method === "DELETE") {
-      products.deleteById(parseInt(id));
-      res.json(req.body.id + " was deleted correctly.");
-    } else {
-    }
-  },
-
-  randomProduct: (req, res) => {
-    res.json(products.getRandomProduct());
+  save: (product) => {
+    return products.save(product);
   },
 };
 
-export { apiControllers, productController, messageController };
+const messageController = {
+  getAllMessages: () => {
+    return messages.getAll();
+  },
+
+  save: (message) => {
+    return messages.save(message);
+  },
+};
+
+// productById: (req, res) => {
+//   const { id } = req.params;
+
+//   if (req.method === "GET") {
+//     res.json(products.getById(parseInt(id)));
+//   } else if (req.method === "PUT") {
+//     products.update(req.body);
+
+//     res.json(req.body.title + " updated correctly.");
+//   } else if (req.method === "DELETE") {
+//     products.deleteById(parseInt(id));
+//     res.json(req.body.id + " was deleted correctly.");
+//   } else {
+//   }
+// },
+
+export { productController, messageController };

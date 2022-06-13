@@ -1,11 +1,11 @@
 {
-  "type":"module",
+  "type": "module",
   "name": "desafio-base-datos-1",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "initiate":" node ./src/db/products/createProductTable.js",
+    "initiate": " node ./src/db/products/createProductTable.js",
     "dev": "nodemon server.js",
     "start": "npm run initiate && npm run dev"
   },
@@ -20,6 +20,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.16",
-    "socket.io": "^4.1.3"
+    "socket.io": "^4.1.3",
+    "sqlite3": "^5.0.8"
   }
 }

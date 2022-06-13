@@ -1,14 +1,15 @@
 import knex from "knex";
 
 class MessageArchiveTable {
-  constructor(table, config) {
+  constructor(config, table) {
     this.table = table;
     this.sql = knex(config);
+    this._createTable()
   }
 
-  async createTable() {
+  async _createTable() {
     try {
-      const exist = await this.sql.schema.hasTable("products");
+      const exist = await this.sql.schema.hasTable(this.table);
       if (!exist) {
         await this.sql.schema.createTable(this.table, (table) => {
           table.increments("id"),

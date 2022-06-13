@@ -3,7 +3,7 @@ import MessageArchiveTable from "../db/MessageArchiveTable.js";
 import { getConfig } from "../db/knexConfig.js";
 
 const products = new ProductArchiveTable(getConfig("sqlite3"), "products");
-const messages = new MessageArchiveTable(getConfig("mysql"), "messages");
+const messages = new MessageArchiveTable(getConfig("mysql2"), "messages");
 
 const productController = {
   getAllProducts: () => {

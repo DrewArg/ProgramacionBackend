@@ -4,6 +4,7 @@ class ProductArchiveTable {
   constructor(config, table) {
     this.table = table;
     this.sql = knex(config);
+    this._createTable()
   }
 
   async _createTable() {

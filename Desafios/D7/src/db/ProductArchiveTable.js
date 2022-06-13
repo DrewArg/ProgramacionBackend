@@ -4,7 +4,7 @@ class ProductArchiveTable {
   constructor(config, table) {
     this.table = table;
     this.sql = knex(config);
-    this._createTable()
+    this._createTable();
   }
 
   async _createTable() {
@@ -29,16 +29,9 @@ class ProductArchiveTable {
   }
 
   async save(product) {
-    if (this.table == null) {
-      try {
-        await this._createTable();
-      } catch (error) {
-        return {error: error}
-      }
-    }
     try {
-      const prod = await this.sql.insert(product).into(this.table);
-      return prod;
+      await this.sql.insert(product).into(this.table);
+      return product;
     } catch (error) {
       return { error: error };
     }

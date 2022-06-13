@@ -30,10 +30,10 @@ class MessageArchiveTable {
 
   async save(message) {
     try {
-      const msg = await this.sql
+      await this.sql
         .insert({ ...message, timestamp: Date.now() })
         .into(this.table);
-      return msg;
+      return message;
     } catch (error) {
       return { error: error };
     }

@@ -39,7 +39,6 @@ async function addProduct() {
   form.reset();
 
   socket.emit('getAllProducts');
-
 }
 
 socket.on('products', handleProductsEvent);

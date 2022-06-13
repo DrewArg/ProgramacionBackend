@@ -6,8 +6,9 @@ const products = new ProductArchiveTable(getConfig("sqlite3"), "products");
 const messages = new MessageArchiveTable(getConfig("mysql2"), "messages");
 
 const productController = {
-  getAllProducts: () => {
-    return products.getAll();
+  getAllProducts: async () => {
+    const prods = await products.getAll();
+    return prods;
   },
 
   save: async (req, res) => {
@@ -17,8 +18,9 @@ const productController = {
 };
 
 const messageController = {
-  getAllMessages: () => {
-    return messages.getAll();
+  getAllMessages: async () => {
+    const msgs = await messages.getAll();
+    return msgs;
   },
 
   save: async (req, res) => {

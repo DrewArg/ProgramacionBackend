@@ -16,13 +16,11 @@ function socketController(server) {
     });
 
     socket.on("getAllProducts", async () => {
-      console.log("tomando productos..");
       socket.emit("products", await productController.getAllProducts());
       io.sockets.emit("products", await productController.getAllProducts());
     });
 
     socket.on("getAllMessages", async () => {
-      console.log("tomando mensajes..");
       socket.emit("messages", await messageController.getAllMessages());
       io.sockets.emit("messages", await messageController.getAllMessages());
     });

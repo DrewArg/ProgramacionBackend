@@ -29,7 +29,6 @@ class ProductArchiveTable {
   }
 
   async save(product) {
-    console.log(this.table);
     if (this.table == null) {
       try {
         await this._createTable();
@@ -38,8 +37,6 @@ class ProductArchiveTable {
       }
     }
     try {
-      console.log("archiveee");
-      console.log(product);
       const prod = await this.sql.insert(product).into(this.table);
       return prod;
     } catch (error) {

@@ -13,8 +13,8 @@ class MessageArchiveTable {
       if (!exist) {
         await this.sql.schema.createTable(this.table, (table) => {
           table.increments("id"),
-            table.string("user"),
-            table.string("message"),
+            table.string("userEmail"),
+            table.string("msgContent"),
             table.string("timestamp");
         });
         console.log(`la tabla ${this.table} ha sido creada!`);

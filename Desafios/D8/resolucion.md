@@ -236,7 +236,337 @@ coderhouse> db.products.find()
     thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_932869-MLA49799587084_042022-O.webp'
   }
 ]
-coderhouse> 
 
 
+coderhouse> db.products.insertOne({title: "valija de viaje",price:4999,thumbnail:"https://http2.mlstatic.com/D_NQ_NP_856190-MLA47352721984_092021-O.webp"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("62a806ed96b24d65e595d02c")
+}
 
+coderhouse> db.products.find({price:{$lt :1000}})
+[
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d025"),
+    title: 'almohadon',
+    price: 950,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_747087-MLA48476492376_122021-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d027"),
+    title: 'sifón simple para bacha',
+    price: 570,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_659928-MLA47846255337_102021-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d028"),
+    title: 'Codo de bronce roscado',
+    price: 599,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_873737-MLA49062114916_022022-O.webp'
+  }
+]
+
+
+coderhouse> db.products.find({$and:[{price:{$gte :1000}},{price:{$lte:3000}}]})
+[
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d023"),
+    title: 'alfombra gris',
+    price: 2300,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_967624-MLA45747164209_042021-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d024"),
+    title: 'cuadro la noche estrellada',
+    price: 1221,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_969667-MLA48428246547_122021-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d026"),
+    title: 'Bacha cocina',
+    price: 1132,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_719146-MLA46496058379_062021-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d029"),
+    title: 'palanca mochila',
+    price: 1901,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_902210-MLA49274353122_032022-O.webp'
+  }
+]
+
+coderhouse> db.products.find({price:{$gt :3000}})
+[
+  {
+    _id: ObjectId("62a7e74096b24d65e595d022"),
+    title: 'Mesa',
+    price: 4500,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_761156-MLA31040483830_062019-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d02a"),
+    title: 'valvula entrada',
+    price: 3398,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_799212-MLA41419079908_042020-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d02b"),
+    title: 'valvula de doble accionamiento',
+    price: 4451,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_932869-MLA49799587084_042022-O.webp'
+  },
+  {
+    _id: ObjectId("62a806ed96b24d65e595d02c"),
+    title: 'valija de viaje',
+    price: 4999,
+    thumbnail: 'https://falabella.scene7.com/is/image/FalabellaAR/2960656_1?wid=800&hei=800&qlt=70'
+  }
+]
+
+coderhouse> db.products.find({},{title:1,_id:0}).sort({price:1}).skip(2).limit(1)
+[ { title: 'almohadon' } ]
+
+coderhouse> db.products.find({},{title:1,_id:0}).sort({price:1}).skip(2).limit(1)
+[ { title: 'almohadon' } ]
+
+coderhouse> db.products.updateMany({},{$set:{stock:100}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 11,
+  modifiedCount: 11,
+  upsertedCount: 0
+}
+
+coderhouse> db.products.find()
+[
+  {
+    _id: ObjectId("62a7e74096b24d65e595d022"),
+    title: 'Mesa',
+    price: 4500,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_761156-MLA31040483830_062019-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d023"),
+    title: 'alfombra gris',
+    price: 2300,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_967624-MLA45747164209_042021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d024"),
+    title: 'cuadro la noche estrellada',
+    price: 1221,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_969667-MLA48428246547_122021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d025"),
+    title: 'almohadon',
+    price: 950,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_747087-MLA48476492376_122021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d026"),
+    title: 'Bacha cocina',
+    price: 1132,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_719146-MLA46496058379_062021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d027"),
+    title: 'sifón simple para bacha',
+    price: 570,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_659928-MLA47846255337_102021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d028"),
+    title: 'Codo de bronce roscado',
+    price: 599,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_873737-MLA49062114916_022022-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d029"),
+    title: 'palanca mochila',
+    price: 1901,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_902210-MLA49274353122_032022-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d02a"),
+    title: 'valvula entrada',
+    price: 3398,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_799212-MLA41419079908_042020-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d02b"),
+    title: 'valvula de doble accionamiento',
+    price: 4451,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_932869-MLA49799587084_042022-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a806ed96b24d65e595d02c"),
+    title: 'valija de viaje',
+    price: 4999,
+    thumbnail: 'https://falabella.scene7.com/is/image/FalabellaAR/2960656_1?wid=800&hei=800&qlt=70',
+    stock: 100
+  }
+]
+
+coderhouse> db.products.updateMany({price:{$gt:4000}},{$set:{stock:0}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+coderhouse> db.products.find()
+[
+  {
+    _id: ObjectId("62a7e74096b24d65e595d022"),
+    title: 'Mesa',
+    price: 4500,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_761156-MLA31040483830_062019-O.webp',
+    stock: 0
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d023"),
+    title: 'alfombra gris',
+    price: 2300,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_967624-MLA45747164209_042021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d024"),
+    title: 'cuadro la noche estrellada',
+    price: 1221,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_969667-MLA48428246547_122021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d025"),
+    title: 'almohadon',
+    price: 950,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_747087-MLA48476492376_122021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d026"),
+    title: 'Bacha cocina',
+    price: 1132,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_719146-MLA46496058379_062021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d027"),
+    title: 'sifón simple para bacha',
+    price: 570,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_659928-MLA47846255337_102021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d028"),
+    title: 'Codo de bronce roscado',
+    price: 599,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_873737-MLA49062114916_022022-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d029"),
+    title: 'palanca mochila',
+    price: 1901,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_902210-MLA49274353122_032022-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d02a"),
+    title: 'valvula entrada',
+    price: 3398,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_799212-MLA41419079908_042020-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d02b"),
+    title: 'valvula de doble accionamiento',
+    price: 4451,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_932869-MLA49799587084_042022-O.webp',
+    stock: 0
+  },
+  {
+    _id: ObjectId("62a806ed96b24d65e595d02c"),
+    title: 'valija de viaje',
+    price: 4999,
+    thumbnail: 'https://falabella.scene7.com/is/image/FalabellaAR/2960656_1?wid=800&hei=800&qlt=70',
+    stock: 0
+  }
+]
+
+
+coderhouse> db.products.deleteMany({price:{$lt:1000}})
+{ acknowledged: true, deletedCount: 3 }
+coderhouse> db.products.find()
+[
+  {
+    _id: ObjectId("62a7e74096b24d65e595d022"),
+    title: 'Mesa',
+    price: 4500,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_761156-MLA31040483830_062019-O.webp',
+    stock: 0
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d023"),
+    title: 'alfombra gris',
+    price: 2300,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_967624-MLA45747164209_042021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d024"),
+    title: 'cuadro la noche estrellada',
+    price: 1221,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_969667-MLA48428246547_122021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d026"),
+    title: 'Bacha cocina',
+    price: 1132,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_719146-MLA46496058379_062021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d029"),
+    title: 'palanca mochila',
+    price: 1901,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_902210-MLA49274353122_032022-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d02a"),
+    title: 'valvula entrada',
+    price: 3398,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_799212-MLA41419079908_042020-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d02b"),
+    title: 'valvula de doble accionamiento',
+    price: 4451,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_932869-MLA49799587084_042022-O.webp',
+    stock: 0
+  },
+  {
+    _id: ObjectId("62a806ed96b24d65e595d02c"),
+    title: 'valija de viaje',
+    price: 4999,
+    thumbnail: 'https://falabella.scene7.com/is/image/FalabellaAR/2960656_1?wid=800&hei=800&qlt=70',
+    stock: 0
+  }
+]

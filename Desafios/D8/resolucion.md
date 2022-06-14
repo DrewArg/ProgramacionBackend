@@ -142,4 +142,101 @@ coderhouse> db.messages.find()
   }
 ]
 
+coderhouse> show collections
+messages
+coderhouse> db.products.insertOne({title:"Mesa",price:4500,thumbnail:"https://http2.mlstatic.com/D_NQ_NP_761156-MLA31040483830_062019-O.webp"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("62a7e74096b24d65e595d022")
+}
+coderhouse> db.products.findOne()
+{
+  _id: ObjectId("62a7e74096b24d65e595d022"),
+  title: 'Mesa',
+  price: 4500,
+  thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_761156-MLA31040483830_062019-O.webp'
+}
+
+coderhouse> db.products.insertMany([{title:"alfombra gris",price:2300,thumbnail:coderhouse> db.products.insertMany([{title:"alfombra gris",price:2300,thumbnail:coderhouse> db.products.insertMany([{title:"alfombra gris",price:2300,thumbnail:coderhouse> db.products.insertMany([{title:"alfombra gris",price:2300,thumbnail:"https://http2.mlstatic.com/D_NQ_NP_967624-MLA45747164209_042021-O.webp"},{title:"cuadro la noche estrellada",price:1221,thumbnail:"https://http2.mlstatic.com/D_NQ_NP_969667-MLA48428246547_122021-O.webp"},{title:"almohadon",price:950,thumbnail:"https://http2.mlstatic.com/D_NQ_NP_747087-MLA48476492376_122021-O.webp"},{title:"Bacha cocina",price:1132,thumbnail:"https://http2.mlstatic.com/D_NQ_NP_719146-MLA46496058379_062021-O.webp"},{title:"sifón simple para bacha",price:570,thumbnail:"https://http2.mlstatic.com/D_NQ_NP_659928-MLA47846255337_102021-O.webp"},{title:"Codo de bronce roscado",price:599,thumbnail:"https://http2.mlstatic.com/D_NQ_NP_873737-MLA49062114916_022022-O.webp"},{title:"palanca mochila",price:1901,thumbnail:"https://http2.mlstatic.com/D_NQ_NP_902210-MLA49274353122_032022-O.webp"},{title:"valvula entrada",price:3398,thumbnail:"https://http2.mlstatic.com/D_NQ_NP_799212-MLA41419079908_042020-O.webp"},{title:"valvula de doble accionamiento",price:4451,thumbnail:"https://http2.mlstatic.com/D_NQ_NP_932869-MLA49799587084_042022-O.webp"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("62a7ea9396b24d65e595d023"),
+    '1': ObjectId("62a7ea9396b24d65e595d024"),
+    '2': ObjectId("62a7ea9396b24d65e595d025"),
+    '3': ObjectId("62a7ea9396b24d65e595d026"),
+    '4': ObjectId("62a7ea9396b24d65e595d027"),
+    '5': ObjectId("62a7ea9396b24d65e595d028"),
+    '6': ObjectId("62a7ea9396b24d65e595d029"),
+    '7': ObjectId("62a7ea9396b24d65e595d02a"),
+    '8': ObjectId("62a7ea9396b24d65e595d02b")
+  }
+}
+
+coderhouse> db.products.find()
+[
+  {
+    _id: ObjectId("62a7e74096b24d65e595d022"),
+    title: 'Mesa',
+    price: 4500,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_761156-MLA31040483830_062019-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d023"),
+    title: 'alfombra gris',
+    price: 2300,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_967624-MLA45747164209_042021-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d024"),
+    title: 'cuadro la noche estrellada',
+    price: 1221,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_969667-MLA48428246547_122021-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d025"),
+    title: 'almohadon',
+    price: 950,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_747087-MLA48476492376_122021-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d026"),
+    title: 'Bacha cocina',
+    price: 1132,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_719146-MLA46496058379_062021-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d027"),
+    title: 'sifón simple para bacha',
+    price: 570,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_659928-MLA47846255337_102021-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d028"),
+    title: 'Codo de bronce roscado',
+    price: 599,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_873737-MLA49062114916_022022-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d029"),
+    title: 'palanca mochila',
+    price: 1901,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_902210-MLA49274353122_032022-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d02a"),
+    title: 'valvula entrada',
+    price: 3398,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_799212-MLA41419079908_042020-O.webp'
+  },
+  {
+    _id: ObjectId("62a7ea9396b24d65e595d02b"),
+    title: 'valvula de doble accionamiento',
+    price: 4451,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_932869-MLA49799587084_042022-O.webp'
+  }
+]
+coderhouse> 
+
+
 

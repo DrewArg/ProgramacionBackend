@@ -1,3 +1,6 @@
+
+/** DESAFIO MONGODB **/
+
 coderhouse> show databases
 admin   148.00 KiB
 config   92.00 KiB
@@ -47,6 +50,8 @@ local    72.00 KiB
 
 already on db coderhouse
 
+/** AGREGO 10 DOCUMENTOS A MENSAJES **/
+
 coderhouse> db.messages.insertOne({userEmail: "andy@dev",msgContent:"Hola mundo",timestamp:new Timestamp()})
 {
   acknowledged: true,
@@ -77,6 +82,8 @@ coderhouse>  db.messages.insertMany([{userEmail:"eze@coder",msgContent:"Hola!!",
     '8': ObjectId("62a7e39e96b24d65e595d021")
   }
 }
+
+/** LISTO DOCUMENTOS DE MENSAJES **/
 
 coderhouse> db.messages.find()
 [
@@ -144,6 +151,9 @@ coderhouse> db.messages.find()
 
 coderhouse> show collections
 messages
+
+/** AGREGO 10 DOCUMENTOS A PRODUCTOS **/
+
 coderhouse> db.products.insertOne({title:"Mesa",price:4500,thumbnail:"https://http2.mlstatic.com/D_NQ_NP_761156-MLA31040483830_062019-O.webp"})
 {
   acknowledged: true,
@@ -172,6 +182,8 @@ coderhouse> db.products.insertMany([{title:"alfombra gris",price:2300,thumbnail:
     '8': ObjectId("62a7ea9396b24d65e595d02b")
   }
 }
+
+/** LISTO DOCUMENTOS DE PRODUCTOS **/
 
 coderhouse> db.products.find()
 [
@@ -237,12 +249,17 @@ coderhouse> db.products.find()
   }
 ]
 
+/** CRUD **/
+/** AGREGO UN PRODUCTO NUEVO **/
+
 
 coderhouse> db.products.insertOne({title: "valija de viaje",price:4999,thumbnail:"https://http2.mlstatic.com/D_NQ_NP_856190-MLA47352721984_092021-O.webp"})
 {
   acknowledged: true,
   insertedId: ObjectId("62a806ed96b24d65e595d02c")
 }
+
+/** LISTO PRODUCTOS CON PRECIO MENOR A $1000 **/
 
 coderhouse> db.products.find({price:{$lt :1000}})
 [
@@ -266,6 +283,7 @@ coderhouse> db.products.find({price:{$lt :1000}})
   }
 ]
 
+/** LISTO PRODUCTOS CON PRECIO MENOR ENTRE  $1000 Y $3000 **/
 
 coderhouse> db.products.find({$and:[{price:{$gte :1000}},{price:{$lte:3000}}]})
 [
@@ -295,6 +313,8 @@ coderhouse> db.products.find({$and:[{price:{$gte :1000}},{price:{$lte:3000}}]})
   }
 ]
 
+/** LISTO PRODUCTOS CON PRECIO MAYOR A $3000 **/
+
 coderhouse> db.products.find({price:{$gt :3000}})
 [
   {
@@ -323,8 +343,12 @@ coderhouse> db.products.find({price:{$gt :3000}})
   }
 ]
 
+/** LISTO SOLO EL TERCER PRODUCTO MAS BARATO**/
+
 coderhouse> db.products.find({},{title:1,_id:0}).sort({price:1}).skip(2).limit(1)
 [ { title: 'almohadon' } ]
+
+/** AGREGO 100 DE STOCK A TODOS LOS DOCUMENTOS **/
 
 coderhouse> db.products.updateMany({},{$set:{stock:100}})
 {
@@ -416,6 +440,8 @@ coderhouse> db.products.find()
   }
 ]
 
+/** CAMBIO EL STOCK A CERO DE LOS PRODUCTOS CON PRECIO MAYOR A $4000 **/
+
 coderhouse> db.products.updateMany({price:{$gt:4000}},{$set:{stock:0}})
 {
   acknowledged: true,
@@ -505,6 +531,7 @@ coderhouse> db.products.find()
   }
 ]
 
+/** BORRO LOS PRODUCTOS CON PRECIO MENOR A $1000 **/
 
 coderhouse> db.products.deleteMany({price:{$lt:1000}})
 { acknowledged: true, deletedCount: 3 }
@@ -567,3 +594,90 @@ coderhouse> db.products.find()
     stock: 0
   }
 ]
+
+/** CREO EL USUARIO 'pepe' CON CLAVE 'asd456' Y LE ASIGNO ROL LECTOR**/
+
+test> use admin
+switched to db admin
+admin> db.createUser({user:"pepe",pwd:"asd456",roles:[{role:"read",db:"coderhouse"}]})
+{ ok: 1 }
+admin> exit
+root@b3013dc9e64a:/# exit
+exit
+drew@alderaan:~$ docker exec -it aef-mongo bash
+root@b3013dc9e64a:/# mongosh -u pepe -p
+Enter password: ******
+Current Mongosh Log ID:	62a93943825a923f572b80f7
+Connecting to:		mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.5.0
+Using MongoDB:		5.0.9
+Using Mongosh:		1.5.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+test> use coderhouse
+switched to db coderhouse
+coderhouse> db.posts.find()
+
+coderhouse> db.products.find()
+[
+  {
+    _id: ObjectId("62a931cc1088476b0d8cd412"),
+    title: 'Mesa',
+    price: 4500,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_761156-MLA31040483830_062019-O.webp',
+    stock: 0
+  },
+  {
+    _id: ObjectId("62a932181088476b0d8cd413"),
+    title: 'alfombra gris',
+    price: 2300,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_967624-MLA45747164209_042021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a932181088476b0d8cd414"),
+    title: 'cuadro la noche estrellada',
+    price: 1221,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_969667-MLA48428246547_122021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a932181088476b0d8cd416"),
+    title: 'Bacha cocina',
+    price: 1132,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_719146-MLA46496058379_062021-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a932181088476b0d8cd419"),
+    title: 'palanca mochila',
+    price: 1901,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_902210-MLA49274353122_032022-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a932181088476b0d8cd41a"),
+    title: 'valvula entrada',
+    price: 3398,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_799212-MLA41419079908_042020-O.webp',
+    stock: 100
+  },
+  {
+    _id: ObjectId("62a932181088476b0d8cd41b"),
+    title: 'valvula de doble accionamiento',
+    price: 4451,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_932869-MLA49799587084_042022-O.webp',
+    stock: 0
+  },
+  {
+    _id: ObjectId("62a9330f1088476b0d8cd41c"),
+    title: 'valija de viaje',
+    price: 4999,
+    thumbnail: 'https://http2.mlstatic.com/D_NQ_NP_856190-MLA47352721984_092021-O.webp',
+    stock: 0
+  }
+]
+coderhouse> db.products.insertOne({title:"notebook",price:3500,thumbnail:"https://www.lenovo.com/medias/22tpe15e5n2.png?context=bWFzdGVyfHJvb3R8MjgzMTMxfGltYWdlL3BuZ3xoNmEvaGVjLzE0MTExNzEzODg2MjM4LnBuZ3xlM2I4ZGNiODIzODYxOTc2NTU0NzI4NTFiNWRkMGY4OWRhZTBlNjk1ZGMzZDljOGU2OGQwNmM0YzY1YmVmMDdk"})
+MongoServerError: not authorized on coderhouse to execute command { insert: "products", documents: [ { title: "notebook", price: 3500, thumbnail: "https://www.lenovo.com/medias/22tpe15e5n2.png?context=bWFzdGVyfHJvb3R8MjgzMTMxfGltYWdlL3BuZ3xoNmEvaGVjLzE0MTExNzEzODg2MjM4LnBuZ3xlM2I4ZGNiODIzODYxOTc2...", _id: ObjectId('62a939adddd252bb31cf1c8e') } ], ordered: true, lsid: { id: UUID("07f099a0-5ff2-44ef-901b-e2e411350155") }, $db: "coderhouse" }
+coderhouse> 
+

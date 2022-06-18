@@ -1,7 +1,7 @@
 //usuario root
 const adminDbConfig = {
   host: "localhost",
-  port: 3306,
+  port: 3307,
   user: "root",
   password: "12345",
   database: "coderhouse",
@@ -10,7 +10,7 @@ const adminDbConfig = {
 //usuario drew
 const userDbConfig = {
   host: "localhost",
-  port: 3306,
+  port: 3307,
   user: "drew",
   password: "54321",
   database: "coderhouse",

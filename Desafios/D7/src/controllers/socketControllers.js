@@ -10,7 +10,8 @@ function socketController(server) {
       console.log("desconexión");
     });
 
-    socket.on("product", async () => {
+    socket.on("saveProduct", async (product) => {
+      await productController.saveProduct(product)
       io.sockets.emit("products", await productController.getAllProducts());
       socket.emit("products", await productController.getAllProducts());
     });
@@ -24,9 +25,15 @@ function socketController(server) {
       socket.emit("messages", await messageController.getAllMessages());
       io.sockets.emit("messages", await messageController.getAllMessages());
     });
+
+    socket.on("saveMessage", async (message) => {
+      await messageController.saveMessage(message);
+      socket.emit("messages", await messageController.getAllMessages());
+      io.sockets.emit("messages", await messageController.getAllMessages());
+    });
   });
 
   return io;
 }
 
-export default  socketController ;
+export default socketController;

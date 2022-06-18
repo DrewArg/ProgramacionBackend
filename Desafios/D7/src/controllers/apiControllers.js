@@ -15,6 +15,10 @@ const productController = {
     const prod = await products.save(req.body);
     return prod;
   },
+
+  saveProduct: async (product) => {
+    await products.save(product)
+  }
 };
 
 const messageController = {
@@ -27,6 +31,10 @@ const messageController = {
     const message = await messages.save(req.body);
     return message;
   },
+
+  saveMessage: async(message) => {
+    return await messages.save(message);
+  }
 };
 
 export { productController, messageController };

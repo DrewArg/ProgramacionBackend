@@ -1,9 +1,17 @@
-import app from './server.js'
+import httpServer from "./server.js";
+import dotenv from "dotenv";
+//import socketController from "./controller/socketController.js";
 
-const PORT = 8080
 
-const server = app.listen(PORT, ()=>{
-    console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
-})
+dotenv.config();
 
-server.on('error',error => console.log(`Error en el servidor: ${error}`))
+//const io = new socketController(httpServer);
+
+const PORT = process.env.PORT || 8080;
+const connectedServer = httpServer.listen(PORT, () => {
+  console.log(
+    `Servidor http escuchando en el puerto ${connectedServer.address().port}`
+  );
+});
+
+connectedServer.on("error", (e) => console.log(`Error en servidor ${e}`));

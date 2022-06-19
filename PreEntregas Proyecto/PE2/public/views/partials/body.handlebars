@@ -1,0 +1,30 @@
+<div class="sectionContainer" id="sectionContainer">
+    <h3 class="sectionTitle">Nuestros Productos</h3>
+    <div id="cartProductSection">
+        {{>productSection}}
+    </div>
+</div>
+<div class="sectionContainer" id="sectionContainer">
+    <div id="productById">
+        {{>searchProduct}}
+    </div>
+</div>
+<div class="sectionContainer" id="sectionContainer">
+    <h3 class="sectionTitle">Carritos</h3>
+    <div id="cartIdSection">
+        {{>cartIdSection}}
+    </div>
+</div>
+<div class="sectionContainer" id="sectionContainer">
+    <h3 class="sectionTitle">Tipo de Usuario</h3>
+    <div class="containerToggle">
+        <div class="toggleUser">
+            Usuario actual:
+            <span id="currentUser">Normal</span>
+        </div>
+        <button class="btn__submit" id="btn__userType">Cambiar tipo</button>
+    </div>
+
+</div>
+{{> form}}
+<script src="/js/index.js"></script>

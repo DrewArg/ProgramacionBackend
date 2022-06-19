@@ -1,0 +1,38 @@
+<div id="productByID" class="productById">
+    <form id="form">
+        <div class="contenedorInput">
+            <label class="formLabel">Ingrese el ID del produto</label>
+            <input class="formInput" type="text" placeholder="id del producto" id="searchById" name="searchById">
+            <button class="btn__submit" id="btn__productID">Buscar</button>
+        </div>
+    </form>
+    {{#if product}}
+    <div class="cardContainer">
+        <div class="card">
+            <div class="card__header">
+                <div class="card__header--name">
+                    {{product.name}}
+                </div>
+            </div>
+            <div class="card__image">
+                <img src={{product.thumbnail}} alt="" class="card__image--thumbnail" />
+            </div>
+            <div class="card__information">
+                <div class="card__information--description">
+                    {{product.description}}
+
+                </div>
+                <div class="card__information--price">
+                    ${{product.price}}
+                </div>
+            </div>
+            <div class="card__footer">
+                stock:
+                {{product.stock}}
+            </div>
+        </div>
+        <button class="btn__submit" id="btnAddToCart{{this.id}}">Add to Cart</button>
+        <div class="hiddenId">{{product.id}}</div>
+    </div>
+    {{/if}}
+</div>

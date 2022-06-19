@@ -1,10 +1,11 @@
 {
+  "type": "module",
   "name": "segunda-entrega-proyecto-final",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "./src/main.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon ./src/main.js"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,35 @@
+<div class="productSection" id="productSection">
+  {{#if cartProductsById.length}}
+  {{#each cartProductsById}}
+  <div class="cardContainer">
+    <div class="card">
+      <div class="card__header">
+        <div class="card__header--name" id="nam--{{this.id}}">
+          {{this.name}}
+        </div>
+      </div>
+      <div class="card__image">
+        <img src={{this.thumbnail}} alt="" class="card__image--thumbnail" id="img--{{this.id}}"/>
+      </div>
+      <div class="card__information">
+        <div class="card__information--description" id="des--{{this.id}}">
+          {{this.description}}
+
+        </div>
+        <div class="card__information--price" id="pri--{{this.id}}">
+          ${{this.price}}
+        </div>
+      </div>
+      <div class="card__footer" id="stk--{{this.id}}">
+        stock:
+        {{this.stock}}
+      </div>
+    </div>
+    <button class="btn__submit" id="btn--{{this.id}}" onClick=removeItemFromCart({{this.id}})>Remove from cart</button>
+    <div class="hiddenId" id="id--{{this.id}}">{{this.id}}</div>
+  </div>
+  {{/each}}
+  {{else}}
+  <h3>actualmente no hay productos en este carrito</h3>
+  {{/if}}
+</div>

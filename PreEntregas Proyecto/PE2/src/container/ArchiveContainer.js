@@ -1,5 +1,4 @@
 import { promises as fs } from "fs";
-
 class ArchiveContainer {
   constructor(path) {
     this.path = path;
@@ -13,7 +12,7 @@ class ArchiveContainer {
 
   async listAll() {
     try {
-      const objects = await promises.readFile(this.path, "utf-8");
+      const objects = await fs.readFile(this.path, "utf-8");
       return JSON.parse(objects);
     } catch (error) {
       return { oops: `Error al listar todos: ${error}` };
@@ -22,14 +21,14 @@ class ArchiveContainer {
 
   async saveObject(object) {
     const objects = await this.listAll();
+    const newId = new Date().getTime() * Math.random() * 100000;
+    const timestamp = new Date();
 
-    let newId = new Date().getTime() * Math.random() * 100000;
-
-    const newObject = { ...object, id: newId };
+    const newObject = { ...object, id: newId, timestamp: timestamp };
     objects.push(newObject);
 
     try {
-      await promises.writeFile(this.path, JSON.stringify(objects, null, 2));
+      await fs.writeFile(this.path, JSON.stringify(objects, null, 2));
       return newObject;
     } catch (error) {
       return { oops: `Error al guardar: ${error}` };
@@ -47,7 +46,7 @@ class ArchiveContainer {
     } else {
       objects[index] = object;
       try {
-        await promises.writeFile(this.path, JSON.stringify(objects, null, 2));
+        await fs.writeFile(this.path, JSON.stringify(objects, null, 2));
       } catch (error) {
         return {
           oops: `Error al actualizar: ${error}`,
@@ -64,7 +63,7 @@ class ArchiveContainer {
     } else {
       const deleted = objects.splice(index, 1)[0];
       try {
-        await promises.writeFile(this.path, JSON.stringify(objects, null, 2));
+        await fs.writeFile(this.path, JSON.stringify(objects, null, 2));
 
         return deleted;
       } catch (error) {

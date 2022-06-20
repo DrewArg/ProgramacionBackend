@@ -12,7 +12,6 @@ const cartController = {
   },
 
   deleteById:(req,res) =>{
-    //old cartById
     const cartId = req.params.cartId
     if(req.method === "DELETE"){
       res.json(carts.deleteById(cartId))
@@ -26,7 +25,7 @@ const cartController = {
     return cart.products;
   },
 
-  productById: (req, res) => {
+  deleteProductById: (req, res) => {
     const productId = req.params.productId;
     const cartId = req.params.cartId;
     const cart = carts.listById(cartId)

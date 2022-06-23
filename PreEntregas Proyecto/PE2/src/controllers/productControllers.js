@@ -1,19 +1,18 @@
 import {productsDao} from "../daos/daoIndex.js";
 
 const productController = {
-  async getById(req, res) {
+  async getById(id) {
     try {
-      const prod = await productsDao.getById(req.params.id);
-      res.json(prod);
+      const prod = await productsDao.listById(id);
+      return prod;
     } catch (e) {
-      console.log(e);
-      return { error: e };
+      return { oops: "no se pudo obtener el producto. Error: " + e };
     }
   },
 
   async updateProduct(req, res) {
     try {
-      const prod = await productsDao.update(req);
+      const prod = await productsDao.updateObject(req);
       res.json(prod);
     } catch (e) {
       return { error: e };

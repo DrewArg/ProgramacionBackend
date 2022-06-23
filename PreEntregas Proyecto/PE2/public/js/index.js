@@ -22,7 +22,7 @@ function changeUser() {
 }
 
 /** cargo los productos iniciales */
-socket.emit("getAllProducts"); //server socket --> emit(products)
+socket.emit("getAllProducts");
 
 socket.on("products", handleProductsEvent);
 
@@ -173,6 +173,7 @@ btnProductID.addEventListener("click", () => {
 
 async function searchProduct() {
   const id = document.getElementById("prodId").value;
+  console.log("id: " + id);
 
   socket.emit("searchProduct", id); //server socket --> emit(foundProduct)
   form2.reset();

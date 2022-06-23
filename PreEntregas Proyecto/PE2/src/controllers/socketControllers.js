@@ -1,6 +1,6 @@
-import {Server as Socket} from 'socket.io'
-import productController from './productControllers.js'
-import cartController from './cartControllers.js'
+import { Server as Socket } from "socket.io";
+import productController from "./productControllers.js";
+import cartController from "./cartControllers.js";
 
 function socketController(server) {
   const io = new Socket(server);
@@ -12,7 +12,14 @@ function socketController(server) {
     });
 
     socket.on("searchProduct", async (id) => {
-      socket.emit("foundProduct", await productController.getById(id));
+      try {
+        const prod = await productController.getById(id);
+        socket.emit("foundProduct", prod);
+      } catch (error) {
+        return {
+          oops: "Socket --> no se pudo obtener el producto. Error: " + error,
+        };
+      }
     });
     socket.on("updateProduct", async (id) => {
       socket.emit("updatedProduct", await productController.getById(id));
@@ -53,4 +60,4 @@ function socketController(server) {
   return io;
 }
 
-export default socketController
+export default socketController;

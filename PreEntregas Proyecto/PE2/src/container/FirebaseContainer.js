@@ -6,7 +6,7 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-const asObj = doc => ({ id: doc.id, ...doc.data() });
+const asObj = (doc) => ({ id: doc.id, ...doc.data() });
 
 class FirebaseContainer {
   constructor(collectionName) {
@@ -14,7 +14,12 @@ class FirebaseContainer {
   }
 
   async listById(id) {
-    return await this.collection.doc(id).get();
+    try {
+      const obj =  await this.collection.doc(id).get();
+      return asObj(obj)
+    } catch (error) {
+      return {oops: "Hubo un error intentando traer el documento por id desde firesbase"}
+    }
   }
 
   async listAll() {

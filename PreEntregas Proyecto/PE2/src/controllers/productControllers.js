@@ -1,8 +1,8 @@
-// const ProductArchiveContainer = require("../containers/ProductArchiveContainer.js");
-// const products = new ProductArchiveContainer("./src/db/products.txt");
+import ArchiveContainer from ('../container/ArchiveContainer.js')
+const products = new ArchiveContainer('../../DB/products.json');
 
-//MODIFICAR ESTO
 const productController = {
+  
   async getById(req, res) {
     try {
       const prod = await products.getById(req.params.id);
@@ -13,7 +13,7 @@ const productController = {
     }
   },
 
-  async updateProduct(req, res) {
+  updateProduct(req, res) {
     try {
       const prod = await products.update(req);
       res.json(prod);
@@ -22,24 +22,24 @@ const productController = {
     }
   },
 
-  async deleteById(req, res) {
+  deleteById(req, res) {
     const id = req.params.id;
     try {
-      return await products.deleteById(id);
+      res.send(products.deleteById(id))
     } catch (e) {
-      return { error: e };
+      res.send({oops: "No se pudo borrar el producto. Error: "+ error})
     }
   },
 
   getAllProducts: () => {
-    return products.getAllProducts();
+    return products.listAll();
   },
 
-  createProduct: (req, res) => {
+  saveProduct: (req, res) => {
     try {
-      res.status(201).json(products.createProduct(req.body));
+      res.status(201).json(products.saveObject(req.body));
     } catch (error) {
-      return { error: error.message };
+     res.send({oops: "No se pudo guardar el producto. Error: "+ error})
     }
   },
 };

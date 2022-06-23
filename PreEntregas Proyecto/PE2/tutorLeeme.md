@@ -1,0 +1,1 @@
+Esrot laburando en el code de manera local para agregarle unos trycatch y ademas conectar correctamente el front con mongo y firebase

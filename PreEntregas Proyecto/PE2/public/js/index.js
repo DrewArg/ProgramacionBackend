@@ -138,22 +138,28 @@ async function updateProduct(currentUser) {
     stock: stock,
   };
 
-  let headersList = {
-    "Content-Type": "application/json",
+  const updateProd = {
+    product: product,
+    currentUser: currentUser,
   };
 
-  let bodyContent = JSON.stringify(product);
+  socket.emit("updateProduct", updateProd);
+  // let headersList = {
+  //   "Content-Type": "application/json",
+  // };
 
-  await fetch(`/api/products/${prodId}?currentUser=${currentUser}`, {
-    method: "PUT",
-    body: bodyContent,
-    headers: headersList,
-    action: `/api/products/${prodId}?currentUser=${currentUser}`,
-  }).catch((err) => console.log(err));
+  // let bodyContent = JSON.stringify(product);
 
-  form.reset();
+  // await fetch(`/api/products/${prodId}?currentUser=${currentUser}`, {
+  //   method: "PUT",
+  //   body: bodyContent,
+  //   headers: headersList,
+  //   action: `/api/products/${prodId}?currentUser=${currentUser}`,
+  // }).catch((err) => console.log(err));
 
   socket.emit("getAllProducts");
+
+  form.reset();
 }
 
 /** formulario de búsqueda de producto por ID */
@@ -290,3 +296,7 @@ async function handleGetActiveCartId(activeCartId) {
     document.getElementById("activeCart").textContent = activeCartId;
   }, 1000);
 }
+
+socket.on("unauthorized", () => {
+  console.error("401: tipo de usuario no autorizado.");
+});

@@ -6,7 +6,7 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-const asObj = (doc) => ({ id: doc.id, ...doc.data() });
+const asObj = (doc) => ({ id: doc.id, ...doc.data });
 
 class FirebaseContainer {
   constructor(collectionName) {
@@ -15,34 +15,54 @@ class FirebaseContainer {
 
   async listById(id) {
     try {
-      const obj =  await this.collection.doc(id).get();
-      return asObj(obj)
+      const obj = await this.collection.doc(id).get();
+      return asObj(obj);
     } catch (error) {
-      return {oops: "Hubo un error intentando traer el documento por id desde firesbase"}
+      console.error(
+        "Hubo un error listando el documento por id. " +
+          error
+      );
     }
   }
 
   async listAll() {
-    const list = [];
-    const snapshot = await this.collection.get();
-    snapshot.forEach((doc) => {
-      list.push(asObj(doc));
-    });
-    return list;
+    try {
+      const list = [];
+      const snapshot = await this.collection.get();
+      snapshot.forEach((doc) => {
+        list.push(asObj(doc));
+      });
+      return list;
+    } catch (error) {
+      console.error(
+        "Hubo un error listando todos los objetos. " + error
+      );
+    }
   }
 
   async saveObject(object) {
-    const savedObject = await this.collection.add(object);
-    return asObj(savedObject);
+    console.log(object.body);
+    try {
+      await this.collection.add(object.body);
+    } catch (error) {
+      console.error("Hubo un error guardando el objeto. " + error);
+    }
   }
 
   async updateObject(object) {
-    const updatedObject = await this.collection.set({ object });
-    return asObj(updatedObject);
+    try {
+      await this.collection.doc(object.id).update(object);
+    } catch (error) {
+      console.error("Hubo un error actualizando el objeto. " + error);
+    }
   }
 
   async deleteById(id) {
-    return await this.collection.doc(id).delete();
+    try {
+      return await this.collection.doc(id).delete();
+    } catch (error) {
+      console.error("Hubo un error borrando el objeto. " + error);
+    }
   }
 
   async deleteAll() {
@@ -54,10 +74,10 @@ class FirebaseContainer {
       const errors = result.filter((r) => r.status == "rejected");
 
       if (errors.length > 0) {
-        return { oops: `no se borró todo. Volver a intentarlo` };
+        console.error(`no se borró todo. Volver a intentarlo`);
       }
     } catch (error) {
-      return { oops: `Error al borrar todos: ${error}` };
+      console.error(`Hubo un error borrando todos los elementos: ${error}`);
     }
   }
 }

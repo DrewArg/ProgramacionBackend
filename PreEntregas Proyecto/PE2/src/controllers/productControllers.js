@@ -1,4 +1,4 @@
-import {productsDao} from "../daos/daoIndex.js";
+import { productsDao } from "../daos/daoIndex.js";
 
 const productController = {
   async getById(id) {
@@ -6,25 +6,31 @@ const productController = {
       const prod = await productsDao.listById(id);
       return prod;
     } catch (e) {
-      return { oops: "no se pudo obtener el producto. Error: " + e };
+      console.error(
+        "Product controller --> no se pudo obtener el producto. Error: " + e
+      );
     }
   },
 
-  async updateProduct(req, res) {
+  async updateProduct(product) {
     try {
-      const prod = await productsDao.updateObject(req);
-      res.json(prod);
+      const prod = await productsDao.updateObject(product);
+      return prod;
     } catch (e) {
-      return { error: e };
+      console.error(
+        "Product controller --> no se pudo actualizar el producto. Error: " + e
+      );
     }
   },
 
-  deleteById(req, res) {
-    const id = req.params.id;
+  async deleteById(id) {
     try {
-      res.send(productsDao.deleteById(id));
+      await productsDao.deleteById(id);
+      return { ok: "Product controller --> producto eliminado correctamente" };
     } catch (e) {
-      res.send({ oops: "No se pudo borrar el producto. Error: " + error });
+      console.error(
+        "Product controller --> No se pudo borrar el producto. Error: " + error
+      );
     }
   },
 
@@ -32,11 +38,14 @@ const productController = {
     return productsDao.listAll();
   },
 
-  saveProduct: (req, res) => {
+  async saveProduct(product) {
     try {
-      res.status(201).json(productsDao.saveObject(req.body));
+      const prod = await productsDao.saveObject(product);
+      return prod;
     } catch (error) {
-      res.send({ oops: "No se pudo guardar el producto. Error: " + error });
+      console.error(
+        "Product controller --> No se pudo guardar el producto. Error: " + error
+      );
     }
   },
 };

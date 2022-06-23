@@ -6,7 +6,7 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-const asObj = (doc) => ({ id: doc.id, ...doc.data });
+const asObj = (doc) => ({ id: doc.id, ...doc.data() });
 
 class FirebaseContainer {
   constructor(collectionName) {
@@ -18,10 +18,7 @@ class FirebaseContainer {
       const obj = await this.collection.doc(id).get();
       return asObj(obj);
     } catch (error) {
-      console.error(
-        "Hubo un error listando el documento por id. " +
-          error
-      );
+      console.error("Hubo un error listando el documento por id. " + error);
     }
   }
 
@@ -34,9 +31,7 @@ class FirebaseContainer {
       });
       return list;
     } catch (error) {
-      console.error(
-        "Hubo un error listando todos los objetos. " + error
-      );
+      console.error("Hubo un error listando todos los objetos. " + error);
     }
   }
 

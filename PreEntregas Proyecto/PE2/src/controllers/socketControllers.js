@@ -11,13 +11,18 @@ function socketController(server) {
       console.log("desconexión");
     });
 
-    socket.on("saveProduct", async (product) => {
-      try {
-        return await productController.saveProduct(product);
-      } catch (error) {
-        console.error(
-          "Socket --> no se pudo guardar el producto. Error: " + error
-        );
+    socket.on("saveProduct", async (saveProd) => {
+      if (saveProd.currentUser !== "Admin") {
+        socket.emit("unauthorized");
+      } else {
+        try {
+          console.log(saveProd.product);
+          await productController.saveProduct(saveProd.product);
+        } catch (error) {
+          console.error(
+            "Socket --> no se pudo guardar el producto. Error: " + error
+          );
+        }
       }
     });
 
@@ -31,6 +36,7 @@ function socketController(server) {
         );
       }
     });
+
     socket.on("updateProduct", async (updateProd) => {
       if (updateProd.currentUser !== "Admin") {
         socket.emit("unauthorized");

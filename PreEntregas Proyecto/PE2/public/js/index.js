@@ -67,22 +67,14 @@ async function addProduct(currentUser) {
     stock: stock,
   };
 
-  let headersList = {
-    "Content-Type": "application/json",
+  const saveProd = {
+    product: product,
+    currentUser: currentUser,
   };
 
-  let bodyContent = JSON.stringify(product);
-
-  await fetch(`/api/products?currentUser=${currentUser}`, {
-    method: "POST",
-    body: bodyContent,
-    headers: headersList,
-    action: `/api/products?currentUser=${currentUser}`,
-  }).catch((err) => console.log(err));
-
-  form.reset();
-
+  socket.emit("saveProduct", saveProd);
   socket.emit("getAllProducts");
+  form.reset();
 }
 
 /** borro un producto y cargo productos nuvevamente */

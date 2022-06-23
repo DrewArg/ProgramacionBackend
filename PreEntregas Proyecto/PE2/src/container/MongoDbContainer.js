@@ -1,25 +1,39 @@
-import mongoose from "mongoose";
+import { db, ObjectId, ObjectID } from "mongodb";
 import config from "../config.js";
 
 await mongoose.connect(config.mongodb.cnxStr, config.mongodb.options);
 
 //ver de no usar mongoose
 class MongoDbContainer {
-  constructor(collectionName, scheme) {
-    this.coleccion = mongoose.model(collectionName, scheme);
+  constructor(collectionName) {
+    this.collection = collectionName;
   }
 
-  async listById(id) {}
+  //62b46aceff1abb66102f4793
 
-  async listAll() {}
+  async listById(id) {
+    return await db.this.collection.find({ _id: ObjectId(id) });
+  }
 
-  async saveObject(object) {}
+  async listAll() {
+    return await db.this.collection.find();
+  }
 
-  async updateObject(object) {}
+  async saveObject(object) {
+    await db.this.collection.insertOne(object);
+  }
 
-  async deleteById(id) {}
+  async updateObject(object) {
+    await db.this.collection.update({ _id: object._id }, { $set: { object } });
+  }
 
-  async deleteAll() {}
+  async deleteById(id) {
+    await db.this.collection.deleteOne({ _id: ObjectId(id) });
+  }
+
+  async deleteAll() {
+    await db.this.collection.deleteMany({});
+  }
 }
 
 export default MongoDbContainer;

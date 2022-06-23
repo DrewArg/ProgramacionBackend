@@ -11,13 +11,7 @@ export default {
     path: "./DB",
   },
   mongodb: {
-    cnxStr: "srv+mongodb://xxxxxxxxxxxxxxxxxxx",
-    options: {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      serverSelectionTimeoutMS: 5000,
-    },
+   
   },
   firebase: {
     serviceAccount: JSON.parse(fs.readFileSync(path.resolve(__dirname,'./DB/coderhouse-backend-62847-firebase-adminsdk-waoh6-a627ff3b1b.json'),'utf-8'))

@@ -10,7 +10,9 @@ class MongoDbContainer {
   }
 
   async listAll() {
-    return await db.this.collection.find();
+    console.log(this.collection);
+    const coll = this.collection;
+    return await db.coll.find();
   }
 
   async saveObject(object) {

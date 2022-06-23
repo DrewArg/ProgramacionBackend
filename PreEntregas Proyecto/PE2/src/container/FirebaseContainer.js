@@ -6,7 +6,7 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-const asObj = (doc) => ({ id: doc.id, ...doc.data() });
+const asObj = doc => ({ id: doc.id, ...doc.data() });
 
 class FirebaseContainer {
   constructor(collectionName) {
@@ -14,7 +14,7 @@ class FirebaseContainer {
   }
 
   async listById(id) {
-    return await db.this.collection.doc(id).get();
+    return await this.collection.doc(id).get();
   }
 
   async listAll() {
@@ -27,18 +27,17 @@ class FirebaseContainer {
   }
 
   async saveObject(object) {
-    const savedObject = await db.this.collection.add(object);
-    console.log(savedObject.id);
+    const savedObject = await this.collection.add(object);
     return asObj(savedObject);
   }
 
   async updateObject(object) {
-    const updatedObject = await db.this.collection.set({ object });
+    const updatedObject = await this.collection.set({ object });
     return asObj(updatedObject);
   }
 
   async deleteById(id) {
-    return await db.this.collection.doc(id).delete();
+    return await this.collection.doc(id).delete();
   }
 
   async deleteAll() {

@@ -1,8 +1,6 @@
-const { Server: Socket } = require("socket.io");
-
-const { productController } = require("./productControllers");
-const { cartController } = require("./cartControllers");
-const { cartIdController } = require("./cartIdControllers");
+import {Server as Socket} from 'socket.io'
+import productController from './productControllers.js'
+import cartController from './cartControllers.js'
 
 function socketController(server) {
   const io = new Socket(server);
@@ -55,4 +53,4 @@ function socketController(server) {
   return io;
 }
 
-module.exports = socketController;
+export default socketController

@@ -21,25 +21,6 @@ function changeUser() {
   }
 }
 
-/** cargo los carritos disponibles */
-
-socket.emit("getCartsIds");
-
-socket.on("cartsIds", handleCartsIds);
-
-async function handleCartsIds(cartsIds) {
-  const cartIdsOnServer = await fetch(
-    "/views/partials/cartIdSection.handlebars"
-  );
-
-  const templateText = await cartIdsOnServer.text();
-
-  const templateFunction = Handlebars.compile(templateText);
-
-  const html = templateFunction({ cartsIds });
-  document.getElementById("cartIdSection").innerHTML = html;
-}
-
 /** cargo los productos iniciales */
 socket.emit("getAllProducts"); //server socket --> emit(products)
 
@@ -251,7 +232,7 @@ async function addToCart(productId) {
 
     cartId.textContent = newCartId;
 
-    socket.emit("getCartsIds");
+    //socket.emit("getCartsIds");
   }
 }
 
@@ -281,7 +262,7 @@ async function createNewCart() {
 
   cartId.textContent = newCartId;
 
-  socket.emit("getCartsIds");
+  //socket.emit("getCartsIds");
 }
 
 async function saveCartId() {
@@ -299,7 +280,7 @@ async function saveCartId() {
   }).catch((err) => console.log(err));
 }
 
-socket.emit("getActiveCartId");
+//socket.emit("getActiveCartId");
 
 socket.on("activeCartId", handleGetActiveCartId);
 

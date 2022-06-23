@@ -1,30 +1,50 @@
 import admin from "firebase-admin";
 import config from "../config.js";
+import fs from "fs";
+
+const serviceAccount = JSON.parse(fs.readFileSync(config.firebase, "utf-8"));
 
 admin.initializeApp({
-  credential: admin.credential.cert(config.firebase),
+  credential: admin.credential.cert(serviceAccount),
 });
 
 const db = admin.firestore();
+const asObj = (doc) => ({ id: doc.id, ...doc.data() });
 
 class FirebaseContainer {
   constructor(collectionName) {
     this.collection = db.collection(collectionName);
   }
 
-  async listById(id) {}
+  async listById(id) {
+    return await db.this.collection.doc(id).get();
+  }
 
-  async listAll() {}
+  async listAll() {
+    const list = [];
+    const snapshot = await this.collection.get();
+    snapshot.forEach((doc) => {
+      list.push(asObj(doc));
+    });
+    return list;
+  }
 
-  async saveObject(object) {}
+  async saveObject(object) {
+    const savedObject = await db.this.collection.add(object);
+    console.log(savedObject.id);
+    return asObj(savedObject);
+  }
 
-  async updateObject(object) {}
+  async updateObject(object) {
+    const updatedObject = await db.this.collection.set({ object });
+    return asObj(updatedObject);
+  }
 
-  async deleteById(id) {}
+  async deleteById(id) {
+    return await db.this.collection.doc(id).delete();
+  }
 
   async deleteAll() {
-    //MODIFICAR ESTO
-
     try {
       const docs = await this.listAll();
       const ids = docs.map((d) => d.id);
@@ -40,7 +60,6 @@ class FirebaseContainer {
     }
   }
 
-  async logout() {}
 }
 
 export default FirebaseContainer;

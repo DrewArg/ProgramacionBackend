@@ -6,26 +6,26 @@ let productsDao;
 switch (config.PERSISTANCE_MODE) {
   case "products-json":
     const { default: ProductsDaoArchive } = await import(
-      "./products/ProductsDaoArchive.js"
+      "./ProductsDaoArchive.js"
     );
-    productsDao = new ProductsDaoArchive(config.filesystem.path);
+    productsDao = new ProductsDaoArchive(config.fileSystem.path);
     break;
 
   case "products-firebase":
     const { default: ProductsDaoFirebase } = await import(
-      "./products/ProductsDaoFirebase.js"
+      "./ProductsDaoFirebase.js"
     );
-    productsDao = new ProductsDaoFirebase();
+    productsDao = new ProductsDaoFirebase("products");
     break;
   case "products-mongodb":
     const { default: ProductsDaoMongoDb } = await import(
-      "./products/ProductsDaoMongoDb.js"
+      "./ProductsDaoMongoDb.js"
     );
-    productsDao = new ProductsDaoMongoDb();
+    productsDao = new ProductsDaoMongoDb("products");
     break;
   case "products-memory":
     const { default: ProductsDaoMemory } = await import(
-      "./products/ProductsDaoMemory.js"
+      "./ProductsDaoMemory.js"
     );
     productsDao = new ProductsDaoMemory();
     break;

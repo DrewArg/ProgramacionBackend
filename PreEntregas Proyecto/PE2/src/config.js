@@ -1,6 +1,6 @@
 
 export default {
-  fyleSystem: {
+  fileSystem: {
     path: "./DB",
   },
   mongodb: {
@@ -25,5 +25,5 @@ export default {
     "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-waoh6%40coderhouse-backend-62847.iam.gserviceaccount.com"
   
   },
-  PERSISTANCE_MODE: "mongodb"
+  PERSISTANCE_MODE: "products-firebase"
 };

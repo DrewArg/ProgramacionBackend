@@ -1,5 +1,4 @@
 import { db, ObjectId } from "mongodb";
-import config from "../config.js";
 
 class MongoDbContainer {
   constructor(collectionName) {

@@ -16,5 +16,5 @@ export default {
   firebase: {
     serviceAccount: JSON.parse(fs.readFileSync(path.resolve(__dirname,'./DB/coderhouse-backend-62847-firebase-adminsdk-waoh6-a627ff3b1b.json'),'utf-8'))
   },
-  PERSISTANCE_MODE: "products-firebase"
+  PERSISTANCE_MODE: "products-archive"
 };

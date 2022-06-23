@@ -1,4 +1,4 @@
-import { db, ObjectId } from "mongodb";
+import db from "mongodb";
 
 class MongoDbContainer {
   constructor(collectionName) {

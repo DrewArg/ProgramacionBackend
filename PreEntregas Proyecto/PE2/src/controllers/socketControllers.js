@@ -51,11 +51,15 @@ function socketController(server) {
       }
     });
 
-    socket.on("deleteProduct", async (id) => {
-      try {
-        socket.emit("deletedProduct", await productController.deleteById(id));
-      } catch (error) {
-        console.error("Socket --> no se pudo borrar el producto");
+    socket.on("deleteProductById", async (delProd) => {
+      if (delProd.currentUser !== "Admin") {
+        socket.emit("unauthorized");
+      } else {
+        try {
+          await productController.deleteById(delProd.prodId);
+        } catch (error) {
+          console.error("Socket --> no se pudo borrar el producto");
+        }
       }
     });
 

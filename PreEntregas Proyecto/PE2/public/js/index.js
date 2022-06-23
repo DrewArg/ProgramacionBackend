@@ -86,21 +86,18 @@ btnDeleteProduct.addEventListener("click", () => {
 });
 
 async function deleteProduct(currentUser) {
+
   const prodId = document.getElementById("idProduct").value;
 
-  let headersList = {
-    "Content-Type": "application/json",
-  };
-
-  await fetch(`/api/products/${prodId}?currentUser=${currentUser}`, {
-    method: "DELETE",
-    headers: headersList,
-    action: `/api/products/${prodId}?currentUser=${currentUser}`,
-  }).catch((err) => console.log(err));
-
+  const delProd = {
+    prodId : prodId,
+    currentUser: currentUser
+  }
+  
+  socket.emit("deleteProductById",delProd)
+  socket.emit("getAllProducts");
   form.reset();
 
-  socket.emit("getAllProducts");
 }
 
 /** actualizo un producto y cargo productos nuvevamente */
@@ -176,11 +173,6 @@ async function searchProduct() {
   socket.emit("searchProduct", id); //server socket --> emit(foundProduct)
   form2.reset();
 }
-
-socket.on("deletedProduct", () => {
-  socket.emit("getAllProducts");
-});
-
 /** muesrto el producto buscado por ID */
 
 socket.on("foundProduct", showProduct);

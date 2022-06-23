@@ -14,7 +14,7 @@ const webControllers = {
   },
 
   webGet404Controller(req, res) {
-    res.status(404).render("layours/404.handlebars", {
+    res.status(404).render("layouts/404.handlebars", {
       layout: "404",
       root: "public",
     })

@@ -1,15 +1,10 @@
-import { db, ObjectId, ObjectID } from "mongodb";
+import { db, ObjectId } from "mongodb";
 import config from "../config.js";
 
-await mongoose.connect(config.mongodb.cnxStr, config.mongodb.options);
-
-//ver de no usar mongoose
 class MongoDbContainer {
   constructor(collectionName) {
     this.collection = collectionName;
   }
-
-  //62b46aceff1abb66102f4793
 
   async listById(id) {
     return await db.this.collection.find({ _id: ObjectId(id) });

@@ -15,7 +15,7 @@ productRouter.get("/products", productController.getAllProducts);
 
 productRouter.post("/products/:id", productController.getById);
 
-productRouter.post("/products", isAdmin, productController.createProduct);
+productRouter.post("/products", isAdmin, productController.saveProduct);
 
 productRouter.put("/products/:id", isAdmin, productController.updateProduct);
 

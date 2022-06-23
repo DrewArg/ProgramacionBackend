@@ -1,4 +1,4 @@
-import ArchiveContainer from ('../container/ArchiveContainer.js')
+import ArchiveContainer from '../container/ArchiveContainer.js'
 const products = new ArchiveContainer('../../DB/products.json');
 
 const productController = {
@@ -13,7 +13,7 @@ const productController = {
     }
   },
 
-  updateProduct(req, res) {
+  async updateProduct (req, res) {
     try {
       const prod = await products.update(req);
       res.json(prod);

@@ -1,4 +1,4 @@
-import { productsDao } from "../daos/products/productsDaoIndex";
+import productsDao from "../daos/products/daoProductsIndex.js";
 
 const productController = {
   async getById(req, res) {

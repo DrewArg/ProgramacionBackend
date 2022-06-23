@@ -1,11 +1,8 @@
 import admin from "firebase-admin";
 import config from "../config.js";
-import fs from "fs";
-
-const serviceAccount = JSON.parse(fs.readFileSync(config.firebase, "utf-8"));
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(config.firebase.serviceAccount),
 });
 
 const db = admin.firestore();
@@ -59,7 +56,6 @@ class FirebaseContainer {
       return { oops: `Error al borrar todos: ${error}` };
     }
   }
-
 }
 
 export default FirebaseContainer;

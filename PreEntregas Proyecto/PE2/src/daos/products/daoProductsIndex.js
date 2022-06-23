@@ -34,4 +34,4 @@ switch (config.PERSISTANCE_MODE) {
     break;
 }
 
-export { productsDao };
+export default productsDao;

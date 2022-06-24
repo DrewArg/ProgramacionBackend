@@ -15,7 +15,9 @@ class ArchiveContainer {
       const objects = await fs.readFile(this.path, "utf-8");
       return JSON.parse(objects);
     } catch (error) {
-      return { oops: `Error al listar todos: ${error}` };
+      console.error(
+        "Archive container --> error al lsitar todos los objetos. " + error
+      );
     }
   }
 
@@ -31,7 +33,7 @@ class ArchiveContainer {
       await fs.writeFile(this.path, JSON.stringify(objects, null, 2));
       return newObject;
     } catch (error) {
-      return { oops: `Error al guardar: ${error}` };
+      console.error("Archive container --> error guardando " + error);
     }
   }
 
@@ -40,17 +42,15 @@ class ArchiveContainer {
     const index = objects.findIndex((o) => o.id == object.id);
 
     if (index == -1) {
-      return {
-        oops: `Error al actualizar, no se encontró el id ${object.id} en el sistema.`,
-      };
+      console.error(
+        "Archive container --> error actualizando, no se encontró el id. "
+      );
     } else {
       objects[index] = object;
       try {
         await fs.writeFile(this.path, JSON.stringify(objects, null, 2));
       } catch (error) {
-        return {
-          oops: `Error al actualizar: ${error}`,
-        };
+        console.error("Archive container --> error actualizando. " + error);
       }
     }
   }
@@ -59,7 +59,9 @@ class ArchiveContainer {
     const objects = await this.listAll();
     const index = objects.findIndex((o) => o.id == id);
     if (index == -1) {
-      return { oops: `Error al borrar, no se encontró el id ${id}` };
+      console.error(
+        "Archive container --> error borrando, no se encontró el id. "
+      );
     } else {
       const deleted = objects.splice(index, 1)[0];
       try {
@@ -67,9 +69,7 @@ class ArchiveContainer {
 
         return deleted;
       } catch (error) {
-        return {
-          oops: `Error al borrar: ${error}`,
-        };
+        console.error("Archive container --> error borrando " + error);
       }
     }
   }

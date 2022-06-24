@@ -86,18 +86,16 @@ btnDeleteProduct.addEventListener("click", () => {
 });
 
 async function deleteProduct(currentUser) {
-
   const prodId = document.getElementById("idProduct").value;
 
   const delProd = {
-    prodId : prodId,
-    currentUser: currentUser
-  }
-  
-  socket.emit("deleteProductById",delProd)
+    prodId: prodId,
+    currentUser: currentUser,
+  };
+
+  socket.emit("deleteProductById", delProd);
   socket.emit("getAllProducts");
   form.reset();
-
 }
 
 /** actualizo un producto y cargo productos nuvevamente */
@@ -133,18 +131,6 @@ async function updateProduct(currentUser) {
   };
 
   socket.emit("updateProduct", updateProd);
-  // let headersList = {
-  //   "Content-Type": "application/json",
-  // };
-
-  // let bodyContent = JSON.stringify(product);
-
-  // await fetch(`/api/products/${prodId}?currentUser=${currentUser}`, {
-  //   method: "PUT",
-  //   body: bodyContent,
-  //   headers: headersList,
-  //   action: `/api/products/${prodId}?currentUser=${currentUser}`,
-  // }).catch((err) => console.log(err));
 
   socket.emit("getAllProducts");
 
@@ -168,8 +154,6 @@ btnProductID.addEventListener("click", () => {
 
 async function searchProduct() {
   const id = document.getElementById("prodId").value;
-  console.log("id: " + id);
-
   socket.emit("searchProduct", id); //server socket --> emit(foundProduct)
   form2.reset();
 }
@@ -256,20 +240,20 @@ async function createNewCart() {
   //socket.emit("getCartsIds");
 }
 
-async function saveCartId() {
-  let headersList = {
-    "Content-Type": "application/json",
-  };
+// async function saveCartId() {
+//   let headersList = {
+//     "Content-Type": "application/json",
+//   };
 
-  const activeCartExist = document.getElementById("activeCart");
-  const cartId = activeCartExist.textContent;
+//   const activeCartExist = document.getElementById("activeCart");
+//   const cartId = activeCartExist.textContent;
 
-  await fetch(`/api/activeCartId/${cartId}`, {
-    method: "POST",
-    headers: headersList,
-    action: `/api/activeCartId/${cartId}`,
-  }).catch((err) => console.log(err));
-}
+//   await fetch(`/api/activeCartId/${cartId}`, {
+//     method: "POST",
+//     headers: headersList,
+//     action: `/api/activeCartId/${cartId}`,
+//   }).catch((err) => console.log(err));
+// }
 
 //socket.emit("getActiveCartId");
 

@@ -16,7 +16,6 @@ function socketController(server) {
         socket.emit("unauthorized");
       } else {
         try {
-          console.log(saveProd.product);
           await productController.saveProduct(saveProd.product);
         } catch (error) {
           console.error(
@@ -26,6 +25,16 @@ function socketController(server) {
       }
     });
 
+    socket.on("getAllProducts", async () => {
+      try {
+        socket.emit("products", await productController.getAllProducts());
+        io.sockets.emit("products", await productController.getAllProducts());
+      } catch (error) {
+        console.error(
+          "Socket --> no se pudieron obtener los productos. Error: " + error
+        );
+      }
+    });
     socket.on("searchProduct", async (id) => {
       try {
         const prod = await productController.getById(id);
@@ -60,22 +69,6 @@ function socketController(server) {
         } catch (error) {
           console.error("Socket --> no se pudo borrar el producto");
         }
-      }
-    });
-
-    // socket.on("product", async () => {
-    //   io.sockets.emit("productById", await productController.productById());
-    //   socket.emit("productById", await productController.productById());
-    // });
-
-    socket.on("getAllProducts", async () => {
-      try {
-        socket.emit("products", await productController.getAllProducts());
-        io.sockets.emit("products", await productController.getAllProducts());
-      } catch (error) {
-        console.error(
-          "Socket --> no se pudieron obtener los productos. Error: " + error
-        );
       }
     });
 

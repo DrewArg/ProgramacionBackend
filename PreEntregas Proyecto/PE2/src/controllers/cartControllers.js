@@ -61,6 +61,11 @@ const cartController = {
       const cart = await cartsDao.listById(cartId);
       try {
         await cart.products.push(product);
+        try {
+          await cartsDao.updateObject(cart);
+        } catch (error) {
+          console.error("Cart controller --> No se pudo acualizar " + error);
+        }
       } catch (error) {
         console.error(
           "Cart controller --> No se pudo agregar el producto. " + error

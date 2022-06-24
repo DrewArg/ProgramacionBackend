@@ -83,8 +83,7 @@ function socketController(server) {
 
     socket.on("addToCart", async (settings) => {
       try {
-        const prod = productController.getById(settings.productId);
-        console.log(prod);
+        const prod = await productController.getById(settings.productId);
         await cartController.addProduct(settings.cartId, prod);
       } catch (error) {
         console.error("Socket --> no se pudo agregar el producto " + error);

@@ -1,6 +1,7 @@
 import { Server as Socket } from "socket.io";
 import productController from "./productControllers.js";
 import cartController from "./cartControllers.js";
+import cartIdController from "./cartIdControllers.js";
 
 function socketController(server) {
   const io = new Socket(server);
@@ -9,6 +10,17 @@ function socketController(server) {
 
     socket.on("disconnect", () => {
       console.log("desconexión");
+    });
+
+    socket.on("cartExist", async () => {
+      socket.emit("cartExistResponse", await cartController.cartExist());
+    });
+
+    socket.on("saveCartId", async (cartId) => {
+      const objId = {
+        id: cartId,
+      };
+      await cartIdController.saveCartId(objId);
     });
 
     socket.on("saveProduct", async (saveProd) => {
@@ -89,18 +101,6 @@ function socketController(server) {
         console.error("Socket --> no se pudo agregar el producto " + error);
       }
     });
-
-    // socket.on("getActiveCartId", async () => {
-    //   socket.emit("activeCartId", await cartIdController.getCurrentId());
-    //   io.sockets.emit("activeCartId", await cartIdController.getCurrentId());
-    // });
-
-    // socket.on("getCartProductsById", async (getCartProductsById) => {
-    //   socket.emit(
-    //     "cartProductsById",
-    //     await cartController.productsInCart(getCartProductsById)
-    //   );
-    // });
   });
 
   return io;

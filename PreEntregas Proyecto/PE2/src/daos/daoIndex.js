@@ -2,6 +2,7 @@ import config from "../config.js";
 
 let productsDao;
 let cartsDao;
+let cartIdDao;
 
 switch (config.PRODUCTS_PERSISTANCE_MODE) {
   case "products-json":
@@ -44,4 +45,26 @@ switch (config.CARTS_PERSISTANCE_MODE) {
     cartsDao = new DaoMemory();
     break;
 }
-export { productsDao, cartsDao };
+
+switch (config.CARTID_PERSISTANCE_MODE) {
+  case "cartId-json":
+    const { default: DaoArchive } = await import("./DaoArchive.js");
+    cartIdDao = new DaoArchive(config.fileSystem.cartId.path);
+    break;
+
+  case "cartId-firebase":
+    const { default: DaoFirebase } = await import("./DaoFirebase.js");
+    cartIdDao = new DaoFirebase("cartId");
+    break;
+
+  case "cartId-mongodb":
+    const { default: DaoMongoDb } = await import("./DaoMongoDb.js");
+    cartIdDao = new DaoMongoDb("cartId");
+    break;
+
+  default:
+    const { default: DaoMemory } = await import("./DaoMemory.js");
+    cartIdDao = new DaoMemory();
+    break;
+}
+export { productsDao, cartsDao, cartIdDao };

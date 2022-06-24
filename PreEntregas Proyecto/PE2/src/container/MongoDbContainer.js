@@ -32,7 +32,6 @@ class MongoDbContainer {
   }
 
   async listById(id) {
-    console.log(id);
     const prods = await this.listAll();
     const index = prods.findIndex((p) => p.id == id);
     if (index == -1) {
@@ -55,8 +54,7 @@ class MongoDbContainer {
 
       prodsArray.forEach((p) => {
         delete Object.assign(p, { ["id"]: p["_id"] })["_id"];
-        p.id = ''+p.id+''
-     
+        p.id = "" + p.id + "";
       });
 
       return prodsArray;
@@ -69,7 +67,8 @@ class MongoDbContainer {
 
   async saveObject(object) {
     try {
-      await mongoDb.collection(this.collection).insertOne(object);
+      const obj = await mongoDb.collection(this.collection).insertOne(object);
+      return obj.insertedId;
     } catch (error) {
       console.error(
         "MongoDB Container --> Hubo un error guardando el objeto. " + error
@@ -81,7 +80,7 @@ class MongoDbContainer {
     try {
       await mongoDb
         .collection(this.collection)
-        .updateOne({ _id: object.id }, { $set: object });
+        .replaceOne({ _id: ObjectId(object.id) }, object);
     } catch (error) {
       console.error(
         "MongoDB Container --> Hubo un error actualizando el objeto. " + error

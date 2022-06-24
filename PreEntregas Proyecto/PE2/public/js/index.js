@@ -2,15 +2,25 @@ const socket = io.connect();
 
 console.log("index.js");
 
-socket.emit("createCart");
-
-socket.on("cartCreated", handleCartCreated);
-
 let cartId = null;
 
+socket.emit("cartExist");
+socket.on("cartExistResponse", hanldeCartExistResponse);
+
+async function hanldeCartExistResponse(cartExistResponse) {
+  if (cartExistResponse) {
+    cartId = cartExistResponse;
+  } else {
+    socket.emit("createCart");
+  }
+  console.log(cartId);
+}
+
+socket.on("cartCreated", handleCartCreated);
 async function handleCartCreated(cartCreated) {
   cartId = cartCreated;
-  console.log(cartId);
+  socket.emit("saveCartId", cartId);
+  socket.emit("cartExist");
 }
 
 /** asigno los permisos de usuario */
@@ -185,48 +195,12 @@ async function showProduct(foundProduct) {
 /** cargo los productos seleccionados al carrito */
 
 async function addToCart(productId) {
-  console.log(productId);
   const settings = {
     productId: productId,
     cartId: cartId,
   };
 
-  socket.emit("addToCart",settings)
-
-  // let headersList = {
-  //   "Content-Type": "application/json",
-  // };
-
-  // const currentProd = await fetch(`/api/products/${productId}`, {
-  //   method: "POST",
-  //   headers: headersList,
-  //   action: `/api/products/${productId}`,
-  // }).catch((err) => console.log(err));
-
-  // const productResponse = await currentProd.json();
-
-  // const activeCartExist = document.getElementById("activeCart");
-  // const cartId = activeCartExist.textContent;
-  // let bodyContent = JSON.stringify(productResponse);
-
-  // if (cartId !== "activeCartExist") {
-  //   await fetch(`/api/carts/${cartId}/products`, {
-  //     method: "POST",
-  //     body: bodyContent,
-  //     headers: headersList,
-  //     action: `/api/carts/${cartId}/products`,
-  //   }).catch((err) => console.log(err));
-  // } else {
-  //   const newCartId = await fetch(`/api/carts`, {
-  //     method: "POST",
-  //     body: bodyContent,
-  //     headers: headersList,
-  //     action: `/api/carts`,
-  //   }).catch((err) => console.log(err));
-
-  //   cartId.textContent = newCartId;
-
-  //   //socket.emit("getCartsIds");
+  socket.emit("addToCart", settings);
 }
 
 socket.on("activeCartId", handleGetActiveCartId);

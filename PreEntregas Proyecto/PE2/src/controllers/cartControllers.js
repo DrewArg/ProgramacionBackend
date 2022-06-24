@@ -18,6 +18,21 @@ const cartController = {
     }
   },
 
+  async cartExist() {
+    try {
+      const carts = await cartsDao.listAll();
+      if (carts.length > 0) {
+        return carts[0].id;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error(
+        "Cart controller --> no se pudo verificar si existen carritos. " + error
+      );
+    }
+  },
+
   async deleteById(id) {
     try {
       await cartsDao.deleteById(id);

@@ -14,6 +14,9 @@ export default {
     products: {
       path: path.resolve(__dirname, "./DB/products.json"),
     },
+    carts: {
+      path: path.resolve(__dirname, "./DB/carts.json"),
+    },
   },
   mongodb: {
     uri: `mongodb+srv://root:${password}@cluster0.vcbuwku.mongodb.net/?retryWrites=true&w=majority`,
@@ -38,5 +41,6 @@ export default {
       )
     ),
   },
-  PERSISTANCE_MODE: "products-mongodb",
+  PRODUCTS_PERSISTANCE_MODE: "products-firebase",
+  CARTS_PERSISTANCE_MODE:"carts-firebase"
 };

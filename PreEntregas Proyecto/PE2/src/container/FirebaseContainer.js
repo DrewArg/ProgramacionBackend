@@ -15,14 +15,17 @@ class FirebaseContainer {
   async listById(id) {
     try {
       const obj = await this.collection.doc(id).get();
+      const asObj = (doc) => ({ id: doc.id, ...doc.data() });
       return asObj(obj);
     } catch (error) {
-      console.error("Firebase container --> Hubo un error listando el documento por id. " + error);
+      console.error(
+        "Firebase container --> Hubo un error listando el documento por id. " +
+          error
+      );
     }
   }
 
   async listAll() {
-    console.log("aca");
     try {
       const asObj = (doc) => ({ id: doc.id, ...doc.data() });
       const list = [];
@@ -30,17 +33,27 @@ class FirebaseContainer {
       snapshot.forEach((doc) => {
         list.push(asObj(doc));
       });
+
+      list.forEach((i) => {
+        i.id = '' + i.id + '';
+      });
       return list;
     } catch (error) {
-      console.error("Firebase container --> Hubo un error listando todos los objetos. " + error);
+      console.error(
+        "Firebase container --> Hubo un error listando todos los objetos. " +
+          error
+      );
     }
   }
 
   async saveObject(object) {
     try {
-      await this.collection.add(object);
+      const obj = await this.collection.add(object);
+      return obj._path.segments[1];
     } catch (error) {
-      console.error("Firebase container --> Hubo un error guardando el objeto. " + error);
+      console.error(
+        "Firebase container --> Hubo un error guardando el objeto. " + error
+      );
     }
   }
 
@@ -48,7 +61,9 @@ class FirebaseContainer {
     try {
       await this.collection.doc(object.id).update(object);
     } catch (error) {
-      console.error("Firebase container --> Hubo un error actualizando el objeto. " + error);
+      console.error(
+        "Firebase container --> Hubo un error actualizando el objeto. " + error
+      );
     }
   }
 
@@ -56,7 +71,9 @@ class FirebaseContainer {
     try {
       return await this.collection.doc(id).delete();
     } catch (error) {
-      console.error("Firebase container --> Hubo un error borrando el objeto. " + error);
+      console.error(
+        "Firebase container --> Hubo un error borrando el objeto. " + error
+      );
     }
   }
 
@@ -69,10 +86,14 @@ class FirebaseContainer {
       const errors = result.filter((r) => r.status == "rejected");
 
       if (errors.length > 0) {
-        console.error(`Firebase container --> no se borró todo. Volver a intentarlo`);
+        console.error(
+          `Firebase container --> no se borró todo. Volver a intentarlo`
+        );
       }
     } catch (error) {
-      console.error(`Firebase container --> Hubo un error borrando todos los elementos: ${error}`);
+      console.error(
+        `Firebase container --> Hubo un error borrando todos los elementos: ${error}`
+      );
     }
   }
 }

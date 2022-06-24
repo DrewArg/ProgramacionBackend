@@ -32,8 +32,8 @@ class MongoDbContainer {
   }
 
   async listById(id) {
-    const prods = await this.listAll();
     console.log(id);
+    const prods = await this.listAll();
     const index = prods.findIndex((p) => p.id == id);
     if (index == -1) {
       console.error(
@@ -55,6 +55,8 @@ class MongoDbContainer {
 
       prodsArray.forEach((p) => {
         delete Object.assign(p, { ["id"]: p["_id"] })["_id"];
+        p.id = ''+p.id+''
+     
       });
 
       return prodsArray;

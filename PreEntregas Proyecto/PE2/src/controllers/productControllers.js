@@ -34,8 +34,14 @@ const productController = {
     }
   },
 
-  getAllProducts: () => {
-    return productsDao.listAll();
+  async getAllProducts() {
+    try {
+      return await productsDao.listAll();
+    } catch (error) {
+      console.error(
+        "Product controller --> No se pudo listar todos los productos. " + error
+      );
+    }
   },
 
   async saveProduct(product) {

@@ -1,59 +1,75 @@
-import ArchiveContainer from '../container/ArchiveContainer.js'
-const carts = new ArchiveContainer ('../../DB/carts.json');
+import { cartsDao } from "../daos/daoIndex.js";
 
 const cartController = {
-
-  saveCart: (req, res) => {
+  async createCart() {
     try {
-      res.status(201).json(carts.saveObject(req.body));
-          } catch (error) {
-            res.status(200).send({oops: `No se pudo crear el carrito. Error: ${error}`})
-    }
-      },
-
-  deleteById:(req,res) =>{
-    const cartId = req.params.cartId
-    try{
-      res.json(carts.deleteById(cartId))
-    }catch(e){
-      
-      res.status(404).send({oops: "No se pudo borrar el carrito. Error " + e})
+      const timestamp = new Date();
+      const products = [];
+      const cart = {
+        timestamp: timestamp,
+        products: products,
+      };
+      const currCart = await cartsDao.saveObject(cart);
+      return currCart;
+    } catch (error) {
+      console.error(
+        `Cart controller --> No se pudo crear el carrito. Error: ${error}`
+      );
     }
   },
 
-  productsInCart: async (cartId) => {
-    const cart = carts.listById(cartId)
-    return cart.products;
+  async deleteById(id) {
+    try {
+      await cartsDao.deleteById(id);
+      return { ok: "Cart controller --> carrito eliminado correctamente" };
+    } catch (e) {
+      console.error(
+        "Cart controller --> No se pudo borrar el carrito. Error: " + error
+      );
+    }
   },
 
-  deleteProductById: (req, res) => {
-    const productId = req.params.productId;
-    const cartId = req.params.cartId;
-    const cart = carts.listById(cartId)
-    const productIndex = cart.products.findIndex(p => p.id == productId)
+  async productsInCart(cartId) {
+    try {
+      const cart = await cartsDao.listById(cartId);
+      return cart.products;
+    } catch (error) {
+      console.error(
+        "Cart controller --> No se pudieron encontrar los productos. " + error
+      );
+    }
+  },
+
+  async deleteProductById(cartId, productId) {
+    const cart = cartsDao.listById(cartId);
+    const productIndex = cart.products.findIndex((p) => p.id == productId);
     if (productIndex == -1) {
-      res.status(404).send({ oops: `Error , no se encontró el id de producto ${productId}` });
-
-    }else{
-        try {
-          cart.products.splice(productIndex,1)[0]
-          res.status(200).send({ok: `El producto ${productId} ha sido eliminado correctamente`})
-          
-        } catch (error) {
-          res.status(405).send({oops: `No se pudo eliminar el producto ${productId}. Error: ${error}`})
-        
+      console.error(`Cart controller --> No se encontró el id del producto. `);
+    } else {
+      try {
+        cart.products.splice(productIndex, 1)[0];
+      } catch (error) {
+        console.error(
+          "Cart controller --> 405: No se pudo eliminar el producto. " + error
+        );
       }
     }
   },
 
-  addProduct: async (req, res) => {
-    const cartId = req.params.id;
-    const cart = carts.listById(cartId)
+  async addProduct(cartId, product) {
     try {
-    await cart.products.push(req.body)
-    res.status(201).send({ok: `El producto fue agregado correctamente`})
-          } catch (error) {
-            res.status(404).send({oops: `No se pudo agregar el producto. Error ${error}`})  
+      const cart = await cartsDao.listById(cartId);
+      try {
+        await cart.products.push(product);
+      } catch (error) {
+        console.error(
+          "Cart controller --> No se pudo agregar el producto. " + error
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Cart controller --> no se pudo listar el carrito por id " + error
+      );
     }
   },
 };

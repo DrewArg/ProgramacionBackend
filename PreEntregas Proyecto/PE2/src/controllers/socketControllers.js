@@ -72,6 +72,25 @@ function socketController(server) {
       }
     });
 
+    socket.on("createCart", async () => {
+      try {
+        const cart = await cartController.createCart();
+        socket.emit("cartCreated", cart);
+      } catch (error) {
+        console.error("Socket --> no se pudo crear el carrito. " + error);
+      }
+    });
+
+    socket.on("addToCart", async (settings) => {
+      try {
+        const prod = productController.getById(settings.productId);
+        console.log(prod);
+        await cartController.addProduct(settings.cartId, prod);
+      } catch (error) {
+        console.error("Socket --> no se pudo agregar el producto " + error);
+      }
+    });
+
     // socket.on("getActiveCartId", async () => {
     //   socket.emit("activeCartId", await cartIdController.getCurrentId());
     //   io.sockets.emit("activeCartId", await cartIdController.getCurrentId());

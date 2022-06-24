@@ -5,10 +5,8 @@ let cartsDao;
 
 switch (config.PERSISTANCE_MODE) {
   case "products-json":
-    const { default: DaoArchive } = await import(
-      "./DaoArchive.js"
-    );
-    productsDao = new DaoArchive(config.fileSystem.path);
+    const { default: DaoArchive } = await import("./DaoArchive.js");
+    productsDao = new DaoArchive(config.fileSystem.products.path);
     break;
 
   case "products-firebase":
@@ -16,19 +14,13 @@ switch (config.PERSISTANCE_MODE) {
     productsDao = new DaoFirebase("products");
     break;
   case "products-mongodb":
-    const { default: DaoMongoDb } = await import(
-      "./DaoMongoDb.js"
-    );
+    const { default: DaoMongoDb } = await import("./DaoMongoDb.js");
     productsDao = new DaoMongoDb("products");
-    break;
-  case "products-memory":
-    const { default: DaoMemory } = await import(
-      "./DaoMemory.js"
-    );
-    productsDao = new DaoMemory();
     break;
 
   default:
+    const { default: DaoMemory } = await import("./DaoMemory.js");
+    productsDao = new DaoMemory();
     break;
 }
 

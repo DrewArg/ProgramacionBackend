@@ -1,19 +1,52 @@
 import { promises as fs } from "fs";
+
 class ArchiveContainer {
   constructor(path) {
     this.path = path;
+    this.objects = [];
+  }
+
+  async _readFile() {
+    // console.log("reading: " + this.path);
+    try {
+      return fs.readFile(this.path, "utf-8").then((text) => {
+        const objectsArray = JSON.parse(text);
+        this.objects = objectsArray;
+      });
+    } catch (error) {
+      console.error("Archive container --> Error en la lectura del json." + error);
+    }
+  }
+
+  async _saveFile() {
+    try {
+      const textFile = JSON.stringify(this.objects, null, 2);
+      return fs.writeFile(this.path, textFile);
+    } catch (error) {
+      console.error("Archive container --> Error en el gaurdado del json. " + error);
+    }
   }
 
   async listById(id) {
-    const objects = await this.listAll();
-    const searched = objects.find((o) => o.id == id);
-    return searched;
+    try {
+      await this._readFile();
+      console.log(id);
+      const index = this.objects.findIndex((o) => o.id === parseInt(id));
+
+      if (index === -1) {
+        console.error("Archive container --> El objeto no fue encontrado");
+      } else {
+        return this.objects[index];
+      }
+    } catch (error) {
+      console.error("Archive container --> Error leyendo el archivo. " + error);
+    }
   }
 
   async listAll() {
     try {
-      const objects = await fs.readFile(this.path, "utf-8");
-      return JSON.parse(objects);
+      await this._readFile();
+      return [...this.objects];
     } catch (error) {
       console.error(
         "Archive container --> error al lsitar todos los objetos. " + error
@@ -22,52 +55,59 @@ class ArchiveContainer {
   }
 
   async saveObject(object) {
-    const objects = await this.listAll();
     const newId = new Date().getTime() * Math.random() * 100000;
     const timestamp = new Date();
 
     const newObject = { ...object, id: newId, timestamp: timestamp };
-    objects.push(newObject);
 
+    console.log("object: " + { newObject });
     try {
-      await fs.writeFile(this.path, JSON.stringify(objects, null, 2));
+      await this._readFile();
+      this.objects.push(newObject);
+      await this._saveFile();
       return newObject;
     } catch (error) {
-      console.error("Archive container --> error guardando " + error);
+      console.error(
+        "Archive container --> error guardando o leyendo el json " + error
+      );
     }
   }
 
   async updateObject(object) {
-    const objects = await this.listAll();
-    const index = objects.findIndex((o) => o.id == object.id);
+    try {
+      await this._readFile();
+      const index = this.objects.findIndex((o) => o.id == object.id);
 
-    if (index == -1) {
-      console.error(
-        "Archive container --> error actualizando, no se encontró el id. "
-      );
-    } else {
-      objects[index] = object;
-      try {
-        await fs.writeFile(this.path, JSON.stringify(objects, null, 2));
-      } catch (error) {
-        console.error("Archive container --> error actualizando. " + error);
+      if (index == -1) {
+        console.error(
+          "Archive container --> error actualizando, no se encontró el id. "
+        );
+      } else {
+        try {
+          this.objects[index] = object;
+          await this._saveFile();
+        } catch (error) {
+          console.error(
+            "Archive container --> error actualizando o guardando. " + error
+          );
+        }
       }
+    } catch (error) {
+      console.error("Archive container --> Error leyendo el archivo. " + error);
     }
   }
 
   async deleteById(id) {
-    const objects = await this.listAll();
-    const index = objects.findIndex((o) => o.id == id);
+    await this._readFile();
+    const index = this.objects.findIndex((o) => o.id == id);
     if (index == -1) {
       console.error(
         "Archive container --> error borrando, no se encontró el id. "
       );
     } else {
-      const deleted = objects.splice(index, 1)[0];
+      this.objects.splice(index, 1)[0];
       try {
-        await fs.writeFile(this.path, JSON.stringify(objects, null, 2));
-
-        return deleted;
+        await this._saveFile();
       } catch (error) {
         console.error("Archive container --> error borrando " + error);
       }

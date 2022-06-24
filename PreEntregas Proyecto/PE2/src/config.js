@@ -11,7 +11,9 @@ const password = "EYUU8mmwfh44bZks";
 
 export default {
   fileSystem: {
-    path: "./DB",
+    products: {
+      path: path.resolve(__dirname, "./DB/products.json"),
+    },
   },
   mongodb: {
     uri: `mongodb+srv://root:${password}@cluster0.vcbuwku.mongodb.net/coderhouse/?retryWrites=true&w=majority`,
@@ -20,8 +22,8 @@ export default {
       useUnifiedTopology: true,
       authSource: "admin",
       auth: {
-        username:userName,
-        password:password,
+        username: userName,
+        password: password,
       },
     },
   },
@@ -36,5 +38,5 @@ export default {
       )
     ),
   },
-  PERSISTANCE_MODE: "products-mongodb",
+  PERSISTANCE_MODE: "products-json",
 };

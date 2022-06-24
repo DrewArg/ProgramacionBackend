@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "name": "silla",
+    "description": "de madera",
+    "code": "sm001",
+    "thumbnail": "https://thumbs.dreamstime.com/b/silla-de-madera-35229832.jpg",
+    "price": "2500",
+    "stock": "100",
+    "id": 161476607502508600,
+    "timestamp": "2022-06-24T02:57:42.800Z"
+  }
+]

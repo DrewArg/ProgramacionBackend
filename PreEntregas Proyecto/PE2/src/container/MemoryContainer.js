@@ -6,7 +6,7 @@ class MemoryContainer {
   listById(id) {
     const element = this.elements.find((e) => e.id == id);
     if (!element) {
-      return { oops: `El id ${id} no se encuentra en el sistema` };
+      console.error(`El id ${id} no se encuentra en el sistema`);
     } else {
       return element;
     }
@@ -28,9 +28,9 @@ class MemoryContainer {
     const index = this.elements.findIndex((o) => o.id == object.id);
 
     if (index == -1) {
-      return {
-        oops: `Error al actualizar, no se encontró el id ${object.id} en el sistema.`,
-      };
+      console.error(
+        `Error al actualizar, no se encontró el id ${object.id} en el sistema`
+      );
     } else {
       this.elements[index] = object;
       return object;
@@ -40,7 +40,7 @@ class MemoryContainer {
   deleteById(id) {
     const index = objects.findIndex((o) => o.id == id);
     if (index == -1) {
-      return { oops: `Error al borrar, no se encontró el id ${id}` };
+      console.error(`Error al borrar, no se encontró el id ${id}`);
     } else {
       return this.elements.splice(index, 1)[0];
     }

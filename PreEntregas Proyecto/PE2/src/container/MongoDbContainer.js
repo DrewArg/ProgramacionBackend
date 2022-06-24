@@ -32,14 +32,15 @@ class MongoDbContainer {
   }
 
   async listById(id) {
-    try {
-      return await mongoDb
-        .collection(this.collection)
-        .find({ _id: ObjectId(id) });
-    } catch (error) {
+    const prods = await this.listAll();
+    console.log(id);
+    const index = prods.findIndex((p) => p.id == id);
+    if (index == -1) {
       console.error(
-        "MongoDB Container --> Hubo un error listando por id. " + error
+        "MongoDb container --> error buscando, no se encontró el id. "
       );
+    } else {
+      return prods[index];
     }
   }
 
@@ -53,7 +54,7 @@ class MongoDbContainer {
       });
 
       prodsArray.forEach((p) => {
-        delete Object.assign(p, {["id"]: p["_id"] })["_id"];
+        delete Object.assign(p, { ["id"]: p["_id"] })["_id"];
       });
 
       return prodsArray;
@@ -66,7 +67,7 @@ class MongoDbContainer {
 
   async saveObject(object) {
     try {
-      await mongoDb.collection(this.collection).insertOne({ object });
+      await mongoDb.collection(this.collection).insertOne(object);
     } catch (error) {
       console.error(
         "MongoDB Container --> Hubo un error guardando el objeto. " + error
@@ -78,7 +79,7 @@ class MongoDbContainer {
     try {
       await mongoDb
         .collection(this.collection)
-        .update({ _id: object._id }, { $set: { object } });
+        .updateOne({ _id: object.id }, { $set: object });
     } catch (error) {
       console.error(
         "MongoDB Container --> Hubo un error actualizando el objeto. " + error

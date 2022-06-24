@@ -16,7 +16,7 @@ export default {
     },
   },
   mongodb: {
-    uri: `mongodb+srv://root:${password}@cluster0.vcbuwku.mongodb.net/coderhouse/?retryWrites=true&w=majority`,
+    uri: `mongodb+srv://root:${password}@cluster0.vcbuwku.mongodb.net/?retryWrites=true&w=majority`,
     client: {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -38,5 +38,5 @@ export default {
       )
     ),
   },
-  PERSISTANCE_MODE: "products-json",
+  PERSISTANCE_MODE: "products-mongodb",
 };

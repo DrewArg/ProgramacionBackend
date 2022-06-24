@@ -1,24 +1,41 @@
-import db from "mongodb";
 import config from "../config.js";
-import { default as mongodb } from "mongodb";
+import { default as mongodb, ObjectId } from "mongodb";
 
 const MongoClient = mongodb.MongoClient;
 const client = new MongoClient(config.mongodb.uri, config.mongodb.client);
+const dbName = "coderhouse";
+const mongoDb = client.db(dbName);
 
 class MongoDbContainer {
   constructor(collectionName) {
-   this.collectionName = this._connect(collectionName);
+    this._connect();
+    this.createCollection(collectionName);
+    this.collection = collectionName;
   }
 
-  async _connect(collectionName) {
-    await client.connect().then(console.log("aca"));
-    const mongoDb = client.db("coderhouse");
-    return mongoDb.collection(collectionName);
+  async createCollection(collectionName) {
+    try {
+      await mongoDb.createCollection(collectionName);
+    } catch (error) {
+      console.error(
+        "Colección ya existente, no se realizaron cambios. " + error
+      );
+    }
+  }
+
+  async _connect() {
+    try {
+      await client.connect();
+    } catch (error) {
+      console.error("Error en la conexión. " + error);
+    }
   }
 
   async listById(id) {
     try {
-      return await db.this.collectionName.find({ _id: ObjectId(id) });
+      return await mongoDb
+        .collection(this.collection)
+        .find({ _id: ObjectId(id) });
     } catch (error) {
       console.error(
         "MongoDB Container --> Hubo un error listando por id. " + error
@@ -28,8 +45,18 @@ class MongoDbContainer {
 
   async listAll() {
     try {
-      const prods = await db.this.collectionName.find();
-      return prods;
+      const prods = mongoDb.collection(this.collection).find();
+      const prodsArray = [];
+
+      await prods.forEach((prod) => {
+        prodsArray.push(prod);
+      });
+
+      prodsArray.forEach((p) => {
+        delete Object.assign(p, {["id"]: p["_id"] })["_id"];
+      });
+
+      return prodsArray;
     } catch (error) {
       console.error(
         "MongoDB Container --> Hubo un error listando todos. " + error
@@ -39,7 +66,7 @@ class MongoDbContainer {
 
   async saveObject(object) {
     try {
-      await db.this.collection.insertOne(object);
+      await mongoDb.collection(this.collection).insertOne({ object });
     } catch (error) {
       console.error(
         "MongoDB Container --> Hubo un error guardando el objeto. " + error
@@ -49,10 +76,9 @@ class MongoDbContainer {
 
   async updateObject(object) {
     try {
-      await db.this.collection.update(
-        { _id: object._id },
-        { $set: { object } }
-      );
+      await mongoDb
+        .collection(this.collection)
+        .update({ _id: object._id }, { $set: { object } });
     } catch (error) {
       console.error(
         "MongoDB Container --> Hubo un error actualizando el objeto. " + error
@@ -62,7 +88,9 @@ class MongoDbContainer {
 
   async deleteById(id) {
     try {
-      await db.this.collection.deleteOne({ _id: ObjectId(id) });
+      await mongoDb
+        .collection(this.collection)
+        .deleteOne({ _id: ObjectId(id) });
     } catch (error) {
       console.error(
         "MongoDB Container --> Hubo un error borrando por id. " + error
@@ -72,7 +100,7 @@ class MongoDbContainer {
 
   async deleteAll() {
     try {
-      await db.this.collection.deleteMany({});
+      await mongoDb.collection(this.collection).deleteMany({});
     } catch (error) {
       console.error(
         "MongoDB Container --> Hubo un error borrando todos. " + error

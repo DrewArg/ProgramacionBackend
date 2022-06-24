@@ -7,14 +7,15 @@ class ArchiveContainer {
   }
 
   async _readFile() {
-    // console.log("reading: " + this.path);
     try {
       return fs.readFile(this.path, "utf-8").then((text) => {
         const objectsArray = JSON.parse(text);
         this.objects = objectsArray;
       });
     } catch (error) {
-      console.error("Archive container --> Error en la lectura del json." + error);
+      console.error(
+        "Archive container --> Error en la lectura del json." + error
+      );
     }
   }
 
@@ -23,7 +24,9 @@ class ArchiveContainer {
       const textFile = JSON.stringify(this.objects, null, 2);
       return fs.writeFile(this.path, textFile);
     } catch (error) {
-      console.error("Archive container --> Error en el gaurdado del json. " + error);
+      console.error(
+        "Archive container --> Error en el gaurdado del json. " + error
+      );
     }
   }
 

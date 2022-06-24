@@ -101,6 +101,22 @@ function socketController(server) {
         console.error("Socket --> no se pudo agregar el producto " + error);
       }
     });
+
+    socket.on("getCartProductsById", async () => {
+      try {
+        const cartId = await cartController.cartExist();
+        try {
+          socket.emit(
+            "cartProductsById",
+            await cartController.productsInCart(cartId)
+          );
+        } catch (error) {
+          console.error("Socket --> no se pudo emitir el socket " + error);
+        }
+      } catch (error) {
+        console.error("Socket --> no se pudo verificar si existen carritos");
+      }
+    });
   });
 
   return io;

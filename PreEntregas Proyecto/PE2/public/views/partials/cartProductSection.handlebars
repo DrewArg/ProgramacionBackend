@@ -25,8 +25,8 @@
         {{this.stock}}
       </div>
     </div>
-    <button class="btn__submit" id="btn--{{this.id}}" onClick=removeItemFromCart({{this.id}})>Remove from cart</button>
-    <div class="hiddenId" id="id--{{this.id}}">{{this.id}}</div>
+    <button class="btn__submit" id="btn--{{this.id}}" onClick=removeItemFromCart('{{this.id}}')>Remove from cart</button>
+    <div class="hiddenId" id="id--{{this.id}}">'{{this.id}}'</div>
   </div>
   {{/each}}
   {{else}}

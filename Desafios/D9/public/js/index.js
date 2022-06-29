@@ -5,6 +5,11 @@ console.log("index.js");
 socket.emit("getAllProducts");
 socket.emit("getAllMessages");
 
+/*
+VER DE CREAR UN BOTON PARA OBTENER PRODUCTOS ALEATORIOS DE FAKER
+ESTO SE COMUNICARÁ CON UN SOCKET QUE LLAMA AL PRODUCT CONTROLLER
+*/
+
 const form = document.getElementById("productForm");
 
 form.addEventListener("submit", (e) => {
@@ -24,7 +29,6 @@ async function addProduct() {
   };
 
   socket.emit("saveProduct", product);
- 
 }
 
 socket.on("products", handleProductsEvent);

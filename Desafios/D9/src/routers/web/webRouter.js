@@ -6,4 +6,4 @@ const webRouter = new Router();
 webRouter.get("/", webGetRootController);
 webRouter.post("/", webGetRootController);
 
-export { webRouter };
+export default webRouter;

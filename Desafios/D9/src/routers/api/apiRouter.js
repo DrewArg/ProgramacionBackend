@@ -1,25 +1,18 @@
-import express from "express";
-import {
-  productController,
-  messageController,
-} from "../../controllers/apiControllers.js";
 
-const productRouter = express.Router();
+import { Router } from "express";
+import productRouter from "./productRouter.js";
+import messageRouter from "./messageRouter.js";
 
-productRouter.get("/products", productController.getAllProducts);
-// productRouter.get("/products/:id", apiControllers.productById);
+const apiRouter = Router();
 
-productRouter.post("/products", productController.save);
+apiRouter.use("/api", productRouter);
+apiRouter.use("/api", messageRouter);
 
-// productRouter.put("/products/:id", apiControllers.productById);
+apiRouter.all("*", (req, res) => {
+  res.status(404).json({
+    error: 404,
+    description: `ruta ${req.url} método ${req.method} no autorizada`,
+  });
+});
 
-// productRouter.delete("/products/:id", apiControllers.productById);
-
-const messageRouter = express.Router();
-
-messageRouter.get("/messages", messageController.getAllMessages);
-
-
-messageRouter.post("/messages", messageController.save);
-
-export { productRouter, messageRouter };
+export default apiRouter;

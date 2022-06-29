@@ -6,13 +6,10 @@ socket.emit("getAllProducts");
 socket.emit("getAllMessages");
 socket.emit("getTestProducts");
 
-/*
-VER DE CREAR UN BOTON PARA OBTENER PRODUCTOS ALEATORIOS DE FAKER
-ESTO SE COMUNICARÁ CON UN SOCKET QUE LLAMA AL PRODUCT CONTROLLER
-*/
-
 async function getTest() {
-  await socket.emit("getTestProducts", 5);
+  const testProdsAmount = document.getElementById('testProductsQty').value
+  await socket.emit("getTestProducts", testProdsAmount);
+
 }
 
 socket.on("testProducts", handleTestProductsEvent);

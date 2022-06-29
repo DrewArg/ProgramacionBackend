@@ -1,7 +1,15 @@
 <h3 class="tituloSeccion">Productos Test</h3>
-<button id="btn__testProducts" class="btn__submit" onclick="getTest()">Obtener productos-test</button>
-{{!-- <button class="btn__submit">Obtener productos-test</button> --}}
+<label class="formLabel">Ingrese la cantidad de productos</label>
+<input
+  class="formInput"
+  type="number"
+  placeholder="cantidad de productos"
+  id="testProductsQty"
+  name="testProductsQty"
+/>
 
+<button id="btn__testProducts" class="btn__submit" onclick="getTest()">Obtener
+  productos-test</button>
 {{#if testProducts.length}}
   <table class="productTable">
     <tr>

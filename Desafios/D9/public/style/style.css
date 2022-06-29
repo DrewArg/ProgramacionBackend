@@ -30,7 +30,7 @@
   border-radius: 5px;
 }
 
-#productTable {
+#productTable, #mockProductTable {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;

@@ -1,7 +1,20 @@
 import config from "../config.js";
 
 let productsDao;
+let mockProductsDao;
 let messagesDao;
+
+switch (config.MOCKPRODUCTS_PERSISTANCE_MODE) {
+  case "mockProducts-memory":
+    const {default : ApiProductsMock} = await import("./ApiProductsMock.js")
+    mockProductsDao = new ApiProductsMock()
+    break;
+
+  default:
+    const { default: DaoMockMongo } = await import("./DaoMongoDb.js");
+    mockProductsDao = new DaoMockMongo("mockProductsD9");
+    break;
+}
 
 switch (config.PRODUCTS_PERSISTANCE_MODE) {
   case "products-mongodb":
@@ -27,4 +40,4 @@ switch (config.MESSAGES_PERSISTANCE_MODE) {
     break;
 }
 
-export { productsDao, messagesDao };
+export { productsDao, messagesDao , mockProductsDao};

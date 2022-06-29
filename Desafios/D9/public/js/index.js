@@ -4,11 +4,32 @@ console.log("index.js");
 
 socket.emit("getAllProducts");
 socket.emit("getAllMessages");
+socket.emit("getTestProducts");
 
 /*
 VER DE CREAR UN BOTON PARA OBTENER PRODUCTOS ALEATORIOS DE FAKER
 ESTO SE COMUNICARÁ CON UN SOCKET QUE LLAMA AL PRODUCT CONTROLLER
 */
+
+async function getTest() {
+  socket.emit("getTestProducts", 5);
+}
+
+socket.on("testProducts", handleTestProductsEvent);
+
+async function handleTestProductsEvent(testProducts) {
+  const testProductsTable = await fetch(
+    "/views/partials/mockProductTable.handlebars"
+  );
+
+  const templateText = await testProductsTable.text();
+
+  const templateFunction = Handlebars.compile(templateText);
+
+  const html = templateFunction({ testProducts });
+
+  document.getElementById("mockProductTable").innerHTML = html;
+}
 
 const form = document.getElementById("productForm");
 

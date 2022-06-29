@@ -1,6 +1,6 @@
 import { Server as Socket } from "socket.io";
 import productController from "./productControllers.js";
-import messageController from "./messageControllers.js"
+import messageController from "./messageControllers.js";
 
 function socketController(server) {
   const io = new Socket(server);
@@ -12,7 +12,7 @@ function socketController(server) {
     });
 
     socket.on("saveProduct", async (product) => {
-      await productController.saveProduct(product)
+      await productController.saveProduct(product);
       io.sockets.emit("products", await productController.getAllProducts());
       socket.emit("products", await productController.getAllProducts());
     });
@@ -20,6 +20,17 @@ function socketController(server) {
     socket.on("getAllProducts", async () => {
       socket.emit("products", await productController.getAllProducts());
       io.sockets.emit("products", await productController.getAllProducts());
+    });
+
+    socket.on("getTestProducts", async (amount) => {
+      socket.emit(
+        "testProducts",
+        await productController.getTestProducts(amount)
+      );
+      io.sockets.emit(
+        "testProducts",
+        await productController.getTestProducts(amount)
+      );
     });
 
     socket.on("getAllMessages", async () => {

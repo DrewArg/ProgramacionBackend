@@ -1,0 +1,28 @@
+<h3 class="tituloSeccion">Productos Test</h3>
+{{! <button id="btn__testProducts" class="btn__submit">Obtener productos-test</button> }}
+<button class="btn__submit">Obtener productos-test</button>
+
+{{#if productsTest.length}}
+  <table class="productTable">
+    <tr>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Imágen</th>
+    </tr>
+    {{#each productsTest}}
+      <tr>
+        <td>
+          {{this.title}}
+        </td>
+        <td>
+          {{this.price}}
+        </td>
+        <td>
+          <img src={{this.thumbnail}} alt="" width="250" height="250" />
+        </td>
+      </tr>
+    {{/each}}
+  </table>
+{{else}}
+  <h3>no hay productos test en el sistema actualmente...</h3>
+{{/if}}

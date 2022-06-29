@@ -12,36 +12,112 @@ function socketController(server) {
     });
 
     socket.on("saveProduct", async (product) => {
-      await productController.saveProduct(product);
-      io.sockets.emit("products", await productController.getAllProducts());
-      socket.emit("products", await productController.getAllProducts());
+      try {
+        await productController.saveProduct(product);
+        try {
+          io.sockets.emit("products", await productController.getAllProducts());
+        } catch (error) {
+          console.error(
+            `Socket controller --> no se pudieron obtener los productos. ${error}`
+          );
+        }
+        try {
+          socket.emit("products", await productController.getAllProducts());
+        } catch (error) {
+          console.error(
+            `Socket controller --> no se pudieron obtener los productos. ${error}`
+          );
+        }
+      } catch (error) {
+        console.error(
+          `Socket controller --> no se pudo guardar el producto. ${error}`
+        );
+      }
     });
 
     socket.on("getAllProducts", async () => {
-      socket.emit("products", await productController.getAllProducts());
-      io.sockets.emit("products", await productController.getAllProducts());
+      try {
+        socket.emit("products", await productController.getAllProducts());
+      } catch (error) {
+        console.error(
+          `Socket controller --> no se pudieron obtener los productos. ${error}`
+        );
+      }
+      try {
+        io.sockets.emit("products", await productController.getAllProducts());
+      } catch (error) {
+        console.error(
+          `Socket controller --> no se pudieron obtener los productos. ${error}`
+        );
+      }
     });
 
     socket.on("getTestProducts", async (amount) => {
-      socket.emit(
-        "testProducts",
-        await productController.getTestProducts(amount)
-      );
-      io.sockets.emit(
-        "testProducts",
-        await productController.getTestProducts(amount)
-      );
+      try {
+        socket.emit(
+          "testProducts",
+          await productController.getTestProducts(amount)
+        );
+      } catch (error) {
+        console.error(
+          `Socket controller --> no se pudieron obtener test products. ${error}`
+        );
+      }
+
+      try {
+        io.sockets.emit(
+          "testProducts",
+          await productController.getTestProducts(amount)
+        );
+      } catch (error) {
+        console.error(
+          `Socket controller --> no se pudieron obtener test products. ${error}`
+        );
+      }
     });
 
     socket.on("getAllMessages", async () => {
-      socket.emit("messages", await messageController.getAllMessages());
-      io.sockets.emit("messages", await messageController.getAllMessages());
+      try {
+        socket.emit("messages", await messageController.getAllMessages());
+      } catch (error) {
+        console.error(
+          `Socket controller --> no se pudieron obtener mensajes. ${error}`
+        );
+      }
+
+      try {
+        io.sockets.emit("messages", await messageController.getAllMessages());
+      } catch (error) {
+        console.error(
+          `Socket controller --> no se pudieron obtener mensajes. ${error}`
+        );
+      }
     });
 
     socket.on("saveMessage", async (message) => {
-      await messageController.saveMessage(message);
-      socket.emit("messages", await messageController.getAllMessages());
-      io.sockets.emit("messages", await messageController.getAllMessages());
+      try {
+        await messageController.saveMessage(message);
+
+        try {
+          socket.emit("messages", await messageController.getAllMessages());
+        } catch (error) {
+          console.error(
+            `Socket controller --> no se pudieron obtener mensajes. ${error}`
+          );
+        }
+
+        try {
+          io.sockets.emit("messages", await messageController.getAllMessages());
+        } catch (error) {
+          console.error(
+            `Socket controller --> no se pudieron obtener mensajes. ${error}`
+          );
+        }
+      } catch (error) {
+        console.error(
+          `Socket controller --> no se pudo guardar el mensaje. ${error}`
+        );
+      }
     });
   });
 

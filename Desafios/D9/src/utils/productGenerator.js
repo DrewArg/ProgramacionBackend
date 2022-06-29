@@ -12,6 +12,3 @@ function createProduct(id) {
 
 export { createProduct };
 
-// const prod = createProduct(5)
-
-// console.log(prod);

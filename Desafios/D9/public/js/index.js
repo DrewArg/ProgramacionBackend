@@ -12,7 +12,7 @@ ESTO SE COMUNICARÁ CON UN SOCKET QUE LLAMA AL PRODUCT CONTROLLER
 */
 
 async function getTest() {
-  socket.emit("getTestProducts", 5);
+  await socket.emit("getTestProducts", 5);
 }
 
 socket.on("testProducts", handleTestProductsEvent);

@@ -1,15 +1,15 @@
 <h3 class="tituloSeccion">Productos Test</h3>
-{{! <button id="btn__testProducts" class="btn__submit">Obtener productos-test</button> }}
-<button class="btn__submit">Obtener productos-test</button>
+<button id="btn__testProducts" class="btn__submit" onclick="getTest()">Obtener productos-test</button>
+{{!-- <button class="btn__submit">Obtener productos-test</button> --}}
 
-{{#if productsTest.length}}
+{{#if testProducts.length}}
   <table class="productTable">
     <tr>
       <th>Nombre</th>
       <th>Precio</th>
       <th>Imágen</th>
     </tr>
-    {{#each productsTest}}
+    {{#each testProducts}}
       <tr>
         <td>
           {{this.title}}

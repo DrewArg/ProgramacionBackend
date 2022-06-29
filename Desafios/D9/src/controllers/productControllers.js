@@ -14,7 +14,8 @@ const productController = {
 
   async getTestProducts(amount) {
     try {
-      return await mockProductsDao.randomProduct(amount);
+      const prods =  await mockProductsDao.randomProduct(amount);
+      return prods
     } catch (error) {
       console.error(
         "Product controller --> no se pudieron obtener los productos mock. " +

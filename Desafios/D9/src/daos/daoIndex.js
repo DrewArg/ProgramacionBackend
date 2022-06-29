@@ -6,12 +6,12 @@ let messagesDao;
 switch (config.PRODUCTS_PERSISTANCE_MODE) {
   case "products-mongodb":
     const { default: DaoMongoDb } = await import("./DaoMongoDb.js");
-    productsDao = new DaoMongoDb("products");
+    productsDao = new DaoMongoDb("productsD9");
     break;
 
   default:
     const { default: DaoMongoDb2 } = await import("./DaoMongoDb.js");
-    productsDao = new DaoMongoDb2("products");
+    productsDao = new DaoMongoDb2("productsD9");
     break;
 }
 

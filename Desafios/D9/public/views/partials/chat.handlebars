@@ -1,0 +1,30 @@
+<h3 class="tituloSeccion">Centro de Mensajes</h3>
+<div class="chatContainer">
+    {{#if messages.length}}
+    <div class="header">
+        <label class="chatLabel">Ingrese su email</label>
+        <input type="text" id="userEmail" class="formInupt" placeholder="email">
+    </div>
+    <div class="chatMessages">
+        {{#each messages}}
+        <p><span class="msgBlue">{{this.userEmail}}</span> [<span class="msgRed">{{this.timestamp}}</span>] : <span
+                class="msgGreen">{{this.msgContent}}</span></p>
+        {{/each}}
+    </div>
+    <div class="userMessage">
+        <input type="text" id="msgContent" class="formInupt" placeholder="ingresa el mensaje">
+        <button id="btn__sendMessage">Send!</button>
+        {{else}}
+        <div class="header">
+            <label class="chatLabel">Ingrese su email</label>
+            <input type="text" id="userEmail" class="formInupt" placeholder="email">
+        </div>
+        <div class="chatMessages">
+            <p class="mensajesFaltantes">no hay mensajes en el sistema actualmente...</p>
+        </div>
+        <div class="userMessage">
+            <input type="text" id="msgContent" class="formInupt" placeholder="ingresa el mensaje">
+            <button id="btn__sendMessage">Send!</button>
+            {{/if}}
+        </div>
+    </div>

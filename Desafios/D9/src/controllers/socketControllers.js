@@ -1,6 +1,8 @@
 import { Server as Socket } from "socket.io";
 import productController from "./productControllers.js";
 import messageController from "./messageControllers.js";
+import userController from "./userControllers.js";
+import normalizeMessages from "../utils/normalizor.js";
 
 function socketController(server) {
   const io = new Socket(server);
@@ -14,20 +16,9 @@ function socketController(server) {
     socket.on("saveProduct", async (product) => {
       try {
         await productController.saveProduct(product);
-        try {
-          io.sockets.emit("products", await productController.getAllProducts());
-        } catch (error) {
-          console.error(
-            `Socket controller --> no se pudieron obtener los productos. ${error}`
-          );
-        }
-        try {
-          socket.emit("products", await productController.getAllProducts());
-        } catch (error) {
-          console.error(
-            `Socket controller --> no se pudieron obtener los productos. ${error}`
-          );
-        }
+
+        io.sockets.emit("products", await _tryGetAllProducts());
+        socket.emit("products", await _tryGetAllProducts());
       } catch (error) {
         console.error(
           `Socket controller --> no se pudo guardar el producto. ${error}`
@@ -36,88 +27,35 @@ function socketController(server) {
     });
 
     socket.on("getAllProducts", async () => {
-      try {
-        socket.emit("products", await productController.getAllProducts());
-      } catch (error) {
-        console.error(
-          `Socket controller --> no se pudieron obtener los productos. ${error}`
-        );
-      }
-      try {
-        io.sockets.emit("products", await productController.getAllProducts());
-      } catch (error) {
-        console.error(
-          `Socket controller --> no se pudieron obtener los productos. ${error}`
-        );
-      }
+      socket.emit("products", await _tryGetAllProducts());
+      io.sockets.emit("products", await _tryGetAllProducts());
     });
 
     socket.on("getTestProducts", async (amount) => {
-      try {
-        socket.emit(
-          "testProducts",
-          await productController.getTestProducts(amount)
-        );
-      } catch (error) {
-        console.error(
-          `Socket controller --> no se pudieron obtener test products. ${error}`
-        );
-      }
-
-      try {
-        io.sockets.emit(
-          "testProducts",
-          await productController.getTestProducts(amount)
-        );
-      } catch (error) {
-        console.error(
-          `Socket controller --> no se pudieron obtener test products. ${error}`
-        );
-      }
+      socket.emit("testProducts", await _tryGetTestProducts(amount));
+      io.sockets.emit("testProducts", await _tryGetTestProducts(amount));
     });
 
     socket.on("getAllMessages", async () => {
-      try {
-        socket.emit("messages", await messageController.getAllMessages());
-      } catch (error) {
-        console.error(
-          `Socket controller --> no se pudieron obtener mensajes. ${error}`
-        );
-      }
-
-      try {
-        io.sockets.emit("messages", await messageController.getAllMessages());
-      } catch (error) {
-        console.error(
-          `Socket controller --> no se pudieron obtener mensajes. ${error}`
-        );
-      }
+      socket.emit("messages", await _tryGetAllMessages());
+      io.sockets.emit("messages", await _tryGetAllMessages());
     });
 
     socket.on("saveMessage", async (message) => {
       try {
         await messageController.saveMessage(message);
 
-        try {
-          socket.emit("messages", await messageController.getAllMessages());
-        } catch (error) {
-          console.error(
-            `Socket controller --> no se pudieron obtener mensajes. ${error}`
-          );
-        }
-
-        try {
-          io.sockets.emit("messages", await messageController.getAllMessages());
-        } catch (error) {
-          console.error(
-            `Socket controller --> no se pudieron obtener mensajes. ${error}`
-          );
-        }
+        socket.emit("messages", await _tryGetAllMessages());
+        io.sockets.emit("messages", await _tryGetAllMessages());
       } catch (error) {
         console.error(
           `Socket controller --> no se pudo guardar el mensaje. ${error}`
         );
       }
+    });
+
+    socket.on("getMockUserData", async () => {
+      socket.emit("mockUserData",await userController.getMockUserData())
     });
   });
 
@@ -125,3 +63,39 @@ function socketController(server) {
 }
 
 export default socketController;
+
+async function _tryGetAllMessages() {
+  try {
+    const messages = await messageController.getAllMessages();
+
+    normalizeMessages(messages);
+
+    return messages;
+  } catch (error) {
+    console.error(
+      `Socket controller --> no se pudieron obtener mensajes. ${error}`
+    );
+  }
+}
+
+async function _tryGetAllProducts() {
+  try {
+    const products = await productController.getAllProducts();
+    return products;
+  } catch (error) {
+    console.error(
+      `Socket controller --> no se pudieron obtener los productos. ${error}`
+    );
+  }
+}
+
+async function _tryGetTestProducts(amount) {
+  try {
+    const testProducts = await productController.getTestProducts(amount);
+    return testProducts;
+  } catch (error) {
+    console.error(
+      `Socket controller --> no se pudieron obtener test products. ${error}`
+    );
+  }
+}

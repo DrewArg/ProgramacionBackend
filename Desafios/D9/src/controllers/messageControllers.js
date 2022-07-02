@@ -57,38 +57,3 @@ const messageController = {
 };
 
 export default messageController;
-
-/*
-const productController = {
-  getAllProducts: async () => {
-    const prods = await products.getAll();
-    return prods;
-  },
-
-  save: async (req, res) => {
-    const prod = await products.save(req.body);
-    return prod;
-  },
-
-  saveProduct: async (product) => {
-    await products.save(product)
-  }
-};
-
-const messageController = {
-  getAllMessages: async () => {
-    const msgs = await messages.getAll();
-    return msgs;
-  },
-
-  save: async (req, res) => {
-    const message = await messages.save(req.body);
-    return message;
-  },
-
-  saveMessage: async(message) => {
-    return await messages.save(message);
-  }
-};
-
-*/

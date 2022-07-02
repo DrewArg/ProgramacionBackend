@@ -1,7 +1,7 @@
 import { productsDao, mockProductsDao } from "../daos/daoIndex.js";
 
 const productController = {
-  async getById(id) {
+  async getById(id) {  
     try {
       const prod = await productsDao.listById(id);
       return prod;

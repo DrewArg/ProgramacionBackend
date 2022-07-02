@@ -1,8 +1,11 @@
 import MemoryContainer from "../containers/MemoryContainer.js";
-import { createProduct } from "../utils/productGenerator.js";
-import { createId } from "../utils/idGenerator.js";
+import {
+  createProduct,
+  createId,
+  createUserData,
+} from "../utils/generators.js";
 
-class ApiProductsMock extends MemoryContainer {
+class MockApi extends MemoryContainer {
   constructor() {
     super();
   }
@@ -17,6 +20,10 @@ class ApiProductsMock extends MemoryContainer {
     }
     return newProducts;
   }
+
+  randomUserData() {
+    return createUserData();
+  }
 }
 
-export default ApiProductsMock;
+export default MockApi;

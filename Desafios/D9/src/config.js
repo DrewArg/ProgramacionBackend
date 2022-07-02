@@ -17,4 +17,5 @@ export default {
   PRODUCTS_PERSISTANCE_MODE: "products-mongodb",
   MESSAGES_PERSISTANCE_MODE: "messages-mongodb",
   MOCKPRODUCTS_PERSISTANCE_MODE: "mockProducts-memory",
+  MOCKUSERS_PERSISTANCE_MODE: "mockUsers-memory",
 };

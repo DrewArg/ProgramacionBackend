@@ -7,9 +7,8 @@ socket.emit("getAllMessages");
 socket.emit("getTestProducts");
 
 async function getTest() {
-  const testProdsAmount = document.getElementById('testProductsQty').value
+  const testProdsAmount = document.getElementById("testProductsQty").value;
   await socket.emit("getTestProducts", testProdsAmount);
-
 }
 
 socket.on("testProducts", handleTestProductsEvent);
@@ -67,12 +66,23 @@ async function handleProductsEvent(products) {
 
 async function addMessage() {
   const userEmail = document.getElementById("userEmail").value;
-
+  const userName = document.getElementById("userName").value;
+  const userLastName = document.getElementById("userLastName").value;
+  const userAge = document.getElementById("userAge").value;
+  const userAlias = document.getElementById("userAlias").value;
+  const userAvatar = document.getElementById("userAvatar").value;
   const msgContent = document.getElementById("msgContent").value;
 
   const message = {
-    userEmail: userEmail,
-    msgContent: msgContent,
+    author: {
+      userEmail: userEmail,
+      userName: userName,
+      userLastName: userLastName,
+      userAge: userAge,
+      userAlias: userAlias,
+      userAvatar: userAvatar,
+    },
+    text: msgContent,
   };
 
   socket.emit("saveMessage", message);
@@ -95,4 +105,20 @@ async function handleAllMessages(messages) {
 
   btnSendMessage = document.getElementById("btn__sendMessage");
   btnSendMessage.addEventListener("click", addMessage);
+}
+async function getMockUserData() {
+  socket.emit("getMockUserData");
+}
+
+socket.on("mockUserData", handleMockUserData);
+
+async function handleMockUserData(mockUserData) {
+  console.log(mockUserData);
+  document.getElementById("userEmail").value = mockUserData.userEmail;
+  document.getElementById("userName").value = mockUserData.userName;
+  document.getElementById("userLastName").value = mockUserData.userLastName;
+  document.getElementById("userAge").value = mockUserData.userAge;
+  document.getElementById("userAlias").value = mockUserData.userAlias;
+  document.getElementById("userAvatar").value = mockUserData.userAvatar;
+
 }

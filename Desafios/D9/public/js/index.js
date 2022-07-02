@@ -84,7 +84,7 @@ async function addMessage() {
       userAvatar: userAvatar,
     },
     text: msgContent,
-    timestamp : timestamp
+    timestamp: timestamp
   };
 
   socket.emit("saveMessage", message);
@@ -95,6 +95,7 @@ let btnSendMessage;
 socket.on("messages", handleAllMessages);
 
 async function handleAllMessages(messages) {
+  console.log(messages);
   const chat = await fetch("/views/partials/chat.handlebars");
 
   const templateText = await chat.text();
@@ -124,7 +125,7 @@ async function handleMockUserData(mockUserData) {
 
 }
 
-function getTimestamp () {
+function getTimestamp() {
   const date = new Date();
   const month = date.getMonth() + 1;
   const day = date.getDate();

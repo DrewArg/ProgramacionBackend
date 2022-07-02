@@ -2,7 +2,7 @@ import { Server as Socket } from "socket.io";
 import productController from "./productControllers.js";
 import messageController from "./messageControllers.js";
 import userController from "./userControllers.js";
-import normalizeMessages from "../utils/normalizor.js";
+import { normalizeMessages, denormalizr } from "../utils/normalizor.js";
 
 function socketController(server) {
   const io = new Socket(server);
@@ -55,9 +55,12 @@ function socketController(server) {
     });
 
     socket.on("getMockUserData", async () => {
-      socket.emit("mockUserData",await userController.getMockUserData())
+      socket.emit("mockUserData", await userController.getMockUserData())
     });
+
+
   });
+
 
   return io;
 }
@@ -67,10 +70,8 @@ export default socketController;
 async function _tryGetAllMessages() {
   try {
     const messages = await messageController.getAllMessages();
-
-    normalizeMessages(messages);
-
-    return messages;
+    const normalizedMessages = normalizeMessages(messages);
+    return normalizedMessages
   } catch (error) {
     console.error(
       `Socket controller --> no se pudieron obtener mensajes. ${error}`

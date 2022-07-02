@@ -72,6 +72,7 @@ async function addMessage() {
   const userAlias = document.getElementById("userAlias").value;
   const userAvatar = document.getElementById("userAvatar").value;
   const msgContent = document.getElementById("msgContent").value;
+  const timestamp = getTimestamp();
 
   const message = {
     author: {
@@ -83,6 +84,7 @@ async function addMessage() {
       userAvatar: userAvatar,
     },
     text: msgContent,
+    timestamp : timestamp
   };
 
   socket.emit("saveMessage", message);
@@ -113,7 +115,6 @@ async function getMockUserData() {
 socket.on("mockUserData", handleMockUserData);
 
 async function handleMockUserData(mockUserData) {
-  console.log(mockUserData);
   document.getElementById("userEmail").value = mockUserData.userEmail;
   document.getElementById("userName").value = mockUserData.userName;
   document.getElementById("userLastName").value = mockUserData.userLastName;
@@ -121,4 +122,16 @@ async function handleMockUserData(mockUserData) {
   document.getElementById("userAlias").value = mockUserData.userAlias;
   document.getElementById("userAvatar").value = mockUserData.userAvatar;
 
+}
+
+function getTimestamp () {
+  const date = new Date();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  const builtDate = day + "/" + month + "/" + year + " " + hour + ":" + minutes + ":" + seconds;
+  return builtDate;
 }

@@ -29,8 +29,8 @@
 
     <div class="chatMessages">
         {{#each messages}}
-        <p><span class="msgBlue">{{this.userEmail}}</span> [<span class="msgRed">{{this.timestamp}}</span>] : <span
-                class="msgGreen">{{this.msgContent}}</span></p>
+        <p><span class="msgBlue">{{this.author.userAlias}}</span> [<span class="msgRed">{{this.timestamp}}</span>] : <span
+                class="msgGreen">{{this.text}}</span><img src={{this.author.userAvatar}} width="50" height="50"/></p>
         {{/each}}
     </div>
     <div class="userMessage">

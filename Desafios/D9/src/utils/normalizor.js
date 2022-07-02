@@ -1,18 +1,14 @@
 import { normalize, schema, denormalize } from "normalizr";
-import util from "util";
+
+console.log("acaaa");
 
 function normalizeMessages(messages) {
   const authorSchema = _getAuthorSchema(messages)
   const textSchema = _getTextSchema(authorSchema)
   const messageSchema = _getMessageSchema(authorSchema,textSchema)
-
   const normalizedData = normalize(messages, [messageSchema]);
-
   const longObjectData = JSON.stringify(messages).length
-  // console.log('Longitud objeto original: ', longObjectData)
-
   const longNormalizedData = JSON.stringify(normalizedData).length
-  // console.log('Longitud objeto normalizado: ', longNormalizedData)
 
   const compressionPercentage = 100.0 - ((longNormalizedData * 100) / longObjectData)
   // console.log('Porcentaje de compresión: ', compressionPercentage.toFixed(2) + '%')
@@ -20,26 +16,15 @@ function normalizeMessages(messages) {
   return normalizedData;
 }
 
-function denormalizr() {
+function denormalizeMessages(messages) {
   const authorSchema = _getAuthorSchema()
   const textSchema = _getTextSchema()
   const messageSchema = _getMessageSchema(authorSchema,textSchema)
-  
-  return {
-    authorSchema : authorSchema,
-    textSchema: textSchema,
-    messageSchema : messageSchema,
-    denormalize: denormalize()
-  }
+  const denormalizedData = denormalize(messages, [messageSchema]);
+  return denormalizedData
 }
 
-export { normalizeMessages, denormalizr };
-
-
-function _print(objeto) {
-  console.log(util.inspect(objeto, false, 12, true))
-}
-
+export { normalizeMessages, denormalizeMessages };
 
 function _getAuthorSchema(messages){
   return new schema.Entity(

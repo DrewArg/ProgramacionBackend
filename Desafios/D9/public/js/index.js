@@ -95,14 +95,16 @@ let btnSendMessage;
 socket.on("messages", handleAllMessages);
 
 async function handleAllMessages(messages) {
-  console.log(messages);
+  // console.log(messages);
+  const denormalizedMessages = denormalizeMessages(messages);
+
   const chat = await fetch("/views/partials/chat.handlebars");
 
   const templateText = await chat.text();
 
   const templateFunction = Handlebars.compile(templateText);
 
-  const html = templateFunction({ messages });
+  const html = templateFunction({ denormalizedMessages });
 
   document.getElementById("globalChat").innerHTML = html;
 
@@ -122,7 +124,6 @@ async function handleMockUserData(mockUserData) {
   document.getElementById("userAge").value = mockUserData.userAge;
   document.getElementById("userAlias").value = mockUserData.userAlias;
   document.getElementById("userAvatar").value = mockUserData.userAvatar;
-
 }
 
 function getTimestamp() {

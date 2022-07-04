@@ -96,7 +96,7 @@ socket.on("messages", handleAllMessages);
 
 async function handleAllMessages(messages) {
   // console.log(messages);
-  const denormalizedMessages = denormalizeMessages(messages);
+  const denormalizedMessages = denormalizeMessages(messages)
 
   const chat = await fetch("/views/partials/chat.handlebars");
 

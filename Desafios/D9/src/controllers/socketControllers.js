@@ -2,7 +2,7 @@ import { Server as Socket } from "socket.io";
 import productController from "./productControllers.js";
 import messageController from "./messageControllers.js";
 import userController from "./userControllers.js";
-import { normalizeMessages, denormalizeMessages } from "../utils/normalizor.js";
+import { normalizeMessages } from "../utils/normalizor.js";
 
 function socketController(server) {
   const io = new Socket(server);

@@ -1,6 +1,5 @@
 import { normalize, schema, denormalize } from "normalizr";
 
-console.log("acaaa");
 
 function normalizeMessages(messages) {
   const authorSchema = _getAuthorSchema(messages)

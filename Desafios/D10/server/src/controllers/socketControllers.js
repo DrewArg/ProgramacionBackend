@@ -2,34 +2,33 @@ import { Server as Socket } from "socket.io";
 import productController from "./productControllers.js";
 import messageController from "./messageControllers.js";
 import userController from "./userControllers.js";
-import { normalizeMessages } from "../utils/normalizor.js";
 
 function socketController(server) {
-  const io = new Socket(server, {
+  const socketServer = new Socket(server, {
     cors: {
       origin: "http://localhost:3000",
       methods: ["GET", "POST", "PUT", "DELETE"]
     }
   });
 
-  io.on("connection", (socket) => {
-    console.log(`nueva conexión: ${socket.id}`);
+  socketServer.on("connection", (expressSocket) => {
+    console.log(`nueva conexión: ${expressSocket.id}`);
+    expressSocket.emit("helloFromBackend")
 
-    socket.on("disconnect", () => {
-      console.log(`desconexión: ${socket.id}`);
+    expressSocket.on("disconnect", () => {
+      console.log(`desconexión: ${expressSocket.id}`);
     });
 
-    socket.on("helloFromFrontend", () => {
+    expressSocket.on("helloFromReact", () => {
       console.log("frontend connected");
-      socket.emit("helloFromBackend")
     }),
 
-      socket.on("saveProduct", async (product) => {
+      expressSocket.on("saveProduct", async (product) => {
         try {
           await productController.saveProduct(product);
 
-          io.sockets.emit("products", await _tryGetAllProducts());
-          socket.emit("products", await _tryGetAllProducts());
+          socketServer.sockets.emit("products", await _tryGetAllProducts());
+          expressSocket.emit("products", await _tryGetAllProducts());
         } catch (error) {
           console.error(
             `Socket controller --> no se pudo guardar el producto. ${error}`
@@ -37,27 +36,27 @@ function socketController(server) {
         }
       });
 
-    socket.on("getAllProducts", async () => {
-      socket.emit("products", await _tryGetAllProducts());
-      io.sockets.emit("products", await _tryGetAllProducts());
+    expressSocket.on("getAllProducts", async () => {
+      expressSocket.emit("products", await _tryGetAllProducts());
+      socketServer.sockets.emit("products", await _tryGetAllProducts());
     });
 
-    socket.on("getTestProducts", async (amount) => {
-      socket.emit("testProducts", await _tryGetTestProducts(amount));
-      io.sockets.emit("testProducts", await _tryGetTestProducts(amount));
+    expressSocket.on("getTestProducts", async (amount) => {
+      expressSocket.emit("testProducts", await _tryGetTestProducts(amount));
+      socketServer.sockets.emit("testProducts", await _tryGetTestProducts(amount));
     });
 
-    socket.on("getAllMessages", async () => {
-      socket.emit("messages", await _tryGetAllMessages());
-      io.sockets.emit("messages", await _tryGetAllMessages());
+    expressSocket.on("getAllMessages", async () => {
+      expressSocket.emit("messages", await _tryGetAllMessages());
+      socketServer.sockets.emit("messages", await _tryGetAllMessages());
     });
 
-    socket.on("saveMessage", async (message) => {
+    expressSocket.on("saveMessage", async (message) => {
       try {
         await messageController.saveMessage(message);
 
-        socket.emit("messages", await _tryGetAllMessages());
-        io.sockets.emit("messages", await _tryGetAllMessages());
+        expressSocket.emit("messages", await _tryGetAllMessages());
+        socketServer.sockets.emit("messages", await _tryGetAllMessages());
       } catch (error) {
         console.error(
           `Socket controller --> no se pudo guardar el mensaje. ${error}`
@@ -65,15 +64,15 @@ function socketController(server) {
       }
     });
 
-    socket.on("getMockUserData", async () => {
-      socket.emit("mockUserData", await userController.getMockUserData())
+    expressSocket.on("getMockUserData", async () => {
+      expressSocket.emit("mockUserData", await userController.getMockUserData())
     });
 
 
   });
 
 
-  return io;
+  return socketServer;
 }
 
 export default socketController;

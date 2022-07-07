@@ -16,9 +16,8 @@ function ProductList({ products }) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            {products.map(p => { return <ProductCard key={p.id} prod={p} /> })}
-                        </tr>
+
+                        {products.map(p => { return <ProductCard key={p.id} prod={p} /> })}
                     </tbody>
                 </table >
             </div>

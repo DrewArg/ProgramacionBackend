@@ -62,8 +62,6 @@ function socketController(server) {
     expressSocket.on("getMockUserData", async () => {
       expressSocket.emit("mockUserData", await userController.getMockUserData())
     });
-
-
   });
 
 

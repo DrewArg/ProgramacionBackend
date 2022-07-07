@@ -12,12 +12,12 @@ const ProductListContainer = () => {
     const handleNewConnection = () => {
         setConnection(true)
     }
-
+    
     useEffect(() => {
         // socket.emit("new connection", socket.id)
-        reactSocket.emit("helloFromReact")
-        reactSocket.on("helloFromBackend", () => {
+        socket.on("helloFromBackend", () => {
             console.log("backend connected");
+            socket.emit("helloFromReact")
         })
     })
 

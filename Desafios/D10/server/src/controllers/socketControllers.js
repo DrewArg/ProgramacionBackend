@@ -19,18 +19,23 @@ function socketController(server) {
       console.log(`desconexión: ${socket.id}`);
     });
 
-    socket.on("saveProduct", async (product) => {
-      try {
-        await productController.saveProduct(product);
+    socket.on("helloFromFrontend", () => {
+      console.log("frontend connected");
+      socket.emit("helloFromBackend")
+    }),
 
-        io.sockets.emit("products", await _tryGetAllProducts());
-        socket.emit("products", await _tryGetAllProducts());
-      } catch (error) {
-        console.error(
-          `Socket controller --> no se pudo guardar el producto. ${error}`
-        );
-      }
-    });
+      socket.on("saveProduct", async (product) => {
+        try {
+          await productController.saveProduct(product);
+
+          io.sockets.emit("products", await _tryGetAllProducts());
+          socket.emit("products", await _tryGetAllProducts());
+        } catch (error) {
+          console.error(
+            `Socket controller --> no se pudo guardar el producto. ${error}`
+          );
+        }
+      });
 
     socket.on("getAllProducts", async () => {
       socket.emit("products", await _tryGetAllProducts());

@@ -13,8 +13,7 @@ function socketController(server) {
 
   socketServer.on("connection", (expressSocket) => {
     console.log(`nueva conexión: ${expressSocket.id}`);
-    expressSocket.emit("helloFromBackend")
-
+   
     expressSocket.on("disconnect", () => {
       console.log(`desconexión: ${expressSocket.id}`);
     });

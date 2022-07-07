@@ -1,7 +1,7 @@
 import { productsDao, mockProductsDao } from "../daos/daoIndex.js";
 
 const productController = {
-  async getById(id) {  
+  async getById(id) {
     try {
       const prod = await productsDao.listById(id);
       return prod;
@@ -14,12 +14,12 @@ const productController = {
 
   async getTestProducts(amount) {
     try {
-      const prods =  await mockProductsDao.randomProduct(amount);
+      const prods = await mockProductsDao.randomProduct(amount);
       return prods
     } catch (error) {
       console.error(
         "Product controller --> no se pudieron obtener los productos mock. " +
-          error
+        error
       );
     }
   },
@@ -57,6 +57,7 @@ const productController = {
   },
 
   async saveProduct(product) {
+    console.log(product);
     try {
       const prod = await productsDao.saveObject(product);
       return prod;

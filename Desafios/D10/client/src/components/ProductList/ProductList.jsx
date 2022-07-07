@@ -5,7 +5,16 @@ function ProductList({ products }) {
     return (
         <>
             <div className='card'>
-                {/* {products.map((p) => { <ProductCard key={p.id} prod={p} /> })} */}
+                <table class="productTable">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Imágen</th>
+                    </tr>
+                    <tr>
+                        {products.map(p => { return <ProductCard key={p.id} prod={p} /> })}
+                    </tr>
+                </table >
             </div>
         </>
     )

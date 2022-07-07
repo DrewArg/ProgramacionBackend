@@ -19,22 +19,18 @@ function socketController(server) {
       console.log(`desconexión: ${expressSocket.id}`);
     });
 
-    expressSocket.on("helloFromReact", () => {
-      console.log("frontend connected");
-    }),
+    expressSocket.on("saveProduct", async (product) => {
+      try {
+        await productController.saveProduct(product);
 
-      expressSocket.on("saveProduct", async (product) => {
-        try {
-          await productController.saveProduct(product);
-
-          socketServer.sockets.emit("products", await _tryGetAllProducts());
-          expressSocket.emit("products", await _tryGetAllProducts());
-        } catch (error) {
-          console.error(
-            `Socket controller --> no se pudo guardar el producto. ${error}`
-          );
-        }
-      });
+        socketServer.sockets.emit("products", await _tryGetAllProducts());
+        expressSocket.emit("products", await _tryGetAllProducts());
+      } catch (error) {
+        console.error(
+          `Socket controller --> no se pudo guardar el producto. ${error}`
+        );
+      }
+    });
 
     expressSocket.on("getAllProducts", async () => {
       expressSocket.emit("products", await _tryGetAllProducts());

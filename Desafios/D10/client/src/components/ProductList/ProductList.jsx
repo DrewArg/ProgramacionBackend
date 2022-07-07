@@ -7,15 +7,19 @@ function ProductList({ products }) {
         <>
             <ProductForm />
             <div id='productTable'>
-                <table class="productTable">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                        <th>Imágen</th>
-                    </tr>
-                    <tr>
-                        {products.map(p => { return <ProductCard key={p.id} prod={p} /> })}
-                    </tr>
+                <table className="productTable">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Imágen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {products.map(p => { return <ProductCard key={p.id} prod={p} /> })}
+                        </tr>
+                    </tbody>
                 </table >
             </div>
         </>

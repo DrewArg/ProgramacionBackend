@@ -3,31 +3,36 @@ import MessageCard from '../MessageCard/MessageCard'
 import MessageForm from '../MessageForm/MessageForm'
 
 function MessageList({ messages }) {
+
+    async function getMockUserData() {
+
+    }
+
     return (
         <>
             <div id="globalChat">
-                <h3 class="tituloSeccion">Centro de Mensajes</h3>
-                <button id="btn__testUserData" class="btn__submit" onclick="getMockUserData()">Get user mock data</button>
-                <div class="chatContainer">
+                <h3 className="tituloSeccion">Centro de Mensajes</h3>
+                <button id="btn__testUserData" className="btn__submit" onClick={() => { getMockUserData() }}>Get user mock data</button>
+                <div className="chatContainer">
                     <MessageForm />
                     {messages.length ?
                         <>
-                            <div class="chatMessages">
+                            <div className="chatMessages">
                                 {messages.map(m => { return <MessageCard key={m.id} msg={m} /> })}
-                                <div class="userMessage">
+                                <div className="userMessage">
 
-                                    <input type="text" id="msgContent" class="formInupt" placeholder="ingresa el mensaje" />
+                                    <input type="text" id="msgContent" className="formInupt" placeholder="ingresa el mensaje" />
                                     <button id="btn__sendMessage">Send!</button>
                                 </div>
                             </div>
                         </>
                         :
                         <>
-                            <div class="chatMessages">
-                                <p class="mensajesFaltantes">no hay mensajes en el sistema actualmente...</p>
+                            <div className="chatMessages">
+                                <p className="mensajesFaltantes">no hay mensajes en el sistema actualmente...</p>
                             </div>
-                            <div class="userMessage">
-                                <input type="text" id="msgContent" class="formInupt" placeholder="ingresa el mensaje" />
+                            <div className="userMessage">
+                                <input type="text" id="msgContent" className="formInupt" placeholder="ingresa el mensaje" />
                                 <button id="btn__sendMessage">Send!</button>
 
                             </div>

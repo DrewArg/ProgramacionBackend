@@ -76,8 +76,7 @@ export default socketController;
 async function _tryGetAllMessages() {
   try {
     const messages = await messageController.getAllMessages();
-    const normalizedMessages = normalizeMessages(messages);
-    return normalizedMessages
+    return messages
   } catch (error) {
     console.error(
       `Socket controller --> no se pudieron obtener mensajes. ${error}`

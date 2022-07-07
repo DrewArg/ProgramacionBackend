@@ -4,7 +4,7 @@ import ProductCard from '../ProductCard/ProductCard'
 function ProductList({ products }) {
     return (
         <>
-            <div className='card'>
+            <div id='productTable'>
                 <table class="productTable">
                     <tr>
                         <th>Nombre</th>

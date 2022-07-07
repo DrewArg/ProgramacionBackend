@@ -12,8 +12,6 @@ function socketController(server) {
     }
   });
 
-
-
   io.on("connection", (socket) => {
     console.log(`nueva conexión: ${socket.id}`);
 

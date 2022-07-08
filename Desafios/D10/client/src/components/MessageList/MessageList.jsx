@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect, useContext } from 'react'
 import { SocketContext } from '../../context/Socket';
 import MessageCard from '../MessageCard/MessageCard'
+import './MessageList.css'
 
 function MessageList({ messages }) {
     const [userEmail, setUserEmail] = useState("")
@@ -43,7 +44,6 @@ function MessageList({ messages }) {
     }
 
     const sendMessage = async () => {
-        console.log(text);
         const message = {
             author: {
                 userEmail: userEmail,
@@ -70,56 +70,64 @@ function MessageList({ messages }) {
         <>
             <div id="globalChat">
                 <h3 className="tituloSeccion">Centro de Mensajes</h3>
-                <button id="btn__testUserData" className="btn__submit" onClick={getMockUserData}>Get user mock data</button>
-                <div className="chatContainer">
-                    <div className="header">
-                        <label className="chatLabel">Ingrese su nombre</label>
-                        <input type="text" id="userName" className="formInupt" placeholder="name" value={userName} onChange={handleOnChange} />
+                <div id='panels'>
+                    <div id='leftPanel'>
+                        <button id="btn__testUserData" className="btn__submit" onClick={getMockUserData}>Obtener usuario FAKE</button>
+                        <div className="chatContainer">
+                            <div className="header">
+                                <label className="chatLabel">Ingrese su nombre</label>
+                                <input type="text" id="userName" className="formInupt" placeholder="name" value={userName} onChange={handleOnChange} />
+                            </div>
+                            <div className="header">
+                                <label className="chatLabel">Ingrese su apellido</label>
+                                <input type="text" id="userLastName" className="formInupt" placeholder="last name" value={userLastName} onChange={handleOnChange} />
+                            </div>
+                            <div className="header">
+                                <label className="chatLabel">Ingrese su edad</label>
+                                <input type="number" id="userAge" className="formInupt" placeholder="age" value={userAge} onChange={handleOnChange} />
+                            </div>
+                            <div className="header">
+                                <label className="chatLabel">Ingrese su email</label>
+                                <input type="text" id="userEmail" className="formInupt" placeholder="email" value={userEmail} onChange={handleOnChange} />
+                            </div>
+                            <div className="header">
+                                <label className="chatLabel">Ingrese su alias</label>
+                                <input type="text" id="userAlias" className="formInupt" placeholder="alias" value={userAlias} onChange={handleOnChange} />
+                            </div>
+                            <div className="header">
+                                <label className="chatLabel">Ingrese su avatar</label>
+                                <input type="text" id="userAvatar" className="formInupt" placeholder="avatar" value={userAvatar} onChange={handleOnChange} />
+                            </div>
+                        </div>
                     </div>
-                    <div className="header">
-                        <label className="chatLabel">Ingrese su apellido</label>
-                        <input type="text" id="userLastName" className="formInupt" placeholder="last name" value={userLastName} onChange={handleOnChange} />
-                    </div>
-                    <div className="header">
-                        <label className="chatLabel">Ingrese su edad</label>
-                        <input type="number" id="userAge" className="formInupt" placeholder="age" value={userAge} onChange={handleOnChange} />
-                    </div>
-                    <div className="header">
-                        <label className="chatLabel">Ingrese su email</label>
-                        <input type="text" id="userEmail" className="formInupt" placeholder="email" value={userEmail} onChange={handleOnChange} />
-                    </div>
-                    <div className="header">
-                        <label className="chatLabel">Ingrese su alias</label>
-                        <input type="text" id="userAlias" className="formInupt" placeholder="alias" value={userAlias} onChange={handleOnChange} />
-                    </div>
-                    <div className="header">
-                        <label className="chatLabel">Ingrese su avatar</label>
-                        <input type="text" id="userAvatar" className="formInupt" placeholder="avatar" value={userAvatar} onChange={handleOnChange} />
-                    </div>
-                    {messages.length ?
-                        <>
-                            <div className="chatMessages">
-                                {messages.map(m => { return <MessageCard key={m.id} msg={m} /> })}
-                                <div className="userMessage">
+                    <div id='rightPanel'>
 
+                        {messages.length ?
+                            <>
+                                <div className="chatMessages">
+                                    {messages.map(m => { return <MessageCard key={m.id} msg={m} /> })}
+                                </div>
+                                <div className="userMessage">
                                     <input type="text" id="msgContent" className="formInupt" placeholder="ingresa el mensaje" value={text} onInput={e => setText(e.target.value)} />
                                     <button id="btn__sendMessage" onClick={sendMessage}>Send!</button>
                                 </div>
-                            </div>
-                        </>
-                        :
-                        <>
-                            <div className="chatMessages">
-                                <p className="mensajesFaltantes">no hay mensajes en el sistema actualmente...</p>
-                            </div>
-                            <div className="userMessage">
-                                <input type="text" id="msgContent" className="formInupt" placeholder="ingresa el mensaje" value={text} onInput={e => setText(e.target.value)} />
-                                <button id="btn__sendMessage" onClick={sendMessage}>Send!</button>
+                            </>
+                            :
+                            <>
+                                <div className="chatMessages">
+                                    <p className="mensajesFaltantes">no hay mensajes en el sistema actualmente...</p>
+                                </div>
+                                <div className="userMessage">
+                                    <input type="text" id="msgContent" className="formInupt" placeholder="ingresa el mensaje" value={text} onInput={e => setText(e.target.value)} />
+                                    <button id="btn__sendMessage" onClick={sendMessage}>Send!</button>
 
-                            </div>
-                        </>
+                                </div>
+                            </>
 
-                    }
+                        }
+
+                    </div>
+
 
                 </div>
             </div>

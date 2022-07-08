@@ -1,11 +1,11 @@
 import React from 'react'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { SocketContext } from '../../context/Socket';
-
+import './ProductForm.css'
 
 function ProductForm() {
     const reactSocket = useContext(SocketContext)
-    
+
     const [prodTitle, setProdTitle] = useState("")
     const [prodPrice, setProdPrice] = useState(0)
     const [prodThumbnail, setProdThumbnail] = useState("")
@@ -25,10 +25,24 @@ function ProductForm() {
         setProdThumbnail("")
     }
 
+    const getMockProductData = async () => {
+        reactSocket.emit("getMockProductData")
+    }
+
+    useEffect(() => {
+        reactSocket.on("mockProductData", (mockProductData) => {
+            setProdTitle(mockProductData.title)
+            setProdPrice(mockProductData.price)
+            setProdThumbnail(mockProductData.thumbnail)
+        })
+    })
+
     return (
         <>
             <div className="contenedorForm">
                 <h3 className="tituloSeccion">Ingresar Producto</h3>
+                <button className="btn__submit" onClick={getMockProductData}>Obtener producto FAKE</button>
+
                 <div id="productForm">
                     <div className="contenedorInput">
                         <label className="formLabel">Ingrese el título</label>
@@ -44,7 +58,7 @@ function ProductForm() {
                         <input className='formInput' type="text" placeholder="url de imágen" id="thumbnail" name="thumbnail" value={prodThumbnail} onInput={e => setProdThumbnail(e.target.value)} />
                     </div>
 
-                    <button className="btn__submit" onClick={addProduct}>Add Product</button>
+                    <button className="btn__submit" onClick={addProduct}>Agregar Producto</button>
 
                 </div>
             </div>

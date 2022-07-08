@@ -1,9 +1,11 @@
 import React from 'react';
+
 import ProductCard from '../ProductCard/ProductCard'
 import ProductForm from '../ProductForm/ProductForm';
+import './ProductList.css'
 
 function ProductList({ products }) {
-    return (
+        return (
         <>
             <ProductForm />
             <div id='productTable'>

@@ -1,7 +1,7 @@
 import React from 'react'
 import NavBar from '../../components/NavBar/NavBar'
 import ProductListContainer from '../../container/ProductListContainer/ProductListContainer';
-import '../Home/Home.css'
+import '../../style/style.css'
 
 function Products() {
     return (

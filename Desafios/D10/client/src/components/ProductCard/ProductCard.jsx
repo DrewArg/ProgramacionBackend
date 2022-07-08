@@ -12,7 +12,7 @@ function ProductCard({ prod: product }) {
                     {product.price}
                 </td>
                 <td>
-                    <img src={product.thumbnail} alt="" width="250" height="250" />
+                    <img src={product.thumbnail} alt="" width="150" height="150" />
                 </td>
 
             </tr>

@@ -1,6 +1,5 @@
 import React from 'react';
-import { useContext } from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { SocketContext } from '../../context/Socket';
 import MessageList from '../../components/MessageList/MessageList'
 

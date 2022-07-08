@@ -17,6 +17,12 @@
   border-radius: 0.75rem;
 }
 
+.contenidoMensaje {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .msgBlue,
 .msgGreen,
 .msgRed {

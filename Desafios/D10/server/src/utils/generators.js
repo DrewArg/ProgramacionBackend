@@ -1,12 +1,12 @@
 import { faker } from "@faker-js/faker";
 faker.locale = "es";
 
-function createProduct(id) {
+function createProductData() {
+  const title = faker.random.word()
   return {
-    id,
-    title: faker.random.word(),
+    title: title,
     price: faker.random.numeric(4),
-    thumbnail: faker.image.imageUrl(),
+    thumbnail: faker.image.imageUrl(250,250,title)
   };
 }
 
@@ -28,4 +28,4 @@ function createUserData() {
     userAvatar: faker.internet.avatar(),
   };
 }
-export { createProduct, createId, createUserData };
+export { createProductData, createId, createUserData };

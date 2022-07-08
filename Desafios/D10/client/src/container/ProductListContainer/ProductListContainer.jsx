@@ -11,7 +11,7 @@ const ProductListContainer = () => {
     const [request, setRequest] = useState(false)
 
     useEffect(() => {
-
+        console.log(request);
         if (!request) {
             reactSocket.emit("getAllProducts")
             setRequest(true)
@@ -28,10 +28,7 @@ const ProductListContainer = () => {
             {
                 loading ? <h2>Cargando...</h2> :
                     <>
-                        {products.length > 0 ? <ProductList products={products} />
-
-                            : <h3>no hay productos en el sistema actualmente...</h3>
-                        }
+                        <ProductList products={products} />
                     </>
             }
         </>

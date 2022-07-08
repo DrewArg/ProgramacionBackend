@@ -28,10 +28,7 @@ const MessageListContainer = () => {
             {
                 loading ? <h2>Cargando...</h2> :
                     <>
-                        {messages.length > 0 ? <MessageList messages={messages} />
-
-                            : <h3>no hay mensajes en el sistema actualmente...</h3>
-                        }
+                        <MessageList messages={messages} />
                     </>
             }
         </>

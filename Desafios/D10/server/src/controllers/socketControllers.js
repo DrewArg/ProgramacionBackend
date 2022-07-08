@@ -13,7 +13,7 @@ function socketController(server) {
 
   socketServer.on("connection", (expressSocket) => {
     console.log(`nueva conexión: ${expressSocket.id}`);
-   
+
     expressSocket.on("disconnect", () => {
       console.log(`desconexión: ${expressSocket.id}`);
     });
@@ -23,7 +23,7 @@ function socketController(server) {
         await productController.saveProduct(product);
 
         socketServer.sockets.emit("products", await _tryGetAllProducts());
-        expressSocket.emit("products", await _tryGetAllProducts());
+        // expressSocket.emit("products", await _tryGetAllProducts());
       } catch (error) {
         console.error(
           `Socket controller --> no se pudo guardar el producto. ${error}`
@@ -32,17 +32,17 @@ function socketController(server) {
     });
 
     expressSocket.on("getAllProducts", async () => {
-      expressSocket.emit("products", await _tryGetAllProducts());
+      // expressSocket.emit("products", await _tryGetAllProducts());
       socketServer.sockets.emit("products", await _tryGetAllProducts());
     });
 
-    expressSocket.on("getTestProducts", async (amount) => {
-      expressSocket.emit("testProducts", await _tryGetTestProducts(amount));
-      socketServer.sockets.emit("testProducts", await _tryGetTestProducts(amount));
+    expressSocket.on("getMockProductData", async () => {
+      //expressSocket.emit("mockProductData", await _tryGetMockProductData());
+      socketServer.sockets.emit("mockProductData", await _tryGetMockProductData());
     });
 
     expressSocket.on("getAllMessages", async () => {
-      expressSocket.emit("messages", await _tryGetAllMessages());
+      // expressSocket.emit("messages", await _tryGetAllMessages());
       socketServer.sockets.emit("messages", await _tryGetAllMessages());
     });
 
@@ -50,7 +50,7 @@ function socketController(server) {
       try {
         await messageController.saveMessage(message);
 
-        expressSocket.emit("messages", await _tryGetAllMessages());
+        // expressSocket.emit("messages", await _tryGetAllMessages());
         socketServer.sockets.emit("messages", await _tryGetAllMessages());
       } catch (error) {
         console.error(
@@ -92,9 +92,9 @@ async function _tryGetAllProducts() {
   }
 }
 
-async function _tryGetTestProducts(amount) {
+async function _tryGetMockProductData() {
   try {
-    const testProducts = await productController.getTestProducts(amount);
+    const testProducts = await productController.getMockProductData();
     return testProducts;
   } catch (error) {
     console.error(

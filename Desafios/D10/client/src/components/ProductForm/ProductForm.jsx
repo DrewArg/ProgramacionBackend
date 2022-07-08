@@ -30,7 +30,9 @@ function ProductForm() {
     }
 
     useEffect(() => {
+        console.log("productss");
         reactSocket.on("mockProductData", (mockProductData) => {
+            // console.log(mockProductData);
             setProdTitle(mockProductData.title)
             setProdPrice(mockProductData.price)
             setProdThumbnail(mockProductData.thumbnail)
@@ -67,18 +69,3 @@ function ProductForm() {
 }
 
 export default ProductForm
-
-/**
- * import { useId, useState } from 'react';
-
-function myFunctionalComponentFunction() {
-  const id = useId();
-  const [input, setInput] = useState(''); // '' is the initial state value
-  return (
-    <div>
-    <label htmlFor={id}>Please specify:</label>
-    <input id={id} value={input} onInput={e => setInput(e.target.value)}/>
-    </div>
-  );
-}
- */

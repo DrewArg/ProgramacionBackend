@@ -9,7 +9,7 @@ productRouter.post("/products/:id", productController.getById);
 
 productRouter.post("/products", productController.saveProduct);
 
-productRouter.post("/products-test", productController.getTestProducts)
+productRouter.post("/products-test", productController.getMockProductData)
 
 productRouter.put("/products/:id", productController.updateProduct);
 

@@ -20,8 +20,9 @@
   width: 45%;
   color: white;
   background-color: rgb(47, 50, 55);
-  border: 5px solid;
+  border: 5px solid rgb(2, 2, 60);
   border-radius: 10px;
+  font-size: 1.05rem;
 }
 
 #leftPanel {

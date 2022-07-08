@@ -5,12 +5,17 @@ function MessageCard({ msg: message }) {
         <>
 
             <div className='singleMessage'>
-                <img src={message.author.userAvatar} className="profileImage" alt="" />
-                <div className="msgBlue">{message.author.userAlias}</div>
-                <div>[</div>
-                <div className="msgRed">{message.timestamp}</div>
-                <div>] :</div>
-                <div className="msgGreen">{message.text}</div>
+                <span className='contenidoMensaje'>
+                    <img src={message.author.userAvatar} className="profileImage" alt="" />
+
+                    <span className="msgBlue">{message.author.userAlias}</span>
+                    <span>[</span>
+                    <span className="msgRed">{message.timestamp}</span>
+                    <span>] : </span>
+                    <span className="msgGreen">{message.text}</span>
+
+                </span>
+
             </div>
 
 

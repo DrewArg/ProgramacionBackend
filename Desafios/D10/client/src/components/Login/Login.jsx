@@ -1,62 +1,96 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { SocketContext } from '../../context/Socket'
+import React, { useState, useEffect } from 'react'
 import './Login.css'
 
 function Login() {
 
     const [userName, setUserName] = useState('')
     const [name, setName] = useState('')
-    const [id, setId] = useState('')
-    const reactSocket = useContext(SocketContext)
 
-    const login = () => {
+
+    const login = async () => {
+        const url = 'http://localhost:8080/api/login'
         const user = {
             name: userName
         }
-        reactSocket.emit("loginUser", user)
+
+        await fetch(url, {
+            method: "POST",
+            body: JSON.stringify(user),
+            headers: {
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Credentials': 'true',
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Methods': 'POST,GET',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+        }).then(async (r) => {
+            if (r.status === 200) {
+                const text = await r.text()
+                setName(text)
+            }
+        })
     }
 
 
-    const logout = () => {
-        const user = {
-            name: name,
-            id: id
-        }
+    const logout = async () => {
+        const url = 'http://localhost:8080/api/logout'
 
-        reactSocket.emit("logoutUser", user)
+        await fetch(url, {
+            method: "POST",
+            headers: {
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Credentials': 'true',
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Methods': 'POST,GET',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+        }).then(async (r) => {
+            if (r.status === 200) {
+                setName('')
+
+            }
+        })
+
     }
-
-
 
     useEffect(() => {
-        reactSocket.on("loggedUser", (session) => {
-            setName(session.name)
-            setId(session.id)
-        })
+        const url = 'http://localhost:8080/'
 
-        reactSocket.on("logout", () => {
-            setName('')
-            setId('')
-        })
-
+        function getFetch() {
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(async (r) => {
+                if (r.status === 200) {
+                    const text = await r.text()
+                    setName(text)
+                }
+            })
+        }
+        getFetch()
     })
 
     return (
         <>
             <h1>Desafío N° 10</h1>
-            <div className='login'>
-                <label className="formLabel">Ingresa tu nombre</label>
-                <input className='formInput' type="text" placeholder="nombre" id="nombreUsuario" name="nombreUsuario" value={userName} onInput={e => { setUserName(e.target.value) }} />
-                <button className="btn__submit" onClick={login}>Ingresar</button>
-            </div>
+
 
             {name !== '' ?
                 <>
-                    <h2>BIENVENIDO {name}</h2>
+                    <h2>Bienvenide {name}</h2>
                     <button className="btn__submit" onClick={logout}>Salir</button>
                 </>
                 :
                 <>
+                    <div className='login'>
+                        <label className="formLabel">Ingresa tu nombre</label>
+                        <input className='formInput' type="text" placeholder="nombre" id="nombreUsuario" name="nombreUsuario" value={userName} onInput={e => { setUserName(e.target.value) }} />
+                        <button className="btn__submit" onClick={login}>Ingresar</button>
+                    </div>
                 </>
             }
 

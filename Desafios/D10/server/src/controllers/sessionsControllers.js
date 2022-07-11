@@ -1,26 +1,43 @@
 import { sessionsDao } from "../daos/daoIndex.js";
 
 const sessionController = {
-    async save(session) {
+    async isLogged(req, res) {
         try {
-            sessionsDao.saveObject(session)
+            if (req.session) {
+                const logged = await sessionsDao.listAll()
+                if (logged.length > 0) {
+                    const cookie = (JSON.parse(logged[0].session))
+                    res.send(cookie.name)
+
+                } else {
+                    res.send('')
+
+                }
+            }
         } catch (error) {
-            console.error("Session controller --> no se pudo guardar la sesión. " + error);
+            console.error("Session controller --> no se pudo verificar el logueo. " + error);
+
         }
     },
 
-    async getByName(name) {
+    async login(req, res) {
         try {
-            return sessionsDao.listByName(name)
+            const session = req.session;
+            session.name = req.body.name
+            session.isLoggedIn = true;
+            // session.id = req.sessionID
+            await session.save()
+            res.send(session.name)
         } catch (error) {
-            console.error("Session controller --> no se pudo encontrar por nombre. " + error);
+            console.error("Session controller --> no se pudo crear la sesión. " + error);
         }
     },
 
-    async delete(session) {
+    async logout(req, res) {
         try {
-            await sessionsDao.deleteById(session.id);
-            return { ok: "Session controller --> producto eliminado correctamente" };
+            await req.session.destroy()
+            sessionsDao.deleteAll()
+            res.send('')
         } catch (e) {
             console.error(
                 "Session controller --> No se pudo borrar la sesión. " + e

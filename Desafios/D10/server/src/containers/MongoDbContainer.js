@@ -43,19 +43,6 @@ class MongoDbContainer {
     }
   }
 
-  async listByName(name) {
-    const objs = await this.listAll();
-    const index = objs.findIndex((o) => o.name === name);
-    if (index == -1) {
-      console.error(
-        "MongoDb container --> error buscando, no se encontró el nombre. "
-      );
-    } else {
-      return objs[index];
-    }
-  }
-
-
   async listAll() {
     try {
       const objs = mongoDb.collection(this.collection).find();

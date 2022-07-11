@@ -30,9 +30,7 @@ function ProductForm() {
     }
 
     useEffect(() => {
-        console.log("productss");
         reactSocket.on("mockProductData", (mockProductData) => {
-            // console.log(mockProductData);
             setProdTitle(mockProductData.title)
             setProdPrice(mockProductData.price)
             setProdThumbnail(mockProductData.thumbnail)

@@ -5,7 +5,6 @@ import SocketController from "./controllers/socketControllers.js";
 dotenv.config();
 
 const io = new SocketController(httpServer);
-
 const PORT = process.env.PORT || 8080;
 const connectedServer = httpServer.listen(PORT, () => {
   console.log(

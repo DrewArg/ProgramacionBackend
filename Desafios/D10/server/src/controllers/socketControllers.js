@@ -2,6 +2,7 @@ import { Server as Socket } from "socket.io";
 import productController from "./productControllers.js";
 import messageController from "./messageControllers.js";
 import userController from "./userControllers.js";
+import sessionsControllers from "./sessionsControllers.js"
 
 function socketController(server) {
   const socketServer = new Socket(server, {
@@ -23,7 +24,6 @@ function socketController(server) {
         await productController.saveProduct(product);
 
         socketServer.sockets.emit("products", await _tryGetAllProducts());
-        // expressSocket.emit("products", await _tryGetAllProducts());
       } catch (error) {
         console.error(
           `Socket controller --> no se pudo guardar el producto. ${error}`
@@ -32,25 +32,20 @@ function socketController(server) {
     });
 
     expressSocket.on("getAllProducts", async () => {
-      // expressSocket.emit("products", await _tryGetAllProducts());
       socketServer.sockets.emit("products", await _tryGetAllProducts());
     });
 
     expressSocket.on("getMockProductData", async () => {
-      //expressSocket.emit("mockProductData", await _tryGetMockProductData());
       socketServer.sockets.emit("mockProductData", await _tryGetMockProductData());
     });
 
     expressSocket.on("getAllMessages", async () => {
-      // expressSocket.emit("messages", await _tryGetAllMessages());
       socketServer.sockets.emit("messages", await _tryGetAllMessages());
     });
 
     expressSocket.on("saveMessage", async (message) => {
       try {
         await messageController.saveMessage(message);
-
-        // expressSocket.emit("messages", await _tryGetAllMessages());
         socketServer.sockets.emit("messages", await _tryGetAllMessages());
       } catch (error) {
         console.error(
@@ -60,8 +55,31 @@ function socketController(server) {
     });
 
     expressSocket.on("getMockUserData", async () => {
-      expressSocket.emit("mockUserData", await userController.getMockUserData())
+      try {
+        expressSocket.emit("mockUserData", await userController.getMockUserData())
+      } catch (error) {
+        console.error("Socket controller --> no se pudo obtener la ingormación fake del usuario. " + error);
+      }
     });
+
+    expressSocket.on("loginUser", async (loginData) => {
+      try {
+        await sessionsControllers.save(loginData)
+        const userName = await sessionsControllers.getByName(loginData.name)
+        expressSocket.emit("loggedUser", userName)
+      } catch (error) {
+        console.error("Socket controller --> no se pudo guardar el usuario. " + error);
+      }
+    })
+
+    expressSocket.on("logoutUser", async (logoutData) => {
+      try {
+        await sessionsControllers.delete(logoutData)
+        expressSocket.emit("logout")
+      } catch (error) {
+        console.error("Socket controller --> no se pudo eliminar el usuario. " + error);
+      }
+    })
   });
 
 

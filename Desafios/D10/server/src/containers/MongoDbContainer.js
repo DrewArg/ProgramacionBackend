@@ -1,8 +1,8 @@
-import config from "../config.js";
+import { mongoConfig } from "../config.js";
 import { default as mongodb, ObjectId } from "mongodb";
 
 const MongoClient = mongodb.MongoClient;
-const client = new MongoClient(config.mongodb.uri, config.mongodb.client);
+const client = new MongoClient(mongoConfig.mongodb.uri, mongoConfig.mongodb.client);
 const dbName = "coderhouse";
 const mongoDb = client.db(dbName);
 
@@ -32,32 +32,45 @@ class MongoDbContainer {
   }
 
   async listById(id) {
-    const prods = await this.listAll();
-    const index = prods.findIndex((p) => p.id == id);
+    const objs = await this.listAll();
+    const index = objs.findIndex((o) => o.id == id);
     if (index == -1) {
       console.error(
         "MongoDb container --> error buscando, no se encontró el id. "
       );
     } else {
-      return prods[index];
+      return objs[index];
     }
   }
 
+  async listByName(name) {
+    const objs = await this.listAll();
+    const index = objs.findIndex((o) => o.name === name);
+    if (index == -1) {
+      console.error(
+        "MongoDb container --> error buscando, no se encontró el nombre. "
+      );
+    } else {
+      return objs[index];
+    }
+  }
+
+
   async listAll() {
     try {
-      const prods = mongoDb.collection(this.collection).find();
-      const prodsArray = [];
+      const objs = mongoDb.collection(this.collection).find();
+      const objsArray = [];
 
-      await prods.forEach((prod) => {
-        prodsArray.push(prod);
+      await objs.forEach((prod) => {
+        objsArray.push(prod);
       });
 
-      prodsArray.forEach((p) => {
-        delete Object.assign(p, { ["id"]: p["_id"] })["_id"];
-        p.id = "" + p.id + "";
+      objsArray.forEach((o) => {
+        delete Object.assign(o, { ["id"]: o["_id"] })["_id"];
+        o.id = "" + o.id + "";
       });
 
-      return prodsArray;
+      return objsArray;
     } catch (error) {
       console.error(
         "MongoDB Container --> Hubo un error listando todos. " + error

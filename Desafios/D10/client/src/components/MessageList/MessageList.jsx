@@ -18,7 +18,6 @@ function MessageList({ messages }) {
 
     useEffect(() => {
         reactSocket.on("mockUserData", (mockUserData) => {
-            // console.log(mockUserData);
             setUserEmail(mockUserData.userEmail)
             setUserName(mockUserData.userName)
             setUserLastName(mockUserData.userLastName)

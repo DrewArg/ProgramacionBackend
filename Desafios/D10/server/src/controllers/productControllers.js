@@ -57,7 +57,6 @@ const productController = {
   },
 
   async saveProduct(product) {
-    console.log(product);
     try {
       const prod = await productsDao.saveObject(product);
       return prod;

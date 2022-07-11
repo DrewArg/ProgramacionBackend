@@ -1,10 +1,29 @@
+import MongoStore from 'connect-mongo'
+
 const userName = "root";
 const password = "EYUU8mmwfh44bZks";
 
-export default {
+export const sessionConfig = {
+  store: MongoStore.create({
+    mongoUrl: `mongodb+srv://root:${password}@cluster0.vcbuwku.mongodb.net/coderhouse`,
+    mongoOptions: {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
+  })
+  ,
+  secret: 'shhhhhhhhhhhhhhhhhhhhh',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 60000
+  }
+}
+
+export const mongoConfig = {
   mongodb: {
     uri: `mongodb+srv://root:${password}@cluster0.vcbuwku.mongodb.net/?retryWrites=true&w=majority`,
-    client: {
+    options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       authSource: "admin",
@@ -13,9 +32,13 @@ export default {
         password: password,
       },
     },
-  },
-  PRODUCTS_PERSISTANCE_MODE: "products-mongodb",
-  MESSAGES_PERSISTANCE_MODE: "messages-mongodb",
-  MOCKPRODUCTS_PERSISTANCE_MODE: "mockProducts-memory",
-  MOCKUSERS_PERSISTANCE_MODE: "mockUsers-memory",
+  }
 };
+
+export const persistanceMode = {
+  products: "products-mongodb",
+  messages: "messages-mongodb",
+  mockProducts: "mockProducts-memory",
+  mockUsers: "mockUsers-memory",
+  sessions: "sessions-mongodb"
+}

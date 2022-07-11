@@ -11,7 +11,6 @@ const ProductListContainer = () => {
     const [request, setRequest] = useState(false)
 
     useEffect(() => {
-        console.log(request);
         if (!request) {
             reactSocket.emit("getAllProducts")
             setRequest(true)

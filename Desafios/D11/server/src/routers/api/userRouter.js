@@ -1,8 +1,10 @@
 import { Router } from "express";
-import userController from "../../controllers/userControllers.js"
+import { userController } from "../../controllers/userControllers.js"
 
-const productRouter = Router();
+const userRouter = Router();
 
-productRouter.get("/mockUsers", userController.getMockUserData);
 
-export default productRouter;
+userRouter.get('/', userController.getUsers)
+userRouter.get("/mockUsers", userController.getMockUserData);
+
+export default userRouter;

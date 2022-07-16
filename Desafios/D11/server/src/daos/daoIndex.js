@@ -1,10 +1,11 @@
 import { persistanceMode } from "../config.js";
 
-let productsDao
-let mockProductsDao
 let mockUsersDao
+let mockProductsDao
+let productsDao
 let messagesDao
 let sessionsDao
+let usersDao
 
 switch (persistanceMode.mockUsers) {
   case "mockUsers-memory":
@@ -14,7 +15,7 @@ switch (persistanceMode.mockUsers) {
 
   default:
     const { default: DaoMockMongo } = await import("./MockApi.js");
-    mockUsersDao = new DaoMockMongo("mockUsersD9");
+    mockUsersDao = new DaoMockMongo("mockUsers");
     break;
 }
 
@@ -26,31 +27,31 @@ switch (persistanceMode.mockProducts) {
 
   default:
     const { default: DaoMockMongo } = await import("./MockApi.js");
-    mockProductsDao = new DaoMockMongo("mockProductsD9");
+    mockProductsDao = new DaoMockMongo("mockProducts");
     break;
 }
 
 switch (persistanceMode.products) {
   case "products-mongodb":
     const { default: DaoMongoDb } = await import("./DaoMongoDb.js");
-    productsDao = new DaoMongoDb("productsD10");
+    productsDao = new DaoMongoDb("products");
     break;
 
   default:
     const { default: DaoMongoDb2 } = await import("./DaoMongoDb.js");
-    productsDao = new DaoMongoDb2("productsD10");
+    productsDao = new DaoMongoDb2("products");
     break;
 }
 
 switch (persistanceMode.messages) {
   case "messages-mongodb":
     const { default: DaoMongoDb } = await import("./DaoMongoDb.js");
-    messagesDao = new DaoMongoDb("messagesD10");
+    messagesDao = new DaoMongoDb("messages");
     break;
 
   default:
     const { default: DaoMongoDb2 } = await import("./DaoMongoDb.js");
-    messagesDao = new DaoMongoDb2("messages10");
+    messagesDao = new DaoMongoDb2("messages");
     break;
 }
 
@@ -66,4 +67,17 @@ switch (persistanceMode.sessions) {
     break;
 }
 
-export { productsDao, messagesDao, mockProductsDao, mockUsersDao, sessionsDao };
+switch (persistanceMode.users) {
+  case "users-mongodb":
+    const { default: DaoMongoDb } = await import("./DaoMongoDb.js");
+    usersDao = new DaoMongoDb("users");
+    break;
+
+  default:
+    const { default: DaoMongoDb2 } = await import("./DaoMongoDb.js");
+    usersDao = new DaoMongoDb2("users");
+    break;
+}
+
+
+export { productsDao, messagesDao, mockProductsDao, mockUsersDao, sessionsDao, usersDao };

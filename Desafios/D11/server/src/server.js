@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import { passportMiddleware, passportSessionHandler } from './middlewares/passport.js'
 import { sessionConfig } from "./config.js";
 import { Server as HttpServer } from "http";
 

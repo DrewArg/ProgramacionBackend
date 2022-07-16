@@ -1,7 +1,7 @@
 import { Server as Socket } from "socket.io";
 import productController from "./productControllers.js";
 import messageController from "./messageControllers.js";
-import userController from "./userControllers.js";
+import { userController } from "./userControllers.js";
 
 function socketController(server) {
   const socketServer = new Socket(server, {

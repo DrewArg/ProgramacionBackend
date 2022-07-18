@@ -60,7 +60,7 @@ export const userController = {
 
   async getByUsername(username) {
     try {
-      const users = this.getUsers();
+      const users = await this.getUsers();
       const user = users.find(u => u.username === username)
       return user;
     } catch (error) {

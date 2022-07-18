@@ -6,10 +6,10 @@ export const registerController = passport.authenticate('register', {
 })
 
 export function successRegisterController(req, res) {
-    console.log(req.user)
-    // res.sendFile('registroOk.html', { root: './views' })
+    // decirle al socket controller que mande un login de ok  al cliente
 }
 
 export function failRegisterController(req, res) {
+    // decirle al socket controller que mande un login de error  al cliente
     res.status(400).json({ err: 'fallo el registro' })
 }

@@ -2,19 +2,19 @@ import { Router } from "express";
 import productRouter from "./productRouter.js";
 import messageRouter from "./messageRouter.js";
 import userRouter from "./userRouter.js"
-import sessionRouter from "./sessionRouter.js";
+import authRouter from "./authRouter.js";
 import { secretRouter } from './secretRouter.js'
-import sessionController from "../../controllers/sessionsControllers.js";
+import authController from "../../controllers/authControllers.js";
 
 const apiRouter = Router();
 
 apiRouter.use("/api", productRouter);
 apiRouter.use("/api", messageRouter);
 apiRouter.use("/api", userRouter);
-apiRouter.use("/api", sessionRouter)
+apiRouter.use("/auth", authRouter)
 apiRouter.use("/api", secretRouter)
 
-apiRouter.use("/", sessionController.isLogged)
+apiRouter.use("/", authController.isLogged)
 
 apiRouter.all("*", (req, res) => {
   res.status(404).json({

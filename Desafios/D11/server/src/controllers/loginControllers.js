@@ -1,17 +1,16 @@
 import passport from 'passport'
-
-import { productsDao, mockProductsDao } from "../daos/daoIndex.js";
-
 export const loginController = passport.authenticate('login', {
     successRedirect: '/auth/successLogin',
     failureRedirect: '/auth/failLogin',
 })
 
 export function successLoginController(req, res) {
-    res.json({ msg: 'ok' })
+    // decirle al socket controller que mande un login de ok  al cliente
+        res.json({ msg: 'ok' })
 }
 
 export function failLoginController(req, res) {
+    // decirle al socket controller que mande un login de error  al cliente
     res.status(401).json({ err: 'fallo el login' })
 }
 

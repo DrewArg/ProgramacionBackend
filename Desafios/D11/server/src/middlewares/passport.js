@@ -15,7 +15,6 @@ passport.use('register', new Strategy({
                 username: username,
                 password: password
             }
-
             const user = await registerUser(usr)
             done(null, user)
         } catch (error) {
@@ -26,9 +25,9 @@ passport.use('register', new Strategy({
     }))
 
 passport.use('login', new Strategy(
-    (username, password, done) => {
+    async (username, password, done) => {
         try {
-            const user = authenticate(username, password)
+            const user = await authenticate(username, password)
             done(null, user)
         } catch (error) {
             done(null, false)

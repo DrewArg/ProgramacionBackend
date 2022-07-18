@@ -8,7 +8,7 @@ function Login() {
     const [name, setName] = useState('')
 
     const register = async () => {
-        const url = 'http://localhost:8080/api/register'
+        const url = 'http://localhost:8080/auth/register'
         const user = {
             username: userName,
             password: userPass
@@ -34,12 +34,11 @@ function Login() {
 
 
     const login = async () => {
-        const url = 'http://localhost:8080/api/login'
+        const url = 'http://localhost:8080/auth/login'
         const user = {
-            name: userName,
+            username: userName,
             password: userPass
         }
-
         await fetch(url, {
             method: "POST",
             body: JSON.stringify(user),
@@ -61,7 +60,7 @@ function Login() {
 
 
     const logout = async () => {
-        const url = 'http://localhost:8080/api/logout'
+        const url = 'http://localhost:8080/auth/logout'
 
         await fetch(url, {
             method: "POST",

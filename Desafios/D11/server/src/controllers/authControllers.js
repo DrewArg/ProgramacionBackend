@@ -1,7 +1,7 @@
 import { sessionsDao } from "../daos/daoIndex.js";
 import { userController } from "./userControllers.js";
 
-const sessionController = {
+const authControllers = {
     async isLogged(req, res) {
         try {
             if (req.session) {
@@ -55,4 +55,4 @@ const sessionController = {
     }
 }
 
-export default sessionController
+export default authControllers

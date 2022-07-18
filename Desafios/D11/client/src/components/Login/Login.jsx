@@ -10,10 +10,9 @@ function Login() {
     const register = async () => {
         const url = 'http://localhost:8080/api/register'
         const user = {
-            name: userName,
+            username: userName,
             password: userPass
         }
-
         await fetch(url, {
             method: "POST",
             body: JSON.stringify(user),

@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs'
 import { mockUsersDao, usersDao } from "../daos/daoIndex.js";
 
 export const userController = {
@@ -25,7 +26,12 @@ export const userController = {
 
   async saveUser(user) {
     try {
-      await usersDao.saveObject(user);
+      const hashPass = await bcrypt.hash(user.password, 10)
+      const usr = {
+        username: user.username,
+        password: hashPass
+      }
+      await usersDao.saveObject(usr);
     } catch (error) {
       console.error(
         "User controller --> " +

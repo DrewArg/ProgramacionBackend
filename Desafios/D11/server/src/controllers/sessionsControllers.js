@@ -1,4 +1,5 @@
 import { sessionsDao } from "../daos/daoIndex.js";
+import { userController } from "./userControllers.js";
 
 const sessionController = {
     async isLogged(req, res) {
@@ -44,6 +45,14 @@ const sessionController = {
             );
         }
     },
+
+    async register(req, res) {
+        const user = {
+            username: req.body.username,
+            password: req.body.password
+        }
+        userController.saveUser(user)
+    }
 }
 
 export default sessionController

@@ -26,7 +26,7 @@ function socketController(server) {
         socketServer.sockets.emit("products", await _tryGetAllProducts());
       } catch (error) {
         console.error(
-          `Socket controller --> no se pudo guardar el producto. ${error}`
+          `Socket controller -->  ${error}`
         );
       }
     });
@@ -49,7 +49,7 @@ function socketController(server) {
         socketServer.sockets.emit("messages", await _tryGetAllMessages());
       } catch (error) {
         console.error(
-          `Socket controller --> no se pudo guardar el mensaje. ${error}`
+          `Socket controller -->  ${error}`
         );
       }
     });
@@ -58,7 +58,7 @@ function socketController(server) {
       try {
         expressSocket.emit("mockUserData", await userController.getMockUserData())
       } catch (error) {
-        console.error("Socket controller --> no se pudo obtener la ingormación fake del usuario. " + error);
+        console.error("Socket controller -->  " + error);
       }
     });
 
@@ -76,7 +76,7 @@ async function _tryGetAllMessages() {
     return messages
   } catch (error) {
     console.error(
-      `Socket controller --> no se pudieron obtener mensajes. ${error}`
+      `Socket controller --> ${error}`
     );
   }
 }
@@ -87,7 +87,7 @@ async function _tryGetAllProducts() {
     return products;
   } catch (error) {
     console.error(
-      `Socket controller --> no se pudieron obtener los productos. ${error}`
+      `Socket controller -->  ${error}`
     );
   }
 }
@@ -98,7 +98,7 @@ async function _tryGetMockProductData() {
     return testProducts;
   } catch (error) {
     console.error(
-      `Socket controller --> no se pudieron obtener test products. ${error}`
+      `Socket controller -->  ${error}`
     );
   }
 }

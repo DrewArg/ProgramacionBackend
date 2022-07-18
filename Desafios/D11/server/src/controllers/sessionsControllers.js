@@ -15,7 +15,7 @@ const sessionController = {
                 }
             }
         } catch (error) {
-            console.error("Session controller --> no se pudo verificar el logueo. " + error);
+            console.error("Session controller -->  " + error);
 
         }
     },
@@ -29,7 +29,7 @@ const sessionController = {
             await session.save()
             res.send(session.name)
         } catch (error) {
-            console.error("Session controller --> no se pudo crear la sesión. " + error);
+            console.error("Session controller -->  " + error);
         }
     },
 
@@ -40,7 +40,7 @@ const sessionController = {
             res.send('')
         } catch (e) {
             console.error(
-                "Session controller --> No se pudo borrar la sesión. " + e
+                "Session controller -->  " + e
             );
         }
     },

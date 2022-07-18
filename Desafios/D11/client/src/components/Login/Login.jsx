@@ -4,13 +4,41 @@ import './Login.css'
 function Login() {
 
     const [userName, setUserName] = useState('')
+    const [userPass, setUserPass] = useState('')
     const [name, setName] = useState('')
+
+    const register = async () => {
+        const url = 'http://localhost:8080/api/register'
+        const user = {
+            name: userName,
+            password: userPass
+        }
+
+        await fetch(url, {
+            method: "POST",
+            body: JSON.stringify(user),
+            headers: {
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Credentials': 'true',
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Methods': 'POST,GET',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+        }).then(async (r) => {
+            if (r.status === 200) {
+                const text = await r.text()
+                setName(text)
+            }
+        })
+    }
 
 
     const login = async () => {
         const url = 'http://localhost:8080/api/login'
         const user = {
-            name: userName
+            name: userName,
+            password: userPass
         }
 
         await fetch(url, {
@@ -49,7 +77,6 @@ function Login() {
         }).then(async (r) => {
             if (r.status === 200) {
                 setName('')
-
             }
         })
 
@@ -76,7 +103,7 @@ function Login() {
 
     return (
         <>
-            <h1>Desafío N° 10</h1>
+            <h1>Desafío N° 11</h1>
 
 
             {name !== '' ?
@@ -89,7 +116,12 @@ function Login() {
                     <div className='login'>
                         <label className="formLabel">Ingresa tu nombre</label>
                         <input className='formInput' type="text" placeholder="nombre" id="nombreUsuario" name="nombreUsuario" value={userName} onInput={e => { setUserName(e.target.value) }} />
+
+                        <label className="formLabel">Ingresa tu cotraseña</label>
+                        <input className='formInput' type="password" placeholder="contrasena" id="contrasena" name="contrasena" value={userPass} onInput={e => { setUserPass(e.target.value) }} />
+
                         <button className="btn__submit" onClick={login}>Ingresar</button>
+                        <button className="btn__submit" onClick={register}>Reistrarse</button>
                     </div>
                 </>
             }

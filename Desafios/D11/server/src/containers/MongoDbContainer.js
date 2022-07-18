@@ -17,9 +17,9 @@ class MongoDbContainer {
     try {
       await mongoDb.createCollection(collectionName);
     } catch (error) {
-      console.error(
-        "Colección ya existente, no se realizaron cambios. " + error
-      );
+      // console.error(
+      //   "Colección ya existente, no se realizaron cambios. "
+      // );
     }
   }
 
@@ -35,9 +35,9 @@ class MongoDbContainer {
     const objs = await this.listAll();
     const index = objs.findIndex((o) => o.id == id);
     if (index == -1) {
-      console.error(
-        "MongoDb container --> error buscando, no se encontró el id. "
-      );
+      // console.error(
+      //   "MongoDb container --> error buscando, no se encontró el id. "
+      // );
     } else {
       return objs[index];
     }
@@ -60,7 +60,7 @@ class MongoDbContainer {
       return objsArray;
     } catch (error) {
       console.error(
-        "MongoDB Container --> Hubo un error listando todos. " + error
+        "MongoDB Container -->  " + error
       );
     }
   }
@@ -71,7 +71,7 @@ class MongoDbContainer {
       return obj.insertedId;
     } catch (error) {
       console.error(
-        "MongoDB Container --> Hubo un error guardando el objeto. " + error
+        "MongoDB Container --> " + error
       );
     }
   }
@@ -83,7 +83,7 @@ class MongoDbContainer {
         .replaceOne({ _id: ObjectId(object.id) }, object);
     } catch (error) {
       console.error(
-        "MongoDB Container --> Hubo un error actualizando el objeto. " + error
+        "MongoDB Container --> " + error
       );
     }
   }
@@ -95,7 +95,7 @@ class MongoDbContainer {
         .deleteOne({ _id: ObjectId(id) });
     } catch (error) {
       console.error(
-        "MongoDB Container --> Hubo un error borrando por id. " + error
+        "MongoDB Container -->  " + error
       );
     }
   }
@@ -105,7 +105,7 @@ class MongoDbContainer {
       await mongoDb.collection(this.collection).deleteMany({});
     } catch (error) {
       console.error(
-        "MongoDB Container --> Hubo un error borrando todos. " + error
+        "MongoDB Container -->  " + error
       );
     }
   }

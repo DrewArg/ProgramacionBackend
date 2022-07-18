@@ -7,7 +7,7 @@ const messageController = {
       return msg;
     } catch (e) {
       console.error(
-        "Message controller --> no se pudo obtener el mensaje. Error: " + e
+        "Message controller --> " + e
       );
     }
   },
@@ -18,7 +18,7 @@ const messageController = {
       return msg;
     } catch (e) {
       console.error(
-        "Message controller --> no se pudo actualizar el mensaje. Error: " + e
+        "Message controller --> " + e
       );
     }
   },
@@ -29,7 +29,7 @@ const messageController = {
       return { ok: "Message controller --> mensaje eliminado correctamente" };
     } catch (e) {
       console.error(
-        "Message controller --> No se pudo borrar el mensaje. Error: " + error
+        "Message controller -->  " + error
       );
     }
   },
@@ -39,7 +39,7 @@ const messageController = {
       return await messagesDao.listAll();
     } catch (error) {
       console.error(
-        "Message controller --> No se pudo listar todos los mensajes. " + error
+        "Message controller --> " + error
       );
     }
   },
@@ -50,7 +50,7 @@ const messageController = {
       return msg;
     } catch (error) {
       console.error(
-        "Message controller --> No se pudo guardar el mensaje. Error: " + error
+        "Message controller -->  " + error
       );
     }
   },

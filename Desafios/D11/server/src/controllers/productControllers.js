@@ -7,7 +7,7 @@ const productController = {
       return prod;
     } catch (e) {
       console.error(
-        "Product controller --> no se pudo obtener el producto." + e
+        "Product controller --> " + e
       );
     }
   },
@@ -18,7 +18,7 @@ const productController = {
       return prod
     } catch (error) {
       console.error(
-        "Product controller --> no se pudieron obtener los datos mock del producto. " +
+        "Product controller --> " +
         error
       );
     }
@@ -30,7 +30,7 @@ const productController = {
       return prod;
     } catch (e) {
       console.error(
-        "Product controller --> no se pudo actualizar el producto. " + e
+        "Product controller -->  " + e
       );
     }
   },
@@ -41,7 +41,7 @@ const productController = {
       return { ok: "Product controller --> producto eliminado correctamente" };
     } catch (e) {
       console.error(
-        "Product controller --> No se pudo borrar el producto. " + error
+        "Product controller -->  " + error
       );
     }
   },
@@ -51,7 +51,7 @@ const productController = {
       return await productsDao.listAll();
     } catch (error) {
       console.error(
-        "Product controller --> No se pudo listar todos los productos. " + error
+        "Product controller -->  " + error
       );
     }
   },
@@ -62,7 +62,7 @@ const productController = {
       return prod;
     } catch (error) {
       console.error(
-        "Product controller --> No se pudo guardar el producto. " + error
+        "Product controller -->  " + error
       );
     }
   },

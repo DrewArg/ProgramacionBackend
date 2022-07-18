@@ -17,6 +17,8 @@ expressApp.use(session(sessionConfig))
 
 expressApp.use(express.json());
 expressApp.use(express.urlencoded({ extended: true }));
+expressApp.use(passportMiddleware)
+expressApp.use(passportSessionHandler)
 
 expressApp.use(apiRouter)
 

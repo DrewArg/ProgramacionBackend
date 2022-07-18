@@ -8,15 +8,18 @@ import { authenticate } from '../api/authenticateApi.js'
 
 passport.use('register', new Strategy({
     passReqToCallback: true,
-    // usernameField: 'email',
-    // passwordField: 'contrasenia',
 },
-    (req, username, password, done) => {
+    async (req, username, password, done) => {
         try {
-            const userData = req.body
-            const user = registerUser(req.body)
+            const usr = {
+                username: username,
+                password: password
+            }
+
+            const user = await registerUser(usr)
             done(null, user)
         } catch (error) {
+            console.error("Passport --> ");
             done(error)
 
         }

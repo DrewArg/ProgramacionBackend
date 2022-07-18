@@ -1,12 +1,12 @@
 import passport from 'passport'
 
-export const registerController = passport.authenticate('registro', {
+export const registerController = passport.authenticate('register', {
     successRedirect: '/auth/successRegister',
     failureRedirect: '/auth/failRegister',
 })
 
 export function successRegisterController(req, res) {
-    res.json(req.user)
+    console.log(req.user)
     // res.sendFile('registroOk.html', { root: './views' })
 }
 

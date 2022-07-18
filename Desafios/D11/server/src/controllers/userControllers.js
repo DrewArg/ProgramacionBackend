@@ -26,12 +26,18 @@ export const userController = {
 
   async saveUser(user) {
     try {
-      const hashPass = await bcrypt.hash(user.password, 10)
-      const usr = {
-        username: user.username,
-        password: hashPass
+      const exists = await this.isUniqueUsername(user.username)
+      if (exists) {
+        const hashPass = await bcrypt.hash(user.password, 10)
+        const usr = {
+          username: user.username,
+          password: hashPass
+        }
+        return await usersDao.saveObject(usr);
+      } else {
+        console.log("el usuario ya existe");
       }
-      await usersDao.saveObject(usr);
+
     } catch (error) {
       console.error(
         "User controller --> " +
@@ -64,7 +70,7 @@ export const userController = {
 
   async isUniqueUsername(username) {
     try {
-      const users = this.getUsers();
+      const users = await this.getUsers();
       const user = users.find(u => u.username === username)
       if (user) {
         return false

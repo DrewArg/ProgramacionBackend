@@ -1,6 +1,8 @@
 import { Router } from "express";
 import sessionsControllers from "../../controllers/sessionsControllers.js";
 
+import { registerController, failRegisterController, successRegisterController } from "../../controllers/registerControllers.js";
+
 const sessionRouter = Router();
 
 sessionRouter.use(function (req, res, next) {
@@ -18,7 +20,13 @@ sessionRouter.use(function (req, res, next) {
   }
 });
 
-sessionRouter.post("/register", sessionsControllers.register);
+// sessionRouter.post("/register", sessionsControllers.register);
+
+sessionRouter.post("/register", registerController);
+
+sessionRouter.post("/successRegister", successRegisterController);
+
+sessionRouter.post("/failRegister", failRegisterController);
 
 sessionRouter.post("/login", sessionsControllers.login);
 

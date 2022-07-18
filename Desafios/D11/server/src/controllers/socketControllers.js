@@ -62,6 +62,10 @@ function socketController(server) {
       }
     });
 
+    async function sendData(data) {
+      expressSocket.emit("sendData", data)
+    }
+
   });
 
 
@@ -102,3 +106,4 @@ async function _tryGetMockProductData() {
     );
   }
 }
+

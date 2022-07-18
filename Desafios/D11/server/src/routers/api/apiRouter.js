@@ -4,7 +4,6 @@ import messageRouter from "./messageRouter.js";
 import userRouter from "./userRouter.js"
 import authRouter from "./authRouter.js";
 import { secretRouter } from './secretRouter.js'
-import authController from "../../controllers/authControllers.js";
 
 const apiRouter = Router();
 
@@ -14,7 +13,9 @@ apiRouter.use("/api", userRouter);
 apiRouter.use("/auth", authRouter)
 apiRouter.use("/api", secretRouter)
 
-apiRouter.use("/", authController.isLogged)
+apiRouter.use("/", () => {
+
+})
 
 apiRouter.all("*", (req, res) => {
   res.status(404).json({

@@ -12,8 +12,6 @@ export const authenticate = async (username, password) => {
                 if (!result) {
                     user = null
                     console.log(`Las contraseñas no coinciden`);
-                } else {
-                    console.log("ok");
                 }
             }
 
@@ -21,7 +19,6 @@ export const authenticate = async (username, password) => {
     } catch (error) {
         console.error(`Auth Api --> ${error}`);
     }
-
     return user;
 
 }

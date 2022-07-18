@@ -28,6 +28,7 @@ passport.use('login', new Strategy(
     async (username, password, done) => {
         try {
             const user = await authenticate(username, password)
+            console.log(user);
             done(null, user)
         } catch (error) {
             done(null, false)

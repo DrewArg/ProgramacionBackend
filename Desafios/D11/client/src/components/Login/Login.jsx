@@ -13,7 +13,7 @@ function Login() {
             username: userName,
             password: userPass
         }
-        await fetch(url, {
+        const response = await fetch(url, {
             method: "POST",
             body: JSON.stringify(user),
             headers: {
@@ -24,12 +24,17 @@ function Login() {
                 'Content-Type': 'application/json'
             },
             credentials: 'include',
-        }).then(async (r) => {
-            if (r.status === 200) {
-                const text = await r.text()
-                setName(text)
-            }
-        })
+        }).then(console.log("hola"))
+        // .then(async (r) => {
+        //     console.log(r);
+        //     if (r.status === 200) {
+        //         const text = await r.text()
+        //         console.log(text);
+        //         setName(text)
+        //     }
+        // })
+
+        console.log("res: " + response);
     }
 
 
@@ -51,8 +56,10 @@ function Login() {
             },
             credentials: 'include',
         }).then(async (r) => {
+            console.log(r);
             if (r.status === 200) {
                 const text = await r.text()
+                console.log(text);
                 setName(text)
             }
         })
@@ -80,24 +87,24 @@ function Login() {
 
     }
 
-    useEffect(() => {
-        const url = 'http://localhost:8080/'
+    // useEffect(() => {
+    //     const url = 'http://localhost:8080/'
 
-        function getFetch() {
-            fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            }).then(async (r) => {
-                if (r.status === 200) {
-                    const text = await r.text()
-                    setName(text)
-                }
-            })
-        }
-        getFetch()
-    })
+    //     function getFetch() {
+    //         fetch(url, {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json"
+    //             },
+    //         }).then(async (r) => {
+    //             if (r.status === 200) {
+    //                 const text = await r.text()
+    //                 setName(text)
+    //             }
+    //         })
+    //     }
+    //     getFetch()
+    // })
 
     return (
         <>

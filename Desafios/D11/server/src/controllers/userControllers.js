@@ -24,7 +24,6 @@ export const userController = {
   },
 
   async saveUser(user) {
-    //verificar que el nombre no exista
     try {
       await usersDao.saveObject(user);
     } catch (error) {

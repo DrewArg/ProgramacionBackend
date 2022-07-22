@@ -7,6 +7,8 @@ import { registerUser } from '../api/userApi.js'
 import { autenticar } from '../api/authenticateApi.js'
 
 passport.use('local-register', new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password',
     passReqToCallback: true,
 },
     async (req, username, password, done) => {
@@ -16,21 +18,12 @@ passport.use('local-register', new LocalStrategy({
                 password: password
             }
             const user = await registerUser(usr)
-            done(null, user)
+            const u = await userController.getById(user)
+            done(null, u)
         } catch (error) {
             console.error("Passport --> ");
             done(error)
 
-        }
-    }))
-
-passport.use('login', new LocalStrategy(
-    async (username, password, done) => {
-        try {
-            const user = await autenticar(username, password)
-            done(null, user)
-        } catch (error) {
-            done(null, false)
         }
     }))
 

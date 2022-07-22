@@ -1,7 +1,6 @@
 import passport from 'passport'
 
 export function loginController(req, res) {
-    console.log(req.body);
     passport.authenticate("local-login", async (error, user, options) => {
         if (user) {
             await req.logIn(user, async () => {

@@ -1,7 +1,6 @@
 import { userController } from '../controllers/userControllers.js'
 import bcrypt from 'bcryptjs'
 
-//de aca sale ok verificado
 export const autenticar = async (username, password) => {
     let user = null;
     try {

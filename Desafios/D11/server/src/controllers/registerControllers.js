@@ -2,7 +2,13 @@ import pkg from 'body-parser';
 import passport from 'passport'
 
 const { json } = pkg
-export const registerController = passport.authenticate('register', (err, user) => {
+
+export const registerController = passport.authenticate('local-register',{
+    
+})
+
+
+export const registerControllerOld = passport.authenticate('register', (err, user) => {
     // successRedirect: '/auth/successRegister',
     // failureRedirect: '/auth/failRegister',
     if (err) {

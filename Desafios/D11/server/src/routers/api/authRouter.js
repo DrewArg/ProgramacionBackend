@@ -1,4 +1,6 @@
 import { Router } from "express";
+import passport from 'passport'
+
 
 import { registerController } from "../../controllers/registerControllers.js";
 
@@ -23,7 +25,7 @@ authRouter.use(function (req, res, next) {
 
 authRouter.post("/register", registerController);
 
-authRouter.post('/login', loginController)
+authRouter.post('/login', (req, res) => loginController(req, res))
 
 authRouter.get('/logout', logoutController)
 

@@ -26,9 +26,10 @@ export const userController = {
 
   async saveUser(user) {
     try {
-      const exists = await this.isUniqueUsername(user.username)
-      if (exists) {
+      const doesntExist = await this.isUniqueUsername(user.username)
+      if (doesntExist) {
         const hashPass = await bcrypt.hash(user.password, 10)
+        console.log(hashPass);
         const usr = {
           username: user.username,
           password: hashPass

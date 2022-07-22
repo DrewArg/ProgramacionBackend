@@ -4,10 +4,16 @@ export function registerController(req, res) {
     passport.authenticate('local-register', async (error, user, options) => {
         if (user) {
             await req.logIn(user, async () => {
-                return await res.status(200).json(user)
+                const session = req.session;
+                session.name = req.body.username
+                return await res.json(user)
             })
         } else if (options) {
+            console.log("options");
             return res.json(options)
+        } else {
+            console.log("else " + user);
+            return res.status(204).send('')
         }
     })(req, res)
 }

@@ -13,10 +13,8 @@ function socketController(server) {
   });
 
   socketServer.on("connection", (expressSocket) => {
-    console.log(`nueva conexión: ${expressSocket.id}`);
 
     expressSocket.on("disconnect", () => {
-      console.log(`desconexión: ${expressSocket.id}`);
     });
 
     expressSocket.on("saveProduct", async (product) => {

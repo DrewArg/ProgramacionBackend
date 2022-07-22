@@ -19,6 +19,7 @@ authRouter.use(function (req, res, next) {
   }
 });
 
+
 authRouter.post("/register", (req, res) => registerController(req, res));
 
 authRouter.post('/login', (req, res) => loginController(req, res))

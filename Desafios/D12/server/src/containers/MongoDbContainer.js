@@ -1,4 +1,4 @@
-import { mongoConfig } from "../config.js";
+import { mongoConfig } from "../config/config.js";
 import { default as mongodb, ObjectId } from "mongodb";
 
 const MongoClient = mongodb.MongoClient;

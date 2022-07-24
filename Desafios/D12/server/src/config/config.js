@@ -34,10 +34,3 @@ export const mongoConfig = {
     },
   }
 };
-
-export const persistanceMode = {
-  products: "products-mongodb",
-  messages: "messages-mongodb",
-  mockProducts: "mockProducts-memory",
-  mockUsers: "mockUsers-memory"
-}

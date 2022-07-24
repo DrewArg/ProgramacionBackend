@@ -1,17 +1,19 @@
 import express from "express";
 import session from "express-session";
+import dotenv from "dotenv";
 import { passportMiddleware, passportSessionHandler } from './middlewares/passport.js'
-import { sessionConfig } from "./config.js";
+import { sessionConfig } from "./config/config.js"
 import { Server as HttpServer } from "http";
-
 import apiRouter from "./routers/api/apiRouter.js";
 import cors from 'cors'
+
+dotenv.config();
 
 const expressApp = express();
 
 expressApp.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
+    origin: process.env.CORS_ORIGIN,
+    credentials: process.env.CORS_CREDENTIALS
 }))
 expressApp.use(session(sessionConfig))
 

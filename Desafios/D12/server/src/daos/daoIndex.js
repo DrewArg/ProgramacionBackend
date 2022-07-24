@@ -1,5 +1,3 @@
-import { persistanceMode } from "../config.js";
-
 let mockUsersDao
 let mockProductsDao
 let productsDao
@@ -7,7 +5,7 @@ let messagesDao
 let sessionsDao
 let usersDao
 
-switch (persistanceMode.mockUsers) {
+switch (process.env.DB_MOCKUSERS) {
   case "mockUsers-memory":
     const { default: MockApi } = await import("./MockApi.js");
     mockUsersDao = new MockApi();
@@ -19,7 +17,7 @@ switch (persistanceMode.mockUsers) {
     break;
 }
 
-switch (persistanceMode.mockProducts) {
+switch (process.env.DB_MOCKPRODUCTS) {
   case "mockProducts-memory":
     const { default: MockApi } = await import("./MockApi.js");
     mockProductsDao = new MockApi();
@@ -31,7 +29,7 @@ switch (persistanceMode.mockProducts) {
     break;
 }
 
-switch (persistanceMode.products) {
+switch (process.env.DB_PRODUCTS) {
   case "products-mongodb":
     const { default: DaoMongoDb } = await import("./DaoMongoDb.js");
     productsDao = new DaoMongoDb("products");
@@ -43,7 +41,7 @@ switch (persistanceMode.products) {
     break;
 }
 
-switch (persistanceMode.messages) {
+switch (process.env.DB_MESSAGES) {
   case "messages-mongodb":
     const { default: DaoMongoDb } = await import("./DaoMongoDb.js");
     messagesDao = new DaoMongoDb("messages");
@@ -55,7 +53,7 @@ switch (persistanceMode.messages) {
     break;
 }
 
-switch (persistanceMode.sessions) {
+switch (process.env.DB_SESSIONS) {
   case "sessions-mongodb":
     const { default: DaoMongoDb } = await import("./DaoMongoDb.js");
     sessionsDao = new DaoMongoDb("sessions");
@@ -67,7 +65,7 @@ switch (persistanceMode.sessions) {
     break;
 }
 
-switch (persistanceMode.users) {
+switch (process.env.DB_USERS) {
   case "users-mongodb":
     const { default: DaoMongoDb } = await import("./DaoMongoDb.js");
     usersDao = new DaoMongoDb("users");

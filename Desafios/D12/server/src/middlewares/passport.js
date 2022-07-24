@@ -1,12 +1,14 @@
 import passport from 'passport'
-import { Strategy } from 'passport-local'
+import { Strategy as LocalStrategy } from 'passport-local'
 
 import { userController } from '../controllers/userControllers.js'
 
 import { registerUser } from '../api/userApi.js'
-import { authenticate } from '../api/authenticateApi.js'
+import { autenticar } from '../api/authenticateApi.js'
 
-passport.use('register', new Strategy({
+passport.use('local-register', new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password',
     passReqToCallback: true,
 },
     async (req, username, password, done) => {
@@ -16,7 +18,8 @@ passport.use('register', new Strategy({
                 password: password
             }
             const user = await registerUser(usr)
-            done(null, user)
+            const u = await userController.getById(user)
+            done(null, u)
         } catch (error) {
             console.error("Passport --> ");
             done(error)
@@ -24,16 +27,20 @@ passport.use('register', new Strategy({
         }
     }))
 
-passport.use('login', new Strategy(
-    async (username, password, done) => {
-        try {
-            const user = await authenticate(username, password)
-            console.log(user);
-            done(null, user)
-        } catch (error) {
-            done(null, false)
-        }
-    }))
+passport.use('local-login', new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password',
+    passReqToCallback: true
+}, async (_, username, password, done) => {
+    const user = await autenticar(username, password)
+    if (!user) {
+        return done(null, false)
+    } else {
+        return done(null, user)
+    }
+
+}
+))
 
 export const passportMiddleware = passport.initialize()
 

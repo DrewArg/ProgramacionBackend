@@ -1,7 +1,5 @@
 import { Router } from "express";
-
 import { registerController } from "../../controllers/registerControllers.js";
-
 import { logoutController, loginController } from "../../controllers/loginControllers.js";
 
 const authRouter = Router();
@@ -21,10 +19,11 @@ authRouter.use(function (req, res, next) {
   }
 });
 
-authRouter.post("/register", registerController);
 
-authRouter.post('/login', loginController)
+authRouter.post("/register", (req, res) => registerController(req, res));
 
-authRouter.get('/logout', logoutController)
+authRouter.post('/login', (req, res) => loginController(req, res))
+
+authRouter.post('/logout', (req, res) => logoutController(req, res))
 
 export default authRouter;

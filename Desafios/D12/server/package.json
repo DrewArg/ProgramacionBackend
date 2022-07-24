@@ -20,6 +20,7 @@
     "express-session": "^1.17.1",
     "minimist": "^1.2.6",
     "mongodb": "^4.7.0",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.19",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",

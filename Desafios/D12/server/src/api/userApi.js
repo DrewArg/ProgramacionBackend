@@ -6,7 +6,8 @@ export const registerUser = async (usr) => {
         if (user) {
             return user
         } else {
-            console.log("userApi no se pudo registrar ");
+            console.log("UserApi --> no se pudo registrar");
+            return user
         }
     } catch (error) {
         console.error("UserApi --> " + error);

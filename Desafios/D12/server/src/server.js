@@ -8,12 +8,9 @@ import apiRouter from "./routers/api/apiRouter.js";
 import infoRouter from "./routers/infoRouter.js"
 import cors from 'cors'
 
-
 dotenv.config();
 
 const expressApp = express();
-
-console.log(process.env.CORS_ORIGIN);
 
 expressApp.use(cors({
     origin: process.env.CORS_ORIGIN,

@@ -6,9 +6,9 @@ import { userController } from "./userControllers.js";
 function socketController(server) {
   const socketServer = new Socket(server, {
     cors: {
-      origin: "http://localhost:3000",
-      methods: ["GET", "POST", "PUT", "DELETE"],
-      credentials: true
+      origin: process.env.CORS_ORIGIN,
+      methods: process.env.CORS_METHODS,
+      credentials: process.env.CORS_CREDENTIALS
     }
   });
 

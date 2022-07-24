@@ -13,10 +13,6 @@ apiRouter.use("/api", userRouter);
 apiRouter.use("/auth", authRouter)
 apiRouter.use("/api", secretRouter)
 
-apiRouter.use("/", () => {
-
-})
-
 apiRouter.all("*", (req, res) => {
   res.status(404).json({
     error: 404,

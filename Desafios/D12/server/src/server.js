@@ -5,6 +5,7 @@ import { passportMiddleware, passportSessionHandler } from './middlewares/passpo
 import { sessionConfig } from "./config/config.js"
 import { Server as HttpServer } from "http";
 import apiRouter from "./routers/api/apiRouter.js";
+import infoRouter from "./routers/infoRouter.js"
 import cors from 'cors'
 
 dotenv.config();

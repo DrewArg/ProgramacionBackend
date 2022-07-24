@@ -17,9 +17,9 @@ class MongoDbContainer {
     try {
       await mongoDb.createCollection(collectionName);
     } catch (error) {
-      // console.error(
-      //   "Colección ya existente, no se realizaron cambios. "
-      // );
+      console.error(
+        "Colección ya existente, no se realizaron cambios. "
+      );
     }
   }
 
@@ -35,9 +35,9 @@ class MongoDbContainer {
     const objs = await this.listAll();
     const index = objs.findIndex((o) => o.id == id);
     if (index == -1) {
-      // console.error(
-      //   "MongoDb container --> error buscando, no se encontró el id. "
-      // );
+      console.error(
+        "MongoDb container --> error buscando, no se encontró el id. "
+      );
     } else {
       return objs[index];
     }

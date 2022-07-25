@@ -1,3 +1,4 @@
+
 const calculate = (queryNumber) => {
     const result = {}
     if (queryNumber > 0) {
@@ -24,11 +25,12 @@ const calculate = (queryNumber) => {
     return result
 }
 
-process.on('calculate', msg => {
-    const result = calculate(queryNumber)
+process.send("ready");
+
+process.on("message", (msg) => {
+    const result = calculate(msg)
     process.send(result)
 })
 
-process.send('done')
 
 

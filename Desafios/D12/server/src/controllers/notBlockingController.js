@@ -3,22 +3,14 @@ import { fork } from 'child_process'
 
 export function calculateNoBlocking(req, res) {
     const queryNumber = req.body.queryNumber
-    console.log("query: " + queryNumber);
-    let result = {};
+    const child = fork('./src/utils/calculateWithFork.js')
 
-    if (queryNumber != 0) {
-        const calculateFn = fork('../server/src/utils/calculateWithFork.js')
-
-        calculateFn.on('message', msg => {
-            if (msg === 'done') {
-                result = msg
-            } else {
-                calculateFn.send('calculate')
-            }
-        })
-    }
-
-    const string = JSON.stringify(result)
-    console.log(result);
-    res.send(string)
+    child.on('message', message => {
+        if (message == 'ready') {
+            child.send(queryNumber)
+        } else {
+            const string = JSON.stringify(message)
+            res.send(string)
+        }
+    });
 }

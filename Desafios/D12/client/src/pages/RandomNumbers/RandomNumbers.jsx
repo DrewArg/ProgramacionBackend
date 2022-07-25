@@ -8,13 +8,14 @@ function RandomNumbers() {
 
     const [queryNumber, setQueryNumber] = useState(0)
     const [result, setResult] = useState({})
+    const [notResult, setNotResult] = useState({})
     const [pKeys, setPkeys] = useState([])
     const [pValues, setPvalues] = useState([])
 
-    const parseArray = () => {
-        const keys = Object.keys(result)
+    const parseArray = (array) => {
+        const keys = Object.keys(array)
         setPkeys(keys)
-        const values = Object.values(result)
+        const values = Object.values(array)
         setPvalues(values)
 
     }
@@ -41,7 +42,7 @@ function RandomNumbers() {
             if (r.status === 200) {
                 const text = await r.text()
                 const response = JSON.parse(text)
-                setResult(response)
+                setNotResult(response)
             } else {
                 console.log("no se pudo el resultado no bloqueante");
             }
@@ -95,7 +96,7 @@ function RandomNumbers() {
                         {result ?
                             <>
 
-                                <button className='buttonOk' onClick={parseArray}>Ver la lista</button>
+                                <button className='buttonOk' onClick={() => { parseArray(result) }}>Ver la lista</button>
                                 {
                                     pKeys.map((key, i) => {
                                         return <div key={key}>
@@ -113,7 +114,7 @@ function RandomNumbers() {
                         {result ?
                             <>
 
-                                <button className='buttonOk' onClick={parseArray}>Ver la lista</button>
+                                <button className='buttonOk' onClick={() => { parseArray(notResult) }}>Ver la lista</button>
                                 {
                                     pKeys.map((key, i) => {
                                         return <div key={key}>

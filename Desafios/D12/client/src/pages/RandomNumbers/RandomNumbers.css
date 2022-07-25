@@ -1,0 +1,14 @@
+.randomNumbers {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.buttonOk {
+  align-self: center;
+  max-width: 6rem;
+  margin-bottom: 4rem;
+}/*# sourceMappingURL=RandomNumbers.css.map */

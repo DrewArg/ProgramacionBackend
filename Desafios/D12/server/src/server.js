@@ -10,12 +10,14 @@ import cors from 'cors'
 
 dotenv.config();
 
+console.log(process.env.CORS_);
+
 const expressApp = express();
 
 expressApp.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    methods: process.env.CORS_METHODS,
-    credentials: process.env.CORS_CREDENTIALS
+    origin: 'http://localhost:3000',
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
 }))
 
 expressApp.use(session(sessionConfig))

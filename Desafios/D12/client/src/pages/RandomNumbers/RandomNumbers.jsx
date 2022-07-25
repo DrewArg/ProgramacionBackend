@@ -5,15 +5,17 @@ import { useState } from 'react'
 
 function RandomNumbers() {
 
-    const [queryNumber, setQueryNumber] = useState()
-    const [result, setResult] = useState()
+    const [queryNumber, setQueryNumber] = useState(0)
+    const [result, setResult] = useState({})
 
     const getBlocking = async () => {
         const url = 'http://localhost:8080/api/blockingRandom'
 
+        console.log(queryNumber);
+
         await fetch(url, {
             method: "POST",
-            body: JSON.stringify(queryNumber),
+            body: queryNumber.toString(),
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
@@ -38,7 +40,16 @@ function RandomNumbers() {
         <>
             <NavBar />
             <button onClick={getBlocking}>Get blocking</button>
-            {console.log(result)}
+            <label className="formLabel">Ingresa el número máximo</label>
+            <input className='formInput' type="number" placeholder="número máximo" id="maxNumber" name="maxNumber" value={queryNumber} onInput={e => { setQueryNumber(e.target.value) }} />
+            {result ?
+                <>
+                    {/* {result.map(k=>{
+                       return <div>{k}</div>
+                    })} */}
+                    {console.log(result)}
+                </>
+                : ""}
         </>
     )
 }

@@ -16,6 +16,7 @@ const NavBar = () => {
                         <Nav className="me-auto">
                             <div className="navLink">
                                 <NavLink className="navLink__child" to="/">Home</NavLink>
+                                <NavLink className="navLink__child" to="/info">Info</NavLink>
                                 <NavLink className="navLink__child" to="/products">Productos</NavLink>
                                 <NavLink className="navLink__child" to="/messages">Mensajes</NavLink>
                             </div>

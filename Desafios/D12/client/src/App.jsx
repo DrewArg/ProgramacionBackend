@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home'
 import Products from './pages/Products/Products'
 import Messages from './pages/Messages/Messages'
+import Info from './pages/Info/Info'
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
-            <Route path="messages" element={<Messages />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/info" element={<Info />} />
+
           </Routes>
         </div>
       </SocketContext.Provider>

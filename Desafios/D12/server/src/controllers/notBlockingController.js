@@ -2,19 +2,23 @@ import { fork } from 'child_process'
 
 
 export function calculateNoBlocking(req, res) {
-    const { url } = req
     const queryNumber = req.body.queryNumber
+    console.log("query: " + queryNumber);
+    let result = {};
 
-    if (url == '/api/notBlockinRandom') {
-        const calculateFn = fork('../utils/calculateWithFork.js')
+    if (queryNumber != 0) {
+        const calculateFn = fork('../server/src/utils/calculateWithFork.js')
 
         calculateFn.on('message', msg => {
-            if (msg === 'ready') {
-                computo.send('calcular!')
+            if (msg === 'done') {
+                result = msg
+            } else {
+                calculateFn.send('calculate')
             }
         })
     }
 
     const string = JSON.stringify(result)
+    console.log(result);
     res.send(string)
 }

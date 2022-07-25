@@ -1,5 +1,4 @@
 export function calculateBlocking(req, res) {
-    console.log(req.body);
     const queryNumber = req.body.queryNumber;
     const result = {};
 

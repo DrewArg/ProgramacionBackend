@@ -11,12 +11,22 @@ function RandomNumbers() {
     const [notResult, setNotResult] = useState({})
     const [pKeys, setPkeys] = useState([])
     const [pValues, setPvalues] = useState([])
+    const [pKeysNot, setPkeysNot] = useState([])
+    const [pValuesNot, setPvaluesNot] = useState([])
 
     const parseArray = (array) => {
         const keys = Object.keys(array)
         setPkeys(keys)
         const values = Object.values(array)
         setPvalues(values)
+
+    }
+
+    const parseArrayNot = (array) => {
+        const keys = Object.keys(array)
+        setPkeysNot(keys)
+        const values = Object.values(array)
+        setPvaluesNot(values)
 
     }
 
@@ -114,11 +124,11 @@ function RandomNumbers() {
                         {result ?
                             <>
 
-                                <button className='buttonOk' onClick={() => { parseArray(notResult) }}>Ver la lista</button>
+                                <button className='buttonOk' onClick={() => { parseArrayNot(notResult) }}>Ver la lista</button>
                                 {
-                                    pKeys.map((key, i) => {
+                                    pKeysNot.map((key, i) => {
                                         return <div key={key}>
-                                            <div >{key}: {pValues[i]}</div>
+                                            <div >{key}: {pValuesNot[i]}</div>
                                         </div>
 
 

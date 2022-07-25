@@ -10,8 +10,6 @@ import cors from 'cors'
 
 dotenv.config();
 
-console.log(process.env.CORS_);
-
 const expressApp = express();
 
 expressApp.use(cors({

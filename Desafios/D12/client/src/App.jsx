@@ -6,6 +6,7 @@ import Home from './pages/Home/Home'
 import Products from './pages/Products/Products'
 import Messages from './pages/Messages/Messages'
 import Info from './pages/Info/Info'
+import RandomNumbers from './pages/RandomNumbers/RandomNumbers';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/info" element={<Info />} />
+            <Route path="/randoms" element={<RandomNumbers />} />
 
           </Routes>
         </div>

@@ -4,6 +4,8 @@ import { calculateNoBlocking } from "../../controllers/notBlockingController.js"
 
 const randomRouter = Router();
 
+// randomRouter.post("/randoms", (req,res) => )
+
 randomRouter.post("/blockingRandom", (req, res) => calculateBlocking(req, res));
 
 randomRouter.post("/notBlockinRandom", (req, res) => calculateNoBlocking(req, res));

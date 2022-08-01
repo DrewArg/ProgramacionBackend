@@ -31,6 +31,7 @@ function Login() {
                 const text = await r.text()
                 const user = JSON.parse(text)
                 setName(user.username)
+                console.log(user.username);
                 setErrorRegistro(false)
                 setErrorLogin(false)
 

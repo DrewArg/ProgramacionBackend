@@ -17,9 +17,9 @@ class MongoDbContainer {
     try {
       await mongoDb.createCollection(collectionName);
     } catch (error) {
-      console.error(
-        "Colección ya existente, no se realizaron cambios. "
-      );
+      // console.error(
+      //   "Colección ya existente, no se realizaron cambios. "
+      // );
     }
   }
 

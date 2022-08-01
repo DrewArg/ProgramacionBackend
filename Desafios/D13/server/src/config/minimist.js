@@ -2,7 +2,8 @@ import parseArgs from 'minimist'
 
 const options = {
     alias: {
-        p: 'port'
+        p: 'port',
+        m: 'mode'
     },
     default: {
         port: 8080
@@ -11,5 +12,5 @@ const options = {
 
 const args = process.argv.slice(2)
 
-export const {port} = parseArgs(args,options)
+export const { port, mode } = parseArgs(args, options)
 

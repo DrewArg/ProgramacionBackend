@@ -97,26 +97,6 @@ function Login() {
 
     }
 
-    // useEffect(() => {
-    //     const url = 'http://localhost:8080/auth/'
-
-    //     function getFetch() {
-    //         fetch(url, {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             },
-    //         }).then(async (r) => {
-    //             if (r.status === 200) {
-    //                 const text = await r.text()
-    //                 setName(text)
-    //             }
-    //         })
-    //     }
-    //     getFetch()
-    // })
-
-
     return (
         <>
             <h1>Desafío N° 13</h1>

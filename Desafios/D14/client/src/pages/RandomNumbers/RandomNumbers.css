@@ -1,0 +1,29 @@
+.randomNumbers {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.buttonOk {
+  align-self: center;
+  max-width: 6rem;
+  margin-bottom: 4rem;
+}
+
+.columnas {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.uno,
+.dos {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+  border-radius: 20px;
+  border: 5px solid white;
+}/*# sourceMappingURL=RandomNumbers.css.map */

@@ -7,7 +7,7 @@ npm run build
 
 Luego, con el build creado, fui a la carpeta raíz (ej: C/) y cree una carpeta "www" porque no existía antes. Allí dentro, creé una carpeta "react-app" y pegué el contenido del production build creado.
 
-En el archivo nginx.config pegamos el contenido de "nginxNoCluster.config", guardé y luego ejecuté nginx desde la terminal de bash parado en la carpeta contenedora del .exe (ejecutando el comando "./nginx.exe"). En el navegador poniendo la ruta "localhost" aparece la app de react, entonces funciona correctamente.
+En el archivo nginx.config pegué el contenido de "nginxNoCluster.config", guardé y luego ejecuté nginx desde la terminal de bash parado en la carpeta contenedora del .exe (ejecutando el comando "./nginx.exe"). En el navegador poniendo la ruta "localhost" aparece la app de react, entonces funciona correctamente.
 
 La configuración de los clusters y el fork están bien. Si corro los comandos estos: 
 

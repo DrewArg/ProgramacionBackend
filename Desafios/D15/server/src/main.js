@@ -6,7 +6,7 @@ import { port as PORT, mode as MODE } from "./config/minimist.js";
 function connectServer() {
   const io = new SocketController(httpServer);
 
-  const connectedServer = httpServer.listen(PORT, () => {
+  const connectedServer = httpServer.listen(process.env.PORT || PORT, () => {
     console.log(
       `Servidor http escuchando en el puerto ${connectedServer.address().port}`
     );

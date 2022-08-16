@@ -10,7 +10,7 @@ function Login() {
     const [errorRegistro, setErrorRegistro] = useState(false)
 
     const register = async () => {
-        const url = 'http://localhost:8080/auth/register'
+        const url = 'https://backend-desafio15.herokuapp.com/auth/register'
         const user = {
             username: userName,
             password: userPass
@@ -21,7 +21,7 @@ function Login() {
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': 'https://boisterous-pasca-17e307.netlify.app',
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },
@@ -45,7 +45,7 @@ function Login() {
 
 
     const login = async () => {
-        const url = 'http://localhost:8080/auth/login'
+        const url = 'https://backend-desafio15.herokuapp.com/auth/login'
         const user = {
             username: userName,
             password: userPass
@@ -56,7 +56,7 @@ function Login() {
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': 'https://boisterous-pasca-17e307.netlify.app',
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },
@@ -78,14 +78,14 @@ function Login() {
 
 
     const logout = async () => {
-        const url = 'http://localhost:8080/auth/logout'
+        const url = 'https://backend-desafio15.herokuapp.com/auth/logout'
 
         await fetch(url, {
             method: "POST",
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': 'https://boisterous-pasca-17e307.netlify.app',
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },

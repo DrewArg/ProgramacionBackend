@@ -6,7 +6,7 @@ import { userController } from "./userControllers.js";
 function socketController(server) {
   const socketServer = new Socket(server, {
     cors: {
-      origin: 'http://localhost:3000',
+      origin: 'https://boisterous-pasca-17e307.netlify.app',
       methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true
     }

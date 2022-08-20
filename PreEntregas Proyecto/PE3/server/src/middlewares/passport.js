@@ -2,7 +2,7 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 
 import { userController } from '../controllers/userControllers.js'
-import { registeruser } from '../api/userApi.js'
+import { registerUser } from '../api/userApi.js'
 import { autenticar } from '../api/authenticate.js'
 
 passport.use('local-strategy', new LocalStrategy({
@@ -18,7 +18,7 @@ passport.use('local-strategy', new LocalStrategy({
                 password: password
             }
 
-            const userId = await registeruser(usr)
+            const userId = await registerUser(usr)
             const user = await userController.getById(userId)
 
             done(null, user)
@@ -44,7 +44,7 @@ passport.use('local-login', new LocalStrategy({
     }
 ))
 
-export const passporMiddleware = passport.initialize()
+export const passportMiddleware = passport.initialize()
 
 passport.serializeUser((user, done) => {
     done(null, user.id)

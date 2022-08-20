@@ -1,0 +1,1 @@
+mover las credenciales del config a un dotenv y al example

@@ -1,4 +1,4 @@
-import { userController } from "../controllers/userControllers";
+import { userController } from "../controllers/userControllers.js";
 import bcrypt from 'bcryptjs'
 
 export const autenticar = async (username, password) => {

@@ -1,6 +1,6 @@
-import { cartsDao } from "../daos/daoIndex"
+import { cartsDao } from "../daos/daoIndex.js"
 
-const cartController = {
+export const cartController = {
     async getById(id) {
         try {
             const cart = await cartsDao.listById(id)

@@ -1,4 +1,7 @@
 import { Server as Socket } from 'socket.io'
+import { productController } from './productControllers.js'
+import { cartController } from './cartControllers.js'
+import { userController } from './userControllers.js'
 
 export function SocketController(server) {
     const socketServer = new Socket(server, {
@@ -9,11 +12,84 @@ export function SocketController(server) {
         }
     })
 
-    socketServer.on("connected", (expressSocket) => {
+    socketServer.on("connect", (expressSocket) => {
         console.log(`new connection: ${expressSocket.id}`);
-    })
 
-    socketServer.on("disconnected", (expressSocket) => {
-        console.log(`disconnected: ${expressSocket.id}`);
+        expressSocket.on("disconnect", () => {
+            console.log(`disconnected: ${expressSocket.id}`);
+        })
+
+        //TODO PARA GUARDAR UN PRODUCTO TIENE QUE SER ADMIN - MIDDLEWARE DE ADMIN
+        expressSocket.on("saveProduct", async (product) => {
+            try {
+                await productController.saveProduct(product)
+                socketServer.sockets.emit("products", await _tryGetAllProducts())
+            } catch (error) {
+                console.error(`Socket controller --> ${error}`);
+            }
+        })
+
+        //TODO PARA ACTUALIZAR UN PRODUCTO TIENE QUE SER ADMIN - MIDDLEWARE DE ADMIN
+        expressSocket.on("updateProduct", async (product) => {
+            try {
+                await productController.updateProduct(product)
+                // socketServer.sockets.emit("products", await _tryGetAllProducts())
+            } catch (error) {
+                console.error(`Socket controller --> ${error}`);
+            }
+        })
+
+        //TODO PARA BORRAR UN PRODUCTO TIENE QUE SER ADMIN - MIDDLEWARE DE ADMIN
+        expressSocket.on("deleteProduct", async (productId) => {
+            try {
+                await productController.deleteById(productId)
+                // socketServer.sockets.emit("products", await _tryGetAllProducts())
+            } catch (error) {
+                console.error(`Socket controller --> ${error}`);
+            }
+        })
+
+        expressSocket.on("getAllProducts", async () => {
+            socketServer.sockets.emit("products", await _tryGetAllProducts())
+        })
+
+
+        expressSocket.on("getProductsInCart", async (cartId) => {
+            try {
+                const products = await cartController.getAllProducts(cartId)
+                socketServer.sockets.emit("productsInCart", products)
+            } catch (error) {
+                console.error(`Socket controller --> ${error}`);
+            }
+        })
+
+        expressSocket.on("deleteProductFromCart", async (cartId, productId) => {
+            try {
+                await cartController.deleteProduct(cartId, productId)
+                // socketServer.sockets.emit("productsInCart", products)
+            } catch (error) {
+                console.error(`Socket controller --> ${error}`);
+            }
+        })
+
+        expressSocket.on("addProductToCart", async (cartId, productId) => {
+            try {
+                await cartController.saveProduct(cartId, productId)
+                // socketServer.sockets.emit("productsInCart", products)
+            } catch (error) {
+                console.error(`Socket controller --> ${error}`);
+            }
+        })
+
+
     })
+}
+
+async function _tryGetAllProducts() {
+    try {
+        const products = await productController.getAllProducts()
+        return products
+    } catch (error) {
+        console.error(`Socket controller --> ${error}`);
+    }
 }

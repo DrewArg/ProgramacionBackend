@@ -1,6 +1,6 @@
 import { productsDao } from '../daos/daoIndex.js'
 
-const productController = {
+export const productController = {
     async getById(id) {
         try {
             const prod = await productsDao.listById(id)

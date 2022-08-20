@@ -1,7 +1,7 @@
 import MongoStore from 'connect-mongo'
 
 const username = 'root'
-const password = 'EYUU8mmwfh44bzks'
+const password = 'EYUU8mmwfh44bZks'
 
 export const sessionConfig = {
     store: MongoStore.create({

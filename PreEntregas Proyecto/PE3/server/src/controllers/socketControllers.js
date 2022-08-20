@@ -1,6 +1,6 @@
 import { Server as Socket } from 'socket.io'
 
-export const SocketController = (server) => {
+export function SocketController(server) {
     const socketServer = new Socket(server, {
         cors: {
             origin: 'http://localhost:8080',

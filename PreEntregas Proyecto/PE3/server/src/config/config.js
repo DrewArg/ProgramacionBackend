@@ -1,7 +1,11 @@
 import MongoStore from 'connect-mongo'
+import dotenv from 'dotenv'
+dotenv.config()
 
-const username = 'root'
-const password = 'EYUU8mmwfh44bZks'
+
+const username = process.env.MONGO_USER
+const password = process.env.MONGO_PASS
+
 
 export const sessionConfig = {
     store: MongoStore.create({
@@ -12,25 +16,25 @@ export const sessionConfig = {
         }
     }),
 
-    secret: 'topSecret',
+    secret: process.env.MONGO_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie:{
+    cookie: {
         maxAge: 10000
     }
 }
 
 export const mongoConfig = {
-    mongodb:{
-        url:`mongodb+srv://${username}:${password}@cluster0.vcbuwku.mongodb.net/?retryWrites=true&w=majority`,
-        options:{
+    mongodb: {
+        url: `mongodb+srv://${username}:${password}@cluster0.vcbuwku.mongodb.net/?retryWrites=true&w=majority`,
+        options: {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-        authSource: 'admin',
-        auth:{
-            username: username,
-            password: password
-        }
+            authSource: 'admin',
+            auth: {
+                username: username,
+                password: password
+            }
         }
     }
 }

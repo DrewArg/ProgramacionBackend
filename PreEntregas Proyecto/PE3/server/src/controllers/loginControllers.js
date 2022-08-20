@@ -1,6 +1,5 @@
-import { readFile } from "@babel/core/lib/gensync-utils/fs";
 import passport from "passport";
-import { sessionsDao } from "../daos/daoIndex";
+import { sessionsDao } from "../daos/daoIndex.js";
 
 export const isLoggedIn = (req, res) => {
     if (req.session.passport) {
@@ -24,8 +23,8 @@ export const loginController = (req, res) => {
     })
 }
 
-export const logoutController = (req, res) => {
-    if(isLoggedIn(req,res)){
+export const logoutController = async (req, res) => {
+    if (isLoggedIn(req, res)) {
         await req.session.destroy()
         await req.logout()
         //TODO ver que onda esta linea de abajo que aparece como descomentada siempre

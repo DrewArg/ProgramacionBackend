@@ -18,7 +18,7 @@ authRouter.use((req, res, next) => {
 })
 
 authRouter.post("/register", (req, res) => registerController(req, res))
-authRouter.posr("/login", (req, res) => loginController(req, res))
+authRouter.post("/login", (req, res) => loginController(req, res))
 authRouter.post("/logout", (req, res) => logoutController(req, res))
 
 export default authRouter

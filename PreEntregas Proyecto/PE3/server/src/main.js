@@ -1,5 +1,5 @@
 import httpServer from './server.js'
-import SocketController from './controllers/socketControllers.js'
+import { SocketController } from './controllers/socketControllers.js'
 import { connectCluster } from './cluster.js'
 import { port as PORT, mode as MODE } from './config/minimist.js'
 

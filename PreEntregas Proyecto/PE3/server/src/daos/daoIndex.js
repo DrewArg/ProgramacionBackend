@@ -1,6 +1,4 @@
-let productsDao
-let sessionsDao
-let usersDao
+let productsDao, sessionsDao, usersDao, cartsDao
 
 switch (process.env.DB_PRODUCTS) {
     case "products-mongodb":
@@ -44,4 +42,18 @@ switch (process.env.DB_USERS) {
         break;
 }
 
-export { productsDao, sessionsDao, usersDao }
+switch (process.env.DB_CARTS) {
+    case "carts-mongodb":
+        const { default: DaoMongoDb } = await import('./DaoMongoDb.js')
+        cartsDao = new DaoMongoDb('carts')
+
+        break;
+
+    default:
+        //TODO habria que agregar un segundo o un default metodo de guardado de datos
+        const { default: DaoMongoDb2 } = await import('./DaoMongoDb.js')
+        cartsDao = new DaoMongoDb2('carts')
+        break;
+}
+
+export { productsDao, sessionsDao, usersDao, cartsDao }

@@ -10,9 +10,12 @@ export const isLoggedIn = (req, res) => {
 }
 
 export const loginController = (req, res) => {
+    console.log(req.body);
     passport.authenticate('local-login', async (error, user, options) => {
         if (user) {
             await req.logIn(user, async () => {
+                const session = req.session
+                session.name = req.body.username
                 return await res.json(user)
             })
         } else if (options) {

@@ -9,8 +9,6 @@ passport.use('local-register', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 },
-
-
     async (req, username, password, done) => {
         try {
             const usr = {
@@ -35,7 +33,9 @@ passport.use('local-login', new LocalStrategy({
 },
 
     async (_, username, password, done) => {
+        console.log("aca");
         const user = await autenticar(username, password)
+        console.log(user);
         if (!user) {
             return done(null, false)
         } else {

@@ -17,6 +17,7 @@ const Login = ({ setLoginPipActive }) => {
             password: userPass
         }
 
+
         await fetch(url, {
             method: 'POST',
             body: JSON.stringify(user),
@@ -81,8 +82,8 @@ const Login = ({ setLoginPipActive }) => {
                             <label className='formLabel'> Contraseña
                             </label>
                             <input className='formInput' type="password" placeholder='contraseña' id='password' name="password" value={userPass} onInput={e => setUserPass(e.target.value)} />
-                            <button className='btn__submit' onClick={login}>Ingresar</button>
                         </form>
+                        <button className='btn__submit' onClick={login}>Ingresar</button>
                     </div>
                     <div className='pipBackground'></div>
                 </>
@@ -98,8 +99,8 @@ const Login = ({ setLoginPipActive }) => {
                             <label className='formLabel'> Contraseña
                             </label>
                             <input className='formInput' type="password" placeholder='contraseña' id='password' name="password" value={userPass} onInput={e => setUserPass(e.target.value)} />
-                            <button className='btn__submit' onClick={login}>Ingresar</button>
                         </form>
+                        <button className='btn__submit' onClick={login}>Ingresar</button>
                     </div>
                     <div className='pipBackground'></div>
 

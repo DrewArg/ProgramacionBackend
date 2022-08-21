@@ -17,7 +17,6 @@ const Register = ({ setRegisterPipActive }) => {
             username: username,
             password: userPass
         }
-
         await fetch(url, {
             method: 'POST',
             body: JSON.stringify(user),

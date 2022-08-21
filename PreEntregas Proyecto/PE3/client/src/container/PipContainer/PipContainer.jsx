@@ -2,17 +2,17 @@ import React from 'react'
 import Login from '../../components/Login/Login.jsx'
 import Register from '../../components/Register/Register.jsx'
 
-const PipContainer = ({ loginPipActive, registerPipActive }) => {
+const PipContainer = ({ loginPipActive, setLoginPipActive, registerPipActive, setRegisterPipActive }) => {
 
     return (
         <>
             {
                 loginPipActive ?
 
-                    <Login /> :
+                    <Login setLoginPipActive={setLoginPipActive} /> :
                     registerPipActive ?
 
-                        <Register />
+                        <Register setRegisterPipActive={setRegisterPipActive} />
                         :
                         <>
                         </>

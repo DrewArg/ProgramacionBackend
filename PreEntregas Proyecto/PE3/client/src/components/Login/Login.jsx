@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { ImCross } from 'react-icons/im'
+import './Login.css'
 
-const Login = () => {
+const Login = ({ setLoginPipActive }) => {
 
     const [username, setUsername] = useState('')
     const [userPass, setUserPass] = useState('')
@@ -69,33 +71,38 @@ const Login = () => {
             {errorLogin ?
 
                 <>
-                    <h2>Ha ocurrido un error en tu ingreso, prueba de nuevo</h2>
-                    <div className='login'>
-                        <form>
+                    <div className='loginForm'>
+                        <ImCross className='loginForm__exit' onClick={() => { setLoginPipActive(false) }} />
+                        <h2>Ha ocurrido un error en tu ingreso, prueba de nuevo</h2>
+                        <form className='loginForm__form'>
                             <label className='formLabel'> Nombre de usuario
-                                <input className='formInput' type="text" placeholder='nombre de usuario' id='username' name="username" value={username} onInput={e => setUsername(e.target.value)} />
                             </label>
+                            <input className='formInput' type="text" placeholder='nombre de usuario' id='username' name="username" value={username} onInput={e => setUsername(e.target.value)} />
                             <label className='formLabel'> Contraseña
-                                <input className='formInput' type="password" placeholder='contraseña' id='password' name="password" value={userPass} onInput={e => setUserPass(e.target.value)} />
                             </label>
+                            <input className='formInput' type="password" placeholder='contraseña' id='password' name="password" value={userPass} onInput={e => setUserPass(e.target.value)} />
                             <button className='btn__submit' onClick={login}>Ingresar</button>
                         </form>
                     </div>
+                    <div className='pipBackground'></div>
                 </>
 
                 :
                 <>
-                    <div className='login'>
-                        <form>
+                    <div className='loginForm'>
+                        <ImCross className='loginForm__exit' onClick={() => { setLoginPipActive(false) }} />
+                        <form className='loginForm__form'>
                             <label className='formLabel'> Nombre de usuario
-                                <input className='formInput' type="text" placeholder='nombre de usuario' id='username' name="username" value={username} onInput={e => setUsername(e.target.value)} />
                             </label>
+                            <input className='formInput' type="text" placeholder='nombre de usuario' id='username' name="username" value={username} onInput={e => setUsername(e.target.value)} />
                             <label className='formLabel'> Contraseña
-                                <input className='formInput' type="password" placeholder='contraseña' id='password' name="password" value={userPass} onInput={e => setUserPass(e.target.value)} />
                             </label>
+                            <input className='formInput' type="password" placeholder='contraseña' id='password' name="password" value={userPass} onInput={e => setUserPass(e.target.value)} />
                             <button className='btn__submit' onClick={login}>Ingresar</button>
                         </form>
                     </div>
+                    <div className='pipBackground'></div>
+
                 </>
             }
         </>

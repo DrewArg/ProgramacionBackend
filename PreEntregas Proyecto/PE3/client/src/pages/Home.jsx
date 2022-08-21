@@ -14,7 +14,7 @@ const Home = () => {
             <Navbar setLoginPipActive={setLoginPipActive} setRegisterPipActive={setRegisterPipActive} />
             <Banner />
             <FeaturedProductsContainer />
-            <PipContainer loginPipActive={loginPipActive} registerPipActive={registerPipActive} />
+            <PipContainer setLoginPipActive={setLoginPipActive} loginPipActive={loginPipActive} setRegisterPipActive={setRegisterPipActive} registerPipActive={registerPipActive} />
             <button className='btn__shop'>Ver todos los productos</button>
         </>
     )

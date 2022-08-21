@@ -14,7 +14,6 @@ const FeaturedProducts = ({ products }) => {
                         :
                         <h3>No hay productos destacados actualmente...</h3>
                 }
-
             </div>
         </>
     )

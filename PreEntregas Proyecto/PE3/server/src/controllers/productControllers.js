@@ -43,6 +43,19 @@ export const productController = {
         } catch (error) {
             console.error(`Product controller --> ${error}`);
         }
+    },
+
+    async getFeaturedProducts() {
+        try {
+            const products = await productsDao.listAll()
+            if (products.length > 4){
+                return products.splice(-5)
+            }else{
+                return products
+            }
+        } catch (error) {
+            console.error(`Product controller --> ${error}`);
+        }
     }
 }
 

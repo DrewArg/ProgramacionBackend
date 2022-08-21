@@ -1,7 +1,6 @@
 import { Server as Socket } from 'socket.io'
 import { productController } from './productControllers.js'
 import { cartController } from './cartControllers.js'
-import { userController } from './userControllers.js'
 
 export function SocketController(server) {
     const socketServer = new Socket(server, {
@@ -51,6 +50,16 @@ export function SocketController(server) {
 
         expressSocket.on("getAllProducts", async () => {
             socketServer.sockets.emit("products", await _tryGetAllProducts())
+        })
+
+        expressSocket.on("getFeaturedProducts", async () => {
+            try {
+                const featuredProds = productController.getFeaturedProducts()
+                socketServer.sockets.emit("featuredProducts", featuredProds)
+            } catch (error) {
+                console.error(`Socket controller --> ${error}`);
+            }
+
         })
 
 

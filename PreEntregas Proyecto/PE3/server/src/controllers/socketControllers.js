@@ -6,7 +6,7 @@ import { userController } from './userControllers.js'
 export function SocketController(server) {
     const socketServer = new Socket(server, {
         cors: {
-            origin: 'http://localhost:8080',
+            origin: 'http://localhost:3000',
             methods: ["GET", "POST", "PUT", "DELETE"],
             credentials: true
         }

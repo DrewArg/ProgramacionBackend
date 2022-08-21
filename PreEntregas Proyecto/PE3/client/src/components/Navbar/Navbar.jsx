@@ -1,9 +1,11 @@
 import React from 'react'
+import { useState } from 'react'
 import { BsSearch, BsCart2 } from 'react-icons/bs'
 import { FiUser } from 'react-icons/fi'
 import './Navbar.css'
 
 const Navbar = () => {
+    const [userOptions, setUserOptions] = useState(false)
     return (
         <>
             <div className='navbarSup'>
@@ -21,7 +23,17 @@ const Navbar = () => {
                         <BsCart2 />
                     </div>
                     <div className='navbarSup__icons--user'>
-                        <FiUser />
+                        <FiUser onClick={() => { setUserOptions(!userOptions) }} />
+                        {
+                            userOptions ?
+                                <>
+                                    <ul className='userOptionsMenu'>
+                                        <li className='userOptionsMenu__item'>Ingresar</li>
+                                        <li className='userOptionsMenu__item'>Registrarse</li>
+                                    </ul>
+                                </>
+                                : ""
+                        }
                     </div>
                 </div>
             </div>

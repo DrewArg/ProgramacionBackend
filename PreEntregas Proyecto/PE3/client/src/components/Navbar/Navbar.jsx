@@ -4,7 +4,7 @@ import { BsSearch, BsCart2 } from 'react-icons/bs'
 import { FiUser } from 'react-icons/fi'
 import './Navbar.css'
 
-const Navbar = () => {
+const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
     const [userOptions, setUserOptions] = useState(false)
     return (
         <>
@@ -28,8 +28,8 @@ const Navbar = () => {
                             userOptions ?
                                 <>
                                     <ul className='userOptionsMenu'>
-                                        <li className='userOptionsMenu__item'>Ingresar</li>
-                                        <li className='userOptionsMenu__item'>Registrarse</li>
+                                        <li className='userOptionsMenu__item' onClick={() => { setLoginPipActive(true); setRegisterPipActive(false) }}>Ingresar</li>
+                                        <li className='userOptionsMenu__item' onClick={() => { setRegisterPipActive(true); setLoginPipActive(false) }}>Registrarse</li>
                                     </ul>
                                 </>
                                 : ""

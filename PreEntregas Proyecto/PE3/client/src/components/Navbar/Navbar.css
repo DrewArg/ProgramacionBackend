@@ -113,5 +113,6 @@ input[type=search]::-webkit-search-cancel-button {
   width: 100%;
 }
 .userOptionsMenu__item:hover {
+  color: white;
   background-color: rgb(26, 108, 106);
 }/*# sourceMappingURL=Navbar.css.map */

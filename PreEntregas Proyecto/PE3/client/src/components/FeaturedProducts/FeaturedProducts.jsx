@@ -1,4 +1,5 @@
 import React from 'react'
+import ProductCard from '../ProductCard/ProductCard.jsx'
 
 const FeaturedProducts = ({ products }) => {
     return (

@@ -10,7 +10,7 @@ const Login = () => {
     const [errorRegister, setErrorRegister] = useState(false)
 
     const register = async () => {
-        const url = 'https://localhost:8080/auth/register'
+        const url = 'http://localhost:8080/auth/register'
         const user = {
             username: username,
             password: userPass
@@ -22,7 +22,7 @@ const Login = () => {
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'https://localhost:3000',
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },
@@ -42,7 +42,7 @@ const Login = () => {
     }
 
     const login = async () => {
-        const url = 'https://localhost:8080/auth/login'
+        const url = 'http://localhost:8080/auth/login'
         const user = {
             username: username,
             password: userPass
@@ -54,7 +54,7 @@ const Login = () => {
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'https://localhost:3000',
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },
@@ -74,7 +74,7 @@ const Login = () => {
     }
 
     const logout = async () => {
-        const url = 'https://localhost:8080/auth/logout'
+        const url = 'http://localhost:8080/auth/logout'
         const user = {
             username: username,
             password: userPass
@@ -86,7 +86,7 @@ const Login = () => {
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'https://localhost:3000',
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },

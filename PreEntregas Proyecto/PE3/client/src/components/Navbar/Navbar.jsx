@@ -11,8 +11,8 @@ const Navbar = () => {
                     PE3
                 </div>
                 <div className='navbarSup__search'>
-                    <form action="/" method="GET" class="navbarSup__search--form">
-                        <input type="search" placeholder="Search" class="navbarSup__search--searchField" />
+                    <form action="/" method="GET" className="navbarSup__search--form">
+                        <input type="search" placeholder="Search" className="navbarSup__search--searchField" />
                         <BsSearch className='navbarSup__search--button' />
                     </form>
                 </div>

@@ -20,7 +20,7 @@ const FeaturedProductsContainer = () => {
             setProducts(prods)
             setLoading(false)
         })
-    })
+    }, [reactSocket, request])
     return (
         <>
             {

@@ -48,15 +48,15 @@ const Register = ({ setRegisterPipActive }) => {
                     <div className='registerForm'>
                         <ImCross className='registerForm__exit' onClick={() => { setRegisterPipActive(false) }} />
                         <h2>Ha ocurrido un error en tu registro, prueba de nuevo</h2>
-                        <form className='registerForm__form'>
+                        <form className='registerForm__form' >
                             <label className='formLabel'> Nombre de usuario
                             </label>
                             <input className='formInput' type="text" placeholder='nombre de usuario' id='username' name="username" value={username} onInput={e => setUsername(e.target.value)} />
                             <label className='formLabel'> Contraseña
                             </label>
                             <input className='formInput' type="password" placeholder='contraseña' id='password' name="password" value={userPass} onInput={e => setUserPass(e.target.value)} />
-                            <button className='btn__submit' onClick={register}>Registrarse</button>
                         </form>
+                        <button className='btn__submit' onClick={register}>Registrarse</button>
                     </div>
                     <div className='pipBackground'></div>
 
@@ -72,8 +72,8 @@ const Register = ({ setRegisterPipActive }) => {
                             <label className='formLabel'> Contraseña
                             </label>
                             <input className='formInput' type="password" placeholder='contraseña' id='password' name="password" value={userPass} onInput={e => setUserPass(e.target.value)} />
-                            <button className='btn__submit' onClick={register}>Registrarse</button>
                         </form>
+                        <button className='btn__submit' onClick={register}>Registrarse</button>
                     </div>
                     <div className='pipBackground'></div>
 

@@ -9,10 +9,8 @@ export const registerController = (req, res) => {
                 return await res.json(user)
             })
         } else if (options) {
-            console.log('options');
             return res.json(options)
         } else {
-            console.log("else " + user);
             return res.status(204).send('')
         }
     })(req, res)

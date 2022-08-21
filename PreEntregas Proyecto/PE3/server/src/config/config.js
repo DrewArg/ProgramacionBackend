@@ -9,7 +9,7 @@ const password = process.env.MONGO_PASS
 
 export const sessionConfig = {
     store: MongoStore.create({
-        mongoUrl: `mongodb+srv://${username}:${password}@cluster.vcbuwku.mongodb.net/coderhouse?retryWrites=true&w=majority`,
+        mongoUrl: `mongodb+srv://${username}:${password}@cluster.vcbuwku.mongodb.net/preEntrega3?retryWrites=true&w=majority`,
         mongoOptions: {
             useNewUrlParser: true,
             useUnifiedTopology: true

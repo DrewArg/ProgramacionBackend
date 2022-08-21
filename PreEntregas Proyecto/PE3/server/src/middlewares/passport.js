@@ -1,15 +1,15 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-
 import { userController } from '../controllers/userControllers.js'
 import { registerUser } from '../api/userApi.js'
 import { autenticar } from '../api/authenticate.js'
 
-passport.use('local-strategy', new LocalStrategy({
+passport.use('local-register', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
     passReqToCallback: true
 },
+
 
     async (req, username, password, done) => {
         try {

@@ -4,7 +4,7 @@ import productRouter from './productRouter.js'
 
 const apiRouter = Router()
 
-apiRouter.use('/api',authRouter)
+apiRouter.use('/auth',authRouter)
 apiRouter.use('/api',productRouter)
 
 apiRouter.all('*',(req,res)=>{

@@ -4,7 +4,7 @@ import { loginController, logoutController } from '../../controllers/loginContro
 
 const authRouter = Router()
 
-authRouter.use((req, res, next) => {
+authRouter.use(function (req, res, next) {
     res.header("Access-Control-Allow-Credentials", true)
     res.header("Access-Control-Allow-Origin", req.headers.origin)
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE")
@@ -16,6 +16,8 @@ authRouter.use((req, res, next) => {
         next()
     }
 })
+
+
 
 authRouter.post("/register", (req, res) => registerController(req, res))
 authRouter.post("/login", (req, res) => loginController(req, res))

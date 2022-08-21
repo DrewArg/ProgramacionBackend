@@ -10,20 +10,20 @@ const ProductList = ({ products }) => {
             <div id='productTable'>
                 {
                     products.length > 0 ?
-                        <table className='productTable'>
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Precio</th>
-                                    <th>Imágen</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {products.map(p => { return <ProductCard key={p.id} product={p} /> })}
-                            </tbody>
-                        </table>
-                        :
-                        <h3>No hay productos en el sistema actualmente...</h3>
+                    <table className='productTable'>
+                    {/* <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Imágen</th>
+                        </tr>
+                    </thead> */}
+                    <tbody>
+                        {products.map(p => { return <ProductCard key={p.id} product={p} /> })}
+                    </tbody>
+                </table>
+                :
+                <h3>No hay productos en el sistema actualmente...</h3>
                 }
             </div>
         </>

@@ -83,11 +83,22 @@ input[type=search]::-webkit-search-cancel-button {
   font-size: 1em;
   font-weight: 400;
 }
+.navbarBot__list a {
+  text-decoration: none;
+  color: black;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
 .navbarBot__list--element {
   margin-left: 12em;
+}
+.navbarBot__list--element:hover {
+  font-weight: 500;
   cursor: pointer;
 }
-.navbarBot__list--home {
+.navbarBot__list--home:hover {
+  font-weight: 500;
   cursor: pointer;
 }
 

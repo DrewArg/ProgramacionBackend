@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { BsSearch, BsCart2 } from 'react-icons/bs'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { FiUser } from 'react-icons/fi'
 import './Navbar.css'
 
@@ -40,9 +41,15 @@ const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
 
             <div className='navbarBot'>
                 <ul className='navbarBot__list'>
-                    <li className='navbarBot__list--home'>Home</li>
-                    <li className='navbarBot__list--element'>Tienda</li>
-                    <li className='navbarBot__list--element'>Contacto</li>
+                    <Link to={'/'}>
+                        <li className='navbarBot__list--home'>Home</li>
+                    </Link>
+                    <Link to={'/shop'}>
+                        <li className='navbarBot__list--element'>Tienda</li>
+                    </Link>
+                    <Link to={'/'}>
+                        <li className='navbarBot__list--element'>Contacto</li>
+                    </Link>
                 </ul>
             </div>
         </>

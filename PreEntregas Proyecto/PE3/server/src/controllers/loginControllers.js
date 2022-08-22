@@ -10,7 +10,6 @@ export const isLoggedIn = (req, res) => {
 }
 
 export const loginController = (req, res) => {
-    console.log(req.body);
     passport.authenticate('local-login', async (error, user, options) => {
         if (user) {
             await req.logIn(user, async () => {
@@ -23,7 +22,7 @@ export const loginController = (req, res) => {
         } else {
             return res.status(204).send('')
         }
-    })
+    })(req,res)
 }
 
 export const logoutController = async (req, res) => {
@@ -34,4 +33,4 @@ export const logoutController = async (req, res) => {
         // sessionsDao.deleteAll()
         return res.send('')
     }
-}
+}   

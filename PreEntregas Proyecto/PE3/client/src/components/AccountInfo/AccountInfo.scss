@@ -3,4 +3,20 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin: 2em;
+
+    &__edit {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+
+        &--checkmark{
+            color: green;
+        }
+
+        &--pencil{
+            color: red;
+        }
+    }
 }

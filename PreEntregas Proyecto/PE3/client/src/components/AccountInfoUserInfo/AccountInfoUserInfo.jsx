@@ -2,11 +2,11 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import './AccountInfoUserInfo.css'
 
 
-const AccountInfoUserInfo = () => {
+const AccountInfoUserInfo = ({ isEditable }) => {
     const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
     const navigate = useNavigate()
 
     const getAccountInfo = async () => {
@@ -28,7 +28,6 @@ const AccountInfoUserInfo = () => {
                 const json = JSON.parse(text)
                 if (json != " ") {
                     setUsername(json.username)
-                    setPassword(json.password)
                 } else {
 
                     navigate("/");
@@ -48,41 +47,65 @@ const AccountInfoUserInfo = () => {
 
     }, []);
     return (
-        <div className='accountInfo__userInfo'>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>Usuario</td>
-                        <td>{username}</td>
-                    </tr>
-                    <tr>
-                        <td>Contraseña</td>
-                        <td>{password}</td>
-                    </tr>
-                    <tr>
-                        <td>Nombre completo</td>
-                        <td>userFullName</td>
-                    </tr>
-                    <tr>
-                        <td>Dirección</td>
-                        <td>userAddress</td>
-                    </tr>
-                    <tr>
-                        <td>Edad</td>
-                        <td>userAge</td>
-                    </tr>
-                    <tr>
-                        <td>N° de teléfono</td>
-                        <td>userPhoneNumber</td>
-                    </tr>
-                    <tr>
-                        <td>Avatar</td>
-                        <td>userAvatar</td>
-                    </tr>
-                </tbody>
+        <form className='accountInfo__userInfo'>
+            {isEditable ?
+                <>
+                    <div>
+                        <label>Usuario</label>
+                        <input type={'text'} value={username} placeholder={'usuario'} />
+                    </div>
+                    <div>
+                        <label>Nombre Completo</label>
+                        <input type={'text'} value={''} placeholder={'nombre completo'} />
+                    </div>
+                    <div>
+                        <label>Dirección</label>
+                        <input type={'text'} value={''} placeholder={'dirección'} />
+                    </div>
+                    <div>
+                        <label>Edad</label>
+                        <input type={'number'} value={''} placeholder={'edad'} />
+                    </div>
+                    <div>
+                        <label>N° de teléfono</label>
+                        <input type={'number'} value={''} placeholder={'teléfono'} />
+                    </div>
+                    <div>
+                        <label>Avatar</label>
+                        <input type={'text'} value={''} placeholder={'avatar'} />
+                    </div>
+                </>
 
-            </table>
-        </div>
+                :
+                <>
+                    <div>
+                        <label>Usuario</label>
+                        <input type={'text'} value={username} placeholder={'usuario'} disabled />
+                    </div>
+                    <div>
+                        <label>Nombre Completo</label>
+                        <input type={'text'} value={''} placeholder={'nombre completo'} disabled />
+                    </div>
+                    <div>
+                        <label>Dirección</label>
+                        <input type={'text'} value={''} placeholder={'dirección'} disabled />
+                    </div>
+                    <div>
+                        <label>Edad</label>
+                        <input type={'number'} value={''} placeholder={'edad'} disabled />
+                    </div>
+                    <div>
+                        <label>N° de teléfono</label>
+                        <input type={'number'} value={''} placeholder={'teléfono'} disabled />
+                    </div>
+                    <div>
+                        <label>Avatar</label>
+                        <input type={'text'} value={''} placeholder={'avatar'} disabled />
+                    </div>
+                </>
+            }
+        </form>
+
     )
 }
 

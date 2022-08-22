@@ -3,4 +3,17 @@
   flex-direction: row;
   flex-wrap: wrap;
   margin: 2em;
+}
+.accountInfo__edit {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+.accountInfo__edit--checkmark {
+  color: green;
+}
+.accountInfo__edit--pencil {
+  color: red;
 }/*# sourceMappingURL=AccountInfo.css.map */

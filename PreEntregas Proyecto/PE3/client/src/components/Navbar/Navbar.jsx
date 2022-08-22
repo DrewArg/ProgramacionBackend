@@ -81,7 +81,9 @@ const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
 
                                             loggedIn ?
                                                 <>
-                                                    <li className='userOptionsMenu__item' onClick={() => { setLoginPipActive(true); setRegisterPipActive(false); setUserOptions(!userOptions) }}>Mi cuenta</li>
+                                                    <Link to={'/my-account'}>
+                                                        <li className='userOptionsMenu__item' onClick={() => { setUserOptions(!userOptions) }}>Mi cuenta</li>
+                                                    </Link>
                                                     <li className='userOptionsMenu__item' onClick={() => { logout(); setUserOptions(!userOptions) }}>Cerrar sesión</li>
 
                                                 </>

@@ -4,6 +4,7 @@ import { SocketContext, socket } from './context/Socket';
 import { useState } from 'react'
 import Home from './pages/Home/Home';
 import Shop from './pages/Shop/Shop';
+import Account from './pages/Account/Account';
 
 function App() {
   const [loginPipActive, setLoginPipActive] = useState(false)
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home  loginPipActive={loginPipActive} registerPipActive={registerPipActive} setLoginPipActive={setLoginPipActive} setRegisterPipActive={setRegisterPipActive} />} />
             <Route path="/shop" element={<Shop loginPipActive={loginPipActive} registerPipActive={registerPipActive} setLoginPipActive={setLoginPipActive} setRegisterPipActive={setRegisterPipActive} />} />
+            <Route path="/my-account" element={<Account loginPipActive={loginPipActive} registerPipActive={registerPipActive} setLoginPipActive={setLoginPipActive} setRegisterPipActive={setRegisterPipActive} />} />
           </Routes>
         </div>
       </SocketContext.Provider>

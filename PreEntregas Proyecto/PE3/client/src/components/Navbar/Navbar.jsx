@@ -7,6 +7,52 @@ import './Navbar.css'
 
 const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
     const [userOptions, setUserOptions] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(false)
+
+    const isLogged = async () => {
+        const url = 'http://localhost:8080/auth/isLogged'
+
+        await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Credentials': 'true',
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Methods': 'POST,GET',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        }).then(async (r) => {
+            if (r.status === 200) {
+                const text = await r.text()
+                console.log("text: " + text);
+                if (text == 'true') {
+                    setLoggedIn(true)
+                } else {
+                    setLoggedIn(false)
+                }
+            } else {
+            }
+        })
+    }
+
+    const logout = async () => {
+        const url = 'http://localhost:8080/auth/logout'
+
+        await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Credentials': 'true',
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Methods': 'POST,GET',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+    }
+
+
     return (
         <>
             <div className='navbarSup'>
@@ -24,16 +70,32 @@ const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
                         <BsCart2 />
                     </div>
                     <div className='navbarSup__icons--user'>
-                        <FiUser onClick={() => { setUserOptions(!userOptions) }} />
+                        <FiUser onClick={() => { setUserOptions(!userOptions); isLogged() }} />
+                        {
+                            console.log("isLogged: " + loggedIn)}
                         {
                             userOptions ?
                                 <>
                                     <ul className='userOptionsMenu'>
-                                        <li className='userOptionsMenu__item' onClick={() => { setLoginPipActive(true); setRegisterPipActive(false) }}>Ingresar</li>
-                                        <li className='userOptionsMenu__item' onClick={() => { setRegisterPipActive(true); setLoginPipActive(false) }}>Registrarse</li>
+                                        {
+
+                                            loggedIn ?
+                                                <>
+                                                    <li className='userOptionsMenu__item' onClick={() => { setLoginPipActive(true); setRegisterPipActive(false); setUserOptions(!userOptions) }}>Mi cuenta</li>
+                                                    <li className='userOptionsMenu__item' onClick={() => { logout(); setUserOptions(!userOptions) }}>Cerrar sesión</li>
+
+                                                </>
+                                                :
+
+                                                <>
+                                                    <li className='userOptionsMenu__item' onClick={() => { setLoginPipActive(true); setRegisterPipActive(false); setUserOptions(!userOptions) }}>Ingresar</li>
+                                                    <li className='userOptionsMenu__item' onClick={() => { setRegisterPipActive(true); setLoginPipActive(false); setUserOptions(!userOptions) }}>Registrarse</li>
+                                                </>
+
+
+                                        }
                                     </ul>
-                                </>
-                                : ""
+                                </> : ""
                         }
                     </div>
                 </div>

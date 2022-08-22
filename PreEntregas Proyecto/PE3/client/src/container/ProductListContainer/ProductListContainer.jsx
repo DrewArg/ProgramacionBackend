@@ -21,7 +21,7 @@ const ProductListContainer = () => {
             setProducts(prods)
             setLoading(false)
         })
-    })
+    },[reactSocket,request])
     return (
         <>
             {

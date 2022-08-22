@@ -14,7 +14,7 @@ function App() {
       <SocketContext.Provider value={socket}>
         <div className="App">
           <Routes>
-            <Route path="/" element={<Home loginPipActive={loginPipActive} registerPipActive={registerPipActive} setLoginPipActive={setLoginPipActive} setRegisterPipActive={setRegisterPipActive} />} />
+            <Route path="/" element={<Home  loginPipActive={loginPipActive} registerPipActive={registerPipActive} setLoginPipActive={setLoginPipActive} setRegisterPipActive={setRegisterPipActive} />} />
             <Route path="/shop" element={<Shop loginPipActive={loginPipActive} registerPipActive={registerPipActive} setLoginPipActive={setLoginPipActive} setRegisterPipActive={setRegisterPipActive} />} />
           </Routes>
         </div>

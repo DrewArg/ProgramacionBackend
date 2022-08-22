@@ -3,11 +3,13 @@ import Navbar from '../../components/Navbar/Navbar'
 import Banner from '../../components/Banner/Banner'
 import FeaturedProductsContainer from '../../container/FeaturedProductsContainer/FeaturedProductsContainer.jsx'
 import PipContainer from '../../container/PipContainer/PipContainer'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 
+const Home = ({ setLoginPipActive, loginPipActive, setRegisterPipActive, registerPipActive }) => {
 
-const Home = ({setLoginPipActive,loginPipActive,setRegisterPipActive,registerPipActive}) => {
-   
+
     return (
         <>
             <Navbar setLoginPipActive={setLoginPipActive} setRegisterPipActive={setRegisterPipActive} />

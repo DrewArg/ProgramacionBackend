@@ -33,6 +33,7 @@ const Login = ({ setLoginPipActive }) => {
             if (r.status === 200) {
                 const text = await r.text()
                 const user = JSON.parse(text)
+                console.log(text);
                 setName(user.username)
                 setErrorLogin(false)
             } else {
@@ -41,7 +42,7 @@ const Login = ({ setLoginPipActive }) => {
         })
     }
 
-   
+
     return (
         <>
             {errorLogin ?

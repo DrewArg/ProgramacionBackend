@@ -34,7 +34,6 @@ passport.use('local-login', new LocalStrategy({
 
     async (_, username, password, done) => {
         const user = await autenticar(username, password)
-        console.log(user);
         if (!user) {
             return done(null, false)
         } else {

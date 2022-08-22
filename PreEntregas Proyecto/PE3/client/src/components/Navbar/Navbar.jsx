@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { BsSearch, BsCart2 } from 'react-icons/bs'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { FiUser } from 'react-icons/fi'
 import './Navbar.css'
 
@@ -25,7 +25,6 @@ const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
         }).then(async (r) => {
             if (r.status === 200) {
                 const text = await r.text()
-                console.log("text: " + text);
                 if (text == 'true') {
                     setLoggedIn(true)
                 } else {
@@ -56,9 +55,11 @@ const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
     return (
         <>
             <div className='navbarSup'>
-                <div className='navbarSup__brand'>
-                    PE3
-                </div>
+                <Link to={'/'}>
+                    <div className='navbarSup__brand'>
+                        PE3
+                    </div>
+                </Link>
                 <div className='navbarSup__search'>
                     <form action="/" method="GET" className="navbarSup__search--form">
                         <input type="search" placeholder="Search" className="navbarSup__search--searchField" />
@@ -71,8 +72,7 @@ const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
                     </div>
                     <div className='navbarSup__icons--user'>
                         <FiUser onClick={() => { setUserOptions(!userOptions); isLogged() }} />
-                        {
-                            console.log("isLogged: " + loggedIn)}
+
                         {
                             userOptions ?
                                 <>
@@ -84,8 +84,9 @@ const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
                                                     <Link to={'/my-account'}>
                                                         <li className='userOptionsMenu__item' onClick={() => { setUserOptions(!userOptions) }}>Mi cuenta</li>
                                                     </Link>
-                                                    <li className='userOptionsMenu__item' onClick={() => { logout(); setUserOptions(!userOptions) }}>Cerrar sesión</li>
-
+                                                    <Link to={'/'}>
+                                                        <li className='userOptionsMenu__item' onClick={() => { logout(); setUserOptions(!userOptions) }}>Cerrar sesión</li>
+                                                    </Link>
                                                 </>
                                                 :
 

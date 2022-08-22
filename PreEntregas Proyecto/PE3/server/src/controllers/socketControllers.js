@@ -13,10 +13,10 @@ export function SocketController(server) {
   });
 
   socketServer.on("connect", (expressSocket) => {
-    console.log(`new connection: ${expressSocket.id}`);
+    (`new connection: ${expressSocket.id}`);
 
     expressSocket.on("disconnect", () => {
-      console.log(`disconnected: ${expressSocket.id}`);
+      (`disconnected: ${expressSocket.id}`);
     });
 
     //TODO PARA GUARDAR UN PRODUCTO TIENE QUE SER ADMIN - MIDDLEWARE DE ADMIN
@@ -45,7 +45,7 @@ export function SocketController(server) {
         await productController.deleteById(productId);
         // socketServer.sockets.emit("products", await _tryGetAllProducts())
       } catch (error) {
-        console.log("else");
+        ("else");
 
         console.error(`Socket controller --> ${error}`);
       }

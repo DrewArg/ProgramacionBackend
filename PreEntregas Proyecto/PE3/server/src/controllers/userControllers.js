@@ -80,5 +80,17 @@ export const userController = {
         } catch (error) {
             console.error(`User controller --> ${error}`);
         }
+    },
+
+    async isAdmin(username,userPass){
+        if(process.env.ADMIN === username){
+            if(process.env.PASS === userPass){
+                return true
+            }else{
+                return false
+            }
+        }else{
+            return false
+        }
     }
 }

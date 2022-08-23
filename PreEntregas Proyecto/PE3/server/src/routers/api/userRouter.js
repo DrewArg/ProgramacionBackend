@@ -26,5 +26,6 @@ userRouter.get("/info", async (req, res) => {
     }
 })
 userRouter.post("/update", userController.saveUser)
+userRouter.post("/isAdmin",userController.isAdmin)
 
 export default userRouter

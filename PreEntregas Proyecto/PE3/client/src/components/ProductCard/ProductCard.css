@@ -7,6 +7,8 @@
   border: 1px solid black;
   background-color: rgb(212, 230, 230);
   font-size: 0.9em;
+  text-decoration: none;
+  color: black;
 }
 .productCard td {
   padding-bottom: 0.3em;

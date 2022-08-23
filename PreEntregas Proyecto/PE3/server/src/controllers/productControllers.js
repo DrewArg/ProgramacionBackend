@@ -1,10 +1,13 @@
 import { productsDao } from '../daos/daoIndex.js'
 
 export const productController = {
-    async getById(id) {
+
+    async getById(req, res) {
+        const bars = await req.url.split("/")
+        const split = bars[2].split(":")
         try {
-            const prod = await productsDao.listById(id)
-            return prod
+            const prod = await productsDao.listById(split[2])
+            res.json(prod)
         } catch (error) {
             console.error(`Product controller --> ${error}`);
         }

@@ -7,13 +7,14 @@ const ProductList = ({ products }) => {
     //TODO solo mostrar el product form si es admin
     //TODO COMPLETAR ESTO QUE ESTÁ MAL
 
-    const [username, setUsername] = useState('')
+    const [admin, setAdmin] = useState(false)
 
     const isAdmin = async () => {
+
         const url = 'http://localhost:8080/account/isAdmin'
 
         await fetch(url, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
@@ -25,28 +26,27 @@ const ProductList = ({ products }) => {
         }).then(async (r) => {
             if (r.status === 200) {
                 const text = await r.text()
-                const json = JSON.parse(text)
-                if (json !== " ") {
-                    setUsername(json.username)
+                const response = JSON.parse(text)
+                if (response) {
+                    setAdmin(true)
                 } else {
+                    setAdmin(false)
                 }
-            } else {
             }
         })
 
     }
     useEffect(() => {
-        let ignore = false;
-
-        if (!ignore) {
-            isAdmin()
-            return () => { ignore = true }
-        }
-
-    }, [isAdmin]);
+        isAdmin()
+    }, []);
     return (
         <>
-            <ProductForm />
+            {
+                admin ?
+                    < ProductForm />
+                    :
+                    ""
+            }
             <div id='productTable'>
                 {
                     products.length > 0 ?

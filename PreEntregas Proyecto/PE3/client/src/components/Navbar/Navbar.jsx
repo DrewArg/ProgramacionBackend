@@ -39,12 +39,12 @@ const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
         const url = 'http://localhost:8080/auth/logout'
 
         await fetch(url, {
-            method: 'DELETE',
+            method: 'GET',
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
                 'Access-Control-Allow-Origin': 'http://localhost:3000',
-                'Access-Control-Allow-Methods': 'POST,GET,DELETE',
+                'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },
             credentials: 'include'

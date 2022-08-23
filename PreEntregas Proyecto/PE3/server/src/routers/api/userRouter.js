@@ -19,6 +19,6 @@ userRouter.use(function (req, res, next) {
 
 userRouter.get("/info", (req, res) => userController.getUserInfo(req, res))
 userRouter.post("/update", userController.saveUser)
-userRouter.post("/isAdmin", userController.isAdmin)
+userRouter.post("/isAdmin", (req, res) => userController.isAdmin(req, res))
 
 export default userRouter

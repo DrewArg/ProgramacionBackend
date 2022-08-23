@@ -21,7 +21,7 @@ authRouter.use(function (req, res, next) {
 
 authRouter.post("/register", (req, res) => registerController(req, res))
 authRouter.post("/login", (req, res) => loginController(req, res))
-authRouter.delete("/logout", (req, res) => logoutController(req, res))
+authRouter.get("/logout", (req, res) => logoutController(req, res))
 authRouter.post("/isLogged", (req, res) => isLoggedIn(req, res))
 
 

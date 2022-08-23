@@ -9,6 +9,7 @@ apiRouter.use('/auth', authRouter)
 apiRouter.use('/api', productRouter)
 apiRouter.use('/account', userRouter)
 
+apiRouter.use('/', (req, res) => { res.status(200) })
 apiRouter.all('*', (req, res) => {
     res.status(404).json({
         error: 404,

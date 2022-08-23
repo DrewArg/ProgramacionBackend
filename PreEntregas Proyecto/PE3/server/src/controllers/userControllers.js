@@ -82,21 +82,29 @@ export const userController = {
         }
     },
 
-    async isAdmin(username, userPass) {
-        if (process.env.ADMIN === username) {
-            if (process.env.PASS === userPass) {
-                return true
+    async isAdmin(req, res) {
+        if (req.session.passport) {
+            const user = await this.getById(req.session.passport.user)
+            const username = user.username
+            const userPass = user.password
+            if (process.env.ADMIN === username) {
+                if (process.env.HASHPASS === userPass) {
+                    res.send(true)
+                } else {
+                    res.send(false)
+                }
             } else {
-                return false
+                res.send(false)
             }
         } else {
-            return false
+            res.send(false)
         }
+
+
     },
     async getUserInfo(req, res) {
         if (req.user) {
             const reqUser = await req.user
-
             const username = reqUser.username
             const user = await this.getByUsername(username)
             if (user) {

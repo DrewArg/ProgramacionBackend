@@ -1,17 +1,18 @@
 import React from 'react'
+import './ProductCard.css'
 
 const ProductCard = ({ product }) => {
     return (
         <>
-            <tr>
+            <tr className='productCard'>
+                <td>
+                    <img src={product.thumbnail} alt={product.alt} width="250" height="250" />
+                </td>
                 <td>
                     {product.title}
                 </td>
                 <td>
-                    {product.price}
-                </td>
-                <td>
-                    <img src={product.thumbnail} alt={product.alt} width="150" height="150" />
+                    ${product.price}
                 </td>
 
             </tr>

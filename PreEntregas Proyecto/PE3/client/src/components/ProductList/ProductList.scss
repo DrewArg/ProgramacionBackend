@@ -1,0 +1,10 @@
+.productTable {
+    &__body {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 2em;
+        justify-content: center;
+        align-items: center;
+    }
+}

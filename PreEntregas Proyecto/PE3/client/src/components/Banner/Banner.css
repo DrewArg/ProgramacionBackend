@@ -4,21 +4,33 @@
   background-size: cover;
   background-position: center;
   min-height: 13em;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   color: white;
 }
+
 .banner h1 {
   font-size: 1.7em;
   text-shadow: 0.2em black;
   letter-spacing: 0.2em;
   font-weight: 400;
 }
+
 .banner button {
-  background-color: rgb(112, 156, 155);
+  background-color: #709c9b;
   color: white;
   border: none;
   cursor: pointer;
@@ -27,4 +39,5 @@
   font: size 0.8em;
   margin-top: 1em;
   letter-spacing: 0.1em;
-}/*# sourceMappingURL=Banner.css.map */
+}
+/*# sourceMappingURL=Banner.css.map */

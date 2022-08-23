@@ -3,12 +3,19 @@
   top: 50%;
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  background-color: rgb(246, 250, 251);
-  border: 0.3em solid rgb(96, 192, 191);
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: #f6fafb;
+  border: 0.3em solid #60c0bf;
   padding: 1em;
   padding-left: 3em;
   padding-right: 3em;
@@ -16,28 +23,41 @@
   font-size: 1.3em;
   min-width: 22em;
 }
+
 .registerForm__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
+
 .registerForm__form label {
   margin-top: 1em;
   text-align: left;
 }
+
 .registerForm__form input {
   margin-top: 1em;
   margin-bottom: 2em;
 }
+
 .registerForm__form button {
   margin-top: 1em;
   margin-bottom: 1em;
 }
+
 .registerForm__exit {
-  color: rgb(120, 7, 7);
+  color: #780707;
   cursor: pointer;
-  align-self: flex-end;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
+
 .registerForm__exit:hover {
   color: red;
 }
@@ -50,4 +70,5 @@
   bottom: 0px;
   left: 0px;
   z-index: 2;
-}/*# sourceMappingURL=Register.css.map */
+}
+/*# sourceMappingURL=Register.css.map */

@@ -6,7 +6,6 @@ const Login = ({ setLoginPipActive }) => {
 
     const [username, setUsername] = useState('')
     const [userPass, setUserPass] = useState('')
-    const [name, setName] = useState('')
 
     const [errorLogin, setErrorLogin] = useState(false)
 
@@ -32,9 +31,7 @@ const Login = ({ setLoginPipActive }) => {
         }).then(async (r) => {
             if (r.status === 200) {
                 const text = await r.text()
-                const user = JSON.parse(text)
                 console.log(text);
-                setName(user.username)
                 setErrorLogin(false)
             } else {
                 setErrorLogin(true)

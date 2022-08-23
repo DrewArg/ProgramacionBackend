@@ -25,7 +25,7 @@ const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
         }).then(async (r) => {
             if (r.status === 200) {
                 const text = await r.text()
-                if (text == 'true') {
+                if (text === 'true') {
                     setLoggedIn(true)
                 } else {
                     setLoggedIn(false)

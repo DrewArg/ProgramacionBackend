@@ -26,7 +26,7 @@ const AccountInfoUserInfo = ({ isEditable }) => {
             if (r.status === 200) {
                 const text = await r.text()
                 const json = JSON.parse(text)
-                if (json != " ") {
+                if (json !== " ") {
                     setUsername(json.username)
                 } else {
 
@@ -45,64 +45,36 @@ const AccountInfoUserInfo = ({ isEditable }) => {
             return () => { ignore = true }
         }
 
-    }, []);
+    }, [getAccountInfo]);
     return (
         <form className='accountInfo__userInfo'>
+            <div className='accountInfo__userInfo--leftElements'>
+                <label>Usuario</label>
+                <label>Nombre Completo</label>
+                <label>Dirección</label>
+                <label>Edad</label>
+                <label>N° de teléfono</label>
+                <label>Avatar</label>
+            </div>
             {isEditable ?
-                <>
-                    <div>
-                        <label>Usuario</label>
-                        <input type={'text'} value={username} placeholder={'usuario'} />
-                    </div>
-                    <div>
-                        <label>Nombre Completo</label>
-                        <input type={'text'} value={''} placeholder={'nombre completo'} />
-                    </div>
-                    <div>
-                        <label>Dirección</label>
-                        <input type={'text'} value={''} placeholder={'dirección'} />
-                    </div>
-                    <div>
-                        <label>Edad</label>
-                        <input type={'number'} value={''} placeholder={'edad'} />
-                    </div>
-                    <div>
-                        <label>N° de teléfono</label>
-                        <input type={'number'} value={''} placeholder={'teléfono'} />
-                    </div>
-                    <div>
-                        <label>Avatar</label>
-                        <input type={'text'} value={''} placeholder={'avatar'} />
-                    </div>
-                </>
+                <div className='accountInfo__userInfo--rightElements'>
+                    <input type={'text'} value={username} placeholder={'usuario'} onChange={(e) => setUsername(e.target.value)} />
+                    <input type={'text'} value={''} placeholder={'nombre completo'} />
+                    <input type={'text'} value={''} placeholder={'dirección'} />
+                    <input type={'number'} value={''} placeholder={'edad'} />
+                    <input type={'number'} value={''} placeholder={'teléfono'} />
+                    <input type={'text'} value={''} placeholder={'avatar'} />
+                </div>
 
                 :
-                <>
-                    <div>
-                        <label>Usuario</label>
-                        <input type={'text'} value={username} placeholder={'usuario'} disabled />
-                    </div>
-                    <div>
-                        <label>Nombre Completo</label>
-                        <input type={'text'} value={''} placeholder={'nombre completo'} disabled />
-                    </div>
-                    <div>
-                        <label>Dirección</label>
-                        <input type={'text'} value={''} placeholder={'dirección'} disabled />
-                    </div>
-                    <div>
-                        <label>Edad</label>
-                        <input type={'number'} value={''} placeholder={'edad'} disabled />
-                    </div>
-                    <div>
-                        <label>N° de teléfono</label>
-                        <input type={'number'} value={''} placeholder={'teléfono'} disabled />
-                    </div>
-                    <div>
-                        <label>Avatar</label>
-                        <input type={'text'} value={''} placeholder={'avatar'} disabled />
-                    </div>
-                </>
+                <div className='accountInfo__userInfo--rightElements'>
+                    <input type={'text'} value={username} disabled placeholder={'usuario'} onChange={(e) => setUsername(e.target.value)} />
+                    <input type={'text'} value={''} disabled placeholder={'nombre completo'} />
+                    <input type={'text'} value={''} disabled placeholder={'dirección'} />
+                    <input type={'number'} value={''} disabled placeholder={'edad'} />
+                    <input type={'number'} value={''} disabled placeholder={'teléfono'} />
+                    <input type={'text'} value={''} disabled placeholder={'avatar'} />
+                </div>
             }
         </form>
 

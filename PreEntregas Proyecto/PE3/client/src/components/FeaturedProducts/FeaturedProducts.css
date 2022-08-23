@@ -1,0 +1,16 @@
+.featuredTable__body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 2em;
+  justify-content: center;
+  align-items: center;
+}
+
+.featuredProducts {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}/*# sourceMappingURL=FeaturedProducts.css.map */

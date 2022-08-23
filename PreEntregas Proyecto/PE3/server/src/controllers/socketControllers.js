@@ -57,7 +57,7 @@ export function SocketController(server) {
     expressSocket.on("getFeaturedProducts", async () => {
       try {
         const featuredProds = productController.getFeaturedProducts();
-        socketServer.sockets.emit("featuredProducts", featuredProds);
+        socketServer.sockets.emit("featuredProducts", await featuredProds);
       } catch (error) {
         console.error(`Socket controller --> ${error}`);
       }

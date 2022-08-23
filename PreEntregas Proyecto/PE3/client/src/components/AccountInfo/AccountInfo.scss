@@ -9,12 +9,15 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: flex-start;
+        font-size: 1.5em;
+        cursor: pointer;
+        margin-left: 4em;
 
-        &--checkmark{
+        &--checkmark {
             color: green;
         }
 
-        &--pencil{
+        &--pencil {
             color: red;
         }
     }

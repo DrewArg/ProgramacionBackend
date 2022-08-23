@@ -33,6 +33,7 @@ const Login = ({ setLoginPipActive }) => {
                 const text = await r.text()
                 console.log(text);
                 setErrorLogin(false)
+                setLoginPipActive(false)
             } else {
                 setErrorLogin(true)
             }

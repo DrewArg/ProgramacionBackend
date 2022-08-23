@@ -25,13 +25,18 @@ export const loginController = (req, res) => {
   })(req, res);
 };
 
-export const logoutController = async (req, res) => {
-  if (req.session) {
-    await req.logout();
-    res.clearCookie("http://localhost:3000");
-    req.session.destroy();
-    req.session = null;
-    sessionsDao.deleteAll()
+export const logoutController = (req, res) => {
+  if (req.session.passport) {
+    req.logout(function (err) {
+      if (err) { return next(err); }
+      res.redirect('/');
+    });
+    // res.clearCookie("http://localhost:3000");
+    // req.session.destroy();
+    // req.session = null;
+    // sessionsDao.deleteAll()
     // return res.send("");
   }
 };
+
+

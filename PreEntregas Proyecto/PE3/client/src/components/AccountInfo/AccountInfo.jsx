@@ -10,6 +10,13 @@ import './AccountInfo.css'
 const AccountInfo = () => {
     const [isEditable, setIsEditable] = useState(false)
 
+    const handleConfirm = () => {
+        setIsEditable(false)
+    }
+
+    const handleEdit = () => {
+        setIsEditable(true)
+    }
     return (
         <>
             <div className='accountInfo'>
@@ -19,12 +26,12 @@ const AccountInfo = () => {
                     {
                         isEditable ?
                             <div className='accountInfo__edit--checkmark'>
-                                <BsCheckLg onClick={() => { setIsEditable(false) }} /> ¡Confirmar cambios!
+                                <BsCheckLg onClick={() => { handleConfirm() }} />
                             </div>
                             :
 
                             <div className='accountInfo__edit--pencil'>
-                                <FaPencilAlt onClick={() => { setIsEditable(true) }} /> Editar datos
+                                <FaPencilAlt onClick={() => { handleEdit() }} />
                             </div>
 
                     }

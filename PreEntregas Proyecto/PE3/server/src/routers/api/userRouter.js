@@ -17,15 +17,8 @@ userRouter.use(function (req, res, next) {
     }
 })
 
-userRouter.get("/info", async (req, res) => {
-    const user = await req.user
-    if (user) {
-        res.json(user)
-    } else {
-        res.json(" ")
-    }
-})
+userRouter.get("/info", (req, res) => userController.getUserInfo(req, res))
 userRouter.post("/update", userController.saveUser)
-userRouter.post("/isAdmin",userController.isAdmin)
+userRouter.post("/isAdmin", userController.isAdmin)
 
 export default userRouter

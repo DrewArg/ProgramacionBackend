@@ -82,15 +82,31 @@ export const userController = {
         }
     },
 
-    async isAdmin(username,userPass){
-        if(process.env.ADMIN === username){
-            if(process.env.PASS === userPass){
+    async isAdmin(username, userPass) {
+        if (process.env.ADMIN === username) {
+            if (process.env.PASS === userPass) {
                 return true
-            }else{
+            } else {
                 return false
             }
-        }else{
+        } else {
             return false
+        }
+    },
+    async getUserInfo(req, res) {
+        if (req.user) {
+            const reqUser = await req.user
+
+            const username = reqUser.username
+            const user = await this.getByUsername(username)
+            if (user) {
+                res.json(user)
+            } else {
+                res.json(" ")
+            }
+        }
+        else {
+            res.json(" ")
         }
     }
 }

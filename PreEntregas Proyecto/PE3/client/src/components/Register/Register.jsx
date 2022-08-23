@@ -32,6 +32,7 @@ const Register = ({ setRegisterPipActive }) => {
                 const text = await r.text()
                 console.log(text);
                 setErrorRegister(false)
+                setRegisterPipActive(false)
             } else {
                 setErrorRegister(true)
             }

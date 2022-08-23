@@ -1,37 +1,21 @@
 .accountInfo {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   margin: 2em;
 }
-
 .accountInfo__edit {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 1.5em;
+  cursor: pointer;
+  margin-left: 4em;
 }
-
 .accountInfo__edit--checkmark {
   color: green;
 }
-
 .accountInfo__edit--pencil {
   color: red;
-}
-/*# sourceMappingURL=AccountInfo.css.map */
+}/*# sourceMappingURL=AccountInfo.css.map */

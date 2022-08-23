@@ -9,6 +9,10 @@ const AccountInfoUserInfo = ({ isEditable }) => {
     const [username, setUsername] = useState('')
     const navigate = useNavigate()
 
+    const handleTextEdit = (e) => {
+
+    }
+
     const getAccountInfo = async () => {
         const url = 'http://localhost:8080/account/info'
 

@@ -1,7 +1,6 @@
 import { Server as Socket } from "socket.io";
 import { productController } from "./productControllers.js";
 import { cartController } from "./cartControllers.js";
-import { isLoggedIn } from "./loginControllers.js";
 
 export function SocketController(server) {
   const socketServer = new Socket(server, {

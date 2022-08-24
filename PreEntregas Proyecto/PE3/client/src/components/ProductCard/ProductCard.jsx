@@ -51,7 +51,7 @@ const ProductCard = ({ product }) => {
     const handleAddToCart = async () => {
         await isLogged()
         if (loggedIn) {
-            const url = `http://localhost:8080/carts/products/:${product.id}`
+            const url = `http://localhost:8080/carts/products/:${product.id}/:${amount}`
 
             await fetch(url, {
                 method: 'POST',
@@ -62,7 +62,6 @@ const ProductCard = ({ product }) => {
                     'Access-Control-Allow-Methods': 'POST,GET',
                     'Content-Type': 'application/json'
                 },
-                // body: body,
                 credentials: 'include'
 
             }).then(async (r) => {

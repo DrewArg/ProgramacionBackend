@@ -12,10 +12,12 @@ export const cartController = {
 
     async getById(req, res) {
         try {
-            const bars = await req.url.split("/")
-            const split = bars[2].split(":")
-            const cart = await cartsDao.listById(split[2])
-            return cart
+            if (req.session.passport) {
+                const bars = await req.originalUrl.split("/")
+                const split = bars[3].split(":")
+                const cart = await cartsDao.listById(split[2])
+                return cart
+            }
         } catch (error) {
             console.error(`Cart controller --> ${error}`);
         }
@@ -30,10 +32,9 @@ export const cartController = {
         }
     },
 
-    async getAllProducts(cartId) {
+    async getAllProducts(cart) {
         try {
-            const userCart = this.getById(cartId)
-            return userCart.products
+            return cart.products
         } catch (error) {
             console.error(`Cart controller --> ${error}`);
         }
@@ -60,15 +61,27 @@ export const cartController = {
     async saveProduct(req, res) {
         try {
             if (req.session.passport) {
-                console.log(req);
-                const bars = await req.url.split("/")
-                const split = bars[2].split(":")
-                const product = await productsDao.listById(split[1])
+                const bars = await req.originalUrl.split("/")
+                const prodId = bars[3].split(":")
+                const product = await productsDao.listById(prodId[1])
+                const quantity = bars[4].split(":")
+                product.quantity = quantity[1]
+
                 const userId = req.session.passport.user
                 const carts = await cartsDao.listAll()
                 const cartIndex = carts.findIndex((c) => c.userId.toString() === userId.toString())
+                const productsInCart = await this.getAllProducts(carts[cartIndex])
 
-                carts[cartIndex].products.push(product)
+                const prodsIndex = productsInCart.findIndex((pc) => pc.id.toString() === prodId[1])
+
+                if (prodsIndex === -1) {
+                    carts[cartIndex].products.push(product)
+                } else {
+                    let dbQty = parseInt(productsInCart[prodsIndex].quantity)
+                    let currQty = parseInt(quantity[1])
+                    let result = dbQty + currQty
+                    productsInCart[prodsIndex].quantity = result
+                }
 
                 await this.updateCart(carts[cartIndex])
             } else {

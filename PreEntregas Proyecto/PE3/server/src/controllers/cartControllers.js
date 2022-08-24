@@ -35,8 +35,7 @@ export const cartController = {
     async getCartProducts(req, res) {
         try {
             if (req.session.passport) {
-                const splitUrl = req.originalUrl.split("/")
-                const userId = splitUrl[3]
+                const userId = req.session.passport.user
                 const carts = await cartsDao.listAll()
                 const index = carts.findIndex((c) => c.userId.toString() === userId.toString())
                 if (index === -1) {

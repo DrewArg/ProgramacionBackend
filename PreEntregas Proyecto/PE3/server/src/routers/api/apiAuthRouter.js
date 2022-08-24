@@ -2,9 +2,9 @@ import { Router } from "express";
 import { registerController } from '../../controllers/registerControllers.js'
 import { isLoggedIn, loginController, logoutController } from '../../controllers/loginControllers.js'
 
-const authRouter = Router()
+const apiAuthRouter = Router()
 
-authRouter.use(function (req, res, next) {
+apiAuthRouter.use(function (req, res, next) {
     res.header("Access-Control-Allow-Credentials", true)
     res.header("Access-Control-Allow-Origin", req.headers.origin)
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE")
@@ -19,10 +19,10 @@ authRouter.use(function (req, res, next) {
 
 
 
-authRouter.post("/register", (req, res) => registerController(req, res))
-authRouter.post("/login", (req, res) => loginController(req, res))
-authRouter.get("/logout", (req, res) => logoutController(req, res))
-authRouter.post("/isLogged", (req, res) => isLoggedIn(req, res))
+apiAuthRouter.post("/register", (req, res) => registerController(req, res))
+apiAuthRouter.post("/login", (req, res) => loginController(req, res))
+apiAuthRouter.get("/logout", (req, res) => logoutController(req, res))
+apiAuthRouter.post("/isLogged", (req, res) => isLoggedIn(req, res))
 
 
-export default authRouter
+export default apiAuthRouter

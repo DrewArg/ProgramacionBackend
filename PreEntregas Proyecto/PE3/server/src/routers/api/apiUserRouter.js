@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { userController } from '../../controllers/userControllers.js'
 
-const userRouter = Router()
+const apiUserRouter = Router()
 
-userRouter.use(function (req, res, next) {
+apiUserRouter.use(function (req, res, next) {
     res.header("Access-Control-Allow-Credentials", true)
     res.header("Access-Control-Allow-Origin", req.headers.origin)
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE")
@@ -16,9 +16,8 @@ userRouter.use(function (req, res, next) {
     }
 })
 
-userRouter.get("/info", (req, res) => userController.getUserInfo(req, res))
-userRouter.get("/userId", (req, res) => userController.getUserId(req, res))
-userRouter.post("/update", userController.saveUser)
-userRouter.post("/isAdmin", (req, res) => userController.isAdmin(req, res))
+apiUserRouter.get("/info", (req, res) => userController.getUserInfo(req, res))
+apiUserRouter.get("/userId", (req, res) => userController.getUserId(req, res))
+apiUserRouter.post("/isAdmin", (req, res) => userController.isAdmin(req, res))
 
-export default userRouter
+export default apiUserRouter

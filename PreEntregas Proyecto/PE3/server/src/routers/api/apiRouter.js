@@ -1,15 +1,15 @@
 import { Router } from "express";
-import authRouter from './authRouter.js'
-import productRouter from './productRouter.js'
-import userRouter from "./userRouter.js";
-import cartRouter from "./cartRouter.js";
+import apiAuthRouter from './apiAuthRouter.js'
+import apiCartRouter from "./apiCartRouter.js";
+import apiProductRouter from "./apiProductRouter.js";
+import apiUserRouter from "./apiUserRouter.js";
 
 const apiRouter = Router()
 
-apiRouter.use('/auth', authRouter)
-apiRouter.use('/api', productRouter)
-apiRouter.use('/account', userRouter)
-apiRouter.use('/carts', cartRouter)
+apiRouter.use('/auth', apiAuthRouter)
+apiRouter.use('/api', apiProductRouter)
+apiRouter.use('/account', apiUserRouter)
+apiRouter.use('/carts', apiCartRouter)
 
 apiRouter.use('/', (req, res) => { res.status(200) })
 apiRouter.all('*', (req, res) => {

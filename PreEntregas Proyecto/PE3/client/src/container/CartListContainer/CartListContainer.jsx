@@ -7,11 +7,9 @@ const CartListContainer = () => {
     const [loading, setLoading] = useState(true)
     const [products, setProducts] = useState([])
 
-    const [id, setId] = useState('')
+    async function getCartProducts() {
 
-    async function fetchUserId() {
-        const url = 'http://localhost:8080/account/userId'
-
+        const url = `http://localhost:8080/carts/products`
         let response = await fetch(url, {
             method: 'GET',
             headers: {
@@ -23,44 +21,15 @@ const CartListContainer = () => {
             },
             credentials: 'include'
         })
-
         response = await response.json()
-        console.log(response);
+        setProducts(response)
+        setLoading(false)
 
-        setId(response)
-
-
-    }
-
-    async function getCartProducts() {
-        console.log(id);
-        if (id === "") {
-            fetchUserId()
-        } else {
-            const url = `http://localhost:8080/carts/products/${id}`
-            console.log(url);
-            let response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Access-Control-Allow-Headers': 'Content-Type',
-                    'Access-Control-Allow-Credentials': 'true',
-                    'Access-Control-Allow-Origin': 'http://localhost:3000',
-                    'Access-Control-Allow-Methods': 'POST,GET',
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
-            })
-            response = await response.json()
-            console.log(response);
-            setProducts(response)
-            setLoading(false)
-
-        }
 
     }
 
     useEffect(() => {
-        fetchUserId()
+        getCartProducts()
     }, [])
     return (
         <>
@@ -69,7 +38,6 @@ const CartListContainer = () => {
                 loading ?
                     <>
                         <h2>Cargando...</h2>
-                        <button onClick={() => { getCartProducts() }}>Obtener Productos</button>
                     </>
 
                     :

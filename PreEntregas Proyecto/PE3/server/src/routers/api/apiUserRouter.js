@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { userController } from '../../controllers/userControllers.js'
+import { apiUserController } from '../../controllers/api/apiUserControllers.js'
 
 const apiUserRouter = Router()
 
@@ -16,8 +16,8 @@ apiUserRouter.use(function (req, res, next) {
     }
 })
 
-apiUserRouter.get("/info", (req, res) => userController.getUserInfo(req, res))
-apiUserRouter.get("/userId", (req, res) => userController.getUserId(req, res))
-apiUserRouter.post("/isAdmin", (req, res) => userController.isAdmin(req, res))
+apiUserRouter.get("/info", (req, res) => apiUserController.getUserInfo(req, res))
+apiUserRouter.get("/userId", (req, res) => apiUserController.getUserId(req, res))
+apiUserRouter.post("/isAdmin", (req, res) => apiUserController.isAdmin(req, res))
 
 export default apiUserRouter

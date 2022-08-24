@@ -1,10 +1,10 @@
 import { Router } from "express";
-import cartController from "../../controllers/cartControllers.js";
+import apiCartController from "../../controllers/api/apiCartControllers.js";
 
 const apiCartRouter = Router()
 
-apiCartRouter.get('/products', (req, res) => cartController.getCartProducts(req, res))
-apiCartRouter.post('/:id', (req, res) => cartController.getById(req, res))
-apiCartRouter.post('/products/:productId/:quantity', (req, res) => cartController.saveProduct(req, res))
+apiCartRouter.get('/products', (req, res) => apiCartController.getCartProducts(req, res))
+apiCartRouter.post('/:id', (req, res) => apiCartController.getById(req, res))
+apiCartRouter.post('/products/:productId/:quantity', (req, res) => apiCartController.saveProduct(req, res))
 
 export default apiCartRouter

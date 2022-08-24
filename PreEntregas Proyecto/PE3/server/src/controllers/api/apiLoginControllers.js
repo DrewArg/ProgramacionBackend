@@ -1,5 +1,5 @@
 import passport from "passport";
-import { sessionsDao } from "../daos/daoIndex.js";
+import { sessionsDao } from "../../daos/daoIndex.js";
 
 export const isLoggedIn = (req, res) => {
   if (req.session.passport != null) {

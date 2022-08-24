@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { registerController } from '../../controllers/registerControllers.js'
-import { isLoggedIn, loginController, logoutController } from '../../controllers/loginControllers.js'
+import { registerController } from '../../controllers/api/apiRegisterControllers.js'
+import { isLoggedIn, loginController, logoutController } from '../../controllers/api/apiLoginControllers.js'
 
 const apiAuthRouter = Router()
 

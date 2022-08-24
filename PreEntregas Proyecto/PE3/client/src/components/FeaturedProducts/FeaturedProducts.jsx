@@ -6,6 +6,7 @@ const FeaturedProducts = ({ products }) => {
     return (
         <>
             <div className='featuredProducts'>
+                <h2>¡Productos Destacados!</h2>
                 {
                     products.length > 0 ?
                         <table className='featuredTable'>

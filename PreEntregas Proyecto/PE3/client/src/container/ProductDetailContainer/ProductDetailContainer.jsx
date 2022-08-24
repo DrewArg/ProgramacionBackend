@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ProductDetail from '../../components/ProductDetail/ProductDetail'
+import './ProductDetailContainer.css'
 
 const ProductDetailContainer = () => {
     const params = useParams()
@@ -40,7 +41,9 @@ const ProductDetailContainer = () => {
     }, []);
     return (
         <>
-            <ProductDetail product={prod} />
+            <div className='productDetailContainer'>
+                <ProductDetail product={prod} />
+            </div>
         </>
     )
 }

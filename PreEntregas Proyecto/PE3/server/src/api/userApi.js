@@ -5,7 +5,8 @@ export const registerUser = async (usr) => {
     try {
         const userId = await userController.saveUser(usr)
         const cart = {
-            userId: userId.toString()
+            userId: userId.toString(),
+            products:[]
         }
         await cartController.saveCart(cart)
 

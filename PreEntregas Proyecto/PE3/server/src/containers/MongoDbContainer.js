@@ -68,7 +68,7 @@ class MongoDbContainer {
         }
     }
 
-    async udpdateObject(object) {
+    async updateObject(object) {
         try {
             await mongoDb
                 .collection(this.collection)

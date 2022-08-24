@@ -1,9 +1,20 @@
-import { cartsDao } from "../daos/daoIndex.js"
+import { cartsDao, productsDao } from "../daos/daoIndex.js"
 
 export const cartController = {
-    async getById(id) {
+
+    async getAllCarts() {
         try {
-            const cart = await cartsDao.listById(id)
+            return await cartsDao.listAll()
+        } catch (error) {
+            console.error(`Product controller --> ${error}`);
+        }
+    },
+
+    async getById(req, res) {
+        try {
+            const bars = await req.url.split("/")
+            const split = bars[2].split(":")
+            const cart = await cartsDao.listById(split[2])
             return cart
         } catch (error) {
             console.error(`Cart controller --> ${error}`);
@@ -37,11 +48,34 @@ export const cartController = {
         }
     },
 
-    async saveProduct(cartId, productId) {
+    async updateCart(cart) {
         try {
-            const userCart = this.getById(cartId)
-            userCart.products.push(productId)
-            //TODO RETURN STATUS CODE OK
+            await cartsDao.updateObject(cart)
+        } catch (error) {
+            console.error(`Cart controller --> ${error}`);
+
+        }
+    },
+
+    async saveProduct(req, res) {
+        try {
+            if (req.session.passport) {
+                console.log(req);
+                const bars = await req.url.split("/")
+                const split = bars[2].split(":")
+                const product = await productsDao.listById(split[1])
+                const userId = req.session.passport.user
+                const carts = await cartsDao.listAll()
+                const cartIndex = carts.findIndex((c) => c.userId.toString() === userId.toString())
+
+                carts[cartIndex].products.push(product)
+
+                await this.updateCart(carts[cartIndex])
+            } else {
+                res.json("usuario sin loguear")
+            }
+
+
         } catch (error) {
             console.error(`Cart controller --> ${error}`);
         }

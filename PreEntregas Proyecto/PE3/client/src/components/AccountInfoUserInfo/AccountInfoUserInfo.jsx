@@ -33,7 +33,6 @@ const AccountInfoUserInfo = ({ isEditable }) => {
                 if (json !== " ") {
                     setUsername(json.username)
                 } else {
-
                     navigate("/");
                 }
             } else {

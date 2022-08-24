@@ -8,8 +8,8 @@ const ProductDetail = ({ product }) => {
                 <div className='productDetail'>
                     <img src={product.thumbnail} alt={product.alt} width={250} height={250} />
                     <div className='productDetail__description'>
-                        <div>{product.title}</div>
-                        <div>{product.price}</div>
+                        <div className='productDetail__description--title'>{product.title}</div>
+                        <div className='productDetail__description--price'>${product.price}</div>
                     </div>
                 </div>
                 :

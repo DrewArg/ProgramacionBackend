@@ -3,8 +3,6 @@ import AccountInfoMenu from '../AccountInfoMenu/AccountInfoMenu'
 import AccountInfoUserInfo from '../AccountInfoUserInfo/AccountInfoUserInfo'
 import { useState } from 'react'
 
-import { FaPencilAlt } from 'react-icons/fa'
-import { BsCheckLg } from 'react-icons/bs'
 import './AccountInfo.css'
 
 const AccountInfo = () => {
@@ -21,22 +19,7 @@ const AccountInfo = () => {
         <>
             <div className='accountInfo'>
                 <AccountInfoMenu />
-                <AccountInfoUserInfo isEditable={isEditable} />
-                <div className='accountInfo__edit'>
-                    {
-                        isEditable ?
-                            <div className='accountInfo__edit--checkmark'>
-                                <BsCheckLg onClick={() => { handleConfirm() }} />
-                            </div>
-                            :
-
-                            <div className='accountInfo__edit--pencil'>
-                                <FaPencilAlt onClick={() => { handleEdit() }} />
-                            </div>
-
-                    }
-                </div>
-
+                <AccountInfoUserInfo isEditable={isEditable} handleConfirm={handleConfirm} handleEdit={handleEdit} />
             </div>
 
         </>

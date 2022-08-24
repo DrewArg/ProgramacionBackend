@@ -48,5 +48,30 @@ export const apiUserController = {
         else {
             res.json(" ")
         }
+    },
+
+    async updateUserInfo(req, res) {
+        if (req.session.passport) {
+            const userId = await req.session.passport.user
+            const updFullname = req.body.fullName
+            const updAddress = req.body.address
+            const updAge = req.body.age
+            const updPhone = req.body.phone
+            const updAvatar = req.body.avatar
+
+            const user = await userController.getById(userId)
+
+            if (user) {
+                user.fullName = updFullname
+                user.address = updAddress
+                user.age = updAge
+                user.phone = updPhone
+                user.avatar = updAvatar
+                userController.updateUser(user)
+            }
+        } else {
+            res.json("usuario no ingresado")
+        }
+
     }
 }

@@ -1,9 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { useContext } from 'react'
-import { SocketContext } from '../../context/Socket.jsx'
-import ProductList from '../../components/ProductList/ProductList.jsx'
+import CartList from '../../components/CartList/CartList.jsx'
 
 const CartListContainer = () => {
     const [loading, setLoading] = useState(true)
@@ -76,7 +74,7 @@ const CartListContainer = () => {
 
                     :
 
-                    <ProductList products={products} />
+                    <CartList products={products} />
 
             }
         </>

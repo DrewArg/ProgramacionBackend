@@ -63,9 +63,9 @@ export function SocketController(server) {
       }
     });
 
-    expressSocket.on("getProductsInCart", async (cartId) => {
+    expressSocket.on("getProductsInCart", async (userId) => {
       try {
-        const products = await cartController.getAllProducts(cartId);
+        const products = await cartController.getAllProducts(userId);
         socketServer.sockets.emit("productsInCart", products);
       } catch (error) {
         console.error(`Socket controller --> ${error}`);

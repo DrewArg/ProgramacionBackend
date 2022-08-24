@@ -32,9 +32,35 @@ export const cartController = {
         }
     },
 
-    async getAllProducts(cart) {
+    async getCartProducts(req, res) {
         try {
-            return cart.products
+            if (req.session.passport) {
+                const splitUrl = req.originalUrl.split("/")
+                const userId = splitUrl[3]
+                const carts = await cartsDao.listAll()
+                const index = carts.findIndex((c) => c.userId.toString() === userId.toString())
+                if (index === -1) {
+                    res.json("no se encontró el carrito")
+                } else {
+                    res.status(200).json(carts[index].products)
+                }
+            } else {
+                res.json("usuario no ingresado")
+            }
+        } catch (error) {
+            console.error(`Cart controller --> ${error}`);
+        }
+    },
+
+    async getAllProducts(userId) {
+        try {
+            const carts = await cartsDao.listAll()
+            const index = carts.findIndex((c) => c.userId.toString() === userId.toString())
+            if (index === -1) {
+                return ""
+            } else {
+                return carts[index].products
+            }
         } catch (error) {
             console.error(`Cart controller --> ${error}`);
         }
@@ -70,10 +96,8 @@ export const cartController = {
                 const userId = req.session.passport.user
                 const carts = await cartsDao.listAll()
                 const cartIndex = carts.findIndex((c) => c.userId.toString() === userId.toString())
-                const productsInCart = await this.getAllProducts(carts[cartIndex])
-
-                const prodsIndex = productsInCart.findIndex((pc) => pc.id.toString() === prodId[1])
-
+                const productsInCart = await this.getAllProducts(userId)
+                const prodsIndex = productsInCart.findIndex((pc) => pc.id === prodId[1])
                 if (prodsIndex === -1) {
                     carts[cartIndex].products.push(product)
                 } else {
@@ -81,9 +105,11 @@ export const cartController = {
                     let currQty = parseInt(quantity[1])
                     let result = dbQty + currQty
                     productsInCart[prodsIndex].quantity = result
+                    carts[cartIndex].products[prodsIndex].quantity = result
                 }
-
                 await this.updateCart(carts[cartIndex])
+                console.log(carts[cartIndex]);
+                res.status(200).json("ok")
             } else {
                 res.json("usuario sin loguear")
             }

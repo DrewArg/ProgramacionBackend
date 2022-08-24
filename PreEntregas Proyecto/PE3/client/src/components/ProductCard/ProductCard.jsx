@@ -66,17 +66,11 @@ const ProductCard = ({ product }) => {
 
             }).then(async (r) => {
                 if (r.status === 200) {
-                    const text = await r.text()
-                    // const p = JSON.parse(text)
-                    // console.log(p);
-                    // if (p) {
-                    //     // setProd(p)
-                    // } else {
-                    // }
+                    setAmount(0)
                 }
             })
 
-            setAmount(0)
+
         } else {
             console.log("not logged ");
         }

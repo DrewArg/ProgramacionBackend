@@ -2,6 +2,18 @@ import bcrypt from 'bcryptjs'
 import { usersDao } from '../daos/daoIndex.js'
 
 export const userController = {
+    async getUserId(req, res) {
+        try {
+            if (req.session.passport) {
+                res.status(200).json(req.session.passport.user)
+            } else {
+                res.json("usuario no ingresado")
+            }
+
+        } catch (error) {
+            console.log(`User controller --> ${error}`);
+        }
+    },
     async getUsers() {
         try {
             const users = await usersDao.listAll()

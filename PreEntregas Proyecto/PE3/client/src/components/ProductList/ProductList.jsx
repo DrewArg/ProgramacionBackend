@@ -5,9 +5,6 @@ import { useState, useEffect } from 'react'
 import './ProductList.css'
 
 const ProductList = ({ products }) => {
-    //TODO solo mostrar el product form si es admin
-    //TODO COMPLETAR ESTO QUE ESTÁ MAL
-
     const [admin, setAdmin] = useState(false)
 
     const isAdmin = async () => {

@@ -68,7 +68,9 @@ const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
                 </div>
                 <div className='navbarSup__icons'>
                     <div className='navbarSup__icons--cart'>
-                        <BsCart2 />
+                        <Link to={'/cart'}>
+                            <BsCart2 />
+                        </Link>
                     </div>
                     <div className='navbarSup__icons--user'>
                         <FiUser onClick={() => { setUserOptions(!userOptions); isLogged() }} />

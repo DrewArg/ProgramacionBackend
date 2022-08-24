@@ -31,7 +31,6 @@ const Login = ({ setLoginPipActive }) => {
         }).then(async (r) => {
             if (r.status === 200) {
                 const text = await r.text()
-                console.log(text);
                 setErrorLogin(false)
                 setLoginPipActive(false)
             } else {

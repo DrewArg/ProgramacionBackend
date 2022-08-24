@@ -1,4 +1,3 @@
-import { readFile } from "@babel/core/lib/gensync-utils/fs.js";
 import { Router } from "express";
 import { userController } from '../../controllers/userControllers.js'
 
@@ -18,6 +17,7 @@ userRouter.use(function (req, res, next) {
 })
 
 userRouter.get("/info", (req, res) => userController.getUserInfo(req, res))
+userRouter.get("/userId", (req, res) => userController.getUserId(req, res))
 userRouter.post("/update", userController.saveUser)
 userRouter.post("/isAdmin", (req, res) => userController.isAdmin(req, res))
 

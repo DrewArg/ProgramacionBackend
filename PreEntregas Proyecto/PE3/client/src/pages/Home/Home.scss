@@ -1,0 +1,18 @@
+.btn__shop {
+    max-width: fit-content;
+    align-self: center;
+    font: size 0.8em;
+    letter-spacing: 0.1em;
+    padding: 1em;
+    margin-bottom: 2em;
+    cursor: pointer;
+    background-color: rgb(181, 232, 232);
+    color: rgb(42, 109, 108);
+    border: none;
+    text-transform: uppercase;
+
+    &:hover {
+        color: white;
+        background-color: rgb(112, 156, 155);
+    }
+}

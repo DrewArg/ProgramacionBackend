@@ -4,9 +4,7 @@ import Banner from '../../components/Banner/Banner'
 import FeaturedProductsContainer from '../../container/FeaturedProductsContainer/FeaturedProductsContainer.jsx'
 import PipContainer from '../../container/PipContainer/PipContainer'
 import { Link } from 'react-router-dom'
-
-
-
+import './Home.css'
 
 const Home = ({ setLoginPipActive, loginPipActive, setRegisterPipActive, registerPipActive }) => {
 

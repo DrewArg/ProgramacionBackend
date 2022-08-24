@@ -1,7 +1,7 @@
 .accountInfo__userInfo {
   display: flex;
   flex-direction: row;
-  min-width: 50%;
+  min-width: 60%;
   background-color: rgb(214, 213, 213);
   height: 100%;
   text-align: left;

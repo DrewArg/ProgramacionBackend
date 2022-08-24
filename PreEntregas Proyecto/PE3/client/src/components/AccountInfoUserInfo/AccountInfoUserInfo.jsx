@@ -12,12 +12,13 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
     const [address, setAddress] = useState('')
     const [phone, setPhone] = useState('')
     const [age, setAge] = useState('')
-    const [avatar, setAvatar] = useState('')
+    const [avatar, setAvatar] = useState({ profileImg: '' })
     const navigate = useNavigate()
 
     const [requested, setRequested] = useState(false)
 
     const updateAccountInfo = async () => {
+        console.log(avatar);
 
         const url = 'http://localhost:8080/account/update-info'
 
@@ -47,6 +48,11 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
 
     }
 
+    const addFile = (e) => {
+        setAvatar({ profileImg: e.target.files[0] })
+        // console.log(e.target.files[0]);
+    }
+
     const getAccountInfo = async () => {
         const url = 'http://localhost:8080/account/info'
 
@@ -73,7 +79,7 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
                         setAge(json.age)
                     }
                     if (json.avatar) {
-                        setAvatar(json.avatar)
+                        // setAvatar(json.avatar)
                     }
                     if (json.phone) {
                         setPhone(json.phone)
@@ -101,7 +107,7 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
     return (
         <>
 
-            <form className='accountInfo__userInfo'>
+            <form className='accountInfo__userInfo' action="http://localhost:8080/account/update-info" enctype="multipart/form-data" method="POST">
                 <div className='accountInfo__userInfo--leftElements'>
                     <label>Usuario</label>
                     <label>Nombre Completo</label>
@@ -111,42 +117,45 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
                     <label>Avatar</label>
                 </div>
                 {isEditable ?
-                    <div className='accountInfo__userInfo--rightElements'>
-                        <input type={'text'} defaultValue={username} placeholder={'usuario'} disabled />
-                        <input type={'text'} defaultValue={fullName} placeholder={'nombre completo'} onChange={(e) => setFullName(e.target.value)} />
-                        <input type={'text'} defaultValue={address} placeholder={'dirección'} onChange={(e) => setAddress(e.target.value)} />
-                        <input type={'number'} defaultValue={age} placeholder={'edad'} onChange={(e) => setAge(e.target.value)} />
-                        <input type={'text'} defaultValue={phone} placeholder={'teléfono'} onChange={(e) => setPhone(e.target.value)} />
-                        <input type={'text'} defaultValue={avatar} placeholder={'avatar'} onChange={(e) => setAvatar(e.target.value)} />
-                    </div>
+                    <>
+                        <div className='accountInfo__userInfo--rightElements'>
+                            <input type={'text'} defaultValue={username} placeholder={'usuario'} disabled />
+                            <input type={'text'} defaultValue={fullName} placeholder={'nombre completo'} onChange={(e) => setFullName(e.target.value)} />
+                            <input type={'text'} defaultValue={address} placeholder={'dirección'} onChange={(e) => setAddress(e.target.value)} />
+                            <input type={'number'} defaultValue={age} placeholder={'edad'} onChange={(e) => setAge(e.target.value)} />
+                            <input type={'text'} defaultValue={phone} placeholder={'teléfono'} onChange={(e) => setPhone(e.target.value)} />
+                            <input type={'file'} name={'profileImg'} onChange={(e) => { addFile(e) }} />
+                            <input type="submit" value="Subir Archivo" />
+                        </div>
+                        <div className='accountInfo__edit'>
+                            <div className='accountInfo__edit--checkmark'>
+                                <BsCheckLg onClick={() => { handleConfirm(); updateAccountInfo() }} />
+                            </div>
+                        </div>
+
+                    </>
 
                     :
-                    <div className='accountInfo__userInfo--rightElements'>
-                        <input type={'text'} defaultValue={username} disabled placeholder={'usuario'} />
-                        <input type={'text'} defaultValue={fullName} disabled placeholder={'nombre completo'} />
-                        <input type={'text'} defaultValue={address} disabled placeholder={'dirección'} />
-                        <input type={'number'} defaultValue={age} disabled placeholder={'edad'} />
-                        <input type={'text'} defaultValue={phone} disabled placeholder={'teléfono'} />
-                        <input type={'text'} defaultValue={avatar} disabled placeholder={'avatar'} />
-                    </div>
+                    <>
+                        <div className='accountInfo__userInfo--rightElements'>
+                            <input type={'text'} defaultValue={username} disabled placeholder={'usuario'} />
+                            <input type={'text'} defaultValue={fullName} disabled placeholder={'nombre completo'} />
+                            <input type={'text'} defaultValue={address} disabled placeholder={'dirección'} />
+                            <input type={'number'} defaultValue={age} disabled placeholder={'edad'} />
+                            <input type={'text'} defaultValue={phone} disabled placeholder={'teléfono'} />
+                            <input type={'file'} name={'profileImg'} disabled />
+                        </div>
+                        <div className='accountInfo__edit'>
+                            <div className='accountInfo__edit--pencil'>
+                                <FaPencilAlt onClick={() => { handleEdit() }} />
+                            </div>
+                        </div>
+                    </>
+
                 }
             </form>
 
-            <div className='accountInfo__edit'>
-                {
-                    isEditable ?
-                        <div className='accountInfo__edit--checkmark'>
-                            <BsCheckLg onClick={() => { handleConfirm(); updateAccountInfo() }} />
-                        </div>
-                        :
 
-                        <div className='accountInfo__edit--pencil'>
-                            <FaPencilAlt onClick={() => { handleEdit() }} />
-                        </div>
-
-                }
-
-            </div>
         </>
 
     )

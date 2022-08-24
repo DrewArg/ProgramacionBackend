@@ -51,7 +51,11 @@ export const apiUserController = {
     },
 
     async updateUserInfo(req, res) {
+        const file = req.file
+        console.log(file);
+       
         if (req.session.passport) {
+            console.log(req.body.avatar);
             const userId = await req.session.passport.user
             const updFullname = req.body.fullName
             const updAddress = req.body.address

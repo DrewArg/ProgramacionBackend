@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { apiUserController } from '../../controllers/api/apiUserControllers.js'
+import { oneFileMiddleware } from "../../middlewares/multer.js";
 
 const apiUserRouter = Router()
 
@@ -16,7 +17,7 @@ apiUserRouter.use(function (req, res, next) {
     }
 })
 
-apiUserRouter.post("/update-info", (req, res) => apiUserController.updateUserInfo(req, res))
+apiUserRouter.post("/update-info", oneFileMiddleware, (req, res) => apiUserController.updateUserInfo(req, res))
 apiUserRouter.get("/info", (req, res) => apiUserController.getUserInfo(req, res))
 apiUserRouter.get("/userId", (req, res) => apiUserController.getUserId(req, res))
 apiUserRouter.post("/isAdmin", (req, res) => apiUserController.isAdmin(req, res))

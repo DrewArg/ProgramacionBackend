@@ -34,15 +34,46 @@ export const apiCartController = {
         }
     },
 
-    async saveProduct(req, res) {
+    async updateProduct(req, res) {
         try {
             if (req.session.passport) {
+
                 const bars = await req.originalUrl.split("/")
                 const prodId = bars[3].split(":")
                 const product = await productsDao.listById(prodId[1])
                 const quantity = bars[4].split(":")
                 product.quantity = quantity[1]
+                const userId = req.session.passport.user
+                const carts = await cartsDao.listAll()
+                const cartIndex = carts.findIndex((c) => c.userId.toString() === userId.toString())
+                const productsInCart = await cartController.getAllProducts(userId)
+                const prodsIndex = productsInCart.findIndex((pc) => pc.id === prodId[1])
+                if (prodsIndex === -1) {
+                    carts[cartIndex].products.push(product)
+                } else {
+                    let currQty = parseInt(quantity[1])
+                    carts[cartIndex].products[prodsIndex].quantity = currQty
+                }
+                await cartController.updateCart(carts[cartIndex])
+                res.status(200).json("ok")
+            } else {
+                res.json("usuario sin loguear")
+            }
 
+
+        } catch (error) {
+            console.error(`Cart controller --> ${error}`);
+        }
+    },
+
+    async saveProduct(req, res) {
+        try {
+            if (req.session.passport) {
+
+                const bars = await req.originalUrl.split("/")
+                const prodId = bars[3].split(":")
+                const product = await productsDao.listById(prodId[1])
+                const quantity = bars[4].split(":")
                 const userId = req.session.passport.user
                 const carts = await cartsDao.listAll()
                 const cartIndex = carts.findIndex((c) => c.userId.toString() === userId.toString())

@@ -28,8 +28,9 @@ const NoUserContainer = ({ setLoggedIn }) => {
                                 ¡Buenas! Para agregar items a tu carrito primero debes ingresar.
                             </div>
                             <div className='noUserContainer__btns'>
-                                <button className='btn__submit' onClick={() => { setLoginPipActive(true) }}>Ingresar</button>
-                                <button className='btn__submit' onClick={() => { setRegisterPipActive(true) }}>Registrarse</button>
+                                <button className='btn__submit' onClick={() => {
+                                    setLoginPipActive(true); }}>Ingresar</button>
+                                <button className='btn__submit' onClick={() => { setRegisterPipActive(true); }}>Registrarse</button>
                             </div>
                         </div>
                         <div className='pipBackground'>

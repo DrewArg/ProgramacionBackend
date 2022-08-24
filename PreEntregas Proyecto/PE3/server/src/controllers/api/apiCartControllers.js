@@ -21,6 +21,7 @@ export const apiCartController = {
                 const userId = req.session.passport.user
                 const carts = await cartsDao.listAll()
                 const index = carts.findIndex((c) => c.userId.toString() === userId.toString())
+
                 if (index === -1) {
                     res.json("no se encontró el carrito")
                 } else {

@@ -5,38 +5,41 @@ import Register from '../../components/Register/Register.jsx'
 import { ImCross } from 'react-icons/im'
 import './NoUserContainer.css'
 
-const NoUserContainer = ({ setLoggedIn }) => {
+const NoUserContainer = ({ loggedIn, setLoggedIn }) => {
     const [loginPipActive, setLoginPipActive] = useState(false)
     const [registerPipActive, setRegisterPipActive] = useState(false)
     return (
         <>
 
 
-            {loginPipActive ?
+            {loggedIn ? "" :
 
-                <Login setLoginPipActive={setLoginPipActive} />
+                loginPipActive ?
 
-                : registerPipActive ?
+                    <Login setLoginPipActive={setLoginPipActive} />
 
-                    <Register setRegisterPipActive={setRegisterPipActive} />
+                    : registerPipActive ?
 
-                    :
-                    <>
-                        <div className='noUserContainer'>
-                            <ImCross className='noUserContainer__exit' onClick={() => { setLoggedIn(true) }} />
-                            <div className='noUserContainer__description'>
-                                ¡Buenas! Para agregar items a tu carrito primero debes ingresar.
+                        <Register setRegisterPipActive={setRegisterPipActive} />
+
+                        :
+                        <>
+                            <div className='noUserContainer'>
+                                <ImCross className='noUserContainer__exit' onClick={() => { setLoggedIn(true) }} />
+                                <div className='noUserContainer__description'>
+                                    ¡Buenas! Para agregar items a tu carrito primero debes ingresar.
+                                </div>
+                                <div className='noUserContainer__btns'>
+                                    <button className='btn__submit' onClick={() => {
+                                        setLoginPipActive(true);
+                                    }}>Ingresar</button>
+                                    <button className='btn__submit' onClick={() => { setRegisterPipActive(true); }}>Registrarse</button>
+                                </div>
                             </div>
-                            <div className='noUserContainer__btns'>
-                                <button className='btn__submit' onClick={() => {
-                                    setLoginPipActive(true); }}>Ingresar</button>
-                                <button className='btn__submit' onClick={() => { setRegisterPipActive(true); }}>Registrarse</button>
-                            </div>
-                        </div>
-                        <div className='pipBackground'>
+                            <div className='pipBackground'>
 
-                        </div>
-                    </>
+                            </div>
+                        </>
             }
 
 

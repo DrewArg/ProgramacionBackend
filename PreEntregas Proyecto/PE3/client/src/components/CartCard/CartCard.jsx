@@ -4,17 +4,19 @@ import './CartCard.css'
 
 const CartCard = ({ product }) => {
 
-    const [currAmount, setCurrAmount] = useState(0)
+    const [currAmount, setCurrAmount] = useState(1)
+    const [totalUnit, setTotalUnit] = useState(0)
 
     const handleSubstract = async () => {
 
-        if (parseInt(product.quantity) <= 0) {
-            product.quantity = 0
-            setCurrAmount(0)
+        if (currAmount <= 1) {
+            product.quantity = 1
+            setCurrAmount(1)
         } else {
             product.quantity = parseInt(product.quantity) - 1
             setCurrAmount(parseInt(product.quantity))
         }
+        setTotalUnit(currAmount * parseInt(product.price))
 
         updateProduct()
     }
@@ -40,41 +42,16 @@ const CartCard = ({ product }) => {
         product.quantity = parseInt(product.quantity) + 1
 
         setCurrAmount(parseInt(product.quantity))
+        setTotalUnit(currAmount * parseInt(product.price))
+
         updateProduct()
     }
 
     useEffect(() => {
         setCurrAmount(parseInt(product.quantity))
-    })
+        setTotalUnit(parseInt(product.quantity) * parseInt(product.price))
 
-
-    // const handleAddToCart = async () => {
-    //     await isLogged()
-    //     if (loggedIn) {
-    //         const url = `http://localhost:8080/carts/products/:${product.id}/:${amount}`
-
-    //         await fetch(url, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Access-Control-Allow-Headers': 'Content-Type',
-    //                 'Access-Control-Allow-Credentials': 'true',
-    //                 'Access-Control-Allow-Origin': 'http://localhost:3000',
-    //                 'Access-Control-Allow-Methods': 'POST,GET',
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             credentials: 'include'
-
-    //         }).then(async (r) => {
-    //             if (r.status === 200) {
-    //             }
-    //         })
-
-
-    //     } else {
-    //         console.log("not logged ");
-    //     }
-    // }
-
+    }, [setCurrAmount, product.quantity])
 
     return (
         <>
@@ -88,6 +65,7 @@ const CartCard = ({ product }) => {
                             <span id='qtyAddition' onClick={() => { handleAddition() }}>+</span>
                         </td>
                         <td headers="th3" id='cartCard__unitPrice'> ${product.price} </td>
+                        <td headers="th4" id='cartCard__totalUnit'>${totalUnit}</td>
                     </>
                     :
                     <h2>Cargando...</h2>

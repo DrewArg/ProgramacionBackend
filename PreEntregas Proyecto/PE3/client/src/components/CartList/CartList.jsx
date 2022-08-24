@@ -8,6 +8,7 @@ import './CartList.css'
 
 const CartList = ({ products }) => {
     const [loggedIn, setLoggedIn] = useState(false)
+    const [cartTotal, setCartTotal] = useState(0)
 
     const isLogged = async () => {
         if (!loggedIn) {
@@ -40,8 +41,8 @@ const CartList = ({ products }) => {
 
 
     useEffect(() => {
-        console.log(loggedIn);
-    }, [isLogged])
+        isLogged()
+    })
 
     return (
         <>
@@ -69,7 +70,7 @@ const CartList = ({ products }) => {
                             </tbody>
                         </table>
                         :
-                        <NoUserContainer setLoggedIn={setLoggedIn} />
+                        <NoUserContainer loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
                 }
             </div>
 

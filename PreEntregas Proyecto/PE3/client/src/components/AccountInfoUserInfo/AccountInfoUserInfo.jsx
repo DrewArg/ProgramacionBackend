@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { FaPencilAlt } from 'react-icons/fa'
 import { BsCheckLg } from 'react-icons/bs'
 import './AccountInfoUserInfo.css'
-import { logPlugin } from '@babel/preset-env/lib/debug'
-
 
 const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
     const [username, setUsername] = useState('')
@@ -72,7 +70,6 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
                         setAddress(json.address)
                     }
                     if (json.age) {
-                        const gotAge = parseInt(json.age)
                         setAge(json.age)
                     }
                     if (json.avatar) {
@@ -103,6 +100,7 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
     }, [requested]);
     return (
         <>
+
             <form className='accountInfo__userInfo'>
                 <div className='accountInfo__userInfo--leftElements'>
                     <label>Usuario</label>
@@ -147,6 +145,7 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
                         </div>
 
                 }
+
             </div>
         </>
 

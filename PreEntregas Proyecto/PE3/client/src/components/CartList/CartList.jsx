@@ -6,6 +6,7 @@ const CartList = ({ products }) => {
 
     return (
         <>
+            {console.log(products)}
             <div id='cartTable'>
                 {
                     products.length > 0 ?
@@ -15,7 +16,7 @@ const CartList = ({ products }) => {
                             </tbody>
                         </table>
                         :
-                        <h3>No hay productos en el carrito actualmente...</h3>
+                        <h3>No hay productos en el carrito actualmente... Revisa si estás ingresado</h3>
                 }
             </div>
         </>

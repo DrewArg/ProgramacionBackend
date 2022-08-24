@@ -45,7 +45,7 @@ export const cartController = {
                     res.status(200).json(carts[index].products)
                 }
             } else {
-                res.json("usuario no ingresado")
+                res.json("")
             }
         } catch (error) {
             console.error(`Cart controller --> ${error}`);
@@ -108,7 +108,6 @@ export const cartController = {
                     carts[cartIndex].products[prodsIndex].quantity = result
                 }
                 await this.updateCart(carts[cartIndex])
-                console.log(carts[cartIndex]);
                 res.status(200).json("ok")
             } else {
                 res.json("usuario sin loguear")

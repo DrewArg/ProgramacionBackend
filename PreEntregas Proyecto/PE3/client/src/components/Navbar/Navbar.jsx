@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BsSearch, BsCart2 } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { FiUser } from 'react-icons/fi'
@@ -8,6 +8,37 @@ import './Navbar.css'
 const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
     const [userOptions, setUserOptions] = useState(false)
     const [loggedIn, setLoggedIn] = useState(false)
+
+    const [admin, setAdmin] = useState(false)
+
+    const isAdmin = async () => {
+
+        const url = 'http://localhost:8080/account/isAdmin'
+
+        await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Credentials': 'true',
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Methods': 'POST,GET',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        }).then(async (r) => {
+            if (r.status === 200) {
+                const text = await r.text()
+                const response = JSON.parse(text)
+                if (response) {
+                    setAdmin(true)
+                } else {
+                    setAdmin(false)
+                }
+            }
+        })
+
+    }
+
 
     const isLogged = async () => {
         const url = 'http://localhost:8080/auth/isLogged'
@@ -51,6 +82,9 @@ const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
         })
     }
 
+    useEffect(() => {
+        isAdmin()
+    }, []);
 
     return (
         <>
@@ -82,14 +116,28 @@ const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
                                         {
 
                                             loggedIn ?
-                                                <>
-                                                    <Link to={'/my-account'}>
-                                                        <li className='userOptionsMenu__item' onClick={() => { setUserOptions(!userOptions) }}>Mi cuenta</li>
-                                                    </Link>
-                                                    <Link to={'/'}>
-                                                        <li className='userOptionsMenu__item' onClick={() => { logout(); setUserOptions(!userOptions) }}>Cerrar sesión</li>
-                                                    </Link>
-                                                </>
+                                                admin ?
+                                                    <>
+                                                        <Link to={'/admin'}>
+                                                            <li className='userOptionsMenu__item' onClick={() => { setUserOptions(!userOptions) }}>Administrar</li>
+                                                        </Link>
+                                                        <Link to={'/my-account'}>
+                                                            <li className='userOptionsMenu__item' onClick={() => { setUserOptions(!userOptions) }}>Mi cuenta</li>
+                                                        </Link>
+                                                        <Link to={'/'}>
+                                                            <li className='userOptionsMenu__item' onClick={() => { logout(); setUserOptions(!userOptions) }}>Cerrar sesión</li>
+                                                        </Link>
+                                                    </>
+                                                    :
+
+                                                    <>
+                                                        <Link to={'/my-account'}>
+                                                            <li className='userOptionsMenu__item' onClick={() => { setUserOptions(!userOptions) }}>Mi cuenta</li>
+                                                        </Link>
+                                                        <Link to={'/'}>
+                                                            <li className='userOptionsMenu__item' onClick={() => { logout(); setUserOptions(!userOptions) }}>Cerrar sesión</li>
+                                                        </Link>
+                                                    </>
                                                 :
 
                                                 <>

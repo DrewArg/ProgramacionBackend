@@ -7,6 +7,7 @@ import Shop from './pages/Shop/Shop';
 import Account from './pages/Account/Account';
 import Detail from './pages/Detail/Detail';
 import Cart from './pages/Cart/Cart';
+import Admin from './pages/Admin/Admin';
 
 function App() {
   const [loginPipActive, setLoginPipActive] = useState(false)
@@ -22,6 +23,7 @@ function App() {
             <Route path="/my-account" element={<Account loginPipActive={loginPipActive} registerPipActive={registerPipActive} setLoginPipActive={setLoginPipActive} setRegisterPipActive={setRegisterPipActive} />} />
             <Route path="/products/:productId" element={<Detail loginPipActive={loginPipActive} registerPipActive={registerPipActive} setLoginPipActive={setLoginPipActive} setRegisterPipActive={setRegisterPipActive} />} />
             <Route path="/cart" element={<Cart loginPipActive={loginPipActive} registerPipActive={registerPipActive} setLoginPipActive={setLoginPipActive} setRegisterPipActive={setRegisterPipActive} />} />
+            <Route path="/admin" element={<Admin setLoginPipActive={setLoginPipActive} setRegisterPipActive={setRegisterPipActive} />} />
           </Routes>
         </div>
       </SocketContext.Provider>

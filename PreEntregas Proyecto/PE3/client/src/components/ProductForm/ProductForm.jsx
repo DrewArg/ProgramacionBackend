@@ -7,6 +7,8 @@ const ProductForm = () => {
     const reactSocket = useContext(SocketContext)
 
     const [prodTitle, setProdTitle] = useState("")
+    const [prodDescr, setProdDescr] = useState("")
+    const [prodStock, setProdStock] = useState(0.0)
     const [prodPrice, setProdPrice] = useState(0.0)
     const [prodThumbnail, setProdThumbnail] = useState("")
     const [prodAlt, setProdAlt] = useState("")
@@ -14,6 +16,8 @@ const ProductForm = () => {
     const addProduct = async () => {
         const product = {
             title: prodTitle,
+            description: prodDescr,
+            stock: prodStock,
             price: prodPrice,
             thumbnail: prodThumbnail,
             alt: prodAlt
@@ -22,14 +26,18 @@ const ProductForm = () => {
         await reactSocket.emit("saveProduct", product)
 
         setProdTitle("")
-        setProdPrice(0.0)
+        setProdPrice(0)
+        setProdDescr("")
+        setProdStock(0)
         setProdThumbnail("")
         setProdAlt("")
     }
 
     const emptyList = () => {
         setProdTitle("")
-        setProdPrice(0.0)
+        setProdPrice(0)
+        setProdDescr("")
+        setProdStock(0)
         setProdThumbnail("")
         setProdAlt("")
     }
@@ -38,33 +46,38 @@ const ProductForm = () => {
     return (
         <>
             <div className='formContainer'>
-                <h3 className='sectionTitle'>Ingresar Producto</h3>
-                <form className='productForm'>
-                    <div className='productForm__element'>
-                        <label className='formLabel'> Título </label>
-                        <input className='formInput' type="text" placeholder='título del producto' id='prodTitle' name="prodTitle" value={prodTitle} onInput={e => setProdTitle(e.target.value)} />
-                    </div>
+                <table className='productForm'>
+                    <thead >
+                        <tr className='productForm__header'>
+                            <th id='pf_title'>Nombre de producto</th>
+                            <th id='pf_descri'>Descripción</th>
+                            <th id='pf_stock'>Stock</th>
+                            <th id='pf_price'>Precio unitario</th>
+                            <th id='pf_img'>Imágen</th>
+                            <th id='pf_imgDescr'>Descripción Img</th>
+                        </tr>
+                    </thead>
+                    <tbody className='cartTable__body'>
+                        <tr className='cartCard'>
+                            <td headers='pf_title'> <input className='formInput' type="text" placeholder='nombre del producto' id='prodTitle' name="prodTitle" value={prodTitle} onInput={e => setProdTitle(e.target.value)} />
+                            </td>
+                            <td headers='pf_descri'>   <input className='formInput' type="text" placeholder='descripción del producto' id='prodDescr' name="prodDescr" value={prodDescr} onInput={e => setProdDescr(e.target.value)} /></td>
+                            <td headers='pf_stock'><input className='formInput' type="number" placeholder='precio' id='prodStock' name="prodStock" value={prodStock} onInput={e => setProdStock(e.target.value)} /></td>
+                            <td headers='pf_price'><input className='formInput' type="number" placeholder='precio' id='prodPrice' name="prodPrice" value={prodPrice} onInput={e => setProdPrice(e.target.value)} /></td>
+                            <td headers='pf_img'><input className='formInput' type="text" placeholder='url de imágen' id='prodThumbnail' name="prodPrice" value={prodThumbnail} onInput={e => setProdThumbnail(e.target.value)} /></td>
+                            <td headers='pf_descri'>   <input className='formInput' type="text" placeholder='descripción de la imágen' id='prodAlt' name="prodAlt" value={prodAlt} onInput={e => setProdAlt(e.target.value)} /></td>
+                        </tr>
 
-                    <div className='productForm__element'>
-                        <label className='formLabel'> Precio </label>
-                        <input className='formInput' type="number" placeholder='precio' id='prodPrice' name="prodPrice" value={prodPrice} onInput={e => setProdPrice(e.target.value)} />
-                    </div>
-
-                    <div className='productForm__element'>
-                        <label className='formLabel'> Imágen </label>
-                        <input className='formInput' type="text" placeholder='url de imágen' id='prodThumbnail' name="prodPrice" value={prodThumbnail} onInput={e => setProdThumbnail(e.target.value)} />
-                    </div>
-
-                    <div className='productForm__element'>
-                        <label className='formLabel'> Descripción </label>
-                        <input className='formInput' type="text" placeholder='descripción de la imágen' id='prodAlt' name="prodAlt" value={prodAlt} onInput={e => setProdAlt(e.target.value)} />
-                    </div>
-                    <div className='btns__div'>
-                        <button className='btn__submit' onClick={addProduct}>Agregar Producto</button>
-                        <button className='btn__submit' onClick={emptyList}>Limpiar formulario</button>
-                    </div>
-                </form>
+                    </tbody>
+                </table>
             </div>
+            <div className='btns__div'>
+                <button className='btn__submit' onClick={addProduct}>Agregar Producto</button>
+                <button className='btn__submit' onClick={emptyList}>Limpiar formulario</button>
+            </div>
+
+
+
         </>
     )
 }

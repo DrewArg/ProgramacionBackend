@@ -7,5 +7,6 @@ apiCartRouter.get('/products', (req, res) => apiCartController.getCartProducts(r
 apiCartRouter.post('/:id', (req, res) => apiCartController.getById(req, res))
 apiCartRouter.post('/products/:productId/:quantity', (req, res) => apiCartController.saveProduct(req, res))
 apiCartRouter.get('/products/:productId/:quantity', (req, res) => apiCartController.updateProduct(req, res))
+apiCartRouter.delete('/products/delete', (req, res) => apiCartController.deleteProductById(req, res))
 
 export default apiCartRouter

@@ -35,6 +35,36 @@ export const apiCartController = {
         }
     },
 
+    async deleteProductById(req, res) {
+        try {
+            if (req.session.passport) {
+                const userId = req.session.passport.user
+                const carts = await cartsDao.listAll()
+                const index = carts.findIndex((c) => c.userId.toString() === userId.toString())
+
+                if (index === -1) {
+                    res.json("no se encontró el carrito")
+
+                } else {
+                    const prodId = req.body.productId
+                    const productsInCart = await cartController.getAllProducts(userId)
+                    const prodsIndex = productsInCart.findIndex((pc) => pc.id === prodId)
+
+                    if (prodsIndex === -1) {
+                        res.json("no se encontró el producto")
+
+                    } else {
+                        carts[index].products.splice(prodsIndex, 1)
+                        await cartsDao.updateObject(carts[index])
+                        res.status(200).json("ok")
+                    }
+                }
+            }
+        } catch (error) {
+            console.error(`Api Product controller --> ${error}`);
+        }
+    },
+
     async updateProduct(req, res) {
         try {
             if (req.session.passport) {

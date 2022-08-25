@@ -52,6 +52,7 @@ const CartList = ({ products }) => {
                         <table className='cartTable'>
                             <thead >
                                 <tr className='cartTable__header'>
+                                    <th id='th0'></th>
                                     <th id='th1'>Nombre de producto</th>
                                     <th id='th2'>Unidades</th>
                                     <th id='th3'>Precio unitario</th>

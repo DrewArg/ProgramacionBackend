@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { FaTrash } from 'react-icons/fa'
 import { useEffect } from 'react'
+import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation'
 import './CartCard.css'
 
 const CartCard = ({ product }) => {
@@ -7,6 +9,30 @@ const CartCard = ({ product }) => {
     const [currAmount, setCurrAmount] = useState(1)
     const [totalUnit, setTotalUnit] = useState(0)
 
+    const deleteProduct = async (id) => {
+
+        const url = 'http://localhost:8080/carts/products/delete'
+
+        const prodId = {
+            productId: id
+        }
+
+        const body = JSON.stringify(prodId)
+
+        await fetch(url, {
+            method: 'DELETE',
+            body: body,
+            headers: {
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Credentials': 'true',
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Methods': 'POST,GET,DELETE',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+
+    }
     const handleSubstract = async () => {
 
         if (currAmount <= 1) {
@@ -58,6 +84,7 @@ const CartCard = ({ product }) => {
             {
                 product ?
                     <>
+                        <td headers='th_0' className='pf__delete'><FaTrash onClick={() => { deleteProduct(product.id) }} /></td>
                         <td headers="th1" id='cartCard__title'>{product.title}</td>
                         <td headers="th2" className='cartCard__cartSection' id='cartCard__units'>
                             <span id='qtySubstraction' onClick={() => { handleSubstract() }}>-</span>

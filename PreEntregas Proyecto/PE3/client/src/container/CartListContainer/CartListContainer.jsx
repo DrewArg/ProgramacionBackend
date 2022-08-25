@@ -30,7 +30,7 @@ const CartListContainer = () => {
 
     useEffect(() => {
         getCartProducts()
-    }, [])
+    }, [getCartProducts])
     return (
         <>
 

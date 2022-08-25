@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import CartCard from '../CartCard/CartCard.jsx'
+import { useNavigate } from 'react-router-dom'
 import NoUserContainer from '../../container/NoUserContainer/NoUserContainer'
 
 import './CartList.css'
@@ -9,6 +10,8 @@ import './CartList.css'
 const CartList = ({ products }) => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [cartTotal, setCartTotal] = useState(0)
+
+    const navigate = useNavigate()
 
     const isLogged = async () => {
         if (!loggedIn) {
@@ -49,27 +52,37 @@ const CartList = ({ products }) => {
             <div id='cartTable'>
                 {
                     loggedIn ?
-                        <table className='cartTable'>
-                            <thead >
-                                <tr className='cartTable__header'>
-                                    <th id='th0'></th>
-                                    <th id='th1'>Nombre de producto</th>
-                                    <th id='th2'>Unidades</th>
-                                    <th id='th3'>Precio unitario</th>
-                                    <th id='th4'>Precio total</th>
-                                </tr>
-                            </thead>
-                            <tbody className='cartTable__body'>
-                                {products.map(p => {
-                                    return (
-                                        <tr key={p.id} className='cartCard'>
-                                            <CartCard key={p.id} product={p} />
-                                        </tr>
-                                    )
-                                })}
 
-                            </tbody>
-                        </table>
+                        products.length > 0 ?
+
+                            <table className='cartTable'>
+                                <thead >
+                                    <tr className='cartTable__header'>
+                                        <th id='th0'></th>
+                                        <th id='th1'>Nombre de producto</th>
+                                        <th id='th2'>Unidades</th>
+                                        <th id='th3'>Precio unitario</th>
+                                        <th id='th4'>Precio total</th>
+                                    </tr>
+                                </thead>
+                                <tbody className='cartTable__body'>
+                                    {products.map(p => {
+                                        return (
+                                            <tr key={p.id} className='cartCard'>
+                                                <CartCard key={p.id} product={p} />
+                                            </tr>
+                                        )
+                                    })}
+
+                                </tbody>
+                            </table>
+                            :
+                            <>
+                                <h2>Ups.. parece que tu carrito está vacio.</h2>
+                                <h3>Pasa por la tienda para llenarlo</h3>
+
+                                <button className='btn__submit' onClick={() => { navigate("/") }}>Tienda</button>
+                            </>
                         :
                         <NoUserContainer loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
                 }

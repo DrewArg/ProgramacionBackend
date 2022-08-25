@@ -16,23 +16,48 @@ export const apiProductController = {
 
 
     async updateProduct(req, res) {
-
         if (req.session.passport) {
-            const updTitle = req.body.title
-            const updPrice = req.body.price
-            const prodId = req.body
+            try {
+                const prod = await productsDao.listById(req.body.id)
 
+                if (req.body.title !== '') {
+                    if (req.body.title !== prod.title) {
+                        prod.title = req.body.title
+                    }
+                }
+                if (req.body.description !== '') {
+                    if (req.body.description !== prod.description) {
+                        prod.description = req.body.description
+                    }
+                }
+                if (req.body.stock !== '') {
+                    if (req.body.stock !== prod.stock) {
+                        prod.stock = req.body.stock
+                    }
+                }
+                if (req.body.price !== '') {
+                    if (req.body.price !== prod.price) {
+                        prod.price = req.body.price
+                    }
+                }
+                if (req.body.thumbnail !== '') {
+                    if (req.body.thumbnail !== prod.thumbnail) {
+                        prod.thumbnail = req.body.thumbnail
+                    }
+                }
+                if (req.body.alt !== '') {
+                    if (req.body.alt !== prod.alt) {
+                        prod.alt = req.body.alt
+                    }
+                }
 
-
-            if (user) {
-                user.fullName = updFullname
-                user.address = updAddress
-                user.age = updAge
-                user.phone = updPhone
-                userController.updateUser(user)
+                await productsDao.updateObject(prod)
+                res.json("ok")
+            } catch (error) {
+                console.error(`Api Product Controller --> ${error}`);
             }
-        } else {
-            res.json("usuario no ingresado")
+
+
         }
 
     },

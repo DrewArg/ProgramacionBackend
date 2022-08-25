@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import Navbar from '../../components/Navbar/Navbar'
 import AddProductContainer from '../../container/AddProductContainer/AddProductContainer'
 import EditProductContainer from '../../container/EditProductContainer/EditProductContainer'
-import EditUserContainer from '../../container/EditUserContainer/EditUserContainer'
 
 
 const Admin = ({ setLoginPipActive, setRegisterPipActive }) => {

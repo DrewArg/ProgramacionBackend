@@ -57,15 +57,15 @@ const ProductForm = () => {
                             <th id='pf_imgDescr'>Descripción Img</th>
                         </tr>
                     </thead>
-                    <tbody className='cartTable__body'>
-                        <tr className='cartCard'>
-                            <td headers='pf_title'> <input className='formInput' type="text" placeholder='nombre del producto' id='prodTitle' name="prodTitle" value={prodTitle} onInput={e => setProdTitle(e.target.value)} />
+                    <tbody className='productForm__body'>
+                        <tr className='productFormCard'>
+                            <td headers='pf_title'><input className='formInput' type="text" placeholder='nombre del producto' id='prodTitle' name="prodTitle" value={prodTitle} onInput={e => setProdTitle(e.target.value)} />
                             </td>
-                            <td headers='pf_descri'>   <input className='formInput' type="text" placeholder='descripción del producto' id='prodDescr' name="prodDescr" value={prodDescr} onInput={e => setProdDescr(e.target.value)} /></td>
+                            <td headers='pf_descri'><input className='formInput' type="text" placeholder='descripción del producto' id='prodDescr' name="prodDescr" value={prodDescr} onInput={e => setProdDescr(e.target.value)} /></td>
                             <td headers='pf_stock'><input className='formInput' type="number" placeholder='precio' id='prodStock' name="prodStock" value={prodStock} onInput={e => setProdStock(e.target.value)} /></td>
                             <td headers='pf_price'><input className='formInput' type="number" placeholder='precio' id='prodPrice' name="prodPrice" value={prodPrice} onInput={e => setProdPrice(e.target.value)} /></td>
                             <td headers='pf_img'><input className='formInput' type="text" placeholder='url de imágen' id='prodThumbnail' name="prodPrice" value={prodThumbnail} onInput={e => setProdThumbnail(e.target.value)} /></td>
-                            <td headers='pf_descri'>   <input className='formInput' type="text" placeholder='descripción de la imágen' id='prodAlt' name="prodAlt" value={prodAlt} onInput={e => setProdAlt(e.target.value)} /></td>
+                            <td headers='pf_descri'><input className='formInput' type="text" placeholder='descripción de la imágen' id='prodAlt' name="prodAlt" value={prodAlt} onInput={e => setProdAlt(e.target.value)} /></td>
                         </tr>
 
                     </tbody>

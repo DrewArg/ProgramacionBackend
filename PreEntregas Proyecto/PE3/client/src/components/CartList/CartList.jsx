@@ -81,7 +81,7 @@ const CartList = ({ products }) => {
                                 <h2>Ups.. parece que tu carrito está vacio.</h2>
                                 <h3>Pasa por la tienda para llenarlo</h3>
 
-                                <button className='btn__submit' onClick={() => { navigate("/") }}>Tienda</button>
+                                <button className='btn__submit' onClick={() => { navigate("/shop") }}>Tienda</button>
                             </>
                         :
                         <NoUserContainer loggedIn={loggedIn} setLoggedIn={setLoggedIn} />

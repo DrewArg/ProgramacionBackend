@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { FaTrash } from 'react-icons/fa'
 import { useEffect } from 'react'
-import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation'
 import './CartCard.css'
 
 const CartCard = ({ product }) => {
@@ -74,10 +73,18 @@ const CartCard = ({ product }) => {
     }
 
     useEffect(() => {
-        setCurrAmount(parseInt(product.quantity))
-        setTotalUnit(parseInt(product.quantity) * parseInt(product.price))
+        // let curQty
+        // console.log("prqu: " + product.quantity);
+        // if (product.quantity === 0) {
+        //     curQty = 0
+        // } else {
+        //     curQty = parseInt(product.quantity)
+        // }
 
-    }, [setCurrAmount, product.quantity])
+        setCurrAmount(product.quantity)
+        setTotalUnit(product.quantity * product.price)
+
+    },[product.quantity,product.price])
 
     return (
         <>

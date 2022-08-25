@@ -101,23 +101,32 @@ export const apiCartController = {
         try {
             if (req.session.passport) {
 
-                const bars = await req.originalUrl.split("/")
-                const prodId = bars[3].split(":")
-                const product = await productsDao.listById(prodId[1])
-                const quantity = bars[4].split(":")
+                console.log(req.body);
+                const prodId = req.body.prodId
+                const quantity = req.body.quantity
+                const product = await productsDao.listById(prodId)
                 const userId = req.session.passport.user
                 const carts = await cartsDao.listAll()
                 const cartIndex = carts.findIndex((c) => c.userId.toString() === userId.toString())
                 const productsInCart = await cartController.getAllProducts(userId)
-                const prodsIndex = productsInCart.findIndex((pc) => pc.id === prodId[1])
+                const prodsIndex = productsInCart.findIndex((pc) => pc.id === prodId)
                 if (prodsIndex === -1) {
                     carts[cartIndex].products.push(product)
                 } else {
-                    let dbQty = parseInt(productsInCart[prodsIndex].quantity)
-                    let currQty = parseInt(quantity[1])
+                    let dbQty
+                    if (!productsInCart[prodsIndex].quantity) {
+                        productsInCart[prodsIndex].quantity = 0
+                        dbQty = 0
+                    } else {
+                        dbQty = productsInCart[prodsIndex].quantity
+
+                    }
+                    let currQty = parseInt(quantity)
                     let result = dbQty + currQty
                     productsInCart[prodsIndex].quantity = result
+
                     carts[cartIndex].products[prodsIndex].quantity = result
+
                 }
                 await cartController.updateCart(carts[cartIndex])
                 res.status(200).json("ok")

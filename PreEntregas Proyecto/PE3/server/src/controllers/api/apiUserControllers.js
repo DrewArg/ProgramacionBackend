@@ -51,18 +51,13 @@ export const apiUserController = {
     },
 
     async updateUserInfo(req, res) {
-        const file = req.file
-        console.log(file);
-       
+
         if (req.session.passport) {
-            console.log(req.body.avatar);
             const userId = await req.session.passport.user
             const updFullname = req.body.fullName
             const updAddress = req.body.address
             const updAge = req.body.age
             const updPhone = req.body.phone
-            const updAvatar = req.body.avatar
-
             const user = await userController.getById(userId)
 
             if (user) {
@@ -70,12 +65,33 @@ export const apiUserController = {
                 user.address = updAddress
                 user.age = updAge
                 user.phone = updPhone
-                user.avatar = updAvatar
                 userController.updateUser(user)
             }
         } else {
             res.json("usuario no ingresado")
         }
+
+    },
+
+    async updateProfileImage(req, res) {
+
+        const url = req.protocol + '://' + req.get('host')
+        const profileImgPath = url + '/' + req.file.path
+        const profileImgData = req.file
+        const username = req.body.username
+        const user = await userController.getByUsername(username)
+
+        if (user) {
+            user.profileImg = {
+                profileImgPath: profileImgPath,
+                profileImgData: profileImgData
+            }
+            userController.updateUser(user)
+
+        } else {
+            res.json("hubo un error")
+        }
+
 
     }
 }

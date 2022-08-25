@@ -46,8 +46,8 @@ const AccountInfo = () => {
                 if (json !== " ") {
                     setUsername(json.username)
 
-                    if (json.avatar) {
-                        setAvatar(json.avatar)
+                    if (json.profileImg) {
+                        setAvatar(json.profileImg.profileImgPath)
                         setLoading(false)
                     }
 

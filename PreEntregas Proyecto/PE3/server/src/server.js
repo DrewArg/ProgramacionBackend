@@ -18,12 +18,16 @@ app.use(cors({
     credentials: true
 }))
 
+app.use('/public', express.static('public'));
+
 app.use(session(sessionConfig))
+
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(passportMiddleware)
 app.use(passportSessionHandler)
+
 
 app.use(socketRouter)
 app.use(apiRouter)

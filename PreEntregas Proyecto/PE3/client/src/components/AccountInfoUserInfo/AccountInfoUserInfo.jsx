@@ -123,55 +123,72 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
     return (
         <>
 
-            <form className='accountInfo__userInfo' onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
-                <div className='accountInfo__userInfo--leftElements'>
-                    <label>Usuario</label>
-                    <label>Nombre Completo</label>
-                    <label>Dirección</label>
-                    <label>Edad</label>
-                    <label>N° de teléfono</label>
-                </div>
-                {isEditable ?
-                    <>
-                        <div className='accountInfo__userInfo--rightElements'>
-                            <input type={'text'} defaultValue={username} placeholder={'usuario'} disabled />
-                            <input type={'text'} defaultValue={fullName} placeholder={'nombre completo'} onChange={(e) => setFullName(e.target.value)} />
-                            <input type={'text'} defaultValue={address} placeholder={'dirección'} onChange={(e) => setAddress(e.target.value)} />
-                            <input type={'number'} defaultValue={age} placeholder={'edad'} onChange={(e) => setAge(e.target.value)} />
-                            <input type={'text'} defaultValue={phone} placeholder={'teléfono'} onChange={(e) => setPhone(e.target.value)} />
-                        </div>
+            {isEditable ?
+                <>
+                    <div className='accountInfo__userInfo'>
+
+                        <form className='accountInfo__userInfo' onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
+                            <div className='accountInfo__userInfo--leftElements'>
+                                <label>Usuario</label>
+                                <label>Nombre Completo</label>
+                                <label>Dirección</label>
+                                <label>Edad</label>
+                                <label>N° de teléfono</label>
+                            </div>
+                            <div className='accountInfo__userInfo--rightElements'>
+                                <input type={'text'} defaultValue={username} placeholder={'usuario'} disabled />
+                                <input type={'text'} defaultValue={fullName} placeholder={'nombre completo'} onChange={(e) => setFullName(e.target.value)} />
+                                <input type={'text'} defaultValue={address} placeholder={'dirección'} onChange={(e) => setAddress(e.target.value)} />
+                                <input type={'number'} defaultValue={age} placeholder={'edad'} onChange={(e) => setAge(e.target.value)} />
+                                <input type={'text'} defaultValue={phone} placeholder={'teléfono'} onChange={(e) => setPhone(e.target.value)} />
+                            </div>
+                        </form>
+                        <form onSubmit={addFile}>
+                            <input type="file" onChange={onFileChange} />
+                            <button className="btn__submit" type="submit">Upload</button>
+                        </form>
                         <div className='accountInfo__edit'>
                             <div className='accountInfo__edit--checkmark'>
                                 <BsCheckLg type='submit' onClick={() => { updateAccountInfo(); handleConfirm() }} />
                             </div>
                         </div>
+                    </div>
 
-                    </>
+                </>
 
-                    :
-                    <>
-                        <div className='accountInfo__userInfo--rightElements'>
-                            <input type={'text'} defaultValue={username} disabled placeholder={'usuario'} />
-                            <input type={'text'} defaultValue={fullName} disabled placeholder={'nombre completo'} />
-                            <input type={'text'} defaultValue={address} disabled placeholder={'dirección'} />
-                            <input type={'number'} defaultValue={age} disabled placeholder={'edad'} />
-                            <input type={'text'} defaultValue={phone} disabled placeholder={'teléfono'} />
-                            {/* <input type={'file'} name={'profileImg'} disabled /> */}
-                        </div>
+                :
+                <>
+                    <div className='accountInfo__userInfo'>
+                        <form className='accountInfo__userInfo' onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
+                            <div className='accountInfo__userInfo--leftElements'>
+                                <label>Usuario</label>
+                                <label>Nombre Completo</label>
+                                <label>Dirección</label>
+                                <label>Edad</label>
+                                <label>N° de teléfono</label>
+                            </div>
+                            <div className='accountInfo__userInfo--rightElements'>
+                                <input type={'text'} defaultValue={username} disabled placeholder={'usuario'} />
+                                <input type={'text'} defaultValue={fullName} disabled placeholder={'nombre completo'} />
+                                <input type={'text'} defaultValue={address} disabled placeholder={'dirección'} />
+                                <input type={'number'} defaultValue={age} disabled placeholder={'edad'} />
+                                <input type={'text'} defaultValue={phone} disabled placeholder={'teléfono'} />
+                            </div>
+                        </form>
+                        <form onSubmit={addFile}>
+                            <input type="file" onChange={onFileChange} disabled />
+                            <button className="btn__submit" type="submit">Upload</button>
+                        </form>
                         <div className='accountInfo__edit'>
                             <div className='accountInfo__edit--pencil'>
                                 <FaPencilAlt onClick={() => { handleEdit() }} />
                             </div>
                         </div>
-                    </>
+                    </div>
+                </>
 
-                }
-            </form>
+            }
 
-            <form onSubmit={addFile}>
-                <input type="file" onChange={onFileChange} />
-                <button className="btn__submit" type="submit">Upload</button>
-            </form>
 
 
         </>

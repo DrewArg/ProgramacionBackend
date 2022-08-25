@@ -1,10 +1,10 @@
-import EditProduct from '../../components/EditProduct/EditProduct'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useContext } from 'react'
 import { SocketContext } from '../../context/Socket.jsx'
 import EditProductList from '../../components/EditProductList/EditProductList'
+import './EditProductContainer.css'
 
 const EditProductContainer = () => {
     const reactSocket = useContext(SocketContext)
@@ -27,7 +27,8 @@ const EditProductContainer = () => {
 
     return (
         <>
-            <h2>Editar productos</h2>
+            <h2 className='ep__title'>Editar productos</h2>
+            <h3 className='ep__subtitle'>Para cargar la información editada, deberás refrescar la página.</h3>
             {
                 loading ?
                     <h2>Cargando...</h2>

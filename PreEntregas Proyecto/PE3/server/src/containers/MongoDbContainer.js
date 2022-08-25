@@ -78,7 +78,7 @@ class MongoDbContainer {
         }
     }
 
-    async delteById(id) {
+    async deleteById(id) {
         try {
             await mongoDb
                 .collection(this.collection)

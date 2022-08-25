@@ -1,5 +1,4 @@
 import { productsDao } from '../../daos/daoIndex.js'
-import { userController } from '../userControllers.js'
 
 export const apiProductController = {
 
@@ -10,7 +9,18 @@ export const apiProductController = {
             const prod = await productsDao.listById(split[2])
             res.json(prod)
         } catch (error) {
-            console.error(`Product controller --> ${error}`);
+            console.error(`Api Product controller --> ${error}`);
+        }
+    },
+
+    async deleteById(req, res) {
+        try {
+            if (req.session.passport) {
+                productsDao.deleteById(req.body.id)
+                res.json("ok")
+            }
+        } catch (error) {
+            console.error(`Api Product controller --> ${error}`);
         }
     },
 

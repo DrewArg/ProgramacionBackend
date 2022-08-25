@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
 import EditProduct from '../EditProduct/EditProduct.jsx'
 import './EditProductList.css'
 

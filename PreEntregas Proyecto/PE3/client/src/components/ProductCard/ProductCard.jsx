@@ -5,10 +5,13 @@ import NoUserContainer from '../../container/NoUserContainer/NoUserContainer'
 
 import './ProductCard.css'
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, editProd }) => {
 
     const [amount, setAmount] = useState(0)
     const [loggedIn, setLoggedIn] = useState(true)
+
+    const [title, setTitle] = useState('')
+    const [price, setPrice] = useState('')
 
     const handleSubstract = () => {
         if (amount <= 0) {
@@ -84,27 +87,51 @@ const ProductCard = ({ product }) => {
                 loggedIn ?
 
                     product ?
-                        <tr className='productCard'>
-                            <td>
-                                <Link to={`/products/:${product.id}`}>
-                                    <img src={product.thumbnail} alt={product.alt} width="250" height="250" />
-                                </Link>
-                            </td>
-                            <td>
-                                {product.title}
-                            </td>
-                            <td>
-                                ${product.price}
-                            </td>
-                            <td className='productCard__cartSection'>
-                                <span id='amountSubstraction' onClick={() => { handleSubstract() }}>-</span>
-                                <span id='amountAmount'>{amount}</span>
-                                <span id='amountAddition' onClick={() => { handleAddition() }}>+</span>
-                            </td>
-                            <td className='productCard__cartSection'>
-                                <button className='btn__submit' onClick={() => { handleAddToCart() }}>Agregar al carrito</button>
-                            </td>
-                        </tr>
+
+                        editProd ?
+                            <tr className='productCard'>
+                                <td>
+                                    <Link to={`/products/:${product.id}`}>
+                                        <img src={product.thumbnail} alt={product.alt} width="250" height="250" />
+                                    </Link>
+                                </td>
+                                <td>
+                                    <input type={'text'} defaultValue={product.title} onChange={(e) => setTitle(e.target.value)} />
+                                </td>
+                                <td>
+                                    <input type={'number'} defaultValue={product.price} onChange={(e) => setPrice(e.target.value)} />                                </td>
+                                <td className='productCard__cartSection'>
+                                    <span id='amountSubstraction' onClick={() => { handleSubstract() }}>-</span>
+                                    <span id='amountAmount'>{amount}</span>
+                                    <span id='amountAddition' onClick={() => { handleAddition() }}>+</span>
+                                </td>
+                                <td className='productCard__cartSection'>
+                                    <button className='btn__submit' onClick={() => { handleAddToCart() }}>Agregar al carrito</button>
+                                </td>
+                            </tr>
+                            :
+
+                            <tr className='productCard'>
+                                <td>
+                                    <Link to={`/products/:${product.id}`}>
+                                        <img src={product.thumbnail} alt={product.alt} width="250" height="250" />
+                                    </Link>
+                                </td>
+                                <td>
+                                    {product.title}
+                                </td>
+                                <td>
+                                    ${product.price}
+                                </td>
+                                <td className='productCard__cartSection'>
+                                    <span id='amountSubstraction' onClick={() => { handleSubstract() }}>-</span>
+                                    <span id='amountAmount'>{amount}</span>
+                                    <span id='amountAddition' onClick={() => { handleAddition() }}>+</span>
+                                </td>
+                                <td className='productCard__cartSection'>
+                                    <button className='btn__submit' onClick={() => { handleAddToCart() }}>Agregar al carrito</button>
+                                </td>
+                            </tr>
                         :
                         <h2>Cargando...</h2>
 

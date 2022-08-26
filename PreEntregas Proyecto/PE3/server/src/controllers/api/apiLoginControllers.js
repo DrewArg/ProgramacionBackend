@@ -1,5 +1,5 @@
 import passport from "passport";
-import { winston } from "../loggerControllers";
+import { winston } from "../loggerControllers.js";
 
 export const isLoggedIn = (req, res) => {
   if (req.session.passport != null) {

@@ -77,10 +77,8 @@ export const apiCartController = {
     },
 
     async updateProduct(req, res) {
-        console.log("update prod");
         try {
             if (req.session.passport) {
-
                 const bars = await req.originalUrl.split("/")
                 const prodId = bars[3].split(":")
                 const product = await productsDao.listById(prodId[1])

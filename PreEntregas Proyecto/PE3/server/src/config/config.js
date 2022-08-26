@@ -13,6 +13,10 @@ export const adminEtherealPass = process.env.ADMIN_PASS
 export const serverUrl = process.env.SERVER_URL
 export const clientUrl = process.env.CLIENT_URL
 
+export const twilioAccountSid = process.env.TWILIO_ID
+export const twilioAuthToken = process.env.TWILIO_TOKEN
+export const twilioSmsPhoneNumber = process.env.TWILIO_SMS_NUMBER
+export const twilioWhatsappPhoneNumber = process.env.TWILIO_WHATSAPP_NUMBER
 
 const username = process.env.MONGO_USER
 const password = process.env.MONGO_PASS

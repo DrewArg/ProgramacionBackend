@@ -2,6 +2,7 @@ import { cartsDao, productsDao } from "../../daos/daoIndex.js"
 import cartController from "../cartControllers.js"
 import { sendBuyEtherealEmail } from "../../messaging/mail/nodeMailer.js"
 import { userController } from "../userControllers.js";
+import { smsSender } from "../../messaging/sms/smsSender.js";
 export const apiCartController = {
 
     async getById(req, res) {
@@ -147,7 +148,9 @@ export const apiCartController = {
             if (req.session.passport) {
                 const userId = req.session.passport.user
                 const user = await userController.getById(userId)
-                await sendBuyEtherealEmail(user,req.body)
+                await sendBuyEtherealEmail(user, req.body)
+                const textMessage = `${user.fullName} tu pedido ha sido recibido y se encuentra en proceso.`
+                await smsSender(user, textMessage)
 
             }
         } catch (error) {

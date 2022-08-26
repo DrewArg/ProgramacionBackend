@@ -7,13 +7,14 @@ import { Server as HttpServer } from 'http'
 import apiRouter from './routers/api/apiRouter.js'
 import cors from 'cors'
 import socketRouter from './routers/socket/socketRouter.js'
+import { clientUrl } from './config/config.js'
 
 dotenv.config()
 
 const app = express()
 
 app.use(cors({
-    origin: process.env.CLIENT_URL,
+    origin: clientUrl,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }))

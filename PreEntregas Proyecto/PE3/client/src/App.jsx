@@ -10,6 +10,7 @@ import Cart from './pages/Cart/Cart';
 import Admin from './pages/Admin/Admin';
 
 function App() {
+
   const [loginPipActive, setLoginPipActive] = useState(false)
   const [registerPipActive, setRegisterPipActive] = useState(false)
 

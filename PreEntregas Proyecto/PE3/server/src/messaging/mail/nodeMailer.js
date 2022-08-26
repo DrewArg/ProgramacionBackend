@@ -1,14 +1,12 @@
 import { createTransport } from 'nodemailer';
-import dotenv from 'dotenv'
-
-dotenv.config()
+import { adminAccount,adminEthereal,adminEtherealPass } from '../../config/config.js'
 
 const transporter = createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: process.env.ADMIN_EMAIL,
-        pass: process.env.ADMIN_PASS
+        user: adminEthereal,
+        pass: adminEtherealPass
     },
     // logger: true,
     // debug: true,
@@ -17,8 +15,8 @@ const transporter = createTransport({
 export const sendBuyEtherealEmail = async (buyer, products) => {
     try {
         const mailOptions = {
-            from: process.env.ADMIN,
-            to: process.env.ADMIN,
+            from: adminAccount,
+            to: adminAccount,
             subject: `Nuevo pedido de ${buyer.fullName} - ${buyer.username}`,
             html: `<p>Se han comprado los siguientes productos: </p>
             <ul>
@@ -38,8 +36,8 @@ export const sendBuyEtherealEmail = async (buyer, products) => {
 export const sendNewRegisterEthereal = async (user) => {
     try {
         const mailOptions = {
-            from: process.env.ADMIN,
-            to: process.env.ADMIN,
+            from: adminAccount,
+            to: adminAccount,
             subject: `Nuevo registro`,
             html: `<p>Se ha registrado un nuevo usuario: </p>
             <ul>

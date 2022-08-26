@@ -1,4 +1,5 @@
 import { userController } from "../userControllers.js";
+import { adminAccount , adminHash } from '../../config/config.js'
 
 export const apiUserController = {
     async getUserId(req, res) {
@@ -19,8 +20,8 @@ export const apiUserController = {
             const user = await userController.getById(req.session.passport.user)
             const username = user.username
             const userPass = user.password
-            if (process.env.ADMIN === username) {
-                if (process.env.HASHPASS === userPass) {
+            if (adminAccount === username) {
+                if (adminHash === userPass) {
                     res.send(true)
                 } else {
                     res.send(false)

@@ -1,11 +1,12 @@
 import { Server as Socket } from "socket.io";
 import { productController } from "./productControllers.js";
 import { cartController } from "./cartControllers.js";
+import { clientUrl } from '../config/config.js'
 
 export function SocketController(server) {
   const socketServer = new Socket(server, {
     cors: {
-      origin: process.env.CLIENT_URL,
+      origin: clientUrl,
       methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
     },

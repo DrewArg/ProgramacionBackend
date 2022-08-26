@@ -3,6 +3,17 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 
+export const adminAccount = process.env.ADMIN
+export const adminPass = process.env.PASS
+export const adminHash = process.env.HASHPASS
+
+export const adminEthereal = process.env.ADMIN_EMAIL
+export const adminEtherealPass = process.env.ADMIN_PASS
+
+export const serverUrl = process.env.SERVER_URL
+export const clientUrl = process.env.CLIENT_URL
+
+
 const username = process.env.MONGO_USER
 const password = process.env.MONGO_PASS
 
@@ -38,3 +49,7 @@ export const mongoConfig = {
         }
     }
 }
+
+
+
+

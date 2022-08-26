@@ -1,5 +1,6 @@
 import { mongoConfig } from '../config/config.js'
 import { default as mongodb, ObjectId } from 'mongodb'
+import { winston } from '../controllers/loggerControllers.js'
 
 const MongoClient = mongodb.MongoClient
 const client = new MongoClient(mongoConfig.mongodb.url, mongoConfig.mongodb.client)
@@ -17,7 +18,7 @@ class MongoDbContainer {
         try {
             await mongoDb.createCollection(collectionName)
         } catch (error) {
-            console.error(`Colección ya existente, no se realizaron cambios`);
+            winston.log('info', `Colección ya existente, no se realizaron cambios`)
         }
     }
 
@@ -25,7 +26,7 @@ class MongoDbContainer {
         try {
             await client.connect()
         } catch (error) {
-            console.error(`Error en la conexión ${error}`);
+            winston.log('error', `Error en la conexión a la mongo ${error}`)
         }
     }
 
@@ -33,8 +34,9 @@ class MongoDbContainer {
         const objs = await this.listAll()
         const index = objs.findIndex((o) => o.id == id)
         if (index == -1) {
-            console.error(`MongoDb container --> error buscando, no se encontró el id`);
+            winston.log('warn', `MongoDb container --> error buscando, no se encontró el id`)
         } else {
+            winston.log('debug', `MongoDb container --> se encontró el id y se devuelve`)
             return objs[index]
         }
     }
@@ -55,7 +57,8 @@ class MongoDbContainer {
 
             return objsArray
         } catch (error) {
-            console.error(`MongoDbContainer --> ${error}`);
+            winston.log('error', `MongoDbContainer --> ${error}`)
+
         }
     }
 
@@ -64,7 +67,7 @@ class MongoDbContainer {
             const obj = await mongoDb.collection(this.collection).insertOne(object)
             return obj.insertedId
         } catch (error) {
-            console.error(`MongoDb container --> ${error}`);
+            winston.log('error', `MongoDbContainer --> ${error}`)
         }
     }
 
@@ -74,7 +77,7 @@ class MongoDbContainer {
                 .collection(this.collection)
                 .replaceOne({ _id: ObjectId(object.id) }, object)
         } catch (error) {
-            console.error(`MongoDb container --> ${error}`);
+            winston.log('error', `MongoDbContainer --> ${error}`)
         }
     }
 
@@ -84,7 +87,7 @@ class MongoDbContainer {
                 .collection(this.collection)
                 .deleteOne({ _id: ObjectId(id) })
         } catch (error) {
-            console.error(`MongoDb container --> ${error}`);
+            winston.log('error', `MongoDbContainer --> ${error}`)
         }
     }
 
@@ -92,7 +95,7 @@ class MongoDbContainer {
         try {
             await mongoDb.collection(this.collection).deleteMany({})
         } catch (error) {
-            console.error(`MongoDb container --> ${error}`);
+            winston.log('error', `MongoDbContainer --> ${error}`)
         }
     }
 

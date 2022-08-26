@@ -22,7 +22,7 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
 
     const updateAccountInfo = async () => {
 
-        const url = 'http://localhost:8080/account/update-info'
+        const url = `${process.env.REACT_APP_SERVER_URL}/account/update-info`
 
 
         const user = {
@@ -41,7 +41,7 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_CLIENT_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },
@@ -51,14 +51,14 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
     }
 
     const getAccountInfo = async () => {
-        const url = 'http://localhost:8080/account/info'
+        const url = `${process.env.REACT_APP_SERVER_URL}/account/info`
 
         await fetch(url, {
             method: 'GET',
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_CLIENT_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },
@@ -104,7 +104,7 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
         const formData = new FormData()
         formData.append('profileImg', avatar.profileImg)
         formData.append('username', username)
-        axios.post("http://localhost:8080/account/update-profileImg", formData, {
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/account/update-profileImg`, formData, {
         }).then(res => {
         })
     }

@@ -12,14 +12,14 @@ const Admin = ({ setLoginPipActive, setRegisterPipActive }) => {
 
     const isAdmin = async () => {
 
-        const url = 'http://localhost:8080/account/isAdmin'
+        const url = `${process.env.REACT_APP_SERVER_URL}/account/isAdmin`
 
         await fetch(url, {
             method: 'POST',
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_CLIENT_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },

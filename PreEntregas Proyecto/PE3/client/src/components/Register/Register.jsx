@@ -13,7 +13,7 @@ const Register = ({ setRegisterPipActive }) => {
     const [errorRegister, setErrorRegister] = useState(false)
 
     const register = async () => {
-        const url = 'http://localhost:8080/auth/register'
+        const url = `${process.env.REACT_APP_SERVER_URL}/auth/register`
         const user = {
             username: username,
             password: userPass,
@@ -27,7 +27,7 @@ const Register = ({ setRegisterPipActive }) => {
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_CLIENT_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },

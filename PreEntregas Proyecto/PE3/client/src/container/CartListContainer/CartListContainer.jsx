@@ -9,13 +9,13 @@ const CartListContainer = () => {
 
     async function getCartProducts() {
 
-        const url = `http://localhost:8080/carts/products`
+        const url = `${process.env.REACT_APP_SERVER_URL}/carts/products`
         let response = await fetch(url, {
             method: 'GET',
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_CLIENT_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },

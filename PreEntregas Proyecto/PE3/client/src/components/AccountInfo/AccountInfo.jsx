@@ -27,14 +27,14 @@ const AccountInfo = () => {
     }
 
     const getAccountInfo = async () => {
-        const url = 'http://localhost:8080/account/info'
+        const url = `${process.env.REACT_APP_SERVER_URL}/account/info`
 
         await fetch(url, {
             method: 'GET',
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_CLIENT_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },

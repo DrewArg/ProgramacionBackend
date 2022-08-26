@@ -10,7 +10,7 @@ const Login = ({ setLoginPipActive }) => {
     const [errorLogin, setErrorLogin] = useState(false)
 
     const login = async () => {
-        const url = 'http://localhost:8080/auth/login'
+        const url = `${process.env.REACT_APP_SERVER_URL}/auth/login`
         const user = {
             username: username,
             password: userPass
@@ -23,7 +23,7 @@ const Login = ({ setLoginPipActive }) => {
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_CLIENT_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },

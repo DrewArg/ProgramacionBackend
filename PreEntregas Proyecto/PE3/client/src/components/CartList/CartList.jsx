@@ -14,7 +14,7 @@ const CartList = ({ products }) => {
     const navigate = useNavigate()
 
     const endBuy = async (products) => {
-        const url = 'http://localhost:8080/carts/sendEmail'
+        const url = `${process.env.REACT_APP_SERVER_URL}/carts/sendEmail`
 
         const body = JSON.stringify(products)
 
@@ -24,7 +24,7 @@ const CartList = ({ products }) => {
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_CLIENT_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },
@@ -35,14 +35,14 @@ const CartList = ({ products }) => {
 
     const isLogged = async () => {
         if (!loggedIn) {
-            const url = 'http://localhost:8080/auth/isLogged'
+            const url = `${process.env.REACT_APP_SERVER_URL}/auth/isLogged`
 
             await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Access-Control-Allow-Headers': 'Content-Type',
                     'Access-Control-Allow-Credentials': 'true',
-                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Access-Control-Allow-Origin': `${process.env.REACT_APP_CLIENT_URL}`,
                     'Access-Control-Allow-Methods': 'POST,GET',
                     'Content-Type': 'application/json'
                 },

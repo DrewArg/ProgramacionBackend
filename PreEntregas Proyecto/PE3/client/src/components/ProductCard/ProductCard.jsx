@@ -23,14 +23,14 @@ const ProductCard = ({ product }) => {
     }
 
     const isLogged = async () => {
-        const url = 'http://localhost:8080/auth/isLogged'
+        const url = `${process.env.REACT_APP_SERVER_URL}/auth/isLogged`
 
         await fetch(url, {
             method: 'POST',
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_CLIENT_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },
@@ -52,7 +52,7 @@ const ProductCard = ({ product }) => {
         await isLogged()
         if (loggedIn) {
 
-            const url = `http://localhost:8080/carts/products/add-product`
+            const url = `${process.env.REACT_APP_SERVER_URL}/carts/products/add-product`
 
             const addProd = {
                 prodId: id,
@@ -67,7 +67,7 @@ const ProductCard = ({ product }) => {
                 headers: {
                     'Access-Control-Allow-Headers': 'Content-Type',
                     'Access-Control-Allow-Credentials': 'true',
-                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Access-Control-Allow-Origin': `${process.env.REACT_APP_CLIENT_URL}`,
                     'Access-Control-Allow-Methods': 'POST,GET',
                     'Content-Type': 'application/json'
                 },

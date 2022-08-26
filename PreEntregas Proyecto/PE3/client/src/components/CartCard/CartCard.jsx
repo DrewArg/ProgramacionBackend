@@ -10,7 +10,7 @@ const CartCard = ({ product }) => {
 
     const deleteProduct = async (id) => {
 
-        const url = 'http://localhost:8080/carts/products/delete'
+        const url = `${process.env.REACT_APP_SERVER_URL}/carts/products/delete`
 
         const prodId = {
             productId: id
@@ -24,7 +24,7 @@ const CartCard = ({ product }) => {
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_CLIENT_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET,DELETE',
                 'Content-Type': 'application/json'
             },
@@ -47,14 +47,14 @@ const CartCard = ({ product }) => {
     }
 
     const updateProduct = async () => {
-        const url = `http://localhost:8080/carts/products/:${product.id}/:${product.quantity}`
+        const url = `${process.env.REACT_APP_SERVER_URL}/carts/products/:${product.id}/:${product.quantity}`
 
         await fetch(url, {
             method: 'GET',
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_CLIENT_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },

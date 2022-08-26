@@ -16,7 +16,8 @@ export const clientUrl = process.env.CLIENT_URL
 export const twilioAccountSid = process.env.TWILIO_ID
 export const twilioAuthToken = process.env.TWILIO_TOKEN
 export const twilioSmsPhoneNumber = process.env.TWILIO_SMS_NUMBER
-export const twilioWhatsappPhoneNumber = process.env.TWILIO_WHATSAPP_NUMBER
+export const twilioWhatsapp = process.env.TWILIO_WHATSAPP
+export const twilioWhatsappAdmin = process.env.TWILIO_WHATSAPP_ADMIN
 
 const username = process.env.MONGO_USER
 const password = process.env.MONGO_PASS

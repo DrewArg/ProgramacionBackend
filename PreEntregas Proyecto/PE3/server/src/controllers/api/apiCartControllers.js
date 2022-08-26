@@ -3,6 +3,7 @@ import cartController from "../cartControllers.js"
 import { sendBuyEtherealEmail } from "../../messaging/mail/nodeMailer.js"
 import { userController } from "../userControllers.js";
 import { smsSender } from "../../messaging/sms/smsSender.js";
+import { whatsappSender } from "../../messaging/whatsapp/whatsappSender.js";
 export const apiCartController = {
 
     async getById(req, res) {
@@ -149,8 +150,10 @@ export const apiCartController = {
                 const userId = req.session.passport.user
                 const user = await userController.getById(userId)
                 await sendBuyEtherealEmail(user, req.body)
-                const textMessage = `${user.fullName} tu pedido ha sido recibido y se encuentra en proceso.`
-                await smsSender(user, textMessage)
+                // const textMessage = `${user.fullName} tu pedido ha sido recibido y se encuentra en proceso.`
+                // await smsSender(user, textMessage)
+                const whatsapp = `Nuevo pedido de ${user.fullName} - ${user.username}`
+                await whatsappSender(user, whatsapp)
 
             }
         } catch (error) {

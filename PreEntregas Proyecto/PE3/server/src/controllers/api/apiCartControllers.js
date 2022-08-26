@@ -1,8 +1,11 @@
 import { cartsDao, productsDao } from "../../daos/daoIndex.js"
 import cartController from "../cartControllers.js"
+import { sendBuyEtherealEmail } from "../../mail/nodeMailer.js"
+import { userController } from "../userControllers.js";
 export const apiCartController = {
 
     async getById(req, res) {
+        console.log("get by id");
         try {
             if (req.session.passport) {
                 const bars = await req.originalUrl.split("/")
@@ -66,6 +69,7 @@ export const apiCartController = {
     },
 
     async updateProduct(req, res) {
+        console.log("update prod");
         try {
             if (req.session.passport) {
 
@@ -137,6 +141,19 @@ export const apiCartController = {
             console.error(`Cart controller --> ${error}`);
         }
     },
+
+    async sendEmail(req, res) {
+        try {
+            if (req.session.passport) {
+                const userId = req.session.passport.user
+                const user = await userController.getById(userId)
+                await sendBuyEtherealEmail(user,req.body)
+
+            }
+        } catch (error) {
+
+        }
+    }
 
 }
 

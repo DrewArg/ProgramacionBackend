@@ -51,7 +51,7 @@ const Login = ({ setLoginPipActive }) => {
                         <form className='loginForm__form'>
                             <label className='formLabel'> Nombre de usuario
                             </label>
-                            <input className='formInput' type="text" placeholder='nombre de usuario' id='username' name="username" value={username} onInput={e => setUsername(e.target.value)} />
+                            <input className='formInput' type="email" placeholder='nombre de usuario' id='username' name="username" value={username} onInput={e => setUsername(e.target.value)} />
                             <label className='formLabel'> Contraseña
                             </label>
                             <input className='formInput' type="password" placeholder='contraseña' id='password' name="password" value={userPass} onInput={e => setUserPass(e.target.value)} />
@@ -68,7 +68,7 @@ const Login = ({ setLoginPipActive }) => {
                         <form className='loginForm__form'>
                             <label className='formLabel'> Nombre de usuario
                             </label>
-                            <input className='formInput' type="text" placeholder='nombre de usuario' id='username' name="username" value={username} onInput={e => setUsername(e.target.value)} />
+                            <input className='formInput' type="email" placeholder='nombre de usuario' id='username' name="username" value={username} onInput={e => setUsername(e.target.value)} />
                             <label className='formLabel'> Contraseña
                             </label>
                             <input className='formInput' type="password" placeholder='contraseña' id='password' name="password" value={userPass} onInput={e => setUserPass(e.target.value)} />

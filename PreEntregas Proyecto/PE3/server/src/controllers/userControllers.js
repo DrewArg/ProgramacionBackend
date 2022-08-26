@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs'
+import { sendNewRegisterEthereal } from '../mail/nodeMailer.js'
 import { usersDao } from '../daos/daoIndex.js'
 
 export const userController = {
@@ -25,6 +26,7 @@ export const userController = {
                     }
                 }
                 const userId = await usersDao.saveObject(usr)
+                await sendNewRegisterEthereal(usr)
                 return userId;
             } else {
                 //TODO devolver que el usuario ya existe, deberia haber una vista para eso

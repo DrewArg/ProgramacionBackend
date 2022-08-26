@@ -1,17 +1,19 @@
-import nodemailer from 'nodemailer'
+import { createTransport } from 'nodemailer';
 
 //TODO Extraer todos estos datos al .env
 const TEST_MAIL = 'tiffany12@ethereal.email'
 
-const transporter = nodemailer.createTransport({
+const transporter = createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: 'tiffany12@ethereal.email',
-        pass: 'vnUSxz4JAwJvGDS325'
+        user: 'urban.heathcote79@ethereal.email',
+        pass: 'csyUxcCNNMYWhyVVuy'
     }
 });
 
+//EL TO deberia ser el mail del usuario o bien el mail del admin
+//el admin tiene que tener su cuenta en ethereal
 const mailOptions = {
     from: 'Servidor Node.js',
     to: TEST_MAIL,
@@ -27,3 +29,5 @@ export const sendEtherealEmail = () => {
         console.error(`nodeMailer --> ${error}`);
     }
 }
+
+

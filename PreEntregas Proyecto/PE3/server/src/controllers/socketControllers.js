@@ -5,7 +5,7 @@ import { cartController } from "./cartControllers.js";
 export function SocketController(server) {
   const socketServer = new Socket(server, {
     cors: {
-      origin: "http://localhost:3000",
+      origin: process.env.CLIENT_REACT_URL,
       methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
     },

@@ -19,7 +19,10 @@ export const userController = {
                 const hashPass = await bcrypt.hash(user.password, 10)
                 const usr = {
                     username: user.username,
-                    password: hashPass
+                    password: hashPass,
+                    profileImg: {
+                        profileImgPath: process.env.SEVER_URL + "/public/images/default-user.png"
+                    }
                 }
                 const userId = await usersDao.saveObject(usr)
                 return userId;

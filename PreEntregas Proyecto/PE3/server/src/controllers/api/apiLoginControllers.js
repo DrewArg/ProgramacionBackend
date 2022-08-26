@@ -31,11 +31,6 @@ export const logoutController = (req, res) => {
       if (err) { return next(err); }
       res.redirect('/');
     });
-    // res.clearCookie("http://localhost:3000");
-    // req.session.destroy();
-    // req.session = null;
-    // sessionsDao.deleteAll()
-    // return res.send("");
   }
 };
 

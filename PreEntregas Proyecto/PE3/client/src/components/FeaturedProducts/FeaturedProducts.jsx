@@ -1,14 +1,16 @@
 import React from 'react'
 import ProductCard from '../ProductCard/ProductCard.jsx'
+import './FeaturedProducts.css'
 
 const FeaturedProducts = ({ products }) => {
     return (
         <>
             <div className='featuredProducts'>
+                <h2>¡Productos Destacados!</h2>
                 {
                     products.length > 0 ?
-                        <table className='productTable'>
-                            <tbody>
+                        <table className='featuredTable'>
+                            <tbody className='featuredTable__body'>
                                 {products.map(p => { return <ProductCard key={p.id} product={p} /> })}
                             </tbody>
                         </table>

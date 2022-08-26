@@ -1,14 +1,7 @@
 import { productsDao } from '../daos/daoIndex.js'
 
 export const productController = {
-    async getById(id) {
-        try {
-            const prod = await productsDao.listById(id)
-            return prod
-        } catch (error) {
-            console.error(`Product controller --> ${error}`);
-        }
-    },
+
 
     async updateProduct(product) {
         try {
@@ -48,9 +41,10 @@ export const productController = {
     async getFeaturedProducts() {
         try {
             const products = await productsDao.listAll()
-            if (products.length > 4){
-                return products.splice(-5)
-            }else{
+            if (products.length > 3) {
+                const featured = products.splice(-4)
+                return featured
+            } else {
                 return products
             }
         } catch (error) {

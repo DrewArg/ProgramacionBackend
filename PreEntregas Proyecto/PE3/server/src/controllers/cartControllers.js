@@ -1,12 +1,13 @@
 import { cartsDao } from "../daos/daoIndex.js"
+import apiCartController from "./api/apiCartControllers.js";
 
 export const cartController = {
-    async getById(id) {
+
+    async getAllCarts() {
         try {
-            const cart = await cartsDao.listById(id)
-            return cart
+            return await cartsDao.listAll()
         } catch (error) {
-            console.error(`Cart controller --> ${error}`);
+            console.error(`Product controller --> ${error}`);
         }
     },
 
@@ -19,10 +20,15 @@ export const cartController = {
         }
     },
 
-    async getAllProducts(cartId) {
+    async getAllProducts(userId) {
         try {
-            const userCart = this.getById(cartId)
-            return userCart.products
+            const carts = await cartsDao.listAll()
+            const index = carts.findIndex((c) => c.userId.toString() === userId.toString())
+            if (index === -1) {
+                return ""
+            } else {
+                return carts[index].products
+            }
         } catch (error) {
             console.error(`Cart controller --> ${error}`);
         }
@@ -37,19 +43,18 @@ export const cartController = {
         }
     },
 
-    async saveProduct(cartId, productId) {
+    async updateCart(cart) {
         try {
-            const userCart = this.getById(cartId)
-            userCart.products.push(productId)
-            //TODO RETURN STATUS CODE OK
+            await cartsDao.updateObject(cart)
         } catch (error) {
             console.error(`Cart controller --> ${error}`);
+
         }
     },
 
     async deleteProduct(cartId, productId) {
         try {
-            const userCart = this.getById(cartId)
+            const userCart = apiCartController.getById(cartId)
             const products = this.getAllProducts(userCart)
 
             const index = products.findIndex(p => p.id == productId)

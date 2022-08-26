@@ -7,7 +7,6 @@ const Register = ({ setRegisterPipActive }) => {
 
     const [username, setUsername] = useState('')
     const [userPass, setUserPass] = useState('')
-    const [name, setName] = useState('')
 
     const [errorRegister, setErrorRegister] = useState(false)
 
@@ -31,9 +30,9 @@ const Register = ({ setRegisterPipActive }) => {
         }).then(async (r) => {
             if (r.status === 200) {
                 const text = await r.text()
-                const user = JSON.parse(text)
-                setName(user.username)
+                console.log(text);
                 setErrorRegister(false)
+                setRegisterPipActive(false)
             } else {
                 setErrorRegister(true)
             }

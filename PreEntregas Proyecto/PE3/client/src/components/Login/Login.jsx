@@ -6,7 +6,6 @@ const Login = ({ setLoginPipActive }) => {
 
     const [username, setUsername] = useState('')
     const [userPass, setUserPass] = useState('')
-    const [name, setName] = useState('')
 
     const [errorLogin, setErrorLogin] = useState(false)
 
@@ -32,40 +31,14 @@ const Login = ({ setLoginPipActive }) => {
         }).then(async (r) => {
             if (r.status === 200) {
                 const text = await r.text()
-                const user = JSON.parse(text)
-                setName(user.username)
                 setErrorLogin(false)
+                setLoginPipActive(false)
             } else {
                 setErrorLogin(true)
             }
         })
     }
 
-    const logout = async () => {
-        const url = 'http://localhost:8080/auth/logout'
-        const user = {
-            username: username,
-            password: userPass
-        }
-
-        await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(user),
-            headers: {
-                'Access-Control-Allow-Headers': 'Content-Type',
-                'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
-                'Access-Control-Allow-Methods': 'POST,GET',
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        }).then(async (r) => {
-            if (r.status === 200) {
-                setName('')
-            }
-            setErrorLogin(false)
-        })
-    }
 
     return (
         <>

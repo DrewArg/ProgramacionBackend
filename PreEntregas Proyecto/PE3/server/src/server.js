@@ -5,8 +5,8 @@ import { passportMiddleware, passportSessionHandler } from './middlewares/passpo
 import { sessionConfig } from './config/config.js'
 import { Server as HttpServer } from 'http'
 import apiRouter from './routers/api/apiRouter.js'
-import infoRouter from './routers/infoRouter.js'
 import cors from 'cors'
+import socketRouter from './routers/socket/socketRouter.js'
 
 dotenv.config()
 
@@ -18,14 +18,18 @@ app.use(cors({
     credentials: true
 }))
 
+app.use('/public', express.static('public'));
+
 app.use(session(sessionConfig))
+
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(passportMiddleware)
 app.use(passportSessionHandler)
 
-app.use(infoRouter)
+
+app.use(socketRouter)
 app.use(apiRouter)
 
 const httpServer = new HttpServer(app)

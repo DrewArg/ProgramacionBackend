@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs'
 import { usersDao } from '../daos/daoIndex.js'
 
 export const userController = {
+
     async getUsers() {
         try {
             const users = await usersDao.listAll()
@@ -20,7 +21,8 @@ export const userController = {
                     username: user.username,
                     password: hashPass
                 }
-                return await usersDao.saveObject(usr)
+                const userId = await usersDao.saveObject(usr)
+                return userId;
             } else {
                 //TODO devolver que el usuario ya existe, deberia haber una vista para eso
                 console.log(`El usuario ya existe en el sistema`);
@@ -80,5 +82,6 @@ export const userController = {
         } catch (error) {
             console.error(`User controller --> ${error}`);
         }
-    }
+    },
+
 }

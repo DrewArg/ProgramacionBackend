@@ -68,7 +68,7 @@ class MongoDbContainer {
         }
     }
 
-    async udpdateObject(object) {
+    async updateObject(object) {
         try {
             await mongoDb
                 .collection(this.collection)
@@ -78,7 +78,7 @@ class MongoDbContainer {
         }
     }
 
-    async delteById(id) {
+    async deleteById(id) {
         try {
             await mongoDb
                 .collection(this.collection)

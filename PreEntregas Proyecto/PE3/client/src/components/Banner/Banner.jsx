@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './Banner.css'
 
 const Banner = () => {
@@ -6,7 +7,9 @@ const Banner = () => {
         <>
             <div className='banner'>
                 <h1>Muebles para tu hogar</h1>
-                <button>Ver tienda</button>
+                <Link to={'/shop'}>
+                    <button>Ver tienda</button>
+                </Link>
             </div>
         </>
     )

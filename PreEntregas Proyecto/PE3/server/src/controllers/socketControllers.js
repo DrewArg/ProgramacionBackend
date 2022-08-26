@@ -1,7 +1,6 @@
 import { Server as Socket } from "socket.io";
 import { productController } from "./productControllers.js";
 import { cartController } from "./cartControllers.js";
-import { isLoggedIn } from "./loginControllers.js";
 
 export function SocketController(server) {
   const socketServer = new Socket(server, {
@@ -13,10 +12,10 @@ export function SocketController(server) {
   });
 
   socketServer.on("connect", (expressSocket) => {
-    console.log(`new connection: ${expressSocket.id}`);
+    (`new connection: ${expressSocket.id}`);
 
     expressSocket.on("disconnect", () => {
-      console.log(`disconnected: ${expressSocket.id}`);
+      (`disconnected: ${expressSocket.id}`);
     });
 
     //TODO PARA GUARDAR UN PRODUCTO TIENE QUE SER ADMIN - MIDDLEWARE DE ADMIN
@@ -45,7 +44,7 @@ export function SocketController(server) {
         await productController.deleteById(productId);
         // socketServer.sockets.emit("products", await _tryGetAllProducts())
       } catch (error) {
-        console.log("else");
+        ("else");
 
         console.error(`Socket controller --> ${error}`);
       }
@@ -58,15 +57,15 @@ export function SocketController(server) {
     expressSocket.on("getFeaturedProducts", async () => {
       try {
         const featuredProds = productController.getFeaturedProducts();
-        socketServer.sockets.emit("featuredProducts", featuredProds);
+        socketServer.sockets.emit("featuredProducts", await featuredProds);
       } catch (error) {
         console.error(`Socket controller --> ${error}`);
       }
     });
 
-    expressSocket.on("getProductsInCart", async (cartId) => {
+    expressSocket.on("getProductsInCart", async (userId) => {
       try {
-        const products = await cartController.getAllProducts(cartId);
+        const products = await cartController.getAllProducts(userId);
         socketServer.sockets.emit("productsInCart", products);
       } catch (error) {
         console.error(`Socket controller --> ${error}`);

@@ -1,8 +1,8 @@
 import passport from "passport";
-import { sessionsDao } from "../daos/daoIndex.js";
+import { sessionsDao } from "../../daos/daoIndex.js";
 
 export const isLoggedIn = (req, res) => {
-  if (req.session) {
+  if (req.session.passport != null) {
     res.send(true);
   } else {
     res.send(false);
@@ -25,16 +25,18 @@ export const loginController = (req, res) => {
   })(req, res);
 };
 
-export const logoutController = async (req, res) => {
-  console.log("logout");
-  if (req.session) {
-    console.log("req..session logout: ");
-    req.logout();
-    res.clearCookie("http://localhost:3000");
-    req.session.destroy();
-    // await req.logout();
+export const logoutController = (req, res) => {
+  if (req.session.passport) {
+    req.logout(function (err) {
+      if (err) { return next(err); }
+      res.redirect('/');
+    });
+    // res.clearCookie("http://localhost:3000");
+    // req.session.destroy();
     // req.session = null;
     // sessionsDao.deleteAll()
     // return res.send("");
   }
 };
+
+

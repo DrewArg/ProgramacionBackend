@@ -27,4 +27,8 @@
   font: size 0.8em;
   margin-top: 1em;
   letter-spacing: 0.1em;
+}
+.banner button:hover {
+  color: rgb(78, 113, 112);
+  background-color: rgb(181, 232, 232);
 }/*# sourceMappingURL=Banner.css.map */

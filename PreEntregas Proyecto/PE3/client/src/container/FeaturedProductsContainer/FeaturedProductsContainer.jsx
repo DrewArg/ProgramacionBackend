@@ -4,6 +4,8 @@ import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts
 import { useContext } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+
+
 const FeaturedProductsContainer = () => {
     const reactSocket = useContext(SocketContext)
     const [loading, setLoading] = useState(true)

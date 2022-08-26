@@ -100,8 +100,6 @@ export const apiCartController = {
     async saveProduct(req, res) {
         try {
             if (req.session.passport) {
-
-                console.log(req.body);
                 const prodId = req.body.prodId
                 const quantity = req.body.quantity
                 const product = await productsDao.listById(prodId)
@@ -110,24 +108,24 @@ export const apiCartController = {
                 const cartIndex = carts.findIndex((c) => c.userId.toString() === userId.toString())
                 const productsInCart = await cartController.getAllProducts(userId)
                 const prodsIndex = productsInCart.findIndex((pc) => pc.id === prodId)
+
                 if (prodsIndex === -1) {
+                    product.quantity = parseInt(quantity)
                     carts[cartIndex].products.push(product)
                 } else {
-                    let dbQty
+                    let dbQty = 0
+                    let currQty = parseInt(quantity)
+
                     if (!productsInCart[prodsIndex].quantity) {
                         productsInCart[prodsIndex].quantity = 0
-                        dbQty = 0
                     } else {
                         dbQty = productsInCart[prodsIndex].quantity
-
+                        let result = dbQty + currQty
+                        productsInCart[prodsIndex].quantity = result
+                        carts[cartIndex].products[prodsIndex].quantity = result
                     }
-                    let currQty = parseInt(quantity)
-                    let result = dbQty + currQty
-                    productsInCart[prodsIndex].quantity = result
-
-                    carts[cartIndex].products[prodsIndex].quantity = result
-
                 }
+
                 await cartController.updateCart(carts[cartIndex])
                 res.status(200).json("ok")
             } else {

@@ -8,16 +8,15 @@ export const productController = {
             const prod = await productsDao.updateObject(product)
             return prod
         } catch (error) {
-            console.error(`Product controller --> ${error}`);
+            winston.log('error', `productControllers -->  ${error}`)
         }
     },
 
     async deleteById(id) {
         try {
             await productsDao.deleteById(id)
-            //TODO devolver estado de se elimino ok
         } catch (error) {
-            console.error(`Product controller --> ${error}`);
+            winston.log('error', `productControllers -->  ${error}`)
         }
     },
 
@@ -25,7 +24,7 @@ export const productController = {
         try {
             return await productsDao.listAll()
         } catch (error) {
-            console.error(`Product controller --> ${error}`);
+            winston.log('error', `productControllers -->  ${error}`)
         }
     },
 
@@ -34,7 +33,7 @@ export const productController = {
             const prodId = await productsDao.saveObject(product)
             return prodId
         } catch (error) {
-            console.error(`Product controller --> ${error}`);
+            winston.log('error', `productControllers -->  ${error}`)
         }
     },
 
@@ -48,7 +47,7 @@ export const productController = {
                 return products
             }
         } catch (error) {
-            console.error(`Product controller --> ${error}`);
+            winston.log('error', `productControllers -->  ${error}`)
         }
     }
 }

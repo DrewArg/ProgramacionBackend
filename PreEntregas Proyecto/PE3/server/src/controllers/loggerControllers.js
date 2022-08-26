@@ -1,5 +1,6 @@
 import { createLogger, transports, format } from 'winston'
 
+
 export const winston = createLogger({
     transports: [
         new transports.File({
@@ -16,7 +17,7 @@ export const winston = createLogger({
 
         new transports.File({
             filename: './src/logs/03-verbose.log',
-            level: 'info',
+            level: 'verbose',
             format: format.combine(format.timestamp(), format.json())
         }),
 
@@ -28,7 +29,7 @@ export const winston = createLogger({
 
         new transports.File({
             filename: './src/logs/05-warn.log',
-            level: 'info',
+            level: 'warn',
             format: format.combine(format.timestamp(), format.json())
         }),
 

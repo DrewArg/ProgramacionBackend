@@ -1,5 +1,6 @@
 import twilio from "twilio";
 import { twilioSmsPhoneNumber, twilioAccountSid, twilioAuthToken } from "../../config/config.js";
+import { winston } from '../../controllers/loggerControllers.js'
 
 export const smsSender = async (user, text) => {
     const smsMessage = {
@@ -12,6 +13,7 @@ export const smsSender = async (user, text) => {
     try {
         await twilioClient.messages.create(smsMessage)
     } catch (error) {
-        `Sms sender --> ${error}`
+        winston.log('error', `Sms sender --> ${error}`)
+
     }
 }

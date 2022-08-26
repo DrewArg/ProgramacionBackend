@@ -1,5 +1,6 @@
 import { createTransport } from 'nodemailer';
 import { adminAccount,adminEthereal,adminEtherealPass } from '../../config/config.js'
+import { winston } from '../../controllers/loggerControllers.js';
 
 const transporter = createTransport({
     host: 'smtp.ethereal.email',
@@ -29,7 +30,8 @@ export const sendBuyEtherealEmail = async (buyer, products) => {
         }
         await transporter.sendMail(mailOptions)
     } catch (error) {
-        console.error(`nodeMailer-- > ${error} `);
+        winston.log('error', `nodeMailer -->  ${error}`)
+
     }
 }
 
@@ -49,7 +51,7 @@ export const sendNewRegisterEthereal = async (user) => {
         }
         await transporter.sendMail(mailOptions)
     } catch (error) {
-        console.error(`nodeMailer-- > ${error} `);
+        winston.log('error', `nodeMailer -->  ${error}`)
     }
 }
 

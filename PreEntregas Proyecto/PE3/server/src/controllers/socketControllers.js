@@ -2,6 +2,7 @@ import { Server as Socket } from "socket.io";
 import { productController } from "./productControllers.js";
 import { cartController } from "./cartControllers.js";
 import { clientUrl } from '../config/config.js'
+import { winston } from "./loggerControllers.js";
 
 export function SocketController(server) {
   const socketServer = new Socket(server, {
@@ -19,40 +20,40 @@ export function SocketController(server) {
       (`disconnected: ${expressSocket.id}`);
     });
 
-    //TODO PARA GUARDAR UN PRODUCTO TIENE QUE SER ADMIN - MIDDLEWARE DE ADMIN
     expressSocket.on("saveProduct", async (product) => {
       try {
         await productController.saveProduct(product);
         socketServer.sockets.emit("products", await _tryGetAllProducts());
       } catch (error) {
-        console.error(`Socket controller --> ${error}`);
+        winston.log('error', `socketControllers -->  ${error}`)
       }
     });
 
-    //TODO PARA ACTUALIZAR UN PRODUCTO TIENE QUE SER ADMIN - MIDDLEWARE DE ADMIN
     expressSocket.on("updateProduct", async (product) => {
       try {
         await productController.updateProduct(product);
         // socketServer.sockets.emit("products", await _tryGetAllProducts())
       } catch (error) {
-        console.error(`Socket controller --> ${error}`);
+        winston.log('error', `socketControllers -->  ${error}`)
       }
     });
 
-    //TODO PARA BORRAR UN PRODUCTO TIENE QUE SER ADMIN - MIDDLEWARE DE ADMIN
     expressSocket.on("deleteProduct", async (productId) => {
       try {
         await productController.deleteById(productId);
         // socketServer.sockets.emit("products", await _tryGetAllProducts())
       } catch (error) {
-        ("else");
-
-        console.error(`Socket controller --> ${error}`);
+        winston.log('error', `socketControllers -->  ${error}`)
       }
     });
 
     expressSocket.on("getAllProducts", async () => {
-      socketServer.sockets.emit("products", await _tryGetAllProducts());
+      try {
+        socketServer.sockets.emit("products", await _tryGetAllProducts());
+      } catch (error) {
+        winston.log('error', `socketControllers -->  ${error}`)
+
+      }
     });
 
     expressSocket.on("getFeaturedProducts", async () => {
@@ -60,7 +61,7 @@ export function SocketController(server) {
         const featuredProds = productController.getFeaturedProducts();
         socketServer.sockets.emit("featuredProducts", await featuredProds);
       } catch (error) {
-        console.error(`Socket controller --> ${error}`);
+        winston.log('error', `socketControllers -->  ${error}`)
       }
     });
 
@@ -69,7 +70,7 @@ export function SocketController(server) {
         const products = await cartController.getAllProducts(userId);
         socketServer.sockets.emit("productsInCart", products);
       } catch (error) {
-        console.error(`Socket controller --> ${error}`);
+        winston.log('error', `socketControllers -->  ${error}`)
       }
     });
 
@@ -78,7 +79,7 @@ export function SocketController(server) {
         await cartController.deleteProduct(cartId, productId);
         // socketServer.sockets.emit("productsInCart", products)
       } catch (error) {
-        console.error(`Socket controller --> ${error}`);
+        winston.log('error', `socketControllers -->  ${error}`)
       }
     });
 
@@ -87,7 +88,7 @@ export function SocketController(server) {
         await cartController.saveProduct(cartId, productId);
         // socketServer.sockets.emit("productsInCart", products)
       } catch (error) {
-        console.error(`Socket controller --> ${error}`);
+        winston.log('error', `socketControllers -->  ${error}`)
       }
     });
   });
@@ -98,6 +99,6 @@ async function _tryGetAllProducts() {
     const products = await productController.getAllProducts();
     return products;
   } catch (error) {
-    console.error(`Socket controller --> ${error}`);
+    winston.log('error', `socketControllers -->  ${error}`)
   }
 }

@@ -2,57 +2,84 @@ let productsDao, sessionsDao, usersDao, cartsDao
 
 switch (process.env.DB_PRODUCTS) {
     case "products-mongodb":
-        const { default: DaoMongoDb } = await import('./DaoMongoDb.js')
-        productsDao = new DaoMongoDb('products')
-
+        try {
+            const { default: DaoMongoDb } = await import('./DaoMongoDb.js')
+            productsDao = new DaoMongoDb('products')
+        } catch (error) {
+            winston.log('error', `daoIndex -->  ${error}`)
+        }
         break;
 
     default:
-        //TODO habria que agregar un segundo o un default metodo de guardado de datos
-        const { default: DaoMongoDb2 } = await import('./DaoMongoDb.js')
-        productsDao = new DaoMongoDb2('products')
+        try {
+            const { default: DaoMongoDb2 } = await import('./DaoMongoDb.js')
+            productsDao = new DaoMongoDb2('products')
+        } catch (error) {
+            winston.log('error', `daoIndex -->  ${error}`)
+        }
         break;
 }
 
 switch (process.env.DB_SESSIONS) {
     case "sessions-mongodb":
-        const { default: DaoMongoDb } = await import('./DaoMongoDb.js')
-        sessionsDao = new DaoMongoDb('sessions')
-
+        try {
+            const { default: DaoMongoDb } = await import('./DaoMongoDb.js')
+            sessionsDao = new DaoMongoDb('sessions')
+        } catch (error) {
+            winston.log('error', `daoIndex -->  ${error}`)
+        }
         break;
 
     default:
-        //TODO habria que agregar un segundo o un default metodo de guardado de datos
-        const { default: DaoMongoDb2 } = await import('./DaoMongoDb.js')
-        sessionsDao = new DaoMongoDb2('sessions')
+        try {
+            const { default: DaoMongoDb2 } = await import('./DaoMongoDb.js')
+            sessionsDao = new DaoMongoDb2('sessions')
+
+        } catch (error) {
+            winston.log('error', `daoIndex -->  ${error}`)
+        }
         break;
 }
 
 switch (process.env.DB_USERS) {
     case "users-mongodb":
-        const { default: DaoMongoDb } = await import('./DaoMongoDb.js')
-        usersDao = new DaoMongoDb('users')
-
+        try {
+            const { default: DaoMongoDb } = await import('./DaoMongoDb.js')
+            usersDao = new DaoMongoDb('users')
+        } catch (error) {
+            winston.log('error', `daoIndex -->  ${error}`)
+        }
         break;
 
     default:
-        //TODO habria que agregar un segundo o un default metodo de guardado de datos
-        const { default: DaoMongoDb2 } = await import('./DaoMongoDb.js')
-        usersDao = new DaoMongoDb2('users')
+        try {
+            const { default: DaoMongoDb2 } = await import('./DaoMongoDb.js')
+            usersDao = new DaoMongoDb2('users')
+        } catch (error) {
+            winston.log('error', `daoIndex -->  ${error}`)
+        }
         break;
 }
 
 switch (process.env.DB_CARTS) {
     case "carts-mongodb":
-        const { default: DaoMongoDb } = await import('./DaoMongoDb.js')
-        cartsDao = new DaoMongoDb('carts')
+        try {
+            const { default: DaoMongoDb } = await import('./DaoMongoDb.js')
+            cartsDao = new DaoMongoDb('carts')
 
+        } catch (error) {
+            winston.log('error', `daoIndex -->  ${error}`)
+
+        }
         break;
 
     default:
-        //TODO habria que agregar un segundo o un default metodo de guardado de datos
-        const { default: DaoMongoDb2 } = await import('./DaoMongoDb.js')
-        cartsDao = new DaoMongoDb2('carts')
+        try {
+            const { default: DaoMongoDb2 } = await import('./DaoMongoDb.js')
+            cartsDao = new DaoMongoDb2('carts')
+        } catch (error) {
+            winston.log('error', `daoIndex -->  ${error}`)
+        }
         break;
 }
 

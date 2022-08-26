@@ -1,4 +1,5 @@
 import { productsDao } from '../../daos/daoIndex.js'
+import { winston } from '../loggerControllers.js'
 
 export const apiProductController = {
 
@@ -9,7 +10,7 @@ export const apiProductController = {
             const prod = await productsDao.listById(split[2])
             res.json(prod)
         } catch (error) {
-            console.error(`Api Product controller --> ${error}`);
+            winston.log('error', `apiProductController --> ${error}`)
         }
     },
 
@@ -20,7 +21,7 @@ export const apiProductController = {
                 res.json("ok")
             }
         } catch (error) {
-            console.error(`Api Product controller --> ${error}`);
+            winston.log('error', `apiProductController --> ${error}`)
         }
     },
 
@@ -64,7 +65,7 @@ export const apiProductController = {
                 await productsDao.updateObject(prod)
                 res.json("ok")
             } catch (error) {
-                console.error(`Api Product Controller --> ${error}`);
+                winston.log('error', `apiProductController --> ${error}`)
             }
 
 

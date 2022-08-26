@@ -11,6 +11,7 @@ export const registerController = (req, res) => {
         } else if (options) {
             return res.json(options)
         } else {
+            winston.log('info', `apiRegisterController --> registered ok`)
             return res.status(204).send('')
         }
     })(req, res)

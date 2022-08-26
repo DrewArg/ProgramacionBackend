@@ -4,6 +4,8 @@ import { sendBuyEtherealEmail } from "../../messaging/mail/nodeMailer.js"
 import { userController } from "../userControllers.js";
 import { smsSender } from "../../messaging/sms/smsSender.js";
 import { whatsappSender } from "../../messaging/whatsapp/whatsappSender.js";
+import { winston } from "../loggerControllers.js";
+
 export const apiCartController = {
 
     async getById(req, res) {
@@ -16,7 +18,7 @@ export const apiCartController = {
                 return cart
             }
         } catch (error) {
-            console.error(`Cart controller --> ${error}`);
+            winston.log('error', `apiCartContoller --> ${error}`)
         }
     },
 
@@ -28,15 +30,17 @@ export const apiCartController = {
                 const index = carts.findIndex((c) => c.userId.toString() === userId.toString())
 
                 if (index === -1) {
+                    winston.log('warn', 'apiCartContoller --> no se encontró el carrito')
                     res.json("no se encontró el carrito")
                 } else {
+                    winston.log('info', 'apiCartContoller --> carrito encontrado')
                     res.status(200).json(carts[index].products)
                 }
             } else {
                 res.json("")
             }
         } catch (error) {
-            console.error(`Cart controller --> ${error}`);
+            winston.log('error', `apiCartContoller --> ${error}`)
         }
     },
 
@@ -48,6 +52,7 @@ export const apiCartController = {
                 const index = carts.findIndex((c) => c.userId.toString() === userId.toString())
 
                 if (index === -1) {
+                    winston.log('warn', 'apiCartContoller --> no se encontró el carrito')
                     res.json("no se encontró el carrito")
 
                 } else {
@@ -56,6 +61,7 @@ export const apiCartController = {
                     const prodsIndex = productsInCart.findIndex((pc) => pc.id === prodId)
 
                     if (prodsIndex === -1) {
+                        winston.log('warn', 'apiCartContoller --> no se encontró el producto')
                         res.json("no se encontró el producto")
 
                     } else {
@@ -66,7 +72,7 @@ export const apiCartController = {
                 }
             }
         } catch (error) {
-            console.error(`Api Product controller --> ${error}`);
+            winston.log('error', `apiCartContoller --> ${error}`)
         }
     },
 
@@ -94,12 +100,13 @@ export const apiCartController = {
                 await cartController.updateCart(carts[cartIndex])
                 res.status(200).json("ok")
             } else {
+                winston.log('warn', `apiCartContoller --> usuario sin loguear`)
                 res.json("usuario sin loguear")
             }
 
 
         } catch (error) {
-            console.error(`Cart controller --> ${error}`);
+            winston.log('error', `apiCartContoller --> ${error}`)
         }
     },
 
@@ -135,12 +142,13 @@ export const apiCartController = {
                 await cartController.updateCart(carts[cartIndex])
                 res.status(200).json("ok")
             } else {
+                winston.log('warn', `apiCartContoller --> usuario sin logear`)
                 res.json("usuario sin loguear")
             }
 
 
         } catch (error) {
-            console.error(`Cart controller --> ${error}`);
+            winston.log('error', `apiCartContoller --> ${error}`)
         }
     },
 
@@ -150,13 +158,14 @@ export const apiCartController = {
                 const userId = req.session.passport.user
                 const user = await userController.getById(userId)
                 await sendBuyEtherealEmail(user, req.body)
-                // const textMessage = `${user.fullName} tu pedido ha sido recibido y se encuentra en proceso.`
-                // await smsSender(user, textMessage)
+                const textMessage = `${user.fullName} tu pedido ha sido recibido y se encuentra en proceso.`
+                await smsSender(user, textMessage)
                 const whatsapp = `Nuevo pedido de ${user.fullName} - ${user.username}`
                 await whatsappSender(user, whatsapp)
 
             }
         } catch (error) {
+            winston.log('error', `apiCartContoller --> ${error}`)
 
         }
     }

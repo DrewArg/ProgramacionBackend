@@ -1,5 +1,6 @@
 import { userController } from "../controllers/userControllers.js";
 import bcrypt from 'bcryptjs'
+import { winston } from "../controllers/loggerControllers.js";
 
 export const autenticar = async (username, password) => {
     try {
@@ -7,12 +8,14 @@ export const autenticar = async (username, password) => {
         const isAllowed = bcrypt.compareSync(password, user.password)
 
         if (!isAllowed) {
-            console.log(`Las contraseñas no coinciden`);
+            winston.log('warn',`Authenticate --> las contraseñas no coinciden`)
             return null
         } else {
+            winston.log('info',`Authenticate --> autenticado`)
             return user
         }
     } catch (error) {
-        console.error(`Authenticate --> ${error}`);
+        winston.log('error',`Authenticate --> ${error}`)
+
     }
 }

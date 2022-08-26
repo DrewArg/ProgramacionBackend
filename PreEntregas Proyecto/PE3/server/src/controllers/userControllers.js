@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
 import { sendNewRegisterEthereal } from '../messaging/mail/nodeMailer.js'
 import { usersDao } from '../daos/daoIndex.js'
+import { winston } from './loggerControllers.js'
 
 export const userController = {
 
@@ -9,7 +10,8 @@ export const userController = {
             const users = await usersDao.listAll()
             return users
         } catch (error) {
-            console.log(`User controller --> ${error}`);
+            winston.log('error', `userControllers -->  ${error}`)
+
         }
     },
 
@@ -31,11 +33,11 @@ export const userController = {
                 await sendNewRegisterEthereal(usr)
                 return userId;
             } else {
-                console.log(`El usuario ya existe en el sistema`);
+                winston.log('warn', `userControllers -->  el usuario ya existe`)
             }
 
         } catch (error) {
-            console.error(`User controller --> ${error}`);
+            winston.log('error', `userControllers -->  ${error}`)
         }
     },
 
@@ -44,7 +46,7 @@ export const userController = {
             const usr = await usersDao.listById(id)
             return usr
         } catch (error) {
-            console.error(`User controller --> ${error}`);
+            winston.log('error', `userControllers -->  ${error}`)
         }
     },
 
@@ -54,7 +56,7 @@ export const userController = {
             const user = users.find(u => u.username === username)
             return user
         } catch (error) {
-            console.error(`User controller --> ${error}`);
+            winston.log('error', `userControllers -->  ${error}`)
         }
     },
 
@@ -65,10 +67,11 @@ export const userController = {
             if (user) {
                 return false
             } else {
+                winston.log('warn', `userControllers -->  el nombre de usuario ya existe`)
                 return true
             }
         } catch (error) {
-            console.error(`User controller --> ${error}`);
+            winston.log('error', `userControllers -->  ${error}`)
         }
     },
 
@@ -77,16 +80,15 @@ export const userController = {
             const usr = await usersDao.updateObject(user)
             return usr
         } catch (error) {
-            console.error(`User controller --> ${error}`);
+            winston.log('error', `userControllers -->  ${error}`)
         }
     },
 
     async deleteById(id) {
         try {
             await usersDao.deleteById(id)
-            //TODO retornar un mensaje de ok capaz con un codigo de estado
         } catch (error) {
-            console.error(`User controller --> ${error}`);
+            winston.log('error', `userControllers -->  ${error}`)
         }
     },
 

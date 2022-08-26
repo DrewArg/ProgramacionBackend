@@ -3,6 +3,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import { userController } from '../controllers/userControllers.js'
 import { registerUser } from '../api/userApi.js'
 import { autenticar } from '../api/authenticate.js'
+import { winston } from '../controllers/loggerControllers.js'
 
 passport.use('local-register', new LocalStrategy({
     usernameField: 'username',
@@ -23,7 +24,7 @@ passport.use('local-register', new LocalStrategy({
 
             done(null, user)
         } catch (error) {
-            console.log(`Passport --> ${error}`);
+            winston.log('error', `Passport --> ${error}`)
             done(error)
         }
     }))
@@ -35,11 +36,16 @@ passport.use('local-login', new LocalStrategy({
 },
 
     async (_, username, password, done) => {
-        const user = await autenticar(username, password)
-        if (!user) {
-            return done(null, false)
-        } else {
-            return done(null, user)
+        try {
+            const user = await autenticar(username, password)
+            if (!user) {
+                return done(null, false)
+            } else {
+                return done(null, user)
+            }
+        } catch (error) {
+            winston.log('error', `Passport --> ${error}`)
+
         }
     }
 ))

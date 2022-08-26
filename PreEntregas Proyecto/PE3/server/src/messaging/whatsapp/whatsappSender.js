@@ -1,5 +1,6 @@
 import twilio from "twilio";
 import { twilioWhatsapp, twilioWhatsappAdmin, twilioAccountSid, twilioAuthToken } from "../../config/config.js";
+import { winston } from "../../controllers/loggerControllers.js";
 
 export const whatsappSender = async (user, text) => {
     const whatsapp = {
@@ -14,6 +15,7 @@ export const whatsappSender = async (user, text) => {
     try {
         const msg = await twilioClient.messages.create(whatsapp)
     } catch (error) {
-        `Whatsapp sender --> ${error}`
+        winston.log('error', `Whatsapp sender --> ${error}`)
+
     }
 }

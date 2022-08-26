@@ -1,5 +1,6 @@
 import { cartsDao } from "../daos/daoIndex.js"
 import apiCartController from "./api/apiCartControllers.js";
+import { winston } from "./loggerControllers.js";
 
 export const cartController = {
 
@@ -7,16 +8,15 @@ export const cartController = {
         try {
             return await cartsDao.listAll()
         } catch (error) {
-            console.error(`Product controller --> ${error}`);
+            winston.log('error', `cartControllers -->  ${error}`)
         }
     },
 
     async deleteById(id) {
         try {
             await cartsDao.deleteById(id)
-            //TODO devolver estado de se elimino ok
         } catch (error) {
-            console.error(`Cart controller --> ${error}`);
+            winston.log('error', `cartControllers -->  ${error}`)
         }
     },
 
@@ -25,12 +25,14 @@ export const cartController = {
             const carts = await cartsDao.listAll()
             const index = carts.findIndex((c) => c.userId.toString() === userId.toString())
             if (index === -1) {
+                winston.log('warn', `cartControllers -->  no se encontró el carrito`)
+
                 return ""
             } else {
                 return carts[index].products
             }
         } catch (error) {
-            console.error(`Cart controller --> ${error}`);
+            winston.log('error', `cartControllers -->  ${error}`)
         }
     },
 
@@ -39,7 +41,7 @@ export const cartController = {
             const cartId = await cartsDao.saveObject(cart)
             return cartId
         } catch (error) {
-            console.error(`Cart controller --> ${error}`);
+            winston.log('error', `cartControllers -->  ${error}`)
         }
     },
 
@@ -47,7 +49,7 @@ export const cartController = {
         try {
             await cartsDao.updateObject(cart)
         } catch (error) {
-            console.error(`Cart controller --> ${error}`);
+            winston.log('error', `cartControllers -->  ${error}`)
 
         }
     },
@@ -61,7 +63,7 @@ export const cartController = {
 
             products.splice(index, 1)
         } catch (error) {
-            console.error(`Cart controller --> ${error}`);
+            winston.log('error', `cartControllers -->  ${error}`)
         }
     }
 }

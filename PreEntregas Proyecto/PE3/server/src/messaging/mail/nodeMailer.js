@@ -19,7 +19,7 @@ export const sendBuyEtherealEmail = async (buyer, products) => {
         const mailOptions = {
             from: process.env.ADMIN,
             to: process.env.ADMIN,
-            subject: `Nuevo pedido de ${buyer.fullName ? buyer.fullName - buyer.username : buyer.username}`,
+            subject: `Nuevo pedido de ${buyer.fullName} - ${buyer.username}`,
             html: `<p>Se han comprado los siguientes productos: </p>
             <ul>
            ${products.map((p) => {
@@ -42,7 +42,12 @@ export const sendNewRegisterEthereal = async (user) => {
             to: process.env.ADMIN,
             subject: `Nuevo registro`,
             html: `<p>Se ha registrado un nuevo usuario: </p>
-            <ul><li>username: ${user.username}</li></ul>`
+            <ul>
+            <li>username: ${user.username}</li>
+            <li>full name: ${user.fullName}</li>
+            <li>phone: ${user.phoneNumber}</li>
+            </ul>`
+
         }
         await transporter.sendMail(mailOptions)
     } catch (error) {

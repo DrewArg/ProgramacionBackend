@@ -1,6 +1,6 @@
 import { cartsDao, productsDao } from "../../daos/daoIndex.js"
 import cartController from "../cartControllers.js"
-import { sendBuyEtherealEmail } from "../../mail/nodeMailer.js"
+import { sendBuyEtherealEmail } from "../../messaging/mail/nodeMailer.js"
 import { userController } from "../userControllers.js";
 export const apiCartController = {
 

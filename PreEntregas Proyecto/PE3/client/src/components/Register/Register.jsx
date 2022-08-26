@@ -7,6 +7,8 @@ const Register = ({ setRegisterPipActive }) => {
 
     const [username, setUsername] = useState('')
     const [userPass, setUserPass] = useState('')
+    const [fullName, setFullName] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
 
     const [errorRegister, setErrorRegister] = useState(false)
 
@@ -14,8 +16,11 @@ const Register = ({ setRegisterPipActive }) => {
         const url = 'http://localhost:8080/auth/register'
         const user = {
             username: username,
-            password: userPass
+            password: userPass,
+            fullName: fullName,
+            phoneNumber: phoneNumber
         }
+
         await fetch(url, {
             method: 'POST',
             body: JSON.stringify(user),
@@ -30,7 +35,6 @@ const Register = ({ setRegisterPipActive }) => {
         }).then(async (r) => {
             if (r.status === 200) {
                 const text = await r.text()
-                console.log(text);
                 setErrorRegister(false)
                 setRegisterPipActive(false)
             } else {
@@ -47,12 +51,18 @@ const Register = ({ setRegisterPipActive }) => {
                         <ImCross className='registerForm__exit' onClick={() => { setRegisterPipActive(false) }} />
                         <h2>Ha ocurrido un error en tu registro, prueba de nuevo</h2>
                         <form className='registerForm__form' >
-                            <label className='formLabel'> Nombre de usuario
+                            <label className='formLabel'> Email
                             </label>
-                            <input className='formInput' type="email" placeholder='nombre de usuario' id='username' name="username" value={username} onInput={e => setUsername(e.target.value)} />
+                            <input className='formInput' type="email" placeholder='email' id='username' name="username" value={username} onInput={e => setUsername(e.target.value)} />
+                            <label className='formLabel'> Nombre Completo
+                            </label>
+                            <input className='formInput' type="text" placeholder='nombre completo' id='fullName' name="fullName" value={fullName} onInput={e => setFullName(e.target.value)} />
                             <label className='formLabel'> Contraseña
                             </label>
                             <input className='formInput' type="password" placeholder='contraseña' id='password' name="password" value={userPass} onInput={e => setUserPass(e.target.value)} />
+                            <label className='formLabel'> Número de teléfono
+                            </label>
+                            <input className='formInput' type="number" placeholder='número de teléfono' id='phoneNumber' name="phoneNumber" value={phoneNumber} onInput={e => setPhoneNumber(e.target.value)} />
                         </form>
                         <button className='btn__submit' onClick={register}>Registrarse</button>
                     </div>
@@ -63,13 +73,19 @@ const Register = ({ setRegisterPipActive }) => {
                 <>
                     <div className='registerForm'>
                         <ImCross className='registerForm__exit' onClick={() => { setRegisterPipActive(false) }} />
-                        <form className='registerForm__form'>
-                            <label className='formLabel'> Nombre de usuario
+                        <form className='registerForm__form' >
+                            <label className='formLabel'> Email
                             </label>
-                            <input className='formInput' type="email" placeholder='nombre de usuario' id='username' name="username" value={username} onInput={e => setUsername(e.target.value)} />
+                            <input className='formInput' type="email" placeholder='email' id='username' name="username" value={username} onInput={e => setUsername(e.target.value)} />
+                            <label className='formLabel'> Nombre Completo
+                            </label>
+                            <input className='formInput' type="text" placeholder='nombre completo' id='fullName' name="fullName" value={fullName} onInput={e => setFullName(e.target.value)} />
                             <label className='formLabel'> Contraseña
                             </label>
                             <input className='formInput' type="password" placeholder='contraseña' id='password' name="password" value={userPass} onInput={e => setUserPass(e.target.value)} />
+                            <label className='formLabel'> Número de teléfono
+                            </label>
+                            <input className='formInput' type="number" placeholder='número de teléfono' id='phoneNumber' name="phoneNumber" value={phoneNumber} onInput={e => setPhoneNumber(e.target.value)} />
                         </form>
                         <button className='btn__submit' onClick={register}>Registrarse</button>
                     </div>

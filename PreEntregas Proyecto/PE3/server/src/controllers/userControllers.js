@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs'
-import { sendNewRegisterEthereal } from '../mail/nodeMailer.js'
+import { sendNewRegisterEthereal } from '../messaging/mail/nodeMailer.js'
 import { usersDao } from '../daos/daoIndex.js'
 
 export const userController = {
@@ -21,6 +21,8 @@ export const userController = {
                 const usr = {
                     username: user.username,
                     password: hashPass,
+                    fullName: user.fullName,
+                    phoneNumber: user.phoneNumber,
                     profileImg: {
                         profileImgPath: process.env.SEVER_URL + "/public/images/default-user.png"
                     }
@@ -29,7 +31,6 @@ export const userController = {
                 await sendNewRegisterEthereal(usr)
                 return userId;
             } else {
-                //TODO devolver que el usuario ya existe, deberia haber una vista para eso
                 console.log(`El usuario ya existe en el sistema`);
             }
 

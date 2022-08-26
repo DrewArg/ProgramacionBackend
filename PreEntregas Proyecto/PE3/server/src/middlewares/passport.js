@@ -13,7 +13,9 @@ passport.use('local-register', new LocalStrategy({
         try {
             const usr = {
                 username: username,
-                password: password
+                password: password,
+                fullName: req.body.fullName,
+                phoneNumber: req.body.phoneNumber
             }
 
             const userId = await registerUser(usr)

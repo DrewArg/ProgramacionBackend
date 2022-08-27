@@ -1,0 +1,19 @@
+.btn__shop {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  align-self: center;
+  font: size 0.8em;
+  letter-spacing: 0.1em;
+  padding: 1em;
+  margin-bottom: 2em;
+  cursor: pointer;
+  background-color: rgb(181, 232, 232);
+  color: rgb(42, 109, 108);
+  border: none;
+  text-transform: uppercase;
+}
+.btn__shop:hover {
+  color: white;
+  background-color: rgb(112, 156, 155);
+}/*# sourceMappingURL=Home.css.map */

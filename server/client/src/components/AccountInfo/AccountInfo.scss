@@ -1,0 +1,37 @@
+.accountInfo {
+    display: flex;
+    flex-direction: row;
+    margin: 2em;
+
+    &__userData {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        right: 0;
+        max-width: 10em;
+        justify-content: flex-end;
+        align-items: center;
+        margin-right: 4em;
+        margin-top: 2em;
+    }
+
+    &__edit {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        font-size: 1.5em;
+        cursor: pointer;
+        margin-left: 0.5em;
+
+        &--checkmark {
+            color: green;
+        }
+
+        &--pencil {
+            color: red;
+        }
+    }
+}

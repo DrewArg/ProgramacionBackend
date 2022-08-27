@@ -1,0 +1,19 @@
+.cartTable {
+  min-width: 100%;
+  margin-top: 2em;
+  background-color: rgb(217, 233, 231);
+}
+.cartTable thead {
+  display: table-header-group;
+  background-color: rgb(18, 103, 93);
+  color: white;
+  align-items: center;
+}
+.cartTable__header {
+  justify-content: space-evenly;
+  align-items: center;
+}
+.cartTable__header th {
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+}/*# sourceMappingURL=CartList.css.map */

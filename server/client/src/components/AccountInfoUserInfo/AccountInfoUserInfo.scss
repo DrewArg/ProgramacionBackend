@@ -1,0 +1,29 @@
+.accountInfo__userInfo {
+    display: flex;
+    flex-direction: row;
+    min-width: 30%;
+    max-width: 65%;
+    background-color: rgb(214, 213, 213);
+    height: 100%;
+    text-align: left;
+
+    &--leftElements {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        margin-left: 6em;
+
+        & input {
+        }
+    }
+    &--rightElements {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        margin-left: 6em;
+        padding-bottom: 0.5em;
+
+        & input {
+        }
+    }
+}

@@ -5,7 +5,8 @@
     "description": "",
     "main": "src/main.js",
     "scripts": {
-        "start": "nodemon main"
+        "start": "nodemon main",
+        "heroku-postbuild": "cd client && npm install && npm run build"
     },
     "keywords": [],
     "author": "",

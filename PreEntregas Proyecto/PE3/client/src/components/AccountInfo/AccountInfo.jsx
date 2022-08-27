@@ -75,7 +75,7 @@ const AccountInfo = () => {
                         <h2>Cargando...</h2></>
                     :
                     <>
-                        <img src={avatar} width={75} height={75} />
+                        <img src={avatar} alt={''} width={75} height={75} />
                         <h2>¡Hola {username}!</h2>
 
                     </>

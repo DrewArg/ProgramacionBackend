@@ -84,7 +84,7 @@ const Navbar = ({ setLoginPipActive, setRegisterPipActive }) => {
 
     useEffect(() => {
         isAdmin()
-    }, [isAdmin]);
+    });
 
     return (
         <>

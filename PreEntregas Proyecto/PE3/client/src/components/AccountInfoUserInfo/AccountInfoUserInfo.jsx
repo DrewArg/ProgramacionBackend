@@ -16,7 +16,7 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
     const navigate = useNavigate()
 
 
-    const [requested, setRequested] = useState(false)
+    // const [requested, setRequested] = useState(false)
 
     const [avatar, setAvatar] = useState({ profileImg: '' })
 
@@ -114,12 +114,9 @@ const AccountInfoUserInfo = ({ isEditable, handleConfirm, handleEdit }) => {
     }
 
     useEffect(() => {
-        if (!requested) {
-            getAccountInfo()
-            setRequested(true)
-        }
+        getAccountInfo()
 
-    }, [requested]);
+    });
     return (
         <>
 

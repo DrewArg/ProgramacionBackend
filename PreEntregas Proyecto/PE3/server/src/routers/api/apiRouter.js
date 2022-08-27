@@ -11,7 +11,7 @@ apiRouter.use('/api', apiProductRouter)
 apiRouter.use('/account', apiUserRouter)
 apiRouter.use('/carts', apiCartRouter)
 
-apiRouter.use('/', (req, res) => { res.status(200) })
+// apiRouter.use('/', (req, res) => { res.status(200) })
 apiRouter.all('*', (req, res) => {
     res.status(404).json({
         error: 404,

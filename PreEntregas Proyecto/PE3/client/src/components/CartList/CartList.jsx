@@ -2,14 +2,14 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import CartCard from '../CartCard/CartCard.jsx'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import NoUserContainer from '../../container/NoUserContainer/NoUserContainer'
 
 import './CartList.css'
 
 const CartList = ({ products }) => {
     const [loggedIn, setLoggedIn] = useState(false)
-    const [cartTotal, setCartTotal] = useState(0)
+    // const [cartTotal, setCartTotal] = useState(0)
 
     const navigate = useNavigate()
 

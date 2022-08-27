@@ -38,7 +38,7 @@ const ProductDetailContainer = () => {
     }
     useEffect(() => {
         getProductById()
-    }, []);
+    });
     return (
         <>
             <div className='productDetailContainer'>

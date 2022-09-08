@@ -1,0 +1,56 @@
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.navBarContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.navLink {
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 600;
+    &:hover {
+        color: rgb(23, 207, 176);
+    }
+
+    &__child {
+        text-decoration: none;
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
+        &:hover {
+            color: rgb(23, 207, 176);
+        }
+    }
+}
+
+.brand {
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 1rem;
+    &:hover {
+        color: rgb(23, 207, 176);
+    }
+}
+
+.cart {
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 800;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    &:hover {
+        color: rgb(23, 207, 176);
+    }
+}

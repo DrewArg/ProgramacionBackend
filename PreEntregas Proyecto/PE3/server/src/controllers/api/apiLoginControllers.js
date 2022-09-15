@@ -18,6 +18,7 @@ export const loginController = (req, res) => {
         const session = req.session;
         session.name = req.body.username;
         return await res.json(user);
+        // return await res.json(session);
       });
     } else if (options) {
       return res.json(options);

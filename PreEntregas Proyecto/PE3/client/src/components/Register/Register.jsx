@@ -33,6 +33,8 @@ const Register = ({ setRegisterPipActive }) => {
             },
             credentials: 'include'
         }).then(async (r) => {
+            const text = await r.text()
+            console.log(text);
             if (r.status === 200) {
                 setErrorRegister(false)
                 setRegisterPipActive(false)

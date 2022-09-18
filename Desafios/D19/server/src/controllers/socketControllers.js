@@ -1,7 +1,6 @@
 import { Server as Socket } from "socket.io";
 import productController from "./productControllers.js";
 import messageController from "./messageControllers.js";
-import { userController } from "./userControllers.js";
 
 function socketController(server) {
   const socketServer = new Socket(server, {
@@ -51,14 +50,6 @@ function socketController(server) {
         console.error(
           `Socket controller -->  ${error}`
         );
-      }
-    });
-
-    expressSocket.on("getMockUserData", async () => {
-      try {
-        expressSocket.emit("mockUserData", await userController.getMockUserData())
-      } catch (error) {
-        console.error("Socket controller -->  " + error);
       }
     });
 

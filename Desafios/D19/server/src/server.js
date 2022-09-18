@@ -7,6 +7,7 @@ import { Server as HttpServer } from "http";
 import apiRouter from "./routers/api/apiRouter.js";
 import infoRouter from "./routers/infoRouter.js"
 import cors from 'cors'
+import { graphqlMiddleware } from "./middlewares/graphQl.js";
 
 dotenv.config();
 
@@ -25,6 +26,8 @@ expressApp.use(express.urlencoded({ extended: true }));
 expressApp.use(passportMiddleware)
 expressApp.use(passportSessionHandler)
 
+
+expressApp.use('/graphql', graphqlMiddleware)
 expressApp.use(infoRouter)
 expressApp.use(apiRouter)
 

@@ -1,8 +1,9 @@
-import { userController } from '../controllers/userControllers.js'
-
+import { saveUser } from '../controllers/userControllers.js'
 export const registerUser = async (usr) => {
     try {
-        const user = await userController.saveUser(usr)
+        console.log(usr);
+        const user = await saveUser(usr)
+        console.log(user);
         if (user) {
             return user
         } else {

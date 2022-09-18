@@ -1,7 +1,7 @@
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 
-import { userController } from '../controllers/userControllers.js'
+import { getUser } from '../controllers/userControllers.js'
 
 import { registerUser } from '../api/userApi.js'
 import { autenticar } from '../api/authenticateApi.js'
@@ -18,7 +18,7 @@ passport.use('local-register', new LocalStrategy({
                 password: password
             }
             const user = await registerUser(usr)
-            const u = await userController.getById(user)
+            const u = await getUser(user)
             done(null, u)
         } catch (error) {
             console.error("Passport --> ");
@@ -50,7 +50,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
     try {
-        const user = userController.getById(id)
+        const user = getUser(id)
         done(null, user)
     } catch (error) {
         done(error)

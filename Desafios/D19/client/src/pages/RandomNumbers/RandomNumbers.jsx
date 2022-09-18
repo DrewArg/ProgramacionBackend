@@ -31,7 +31,7 @@ function RandomNumbers() {
     }
 
     const getNotBlocking = async () => {
-        const url = 'https://backend-desafio15.herokuapp.com/api/notBlockinRandom'
+        const url = `${process.env.REACT_APP_SERVER_URL}/api/notBlockinRandom`
 
         const number = {
             queryNumber: queryNumber
@@ -43,7 +43,7 @@ function RandomNumbers() {
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'https://boisterous-pasca-17e307.netlify.app',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_SERVER_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },
@@ -61,7 +61,7 @@ function RandomNumbers() {
 
 
     const getBlocking = async () => {
-        const url = 'https://backend-desafio15.herokuapp.com/api/blockingRandom'
+        const url = `${process.env.REACT_APP_SERVER_URL}/api/blockingRandom`
 
         const number = {
             queryNumber: queryNumber
@@ -73,7 +73,7 @@ function RandomNumbers() {
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'https://boisterous-pasca-17e307.netlify.app',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_SERVER_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },

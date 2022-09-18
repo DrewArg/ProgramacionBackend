@@ -13,7 +13,7 @@ dotenv.config();
 const expressApp = express();
 
 expressApp.use(cors({
-    origin: 'https://boisterous-pasca-17e307.netlify.app',
+    origin: `${process.env.CLIENT_URL}`,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }))

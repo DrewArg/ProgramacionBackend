@@ -8,14 +8,14 @@ function Info() {
     const [gotInfo, setGotInfo] = useState({})
 
     const getInfo = async () => {
-        const url = 'https://backend-desafio15.herokuapp.com/info'
+        const url = `${process.env.REACT_APP_SERVER_URL}/info`
 
         await fetch(url, {
             method: "POST",
             headers: {
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'https://boisterous-pasca-17e307.netlify.app',
+                'Access-Control-Allow-Origin': `${process.env.REACT_APP_SERVER_URL}`,
                 'Access-Control-Allow-Methods': 'POST,GET',
                 'Content-Type': 'application/json'
             },

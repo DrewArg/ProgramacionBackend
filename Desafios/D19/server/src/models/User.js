@@ -11,11 +11,11 @@ export default class User {
     }
 
     set username(username) {
-        if (!username) throw new Error(`MISSING_ARGS: el campo 'id' es obligatorio`)
+        if (!username) throw new Error(`MISSING_ARGS: el campo 'username' es obligatorio`)
         this.#username = username
     }
     set password(password) {
-        if (!password) throw new Error(`MISSING_ARGS: el campo 'id' es obligatorio`)
+        if (!password) throw new Error(`MISSING_ARGS: el campo 'password' es obligatorio`)
         this.#password = password
     }
 

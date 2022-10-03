@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { Cart } from './Cart';
 
 export class User {
     #id
@@ -8,6 +9,7 @@ export class User {
     #lastname
     #phone
     #image
+    #cart
 
     /**
     * @param {string} email
@@ -17,6 +19,7 @@ export class User {
         this.#setEmail(email)
         this.#setPassword(password)
         this.#id = uuidv4()
+        this.#cart = new Cart()
     }
 
     #setEmail(email) {
@@ -74,6 +77,7 @@ export class User {
     get lastname() { return this.#lastname }
     get phone() { return this.#phone }
     get image() { return this.#image }
+    get cart() { return this.#cart }
 
 
     getUserData() {
@@ -84,7 +88,8 @@ export class User {
             name: this.#name,
             lastname: this.#lastname,
             phone: this.#phone,
-            image: this.#image
+            image: this.#image,
+            cart: this.#cart
         })
     }
 

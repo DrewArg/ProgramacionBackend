@@ -7,11 +7,17 @@ export class Product {
     #price
     #image
 
-    constructor({ name, description, price, image }) {
+    /**
+    * @param {string} name
+    * @param {string} description
+    * @param {number} price
+    * @param {string} imageUrl
+    */
+    constructor({ name, description, price, imageUrl }) {
         this.name(name)
         this.description(description)
         this.price(price)
-        this.image(image)
+        this.image(imageUrl)
         this.#id = uuidv4()
     }
 

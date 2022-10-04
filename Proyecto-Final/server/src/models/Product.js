@@ -1,6 +1,6 @@
 import Id from './Id';
 
-export class Product {
+export default class Product {
     #id
     #name
     #description

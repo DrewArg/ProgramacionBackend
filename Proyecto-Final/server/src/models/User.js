@@ -1,7 +1,7 @@
 import { Cart } from './Cart';
 import Id from './Id';
 
-export class User {
+export default class User {
     #id
     #email
     #password

@@ -1,3 +1,4 @@
+import Product from '../models/Product.js'
 export default class ProductService {
     #productsDao
 
@@ -14,10 +15,11 @@ export default class ProductService {
         }
     }
 
-    async saveProduct(product) {
+    async saveProduct(productData) {
         try {
-            const prodId = await this.#productsDao.save(product)
-            return prodId
+            const product = new Product(productData.name, productData.description, productData.price, productData.image)
+
+            await this.#productsDao.save(product)
         } catch (error) {
             winston.log('error', `productControllers -->  ${error}`)
         }

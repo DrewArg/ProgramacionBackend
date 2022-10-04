@@ -1,6 +1,6 @@
 import Id from './Id';
 
-export class Order {
+export default class Order {
     #id
     #products
     #timestamp

@@ -1,5 +1,5 @@
 import Id from './Id';
-export class Cart {
+export default class Cart {
     #id
     #products
 

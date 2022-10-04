@@ -1,6 +1,6 @@
 import Id from './Id';
 
-export class Image {
+export default class Image {
     #id
     #title
     #description

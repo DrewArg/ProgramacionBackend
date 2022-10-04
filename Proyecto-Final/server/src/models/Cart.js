@@ -9,7 +9,8 @@ export class Cart {
     }
 
     //TODO ver si esto va acá o en la base de datos
-
+    //TODO ver si hace falta agregar un ListadoDeProductos como mostró marian
+    
     addProduct(productId, quantity) {
         if (!productId) throw new Error(`The productId is required`)
 

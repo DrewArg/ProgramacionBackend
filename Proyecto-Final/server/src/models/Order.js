@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import Id from './Id';
 
 export class Order {
     #id
@@ -10,7 +10,7 @@ export class Order {
     */
     constructor(cart) {
         this.#setProducts(cart)
-        this.#id = uuidv4()
+        this.#id = new Id()
         this.#timestamp = new Date()
     }
 

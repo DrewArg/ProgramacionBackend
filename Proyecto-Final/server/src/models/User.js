@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from 'uuid';
 import { Cart } from './Cart';
+import Id from './Id';
 
 export class User {
     #id
@@ -19,7 +19,7 @@ export class User {
     constructor({ email, password }) {
         this.#setEmail(email)
         this.#setPassword(password)
-        this.#id = uuidv4()
+        this.#id = new Id()
         this.#cart = new Cart()
         this.#orders = []
     }

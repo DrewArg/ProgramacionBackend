@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import Id from './Id';
 
 export class Product {
     #id
@@ -18,7 +18,7 @@ export class Product {
         this.description(description)
         this.price(price)
         this.image(imageUrl)
-        this.#id = uuidv4()
+        this.#id = new Id()
     }
 
     /**

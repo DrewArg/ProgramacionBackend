@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import Id from './Id';
 
 export class Image {
     #id
@@ -13,7 +13,7 @@ export class Image {
     constructor({ title, description }) {
         this.#setTitle(title)
         this.#setDescription(description)
-        this.#id = uuidv4()
+        this.#id = new Id()
     }
 
     #setTitle(title) {

@@ -7523,3 +7523,26 @@
 {"level":"info","message":"Colección ya existente, no se realizaron cambios","timestamp":"2022-08-28T00:23:08.369Z"}
 {"level":"info","message":"Colección ya existente, no se realizaron cambios","timestamp":"2022-08-28T00:23:08.478Z"}
 {"level":"error","message":"Sms sender --> Error: The number  is unverified. Trial accounts cannot send messages to unverified numbers; verify  at twilio.com/user/account/phone-numbers/verified, or purchase a Twilio number to send messages to unverified numbers.","timestamp":"2022-08-28T00:23:25.268Z"}
+{"level":"info","message":"Colección ya existente, no se realizaron cambios","timestamp":"2022-09-16T16:54:31.594Z"}
+{"level":"info","message":"Colección ya existente, no se realizaron cambios","timestamp":"2022-09-16T16:54:31.644Z"}
+{"level":"info","message":"Colección ya existente, no se realizaron cambios","timestamp":"2022-09-16T16:54:31.663Z"}
+{"level":"info","message":"Colección ya existente, no se realizaron cambios","timestamp":"2022-09-16T16:54:31.932Z"}
+{"level":"warn","message":"apiUserController -->  passport NO loggeado","timestamp":"2022-09-16T16:55:03.803Z"}
+{"level":"warn","message":"apiUserController -->  passport NO loggeado","timestamp":"2022-09-16T16:55:03.816Z"}
+{"level":"warn","message":"apiLoginControllers --> passport NOT logged","timestamp":"2022-09-16T16:55:06.176Z"}
+{"level":"warn","message":"apiUserController -->  passport NO loggeado","timestamp":"2022-09-16T16:55:06.180Z"}
+{"level":"warn","message":"apiUserController -->  passport NO loggeado","timestamp":"2022-09-16T16:55:11.356Z"}
+{"level":"error","message":"Authenticate --> TypeError: Cannot read properties of undefined (reading 'password')","timestamp":"2022-09-16T16:55:14.696Z"}
+{"level":"info","message":"apiLoginControllers --> passport OK","timestamp":"2022-09-16T16:55:14.697Z"}
+{"level":"error","message":"Authenticate --> TypeError: Cannot read properties of undefined (reading 'password')","timestamp":"2022-09-16T16:55:19.500Z"}
+{"level":"info","message":"apiLoginControllers --> passport OK","timestamp":"2022-09-16T16:55:19.501Z"}
+{"level":"error","message":"Authenticate --> TypeError: Cannot read properties of undefined (reading 'password')","timestamp":"2022-09-16T16:55:21.084Z"}
+{"level":"info","message":"apiLoginControllers --> passport OK","timestamp":"2022-09-16T16:55:21.085Z"}
+{"level":"info","message":"Authenticate --> autenticado","timestamp":"2022-09-16T16:55:49.121Z"}
+{"level":"info","message":"apiLoginControllers --> passport logged","timestamp":"2022-09-16T16:55:50.648Z"}
+{"level":"info","message":"apiLoginControllers --> passport logged","timestamp":"2022-09-16T16:56:17.128Z"}
+{"level":"info","message":"apiLoginControllers --> passport logged","timestamp":"2022-09-16T16:57:08.257Z"}
+{"level":"info","message":"apiLoginControllers --> passport logged","timestamp":"2022-09-16T16:57:19.732Z"}
+{"level":"info","message":"apiLoginControllers --> passport logged","timestamp":"2022-09-16T16:57:43.423Z"}
+{"level":"info","message":"apiLoginControllers --> passport logged","timestamp":"2022-09-16T16:58:52.343Z"}
+{"level":"info","message":"apiLoginControllers --> passport logged","timestamp":"2022-09-16T16:58:56.383Z"}

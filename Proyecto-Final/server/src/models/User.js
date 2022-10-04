@@ -10,6 +10,7 @@ export class User {
     #phone
     #image
     #cart
+    #orders
 
     /**
     * @param {string} email
@@ -20,6 +21,15 @@ export class User {
         this.#setPassword(password)
         this.#id = uuidv4()
         this.#cart = new Cart()
+        this.#orders = []
+    }
+
+    /**
+    * @param {Order} order
+    */
+    addOrder(order) {
+        if (!order) throw new Error(`The order is required`)
+        this.#orders.push(order)
     }
 
     #setEmail(email) {
@@ -78,6 +88,7 @@ export class User {
     get phone() { return this.#phone }
     get image() { return this.#image }
     get cart() { return this.#cart }
+    get orders() { return this.#orders }
 
 
     getUserData() {
@@ -89,7 +100,8 @@ export class User {
             lastname: this.#lastname,
             phone: this.#phone,
             image: this.#image,
-            cart: this.#cart
+            cart: this.#cart,
+            orders: this.#orders
         })
     }
 

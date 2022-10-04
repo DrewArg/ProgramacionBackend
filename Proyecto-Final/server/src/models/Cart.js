@@ -8,6 +8,17 @@ export class Cart {
         this.#products = []
     }
 
+    //TODO ver si esto va acá o en la base de datos
+    addProduct(product) {
+        if (!product) throw new Error(`The product is required`)
+        this.#products.push(product)
+    }
+
+    removeProduct(product) {
+        if (!product) throw new Error(`The product is required`)
+
+    }
+
     get id() { return this.#id }
     get products() { return this.#products }
 

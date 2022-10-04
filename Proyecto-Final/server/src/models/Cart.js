@@ -9,13 +9,60 @@ export class Cart {
     }
 
     //TODO ver si esto va acá o en la base de datos
-    addProduct(product) {
-        if (!product) throw new Error(`The product is required`)
-        this.#products.push(product)
+
+    addProduct(productId, quantity) {
+        if (!productId) throw new Error(`The productId is required`)
+
+        const existIndex = this.#productExist(productId)
+        if (!existIndex) {
+            if (!quantity) throw new Error(`The quantity is required`)
+            const product = {
+                id: productId,
+                quantity: quantity
+            }
+            this.#products.push(product)
+        } else {
+            this.#products[existIndex].quantity += quantity
+        }
     }
 
-    removeProduct(product) {
-        if (!product) throw new Error(`The product is required`)
+    removeOneProduct(productId) {
+        const existIndex = this.#productExist(productId)
+        if (!existIndex) {
+            throw new Error(`The productId ${productId} does not exist`)
+        } else {
+            if (this.#products[existIndex].quantity === 1) {
+                this.#products.splice(existIndex, 1)[0];
+            } else {
+                this.#products[existIndex].quantity -= 1
+            }
+        }
+    }
+
+    removeWholeProduct(productId) {
+        const existIndex = this.#productExist(productId)
+        if (!existIndex) {
+            throw new Error(`The productId ${productId} does not exist`)
+        } else {
+            this.#products.splice(existIndex, 1)[0];
+        }
+    }
+
+    emptyCart() {
+        this.#products = []
+    }
+
+    /**
+     * @param {string} productId
+     */
+    #productExist(productId) {
+        if (!productId) throw new Error(`The productId is required`)
+        const index = this.#products.findIndex((p) => p.id == productId)
+        if (index == -1) {
+            return false
+        } else {
+            return index;
+        }
 
     }
 

@@ -13,7 +13,7 @@ export class Order {
         const products = cart.products
         if (!products) throw new Error(`The products are required`)
         this.#products = products
-        cart.products = []
+        cart.emptyCart()
     }
 
     get id() { return this.#id }

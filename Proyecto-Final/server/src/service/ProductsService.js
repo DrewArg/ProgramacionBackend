@@ -1,7 +1,10 @@
 import Product from '../models/Product.js'
+
 export default class ProductService {
     #productsDao
-
+    /**
+    * @param {dao} productsDao
+    */
     constructor(productsDao) {
         this.#productsDao = productsDao
     }

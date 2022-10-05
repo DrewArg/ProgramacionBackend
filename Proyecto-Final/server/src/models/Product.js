@@ -1,4 +1,4 @@
-import Id from './Id';
+import Id from './Id.js';
 
 export default class Product {
     #id

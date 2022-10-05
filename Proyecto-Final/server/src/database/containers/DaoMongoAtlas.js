@@ -1,6 +1,6 @@
-import { mongoConfig } from '../config/config.js'
+import { mongoConfig } from '../../config/config.js'
 import { default as mongodb, ObjectId } from 'mongodb'
-import { winston } from '../controllers/loggerControllers.js'
+import { winston } from '../../controllers/loggersControllers.js'
 import { DB_NAME } from '../../config/config.js'
 
 const MongoClient = mongodb.MongoClient
@@ -8,6 +8,7 @@ const client = new MongoClient(mongoConfig.mongodb.url, mongoConfig.mongodb.clie
 const mongoDb = client.db(DB_NAME)
 
 export default class DaoMongoAtlas {
+    #collection
 
     constructor(collectionName) {
         this._connect()

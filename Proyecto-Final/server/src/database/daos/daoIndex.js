@@ -1,5 +1,6 @@
 import { winston } from '../../controllers/loggersControllers.js'
 import { PERSISTANCE } from '../../config/config.js';
+import DaoMongoAtlas from '../containers/DaoMongoAtlas.js'
 
 
 let productsDao
@@ -7,8 +8,7 @@ let productsDao
 switch (PERSISTANCE) {
     case "mongoAtlas":
         try {
-            const { default: DaoMongoDb } = await import('../containers/DaoMongoAtlas.js')
-            productsDao = new DaoMongoDb('products')
+            productsDao = new DaoMongoAtlas('products')
         } catch (error) {
             winston.log('error', `daoIndex -->  ${error}`)
         }
@@ -16,8 +16,7 @@ switch (PERSISTANCE) {
 
     default:
         try {
-            const { default: DaoMongoDb2 } = await import('../containers/DaoMongoAtlas.js')
-            productsDao = new DaoMongoDb2('products')
+            productsDao = new DaoMongoAtlas('products')
         } catch (error) {
             winston.log('error', `daoIndex -->  ${error}`)
         }

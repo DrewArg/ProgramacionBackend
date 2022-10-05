@@ -22,8 +22,9 @@ export default class ProductService {
     async saveProduct(productData) {
         try {
             const product = new Product(productData.name, productData.description, productData.price, productData.image)
-
-            await this.#productsDao.save(product)
+            console.log("service");
+            console.log(product);
+            await this.#productsDao.saveObject(product)
         } catch (error) {
             winston.log('error', `productControllers -->  ${error}`)
         }

@@ -45,7 +45,7 @@ export default class DaoMongoAtlas {
 
     async listAll() {
         try {
-            const objs = mongoDb.collection(this.collection).find()
+            const objs = mongoDb.collection(this.#collection).find()
             const objsArray = []
 
             await objs.forEach(prod => {
@@ -65,8 +65,9 @@ export default class DaoMongoAtlas {
     }
 
     async saveObject(object) {
+        console.log(object);
         try {
-            const obj = await mongoDb.collection(this.collection).insertOne(object)
+            const obj = await mongoDb.collection(this.#collection).insertOne(object)
             return obj.insertedId
         } catch (error) {
             winston.log('error', `MongoDbContainer --> ${error}`)
@@ -76,7 +77,7 @@ export default class DaoMongoAtlas {
     async updateObject(object) {
         try {
             await mongoDb
-                .collection(this.collection)
+                .collection(this.#collection)
                 .replaceOne({ _id: ObjectId(object.id) }, object)
         } catch (error) {
             winston.log('error', `MongoDbContainer --> ${error}`)
@@ -86,7 +87,7 @@ export default class DaoMongoAtlas {
     async deleteById(id) {
         try {
             await mongoDb
-                .collection(this.collection)
+                .collection(this.#collection)
                 .deleteOne({ _id: ObjectId(id) })
         } catch (error) {
             winston.log('error', `MongoDbContainer --> ${error}`)
@@ -95,7 +96,7 @@ export default class DaoMongoAtlas {
 
     async deleteAll() {
         try {
-            await mongoDb.collection(this.collection).deleteMany({})
+            await mongoDb.collection(this.#collection).deleteMany({})
         } catch (error) {
             winston.log('error', `MongoDbContainer --> ${error}`)
         }

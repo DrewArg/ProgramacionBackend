@@ -1,30 +1,12 @@
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:55:53.215Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:56:42.084Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:58:07.315Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:58:10.538Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:58:13.254Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:58:16.950Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:58:20.316Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:58:24.976Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:58:33.567Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:58:38.527Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:58:42.756Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:58:46.439Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:58:50.429Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:59:00.321Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T02:59:01.504Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T03:00:59.100Z"}
-{"level":"error","message":"productControllers -->  TypeError: Cannot destructure property 'name' of 'undefined' as it is undefined.","timestamp":"2022-10-05T03:01:01.975Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T03:02:08.148Z"}
-{"level":"error","message":"productService -->  TypeError: Cannot read properties of undefined (reading 'listAll')","timestamp":"2022-10-05T03:02:10.877Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T03:04:29.380Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T03:04:33.149Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T03:04:37.240Z"}
-{"level":"error","message":"daoIndex -->  ReferenceError: log is not defined","timestamp":"2022-10-05T03:05:02.739Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T03:05:08.210Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T03:05:19.996Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T03:05:28.880Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T03:05:34.729Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T03:05:38.107Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T03:06:28.158Z"}
-{"level":"error","message":"daoIndex -->  SyntaxError: Private field '#collection' must be declared in an enclosing class","timestamp":"2022-10-05T03:06:37.561Z"}
+{"level":"error","message":"productControllers -->  Error: The name value is required","timestamp":"2022-10-05T03:28:52.811Z"}
+{"level":"error","message":"productControllers -->  Error: MISSING_REQUIRED_PARAM","timestamp":"2022-10-05T03:33:47.884Z"}
+{"level":"error","message":"productControllers -->  Error: MISSING_REQUIRED_PARAM","timestamp":"2022-10-05T03:34:32.731Z"}
+{"level":"error","message":"productControllers -->  Error: MISSING_REQUIRED_PARAM","timestamp":"2022-10-05T03:35:34.715Z"}
+{"level":"error","message":"productControllers -->  Error: MISSING_REQUIRED_PARAM","timestamp":"2022-10-05T03:36:13.909Z"}
+{"level":"error","message":"productControllers -->  Error: MISSING_REQUIRED_PARAM","timestamp":"2022-10-05T03:36:52.553Z"}
+{"level":"error","message":"productControllers -->  TypeError: Cannot read properties of undefined (reading 'status')","timestamp":"2022-10-05T03:40:58.957Z"}
+{"level":"error","message":"productControllers -->  TypeError: Cannot read properties of undefined (reading 'status')","timestamp":"2022-10-05T03:41:41.626Z"}
+{"level":"error","message":"productControllers -->  TypeError: Cannot read properties of undefined (reading 'status')","timestamp":"2022-10-05T03:41:50.060Z"}
+{"level":"error","message":"productControllers -->  TypeError: Cannot read properties of undefined (reading 'status')","timestamp":"2022-10-05T03:42:04.325Z"}
+{"level":"error","message":"productControllers -->  TypeError: Cannot read properties of undefined (reading 'status')","timestamp":"2022-10-05T03:42:19.109Z"}
+{"level":"error","message":"productControllers -->  TypeError: Cannot read properties of undefined (reading 'status')","timestamp":"2022-10-05T03:42:44.234Z"}

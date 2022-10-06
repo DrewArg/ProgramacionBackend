@@ -56,13 +56,13 @@ export default class Product {
     get image() { return this.#image }
 
     getProductData() {
-        return Object.freeze({
+        return Object.freeze(({
             id: this.#id,
             name: this.#name,
             description: this.#description,
             price: this.#price,
             image: this.#image
 
-        })
+        }))
     }
 }

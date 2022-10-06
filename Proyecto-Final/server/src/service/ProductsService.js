@@ -10,6 +10,12 @@ export default class ProductService {
         this.#productsDao = productsDao
     }
 
+    async getById(id) {
+        if (!id) throw new Error('MISSING_REQUIRED_PARAM')
+        return await this.#productsDao.listById(id)
+
+    }
+
     async getAllProducts() {
         try {
             return await this.#productsDao.listAll()
@@ -23,16 +29,12 @@ export default class ProductService {
     async saveProduct({ name, description, price, image }) {
 
         if (!name) throw new Error('MISSING_REQUIRED_PARAM')
-        if (typeof name !== 'string') throw new Error('MISSING_REQUIRED_PARAM')
         if (!description) throw new Error('MISSING_REQUIRED_PARAM')
-        if (typeof description !== 'string') throw new Error('MISSING_REQUIRED_PARAM')
         if (!price) throw new Error('MISSING_REQUIRED_PARAM')
-        if (typeof price !== 'number') throw new Error('MISSING_REQUIRED_PARAM')
         if (!image) throw new Error('MISSING_REQUIRED_PARAM')
-        if (typeof image !== 'string') throw new Error('MISSING_REQUIRED_PARAM')
 
         const product = new Product(name, description, price, image)
-        return await this.#productsDao.saveObject(product.getProductData())
+        return await this.#productsDao.saveObject(JSON.parse(JSON.stringify(product.getProductData())))
 
     }
 

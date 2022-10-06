@@ -34,7 +34,7 @@ export default class DaoMongoAtlas {
 
     async listById(id) {
         const objs = await this.listAll()
-        const index = objs.findIndex((o) => o.id == id)
+        const index = objs.findIndex((o) => o.object.id == id)
         if (index == -1) {
             winston.log('warn', `MongoDb container --> error buscando, no se encontró el id`)
         } else {
@@ -65,9 +65,10 @@ export default class DaoMongoAtlas {
     }
 
     async saveObject(object) {
-
+        const ob = object
+        console.log(ob);
         try {
-            const obj = await mongoDb.collection(this.#collection).insertOne({ object })
+            const obj = await mongoDb.collection(this.#collection).insertOne(ob)
             return obj.insertedId
         } catch (error) {
             winston.log('error', `MongoDbContainer --> ${error}`)

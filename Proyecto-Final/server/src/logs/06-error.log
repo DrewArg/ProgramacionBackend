@@ -7,3 +7,19 @@
 {"level":"error","message":"MongoDbContainer --> TypeError: Cannot read properties of undefined (reading '_id')","timestamp":"2022-10-06T01:09:22.272Z"}
 {"level":"error","message":"MongoDbContainer --> TypeError: Cannot read properties of undefined (reading '_id')","timestamp":"2022-10-06T01:09:29.906Z"}
 {"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:09:59.245Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:35:15.528Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:35:45.350Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:38:16.997Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:38:31.247Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot create property '_id' on string '{}'","timestamp":"2022-10-06T01:41:48.223Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot create property '_id' on string '{}'","timestamp":"2022-10-06T01:49:01.804Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot create property '_id' on string '{\"id\":\"43c32264-f66a-45a4-a04b-570ce2e7c668\",\"name\":\"silla\",\"description\":\"esto es una silla\",\"price\":999,\"image\":\"www.google.com\"}'","timestamp":"2022-10-06T01:49:43.013Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot create property '_id' on string '\"{\\\"id\\\":\\\"96786b5a-2784-465e-b4be-1990832ed4fe\\\",\\\"name\\\":\\\"silla\\\",\\\"description\\\":\\\"esto es una silla\\\",\\\"price\\\":999,\\\"image\\\":\\\"www.google.com\\\"}\"'","timestamp":"2022-10-06T01:50:31.748Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot create property '_id' on string '{\"id\":\"5494ef97-bc5a-4b45-bd81-8989876924cc\",\"name\":\"silla\",\"description\":\"esto es una silla\",\"price\":999,\"image\":\"www.google.com\"}'","timestamp":"2022-10-06T01:51:37.852Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot create property '_id' on string '{\"id\":\"362abeb6-c6bf-4265-8212-09382f523073\",\"name\":\"silla\",\"description\":\"esto es una silla\",\"price\":999,\"image\":\"www.google.com\"}'","timestamp":"2022-10-06T01:52:15.959Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:54:24.533Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:58:05.663Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:59:37.880Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T02:03:55.668Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T02:04:57.265Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T02:08:21.695Z"}

@@ -23,3 +23,8 @@
 {"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T02:03:55.668Z"}
 {"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T02:04:57.265Z"}
 {"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T02:08:21.695Z"}
+{"level":"error","message":"MongoDbContainer --> MongoServerError: After applying the update, the (immutable) field '_id' was found to have been altered to _id: \"633e3935621cb07946d89033\"","timestamp":"2022-10-06T02:57:28.014Z"}
+{"level":"error","message":"MongoDbContainer --> MongoServerError: After applying the update, the (immutable) field '_id' was found to have been altered to _id: \"633e3935621cb07946d89033\"","timestamp":"2022-10-06T02:58:06.326Z"}
+{"level":"error","message":"MongoDbContainer --> MongoInvalidArgumentError: Replacement document must not contain atomic operators","timestamp":"2022-10-06T03:21:35.916Z"}
+{"level":"error","message":"MongoDbContainer --> MongoInvalidArgumentError: Replacement document must not contain atomic operators","timestamp":"2022-10-06T03:22:21.177Z"}
+{"level":"error","message":"MongoDbContainer --> MongoInvalidArgumentError: Replacement document must not contain atomic operators","timestamp":"2022-10-06T03:22:48.033Z"}

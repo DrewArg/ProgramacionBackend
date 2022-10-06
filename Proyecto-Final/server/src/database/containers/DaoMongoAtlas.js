@@ -53,6 +53,7 @@ export default class DaoMongoAtlas {
             await objs.forEach(prod => {
                 objsArray.push(prod)
             })
+            
             return objsArray
         } catch (error) {
             winston.log('error', `MongoDbContainer --> ${error}`)

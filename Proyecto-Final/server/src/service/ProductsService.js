@@ -16,13 +16,8 @@ export default class ProductService {
     }
 
     async getAllProducts() {
-        try {
-            return await this.#productsDao.listAll()
-        } catch (error) {
-            next(error)
-            winston.log('error', `productService -->  ${error}`)
+        return await this.#productsDao.listAll()
 
-        }
     }
 
     async saveProduct({ name, description, price, image }) {

@@ -1,5 +1,5 @@
 export function errorHandler(err, req, res, next) {
-    switch (err) {
+    switch (err.message) {
         case 'NOT_FOUND':
             res.status(404)
             break
@@ -39,5 +39,5 @@ export function errorHandler(err, req, res, next) {
         default:
             res.status(500)
     }
-    res.json(err)
+    res.send(err)
 }

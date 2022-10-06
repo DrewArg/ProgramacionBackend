@@ -1,4 +1,3 @@
-import { errorHandler } from "../middlewares/errorHandler.js"
 import Id from './Id.js';
 
 export default class Product {
@@ -14,20 +13,18 @@ export default class Product {
     * @param {number} price
     * @param {string} imageUrl
     */
-    constructor({ name, description, price, imageUrl }) {
+    constructor(name, description, price, imageUrl ) {
         this.name = name
         this.description = description
         this.price = price
         this.image = imageUrl
-        this.#id = new Id()
+        this.#id = new Id().getNewId()
     }
 
     /**
      * @param {string} name
      */
     set name(name) {
-        if (!name) throw new errorHandler('MISSING_REQUIRED_PARAM')
-        if (typeof name !== 'string') throw new errorHandler('MISSING_REQUIRED_PARAM')
         this.#name = name
     }
 
@@ -35,8 +32,6 @@ export default class Product {
      * @param {string} description
      */
     set description(description) {
-        if (!description) throw new Error(`The description value is required`)
-        if (typeof description !== 'string') throw new Error(`The datatype of description must be a string`)
         this.#description = description
     }
 
@@ -44,8 +39,6 @@ export default class Product {
      * @param {number}price
      */
     set price(price) {
-        if (!price) throw new Error(`The price value is required`)
-        if (typeof price !== 'number') throw new Error(`The datatype of price must be a number`)
         this.#price = price
     }
 
@@ -53,8 +46,6 @@ export default class Product {
      * @param {string} image
      */
     set image(image) {
-        if (!image) throw new Error(`The image value is required`)
-        if (typeof image !== 'string') throw new Error(`The datatype of image must be a number`)
         this.#image = image
     }
 

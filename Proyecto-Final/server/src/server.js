@@ -9,8 +9,8 @@ app.use('/public', express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use(errorHandler)
 app.use('/api/products', productsRouter)
+app.use(errorHandler)
 
 
 

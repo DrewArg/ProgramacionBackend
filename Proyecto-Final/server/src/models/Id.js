@@ -4,7 +4,12 @@ export default class Id {
     /**
     * @return {uuidv4} 
     */
-    static new() {
+
+    constructor() {
+
+    }
+
+    getNewId() {
         return uuidv4()
     }
 } 

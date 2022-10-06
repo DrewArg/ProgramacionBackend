@@ -14,20 +14,26 @@ export default class ProductService {
         try {
             return await this.#productsDao.listAll()
         } catch (error) {
+            next(error)
             winston.log('error', `productService -->  ${error}`)
 
         }
     }
 
-    async saveProduct(productData) {
-        try {
-            const product = new Product(productData.name, productData.description, productData.price, productData.image)
-            console.log("service");
-            console.log(product);
-            await this.#productsDao.saveObject(product)
-        } catch (error) {
-            winston.log('error', `productControllers -->  ${error}`)
-        }
+    async saveProduct({ name, description, price, image }) {
+
+        if (!name) throw new Error('MISSING_REQUIRED_PARAM')
+        if (typeof name !== 'string') throw new Error('MISSING_REQUIRED_PARAM')
+        if (!description) throw new Error('MISSING_REQUIRED_PARAM')
+        if (typeof description !== 'string') throw new Error('MISSING_REQUIRED_PARAM')
+        if (!price) throw new Error('MISSING_REQUIRED_PARAM')
+        if (typeof price !== 'number') throw new Error('MISSING_REQUIRED_PARAM')
+        if (!image) throw new Error('MISSING_REQUIRED_PARAM')
+        if (typeof image !== 'string') throw new Error('MISSING_REQUIRED_PARAM')
+
+        const product = new Product(name, description, price, image)
+        return await this.#productsDao.saveObject(product.getProductData())
+
     }
 
     async updateProduct(productId, productData) {

@@ -22,8 +22,6 @@ export default class ProductsControllers {
     saveProduct = async (req, res, next) => {
         try {
             const savedProd = await this.#productsService.saveProduct(req.body)
-            console.log("saveProduct");
-            console.log(savedProd);
             res.status(201).json(savedProd)
         } catch (error) {
             next(error)

@@ -33,10 +33,12 @@ export default class DaoMongoAtlas {
     }
 
     async listById(id) {
+        if (!id) throw new Error('MISSING_REQUIRED_PARAM')
         const objs = await this.listAll()
-        const index = objs.findIndex((o) => o.object.id == id)
+        const index = objs.findIndex((o) => o.id == id)
         if (index == -1) {
             winston.log('warn', `MongoDb container --> error buscando, no se encontró el id`)
+            throw new Error("NOT_FOUND")
         } else {
             winston.log('debug', `MongoDb container --> se encontró el id y se devuelve`)
             return objs[index]
@@ -51,12 +53,6 @@ export default class DaoMongoAtlas {
             await objs.forEach(prod => {
                 objsArray.push(prod)
             })
-
-            objsArray.forEach(o => {
-                delete Object.assign(o, { ["id"]: o["_id"] })["_id"]
-                o.id = "" + o.id + ""
-            })
-
             return objsArray
         } catch (error) {
             winston.log('error', `MongoDbContainer --> ${error}`)

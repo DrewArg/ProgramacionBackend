@@ -25,6 +25,7 @@ export default class Product {
      * @param {string} name
      */
     set name(name) {
+        if (!name) throw new Error('MISSING_REQUIRED_PARAM')
         this.#name = name
     }
 
@@ -32,6 +33,7 @@ export default class Product {
      * @param {string} description
      */
     set description(description) {
+        if (!description) throw new Error('MISSING_REQUIRED_PARAM')
         this.#description = description
     }
 
@@ -39,6 +41,7 @@ export default class Product {
      * @param {number}price
      */
     set price(price) {
+        if (!price) throw new Error('MISSING_REQUIRED_PARAM')
         this.#price = price
     }
 
@@ -46,6 +49,7 @@ export default class Product {
      * @param {string} image
      */
     set image(image) {
+        if (!image) throw new Error('MISSING_REQUIRED_PARAM')
         this.#image = image
     }
 

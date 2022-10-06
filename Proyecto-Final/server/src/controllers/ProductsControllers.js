@@ -11,7 +11,7 @@ export default class ProductsControllers {
 
     getById = async (req, res, next) => {
         try {
-            const prod = await this.#productsService.getById(req.params)
+            const prod = await this.#productsService.getById(req.params.id)
             res.json(prod)
         } catch (error) {
             next(error)
@@ -30,7 +30,6 @@ export default class ProductsControllers {
 
     saveProduct = async (req, res, next) => {
         try {
-            console.log(req.body);
             const savedProd = await this.#productsService.saveProduct(req.body)
             res.status(201).json(savedProd)
         } catch (error) {

@@ -28,3 +28,22 @@
 {"level":"error","message":"MongoDbContainer --> MongoInvalidArgumentError: Replacement document must not contain atomic operators","timestamp":"2022-10-06T03:21:35.916Z"}
 {"level":"error","message":"MongoDbContainer --> MongoInvalidArgumentError: Replacement document must not contain atomic operators","timestamp":"2022-10-06T03:22:21.177Z"}
 {"level":"error","message":"MongoDbContainer --> MongoInvalidArgumentError: Replacement document must not contain atomic operators","timestamp":"2022-10-06T03:22:48.033Z"}
+{"level":"error","message":"MongoDbContainer --> ReferenceError: oldObject is not defined","timestamp":"2022-10-06T11:18:15.984Z"}
+{"level":"error","message":"MongoDbContainer --> ReferenceError: oldObject is not defined","timestamp":"2022-10-06T11:19:22.057Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:25:27.495Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:26:32.042Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:27:42.237Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:32:06.587Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:33:33.762Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:34:50.174Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:35:16.006Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:35:38.694Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:36:08.054Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:36:40.971Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:37:19.263Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T23:11:56.965Z"}
+{"level":"error","message":"MongoDbContainer --> Error: MISSING_REQUIRED_PARAM","timestamp":"2022-10-06T23:12:59.593Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T23:13:17.169Z"}
+{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T23:14:11.904Z"}
+{"level":"error","message":"MongoDbContainer --> Error: NOT_FOUND","timestamp":"2022-10-06T23:23:22.621Z"}
+{"level":"error","message":"MongoDbContainer --> Error: NOT_FOUND","timestamp":"2022-10-06T23:23:29.505Z"}

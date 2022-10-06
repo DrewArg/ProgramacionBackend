@@ -27,8 +27,8 @@ export default class ProductService {
     }
 
     async updateProduct(productId, productData) {
-        console.log(productData);
-        return await this.#productsDao.updateObject(productId, JSON.parse(JSON.stringify(productData)))
+        const updated = await this.#productsDao.updateObject(productId, JSON.parse(JSON.stringify(productData)))
+        return updated
     }
 
     async deleteProduct(productId) {

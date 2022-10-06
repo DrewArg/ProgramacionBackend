@@ -71,17 +71,20 @@ export default class DaoMongoAtlas {
     }
 
     async updateObject(objectId, objectData) {
-        console.log(objectData.price);
+
         //TODO actualizar la posibilidad de que sobrescriba en loop todos los items pasados en el objeto de parametro.
         //TODO verificar que no se sobreescriban los ids
-        try {
-            await mongoDb
-                .collection(this.#collection)
-                // .replaceOne({ id: objectId }, {objectData})
-                .replaceOne({ id: objectId }, { $set: { price: objectData.price } })
-        } catch (error) {
-            winston.log('error', `MongoDbContainer --> ${error}`)
-        }
+
+        if (objectData.id) throw new Error('BAD_REQUEST')
+        const prod = await this.listById(objectId)
+
+        const updatedProd = { ...prod, ...objectData }
+
+        await mongoDb
+            .collection(this.#collection)
+            .replaceOne({ id: objectId }, { updatedProd })
+
+        return updatedProd
     }
 
     async deleteById(id) {

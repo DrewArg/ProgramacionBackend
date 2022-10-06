@@ -40,8 +40,10 @@ export default class ProductsControllers {
     updateProduct = async (req, res, next) => {
         try {
             const updatedProduct = await this.#productsService.updateProduct(req.params.id, req.body)
+            console.log("no error");
             res.json(updatedProduct)
         } catch (error) {
+            console.log(error);
             next(error)
         }
     }

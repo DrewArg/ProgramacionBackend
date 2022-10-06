@@ -22,7 +22,7 @@ export default class ProductService {
 
     async saveProduct({ name, description, price, image }) {
         const product = new Product(name, description, price, image)
-        return await this.#productsDao.saveObject(JSON.parse(JSON.stringify(product.getProductData())))
+        return await this.#productsDao.saveObject((product.getProductData()))
 
     }
 

@@ -65,11 +65,9 @@ export default class DaoMongoAtlas {
     }
 
     async saveObject(object) {
-        const ob = object
-        console.log(ob);
         try {
-            const obj = await mongoDb.collection(this.#collection).insertOne(ob)
-            return obj.insertedId
+            const obj = await mongoDb.collection(this.#collection).insertOne(object)
+            return object.id
         } catch (error) {
             winston.log('error', `MongoDbContainer --> ${error}`)
         }

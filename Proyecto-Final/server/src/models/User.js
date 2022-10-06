@@ -19,7 +19,7 @@ export default class User {
     constructor({ email, password }) {
         this.#setEmail(email)
         this.#setPassword(password)
-        this.#id = new Id()
+        this.#id = new Id().getNewId()
         this.#cart = new Cart()
         this.#orders = []
     }

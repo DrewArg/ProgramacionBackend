@@ -13,7 +13,7 @@ export default class Image {
     constructor({ title, description }) {
         this.#setTitle(title)
         this.#setDescription(description)
-        this.#id = new Id()
+        this.#id = new Id().getNewId()
     }
 
     #setTitle(title) {

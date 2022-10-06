@@ -10,7 +10,7 @@ export default class Order {
     */
     constructor(cart) {
         this.#setProducts(cart)
-        this.#id = new Id()
+        this.#id = new Id().getNewId()
         this.#timestamp = new Date()
     }
 

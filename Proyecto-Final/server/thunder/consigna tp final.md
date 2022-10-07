@@ -3,7 +3,7 @@ DATA ON WIRE
 (no sirve paginas, solo json)
 
 ## imagenes (para usuarios y productos)
-# FALTA
+# REVISAR
 - POST /api/images: agrega una nueva imagen al servidor (multer), y devuelve su url pública (express.static) 
 
 ## usuarios

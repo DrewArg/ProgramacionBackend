@@ -33,3 +33,7 @@
 {"level":"error","message":"Error en la conexión a la mongo MongoServerSelectionError: getaddrinfo ENOTFOUND mongodb0.example.com","timestamp":"2022-10-07T07:47:26.792Z"}
 {"level":"error","message":"Error en la conexión a la mongo MongoServerSelectionError: getaddrinfo ENOTFOUND mongodb0.example.com","timestamp":"2022-10-07T07:47:26.793Z"}
 {"level":"error","message":"Error en la conexión a la mongo MongoServerSelectionError: getaddrinfo ENOTFOUND mongodb0.example.com","timestamp":"2022-10-07T07:47:26.793Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: mongoDb.collection(...).dbName is not a function","timestamp":"2022-10-07T13:33:23.396Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: mongoDb.collection(...).dbName is not a function","timestamp":"2022-10-07T13:33:42.480Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: mongoDb.collection(...).dbName is not a function","timestamp":"2022-10-07T13:34:11.739Z"}
+{"level":"error","message":"MongoDbContainer --> TypeError: mongoDb.collection(...).dbName is not a function","timestamp":"2022-10-07T13:34:16.073Z"}

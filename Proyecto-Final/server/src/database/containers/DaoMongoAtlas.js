@@ -46,19 +46,16 @@ export default class DaoMongoAtlas {
     }
 
     async listAll() {
-        try {
-            const objs = mongoDb.collection(this.#collection).find()
+            const objs =  mongoDb.collection(this.#collection).find()
             const objsArray = []
 
             await objs.forEach(prod => {
                 objsArray.push(prod)
             })
 
+            //tengo el objsarray
             return objsArray
-        } catch (error) {
-            winston.log('error', `MongoDbContainer --> ${error}`)
-
-        }
+    
     }
 
     async saveObject(object) {

@@ -82,7 +82,7 @@ export default class Cart {
     getProducts() { return this.#products }
 
     getCartData() {
-        return JSON.parse(JSON.stringif(Object.freeze({
+        return JSON.parse(JSON.stringify(Object.freeze({
             id: this.#id,
             products: this.#products
         })))

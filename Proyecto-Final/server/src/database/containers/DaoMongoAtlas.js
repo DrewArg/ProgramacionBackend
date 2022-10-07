@@ -91,13 +91,13 @@ export default class DaoMongoAtlas {
     }
 
     async deleteById(id) {
-        try {
-            await mongoDb
-                .collection(this.#collection)
-                .deleteOne({ _id: ObjectId(id) })
-        } catch (error) {
-            winston.log('error', `MongoDbContainer --> ${error}`)
-        }
+
+        if (!id) throw new Error('BAD_REQUEST')
+        const prod = await this.listById(id)
+
+        await mongoDb
+            .collection(this.#collection)
+            .deleteOne({ id: prod.id })
     }
 
     async deleteAll() {

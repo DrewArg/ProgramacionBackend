@@ -32,11 +32,7 @@ export default class ProductService {
     }
 
     async deleteProduct(productId) {
-        try {
-            await this.#productsDao.deleteById(productId)
-        } catch (error) {
-            winston.log('error', `productControllers -->  ${error}`)
-        }
+        await this.#productsDao.deleteById(productId)
     }
 
 }

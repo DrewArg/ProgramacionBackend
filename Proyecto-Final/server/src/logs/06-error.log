@@ -47,3 +47,6 @@
 {"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T23:14:11.904Z"}
 {"level":"error","message":"MongoDbContainer --> Error: NOT_FOUND","timestamp":"2022-10-06T23:23:22.621Z"}
 {"level":"error","message":"MongoDbContainer --> Error: NOT_FOUND","timestamp":"2022-10-06T23:23:29.505Z"}
+{"level":"error","message":"productControllers -->  Error: NOT_FOUND","timestamp":"2022-10-07T00:59:10.582Z"}
+{"level":"error","message":"productControllers -->  Error: NOT_FOUND","timestamp":"2022-10-07T00:59:45.061Z"}
+{"level":"error","message":"productControllers -->  Error: NOT_FOUND","timestamp":"2022-10-07T01:00:00.569Z"}

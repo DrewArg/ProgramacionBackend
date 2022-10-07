@@ -37,10 +37,10 @@ export default class Image {
         this.#url = url
     }
 
-    get id() { return this.#id }
-    get title() { return this.#title }
-    get description() { return this.#description }
-    get url() { return this.#url }
+    getId() { return this.#id }
+    getTitle() { return this.#title }
+    getDescription() { return this.#description }
+    getUrl() { return this.#url }
 
     getImageData() {
         return JSON.parse(JSON.stringify(Object.freeze({

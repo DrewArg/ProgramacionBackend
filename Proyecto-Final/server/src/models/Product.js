@@ -53,11 +53,11 @@ export default class Product {
         this.#image = image
     }
 
-    get id() { return this.#id }
-    get name() { return this.#name }
-    get description() { return this.#description }
-    get price() { return this.#price }
-    get image() { return this.#image }
+    getId() { return this.#id }
+    getName() { return this.#name }
+    getDescription() { return this.#description }
+    getPrice() { return this.#price }
+    getImage() { return this.#image }
 
     getProductData() {
         return JSON.parse(JSON.stringify(Object.freeze(({

@@ -78,8 +78,8 @@ export default class Cart {
 
     }
 
-    get id() { return this.#id }
-    get products() { return this.#products }
+    getId() { return this.#id }
+    getProducts() { return this.#products }
 
     getCartData() {
         return JSON.parse(JSON.stringifyObject.freeze({

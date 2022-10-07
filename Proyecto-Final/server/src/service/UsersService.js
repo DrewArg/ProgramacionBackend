@@ -18,8 +18,8 @@ export default class UsersService {
         return await this.#usersDao.listAll()
     }
 
-    async saveUser({ email, password }) {
-        const user = new User(email, password)
+    async saveUser({ email, password, name, lastname, phone, image }) {
+        const user = new User(email, password, name, lastname, phone, image)
         return await this.#usersDao.saveObject(user.getUserData())
     }
 

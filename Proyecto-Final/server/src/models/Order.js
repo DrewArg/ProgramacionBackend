@@ -21,9 +21,9 @@ export default class Order {
         cart.emptyCart()
     }
 
-    get id() { return this.#id }
-    get products() { return this.#products }
-    get timestamp() { return this.#timestamp }
+    getId() { return this.#id }
+    getProducts() { return this.#products }
+    getTimestamp() { return this.#timestamp }
 
     getOrderData() {
         return JSON.parse(JSON.stringify(Object.freeze({

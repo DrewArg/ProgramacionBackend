@@ -1,52 +1,35 @@
-{"level":"error","message":"MongoDbContainer --> ReferenceError: o is not defined","timestamp":"2022-10-06T01:04:52.830Z"}
-{"level":"error","message":"MongoDbContainer --> ReferenceError: o is not defined","timestamp":"2022-10-06T01:05:07.587Z"}
-{"level":"error","message":"MongoDbContainer --> ReferenceError: o is not defined","timestamp":"2022-10-06T01:06:07.582Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:06:38.681Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:07:00.754Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:07:48.018Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot read properties of undefined (reading '_id')","timestamp":"2022-10-06T01:09:22.272Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot read properties of undefined (reading '_id')","timestamp":"2022-10-06T01:09:29.906Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:09:59.245Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:35:15.528Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:35:45.350Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:38:16.997Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:38:31.247Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot create property '_id' on string '{}'","timestamp":"2022-10-06T01:41:48.223Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot create property '_id' on string '{}'","timestamp":"2022-10-06T01:49:01.804Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot create property '_id' on string '{\"id\":\"43c32264-f66a-45a4-a04b-570ce2e7c668\",\"name\":\"silla\",\"description\":\"esto es una silla\",\"price\":999,\"image\":\"www.google.com\"}'","timestamp":"2022-10-06T01:49:43.013Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot create property '_id' on string '\"{\\\"id\\\":\\\"96786b5a-2784-465e-b4be-1990832ed4fe\\\",\\\"name\\\":\\\"silla\\\",\\\"description\\\":\\\"esto es una silla\\\",\\\"price\\\":999,\\\"image\\\":\\\"www.google.com\\\"}\"'","timestamp":"2022-10-06T01:50:31.748Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot create property '_id' on string '{\"id\":\"5494ef97-bc5a-4b45-bd81-8989876924cc\",\"name\":\"silla\",\"description\":\"esto es una silla\",\"price\":999,\"image\":\"www.google.com\"}'","timestamp":"2022-10-06T01:51:37.852Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot create property '_id' on string '{\"id\":\"362abeb6-c6bf-4265-8212-09382f523073\",\"name\":\"silla\",\"description\":\"esto es una silla\",\"price\":999,\"image\":\"www.google.com\"}'","timestamp":"2022-10-06T01:52:15.959Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:54:24.533Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:58:05.663Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T01:59:37.880Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T02:03:55.668Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T02:04:57.265Z"}
-{"level":"error","message":"MongoDbContainer --> TypeError: Cannot add property _id, object is not extensible","timestamp":"2022-10-06T02:08:21.695Z"}
-{"level":"error","message":"MongoDbContainer --> MongoServerError: After applying the update, the (immutable) field '_id' was found to have been altered to _id: \"633e3935621cb07946d89033\"","timestamp":"2022-10-06T02:57:28.014Z"}
-{"level":"error","message":"MongoDbContainer --> MongoServerError: After applying the update, the (immutable) field '_id' was found to have been altered to _id: \"633e3935621cb07946d89033\"","timestamp":"2022-10-06T02:58:06.326Z"}
-{"level":"error","message":"MongoDbContainer --> MongoInvalidArgumentError: Replacement document must not contain atomic operators","timestamp":"2022-10-06T03:21:35.916Z"}
-{"level":"error","message":"MongoDbContainer --> MongoInvalidArgumentError: Replacement document must not contain atomic operators","timestamp":"2022-10-06T03:22:21.177Z"}
-{"level":"error","message":"MongoDbContainer --> MongoInvalidArgumentError: Replacement document must not contain atomic operators","timestamp":"2022-10-06T03:22:48.033Z"}
-{"level":"error","message":"MongoDbContainer --> ReferenceError: oldObject is not defined","timestamp":"2022-10-06T11:18:15.984Z"}
-{"level":"error","message":"MongoDbContainer --> ReferenceError: oldObject is not defined","timestamp":"2022-10-06T11:19:22.057Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:25:27.495Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:26:32.042Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:27:42.237Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:32:06.587Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:33:33.762Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:34:50.174Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:35:16.006Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:35:38.694Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:36:08.054Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:36:40.971Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T11:37:19.263Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T23:11:56.965Z"}
-{"level":"error","message":"MongoDbContainer --> Error: MISSING_REQUIRED_PARAM","timestamp":"2022-10-06T23:12:59.593Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T23:13:17.169Z"}
-{"level":"error","message":"MongoDbContainer --> Error: BAD_REQUEST","timestamp":"2022-10-06T23:14:11.904Z"}
-{"level":"error","message":"MongoDbContainer --> Error: NOT_FOUND","timestamp":"2022-10-06T23:23:22.621Z"}
-{"level":"error","message":"MongoDbContainer --> Error: NOT_FOUND","timestamp":"2022-10-06T23:23:29.505Z"}
-{"level":"error","message":"productControllers -->  Error: NOT_FOUND","timestamp":"2022-10-07T00:59:10.582Z"}
-{"level":"error","message":"productControllers -->  Error: NOT_FOUND","timestamp":"2022-10-07T00:59:45.061Z"}
-{"level":"error","message":"productControllers -->  Error: NOT_FOUND","timestamp":"2022-10-07T01:00:00.569Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:04:05.101Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:04:05.115Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:04:05.119Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:04:05.119Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:04:58.622Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:09:29.581Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:09:29.587Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:09:29.633Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:09:29.635Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:09:52.487Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:09:52.507Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:09:52.540Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:10:55.115Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:10:55.129Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:10:55.151Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:10:55.152Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:14:17.420Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:14:17.445Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:14:17.455Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:14:17.471Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:14:28.825Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:14:28.838Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:14:28.859Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerError: bad auth : Authentication failed.","timestamp":"2022-10-07T07:14:28.889Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerSelectionError: getaddrinfo ENOTFOUND mongodb0.example.com","timestamp":"2022-10-07T07:45:13.373Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerSelectionError: getaddrinfo ENOTFOUND mongodb0.example.com","timestamp":"2022-10-07T07:45:13.376Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerSelectionError: getaddrinfo ENOTFOUND mongodb0.example.com","timestamp":"2022-10-07T07:45:13.376Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerSelectionError: getaddrinfo ENOTFOUND mongodb0.example.com","timestamp":"2022-10-07T07:45:13.377Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerSelectionError: getaddrinfo ENOTFOUND mongodb0.example.com","timestamp":"2022-10-07T07:45:13.377Z"}
+{"level":"error","message":"MongoDbContainer --> MongoTopologyClosedError: Topology is closed","timestamp":"2022-10-07T07:46:22.720Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerSelectionError: getaddrinfo ENOTFOUND mongodb0.example.com","timestamp":"2022-10-07T07:47:26.791Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerSelectionError: getaddrinfo ENOTFOUND mongodb0.example.com","timestamp":"2022-10-07T07:47:26.792Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerSelectionError: getaddrinfo ENOTFOUND mongodb0.example.com","timestamp":"2022-10-07T07:47:26.792Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerSelectionError: getaddrinfo ENOTFOUND mongodb0.example.com","timestamp":"2022-10-07T07:47:26.793Z"}
+{"level":"error","message":"Error en la conexión a la mongo MongoServerSelectionError: getaddrinfo ENOTFOUND mongodb0.example.com","timestamp":"2022-10-07T07:47:26.793Z"}

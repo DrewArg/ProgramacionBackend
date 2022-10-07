@@ -2,7 +2,6 @@ import { mongoConfig } from '../../config/config.js'
 import { default as mongodb, ObjectId } from 'mongodb'
 import { winston } from '../../controllers/loggersControllers.js'
 import { DB_NAME } from '../../config/config.js'
-import { json } from 'express'
 
 const MongoClient = mongodb.MongoClient
 const client = new MongoClient(mongoConfig.mongodb.url, mongoConfig.mongodb.client)

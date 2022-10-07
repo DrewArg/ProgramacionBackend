@@ -27,11 +27,11 @@ export const winston = createLogger({
         //     format: format.combine(format.timestamp(), format.json())
         // }),
 
-        // new transports.File({
-        //     filename: './src/logs/05-warn.log',
-        //     level: 'warn',
-        //     format: format.combine(format.timestamp(), format.json())
-        // }),
+        new transports.File({
+            filename: './src/logs/05-warn.log',
+            level: 'warn',
+            format: format.combine(format.timestamp(), format.json())
+        }),
 
         new transports.File({
             filename: './src/logs/06-error.log',

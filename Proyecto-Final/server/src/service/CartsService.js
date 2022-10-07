@@ -26,9 +26,7 @@ export default class CartsService {
 
   async updateCart(cartId, cartData) {
     const updated = await this.#cartsDao.updateObject(
-      cartId,
-      JSON.parse(JSON.stringify(cartData))
-    );
+      cartId,cartData);
     return updated;
   }
 

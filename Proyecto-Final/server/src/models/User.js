@@ -38,7 +38,6 @@ export default class User {
 
   addOrder() {
     //nO ESTA ENTRANDO ACA
-    console.log("ACA");
     const newOrderId = new Order().getId()
     this.#orders.push(newOrderId);
     return newOrderId

@@ -73,7 +73,7 @@ export default class CartsControllers {
         throw new Error("NOT_FOUND");
       }
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   };
 
@@ -107,7 +107,7 @@ export default class CartsControllers {
             products.splice(productIndex, 1);
           }
           await this.#cartsService.updateCart(cartId, cart);
-          res.status(200).json("ok");
+          res.status(200).send()
         } else {
           winston.warn("carts controllers --> producto no encontrado")
           throw new Error("NOT_FOUND");
@@ -116,12 +116,6 @@ export default class CartsControllers {
         winston.warn("carts controllers --> usuario no encontrado")
         throw new Error("NOT_FOUND");
       }
-      //primero hay que verificar que exista en el carrito el item
-
-      const deletedCart = await this.#cartsService.removeProductFromCart(
-        req.params.id
-      );
-      res.json(deletedCart);
     } catch (error) {
       next(error);
     }

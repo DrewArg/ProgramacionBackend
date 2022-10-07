@@ -33,18 +33,13 @@ export default class OrdersControllers {
 
   saveOrder = async (req, res, next) => {
     try {
-      console.log(req.user);
       const users = await usersControllers.getDbUsers();
       const index = users.findIndex((u) => u.email == req.user.email);
       if (index !== -1) {
         const cartId = users[index].cartId;
         const cart = await cartsService.getBydId(cartId);
         const cartProds = cart.products;
-        console.log("cart prods");
-        console.log(cartProds);
         const orderId = users[index].addOrder();
-        console.log(orderId);
-        console.log(users[index]);
       }
       const savedOrder = await this.#ordersService.saveOrder(req.body);
       res.status(201).json(savedOrder);

@@ -41,7 +41,6 @@ export async function authorize(req, res, next) {
       throw new Error("NOT_FOUND");
     }
   } catch (error) {
-    console.log(error);
     winston.error(`Error --> ${error}`);
     throw new Error("FORBIDDEN");
   }

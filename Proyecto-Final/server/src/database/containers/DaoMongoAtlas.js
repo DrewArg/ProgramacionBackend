@@ -36,17 +36,15 @@ export default class DaoMongoAtlas {
   }
 
   async listById(id) {
-    winston.error("daoMongoAtlas --> el id es requerido");
-    if (!id) throw new Error("MISSING_REQUIRED_PARAM");
+    if (!id) {
+      winston.error("daoMongoAtlas --> el id es requerido");
+      throw new Error("MISSING_REQUIRED_PARAM");
+    }
     const objs = await this.listAll();
+
     const index = objs.findIndex((o) => o.id == id);
     if (index == -1) {
-      winston.log(
-        "warn",
-        `MongoDb container --> error buscando, no se encontró el id`
-      );
       winston.warn("daoMongoAtlas --> objeto no encontrado");
-
       throw new Error("NOT_FOUND");
     } else {
       winston.log(
@@ -77,25 +75,22 @@ export default class DaoMongoAtlas {
   }
 
   async updateObject(objectId, objectData) {
-    //TODO actualizar la posibilidad de que sobrescriba en loop todos los items pasados en el objeto de parametro.
-    //TODO verificar que no se sobreescriban los ids
-
-    const prod = await this.listById(objectId);
-
-    const updatedProd = { ...prod, ...objectData };
-
-    delete updatedProd._id;
+    const obj = await this.listById(objectId);
+    const updatedObj = { ...obj, ...objectData };
+    delete updatedObj._id;
 
     await mongoDb
       .collection(this.#collection)
-      .replaceOne({ id: objectId }, updatedProd);
-
-    return updatedProd;
+      .replaceOne({ id: objectId }, updatedObj);
+    return updatedObj;
   }
 
   async deleteById(id) {
-    winston.error("daoMongoAtlas --> el id es requerido");
-    if (!id) throw new Error("BAD_REQUEST");
+    if (!id) {
+      winston.error("daoMongoAtlas --> el id es requerido");
+      throw new Error("BAD_REQUEST");
+    }
+
     const prod = await this.listById(id);
 
     await mongoDb.collection(this.#collection).deleteOne({ id: prod.id });

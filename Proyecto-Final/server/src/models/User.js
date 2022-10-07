@@ -87,7 +87,7 @@ export default class User {
   }
 
   #setCartId(cartId) {
-    if (cartId) throw new Error("MISSING_REQUIRED_PARAM");
+    if (!cartId) throw new Error("MISSING_REQUIRED_PARAM");
     this.#cartId = cartId;
   }
 

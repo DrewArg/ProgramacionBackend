@@ -24,10 +24,7 @@ export default class UsersService {
 
   async saveUser({ email, password, name, lastname, phone, image }) {
     const userCart = new Cart();
-    console.log(userCart);
     const userCartId = await this.#cartsDao.saveObject(userCart.getCartData());
-    console.log("user cart id");
-    console.log(userCartId);
     const user = new User(
       email,
       password,

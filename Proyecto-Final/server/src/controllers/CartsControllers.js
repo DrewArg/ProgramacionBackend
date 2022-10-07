@@ -31,24 +31,26 @@ export default class CartsControllers {
   //TODO ver si este metodo hay que usarlo o bien deberia ser save Product in cart
   saveProductInCart = async (req, res, next) => {
     try {
-      console.log("save product");
-      console.log(req.user);
       //TODO DESCOMENTAR Y CODEAR REVISAR ESTO!
       const users = await usersControllers.getDbUsers();
       const index = users.findIndex((u) => u.email == req.user.email);
-      console.log(index);
       if (index != -1) {
-        console.log("aca");
-        console.log(users[index]);
-        const userData = users[index].getUserData();
-        console.log(userData);
-        console.log("userCart");
-        console.log(userData.cart);
-        userCart.addProduct(req.body.productId, 1);
+        const currUser = users[index];
+        const userCart = await this.#cartsService.getBydId(currUser.cartId);
+        const products = userCart.products;
+        const productIndex = products.findIndex(
+          (p) => p.productId === req.body.productId
+        );
+        if (productIndex === -1) {
+          products.push({ productId: req.body.productId, quantity: 1 });
+        } else {
+          products[productIndex].quantity += 1;
+        }
         const savedCart = await this.#cartsService.updateCart(
-          userCart.getId(),
+          currUser.cartId,
           userCart
         );
+
         res.status(201).json(savedCart);
       } else {
         throw new Error("NOT_FOUND");

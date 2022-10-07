@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { SECRET } from "../config/config.js";
+import { winston } from "../controllers/loggersControllers.js";
 import { usersService } from "../service/index.js";
 
 export function generateAuthToken(email, password) {
@@ -36,6 +37,7 @@ export async function authorize(req, res, next) {
       throw new Error("NOT_FOUND");
     }
   } catch (error) {
+    winston.error(`Error --> ${error}`);
     throw new Error("FORBIDDEN");
   }
 

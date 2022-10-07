@@ -53,8 +53,7 @@ export default class UsersControllers {
     try {
       if (this.isUniqueUsername(req.body.email)) {
         req.body.password = await bcrypt.hash(req.body.password, 10);
-        console.log("save user user controller");
-        const userId = await this.#usersService.saveUser(req.body);
+        await this.#usersService.saveUser(req.body);
         const token = generateAuthToken(req.body.email, req.body.password);
         res.status(201).json(token);
       }

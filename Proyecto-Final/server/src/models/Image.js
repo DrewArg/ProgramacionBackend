@@ -1,54 +1,68 @@
-import Id from './Id.js';
+import Id from "./Id.js";
 
 export default class Image {
-    #id
-    #title
-    #description
-    #url
+  #id;
+  #title;
+  #description;
+  #url;
 
-    /**
+  /**
    * @param {string} title
    * @param {string} description
    */
-    constructor({ title, description }) {
-        this.#setTitle(title)
-        this.#setDescription(description)
-        this.#id = new Id().getNewId()
-    }
+  constructor(title, description) {
+    this.#setTitle(title);
+    this.#setDescription(description);
+    this.#id = new Id().getNewId();
+  }
 
-    #setTitle(title) {
-        if (!title) throw new Error(`The title value is required`)
-        if (typeof title !== 'string') throw new Error(`The datatype of title must be a string`)
-        this.#title = title
-    }
+  #setTitle(title) {
+    if (!title) throw new Error(`The title value is required`);
+    if (typeof title !== "string")
+      throw new Error(`The datatype of title must be a string`);
+    this.#title = title;
+  }
 
-    #setDescription(description) {
-        if (!description) throw new Error(`The description value is required`)
-        if (typeof description !== 'string') throw new Error(`The datatype of description must be a string`)
-        this.#description = description
-    }
+  #setDescription(description) {
+    if (!description) throw new Error(`The description value is required`);
+    if (typeof description !== "string")
+      throw new Error(`The datatype of description must be a string`);
+    this.#description = description;
+  }
 
-    /**
-    * @param {string} url
-    */
-    set url(url) {
-        if (!url) throw new Error(`The url value is required`)
-        if (typeof url !== 'string') throw new Error(`The datatype of url must be a string`)
-        this.#url = url
-    }
+  /**
+   * @param {string} url
+   */
+  set url(url) {
+    if (!url) throw new Error(`The url value is required`);
+    if (typeof url !== "string")
+      throw new Error(`The datatype of url must be a string`);
+    this.#url = url;
+  }
 
-    getId() { return this.#id }
-    getTitle() { return this.#title }
-    getDescription() { return this.#description }
-    getUrl() { return this.#url }
+  getId() {
+    return this.#id;
+  }
+  getTitle() {
+    return this.#title;
+  }
+  getDescription() {
+    return this.#description;
+  }
+  getUrl() {
+    return this.#url;
+  }
 
-    getImageData() {
-        return JSON.parse(JSON.stringify(Object.freeze({
-            id: this.#id,
-            title: this.#title,
-            description: this.#description,
-            url: this.#url
-
-        })))
-    }
+  getImageData() {
+    return JSON.parse(
+      JSON.stringify(
+        Object.freeze({
+          id: this.#id,
+          title: this.#title,
+          description: this.#description,
+          url: this.#url,
+        })
+      )
+    );
+  }
 }

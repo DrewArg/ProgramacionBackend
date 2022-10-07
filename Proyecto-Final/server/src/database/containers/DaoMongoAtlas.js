@@ -1,5 +1,5 @@
 import { mongoConfig } from '../../config/config.js'
-import { default as mongodb, ObjectId } from 'mongodb'
+import { default as mongodb } from 'mongodb'
 import { winston } from '../../controllers/loggersControllers.js'
 import { DB_NAME } from '../../config/config.js'
 

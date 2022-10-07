@@ -1,9 +1,8 @@
 import jwt from 'jsonwebtoken'
+import { SECRET } from '../config/config.js'
 
-const PRIVATE_KEY = 'privateKey'
-
-export function generateAuthToken(username) {
-    const token = jwt.sign({ username }, PRIVATE_KEY, { expiresIn: "1 day" })
+export function generateAuthToken(email) {
+    const token = jwt.sign({ email }, SECRET, { expiresIn: 86400 })
     return token;
 }
 
@@ -21,8 +20,8 @@ export function authorize(req, res, next) {
     }
 
     try {
-        const original = jwt.verify(token, PRIVATE_KEY)
-        req.isAuthorized = original
+        const decoded = jwt.verify(token, SECRET)
+        req.email = decoded
     } catch (error) {
         throw new Error('FORBIDDEN')
     }

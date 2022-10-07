@@ -76,7 +76,6 @@ export default class DaoMongoAtlas {
         //TODO actualizar la posibilidad de que sobrescriba en loop todos los items pasados en el objeto de parametro.
         //TODO verificar que no se sobreescriban los ids
 
-        if (objectData.id) throw new Error('BAD_REQUEST')
         const prod = await this.listById(objectId)
 
         const updatedProd = { ...prod, ...objectData }

@@ -1,4 +1,6 @@
+import bcrypt from 'bcryptjs'
 import UsersService from '../service/UsersService.js'
+import { generateAuthToken } from '../middlewares/jwt.js'
 
 export default class UsersControllers {
     #usersService
@@ -28,10 +30,25 @@ export default class UsersControllers {
         }
     }
 
+    isUniqueUsername = async (email) => {
+        const users = await await this.#usersService.getAllUsers()
+        const user = users.find(u => u.email === email)
+        if (!user) {
+            return true
+        } else {
+            return false
+        }
+
+    }
+
     saveUser = async (req, res, next) => {
         try {
-            const savedUser = await this.#usersService.saveUser(req.body)
-            res.status(201).json(savedUser)
+            if (this.isUniqueUsername(req.body.email)) {
+                req.body.password = bcrypt.hash(req.body.password, 10)
+                const userId = await this.#usersService.saveUser(req.body)
+                const token = generateAuthToken(req.body.email)
+                res.status(201).json(token)
+            }
         } catch (error) {
             next(error)
         }

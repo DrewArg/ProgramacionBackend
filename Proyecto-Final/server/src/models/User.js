@@ -1,5 +1,5 @@
-import { Cart } from './Cart';
-import Id from './Id';
+import Cart from './Cart.js';
+import Id from './Id.js';
 
 export default class User {
     #id
@@ -12,6 +12,8 @@ export default class User {
     #cart
     #orders
 
+    //TODO CAMBIAR LOS THROW DE LOS ERRORES EN TODOS LOS MODELOS PARA QUE UTILICEN EL ERROR HANDLER
+    //TODO ver si el usuario no tiene mas requeridos al registrarse
     /**
     * @param {string} email
     * @param {string} password
@@ -92,7 +94,7 @@ export default class User {
 
 
     getUserData() {
-        return Object.freeze({
+        return JSON.parse(JSON.stringify(Object.freeze({
             id: this.#id,
             email: this.#email,
             password: this.#password,
@@ -102,7 +104,7 @@ export default class User {
             image: this.#image,
             cart: this.#cart,
             orders: this.#orders
-        })
+        })))
     }
 
 

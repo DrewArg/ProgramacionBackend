@@ -3,7 +3,7 @@ import { PERSISTANCE } from '../../config/config.js';
 import DaoMongoAtlas from '../containers/DaoMongoAtlas.js'
 
 
-let imagesDao, productsDao, cartsDao, ordersDao
+let imagesDao, usersDao, productsDao, cartsDao, ordersDao
 
 //TODO agregar conexion a mongodb local para desarrollo
 
@@ -14,6 +14,7 @@ switch (PERSISTANCE) {
             productsDao = new DaoMongoAtlas('products')
             cartsDao = new DaoMongoAtlas('carts')
             ordersDao = new DaoMongoAtlas('orders')
+            usersDao = new DaoMongoAtlas('users')
         } catch (error) {
             winston.log('error', `daoIndex -->  ${error}`)
         }
@@ -25,10 +26,12 @@ switch (PERSISTANCE) {
             productsDao = new DaoMongoAtlas('products')
             cartsDao = new DaoMongoAtlas('carts')
             ordersDao = new DaoMongoAtlas('orders')
+            usersDao = new DaoMongoAtlas('users')
+
         } catch (error) {
             winston.log('error', `daoIndex -->  ${error}`)
         }
         break;
 }
 
-export { imagesDao, productsDao, cartsDao, ordersDao }
+export { imagesDao, usersDao, productsDao, cartsDao, ordersDao }

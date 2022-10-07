@@ -1,4 +1,5 @@
 import CartsService from "../service/CartsService.js";
+import { cartsControllers, usersControllers } from "./index.js";
 
 export default class CartsControllers {
     #cartsService
@@ -30,9 +31,19 @@ export default class CartsControllers {
     //TODO ver si este metodo hay que usarlo o bien deberia ser save Product in cart
     saveProductInCart = async (req, res, next) => {
         try {
-            //TODO DESCOMENTAR Y CODEAR
-            // const savedCart = await this.#cartsService.addProduct()
-            res.status(201).json(savedCart)
+            //TODO DESCOMENTAR Y CODEAR REVISAR ESTO!
+            const users = await usersControllers.getAll()
+            const index = users.findIndex((u) => u.email === req.user.email)
+            console.log(index);
+            if (index != -1) {
+                const cartId = users[index].getCartId()
+                const userCart = await cartsControllers.getById(cartId)
+                userCart.addProduct(req.body.productId, 1)
+                await this.#cartsService.updateCart(cartId, { userCart })
+                res.status(201).json(savedCart)
+            } else {
+                throw new Error('NOT_FOUND')
+            }
         } catch (error) {
 
         }

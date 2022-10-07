@@ -1,7 +1,6 @@
 import { Router } from 'express'
+import { authorize } from '../middlewares/jwt.js'
 import CartsControllers from '../controllers/CartsControllers.js'
-
-//TODO agregar middleware que controle si el usuario está registrado y logeado antes de mostrar el carrito
 
 export default class CartsRouter {
     #cartsRouter
@@ -11,9 +10,9 @@ export default class CartsRouter {
     */
     constructor(cartsControllers) {
         this.#cartsRouter = Router()
-            .get('/', (req, res, next) => cartsControllers.getProducts(req, res, next))
-            .post('/', (req, res, next) => cartsControllers.saveProductInCart(req, res, next))
-            .delete('/:id?', (req, res, next) => cartsControllers.removeProductFromCart(req, res, next))
+            .get('/', authorize, (req, res, next) => cartsControllers.getProducts(req, res, next))
+            .post('/', authorize, (req, res, next) => cartsControllers.saveProductInCart(req, res, next))
+            .delete('/:id?', authorize, (req, res, next) => cartsControllers.removeProductFromCart(req, res, next))
         //TODO VER SI LA LINEA DE ABAJO VA ACA O EN EL APIROUTER
         // .all('/*', () => { throw new Error('') })
     }

@@ -16,12 +16,16 @@ export default class Cart {
    * @param {number} quantity
    */
   addProduct(productId, quantity) {
-    winston.error("cart -->el productId es requerido");
-    if (!productId) throw new Error('MISSING_REQUIRED_PARAM');
+    if (!productId){
+      winston.error("cart -->el productId es requerido");
+      throw new Error('MISSING_REQUIRED_PARAM');
+    } 
     const existIndex = this.#productExist(productId);
     if (!existIndex) {
-      winston.error("cart -->la cantidad es requerida");
-      if (!quantity) throw new Error('MISSING_REQUIRED_PARAM');
+      if (!quantity){
+        winston.error("cart -->la cantidad es requerida");
+        throw new Error('MISSING_REQUIRED_PARAM');
+      } 
       const product = {
         id: productId,
         quantity: quantity,
@@ -70,8 +74,10 @@ export default class Cart {
    * @param {string} productId
    */
   #productExist(productId) {
-    winston.error("cart -->el productId es requerido");
-    if (!productId) throw new Error('MISSING_REQUIRED_PARAM');
+    if (!productId){
+      winston.error("cart -->el productId es requerido");
+      throw new Error('MISSING_REQUIRED_PARAM');
+    } 
     const index = this.#products.findIndex((p) => p.id == productId);
     if (index == -1) {
       return false;

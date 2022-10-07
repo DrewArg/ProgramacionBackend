@@ -18,14 +18,18 @@ export default class Image {
   }
 
   #setTitle(title) {
-    winston.error("image -->el title es requerido");
-    if (!title) throw new Error('MISSING_REQUIRED_PARAM');
+    if (!title) {
+      winston.error("image -->el title es requerido");
+      throw new Error('MISSING_REQUIRED_PARAM');
+    }
     this.#title = title;
   }
 
   #setDescription(description) {
-    winston.error("image -->la description es requerido");
-    if (!description) throw new Error('MISSING_REQUIRED_PARAM');
+    if (!description){
+      winston.error("image -->la description es requerido");
+      throw new Error('MISSING_REQUIRED_PARAM');
+    } 
     this.#description = description;
   }
 
@@ -33,8 +37,11 @@ export default class Image {
    * @param {string} url
    */
   set url(url) {
-    winston.error('image --> la url es requerida')
-    if (!url) throw new Error('MISSING_REQUIRED_PARAM');
+    if (!url){
+      winston.error('image --> la url es requerida')
+      throw new Error('MISSING_REQUIRED_PARAM');
+    } 
+      
     this.#url = url;
   }
 

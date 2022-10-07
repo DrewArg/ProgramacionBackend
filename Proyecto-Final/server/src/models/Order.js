@@ -6,9 +6,6 @@ export default class Order {
   #products;
   #timestamp;
 
-  /**
-   * @param {Cart} cart
-   */
   constructor() {
     this.#id = new Id().getNewId();
     this.#timestamp = new Date();
@@ -18,9 +15,11 @@ export default class Order {
    * @param {Product[]} cartProducts
    */
   setProducts(cartProducts) {
-    winston.error("order --> los cartProducts son requeridos");
-    if (!cartProducts) throw new Error("MISSING_REQUIRED_PARAM");
-    this.#products = products;
+    if (!cartProducts) {
+      winston.error("order --> los cartProducts son requeridos");
+      throw new Error("MISSING_REQUIRED_PARAM");
+    }
+    this.#products = cartProducts;
   }
 
   getId() {

@@ -44,14 +44,18 @@ export default class User {
   }
 
   #setEmail(email) {
-    winston.error('user --> el email es requerido')
-    if (!email) throw new Error("MISSING_REQUIRED_PARAM");
+    if (!email){
+      winston.error('user --> el email es requerido')
+      throw new Error("MISSING_REQUIRED_PARAM");
+    } 
     this.#email = email;
   }
 
   #setPassword(password) {
-    winston.error('user --> el password es requerido')
-    if (!password) throw new Error("MISSING_REQUIRED_PARAM");
+    if (!password){
+      winston.error('user --> el password es requerido')
+      throw new Error("MISSING_REQUIRED_PARAM");
+    } 
     this.#password = password;
   }
 
@@ -59,8 +63,10 @@ export default class User {
    * @param {string} name
    */
   setName(name) {
-    winston.error('user --> el name es requerido')
-    if (!name) throw new Error("MISSING_REQUIRED_PARAM");
+    if (!name){
+      winston.error('user --> el name es requerido')
+      throw new Error("MISSING_REQUIRED_PARAM");
+    } 
     this.#name = name;
   }
 
@@ -68,8 +74,10 @@ export default class User {
    * @param {string} lastname
    */
   setLastname(lastname) {
-    winston.error('user --> el lastname es requerido')
-    if (!lastname) throw new Error("MISSING_REQUIRED_PARAM");
+    if (!lastname){
+      winston.error('user --> el lastname es requerido')
+      throw new Error("MISSING_REQUIRED_PARAM");
+    } 
     this.#lastname = lastname;
   }
 
@@ -77,8 +85,10 @@ export default class User {
    * @param {number} phone
    */
   setPhone(phone) {
-    winston.error('user --> el phone es requerido')
-    if (!phone) throw new Error("MISSING_REQUIRED_PARAM");
+    if (!phone){
+      winston.error('user --> el phone es requerido')
+      throw new Error("MISSING_REQUIRED_PARAM");
+    } 
     this.#phone = phone;
   }
 
@@ -86,14 +96,18 @@ export default class User {
    * @param {string} image
    */
   setImage(image) {
-    winston.error('user --> la image url es requerida')
-    if (!image) throw new Error("MISSING_REQUIRED_PARAM");
+    if (!image){
+      winston.error('user --> la image url es requerida')
+      throw new Error("MISSING_REQUIRED_PARAM");
+    } 
     this.#image = image;
   }
 
   #setCartId(cartId) {
-    winston.error('user --> el cartId es requerido')
-    if (!cartId) throw new Error("MISSING_REQUIRED_PARAM");
+    if (!cartId){
+      winston.error('user --> el cartId es requerido')
+      throw new Error("MISSING_REQUIRED_PARAM");
+    } 
     this.#cartId = cartId;
   }
 

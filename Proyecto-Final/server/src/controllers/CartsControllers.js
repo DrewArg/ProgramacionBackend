@@ -1,5 +1,5 @@
 import CartsService from "../service/CartsService.js";
-import { usersControllers } from "./index.js";
+import { usersControllers, productsControllers } from "./index.js";
 import { winston } from "./loggersControllers.js";
 
 export default class CartsControllers {
@@ -41,12 +41,11 @@ export default class CartsControllers {
   saveProductInCart = async (req, res, next) => {
     try {
       //TODO verificar que el producto exista antes de guardarlo
-      // const prod = await productsControllers.getById(req.params.id);
-      // if (!prod) {
-      // winston.warn("carts controllers --> producto no encontrado")
-
-      //   throw new Error("NOT_FOUND");
-      // }
+      const prod = await productsControllers.getById(req.params.id);
+      if (!prod) {
+        winston.warn("carts controllers --> producto no encontrado");
+        throw new Error("NOT_FOUND");
+      }
       const users = await usersControllers.getDbUsers();
       const index = users.findIndex((u) => u.email == req.user.email);
       if (index != -1) {
@@ -107,13 +106,13 @@ export default class CartsControllers {
             products.splice(productIndex, 1);
           }
           await this.#cartsService.updateCart(cartId, cart);
-          res.status(200).send()
+          res.status(200).send();
         } else {
-          winston.warn("carts controllers --> producto no encontrado")
+          winston.warn("carts controllers --> producto no encontrado");
           throw new Error("NOT_FOUND");
         }
       } else {
-        winston.warn("carts controllers --> usuario no encontrado")
+        winston.warn("carts controllers --> usuario no encontrado");
         throw new Error("NOT_FOUND");
       }
     } catch (error) {

@@ -15,11 +15,13 @@ export default class Cart {
    * @param {string} productId
    * @param {number} quantity
    */
-  addProduct(productId,quantity) {
-    if (!productId) throw new Error(`The productId is required`);
+  addProduct(productId, quantity) {
+    winston.error("cart -->el productId es requerido");
+    if (!productId) throw new Error('MISSING_REQUIRED_PARAM');
     const existIndex = this.#productExist(productId);
     if (!existIndex) {
-      if (!quantity) throw new Error(`The quantity is required`);
+      winston.error("cart -->la cantidad es requerida");
+      if (!quantity) throw new Error('MISSING_REQUIRED_PARAM');
       const product = {
         id: productId,
         quantity: quantity,
@@ -36,7 +38,8 @@ export default class Cart {
   removeOneProduct(productId) {
     const existIndex = this.#productExist(productId);
     if (!existIndex) {
-      throw new Error(`The productId ${productId} does not exist`);
+      winston.error("cart -->el productId no existe");
+      throw new Error('NOT_FOUND');
     } else {
       if (this.#products[existIndex].quantity === 1) {
         this.#products.splice(existIndex, 1)[0];
@@ -52,7 +55,8 @@ export default class Cart {
   removeWholeProduct(productId) {
     const existIndex = this.#productExist(productId);
     if (!existIndex) {
-      throw new Error(`The productId ${productId} does not exist`);
+      winston.error("cart -->el productId no existe");
+      throw new Error('NOT_FOUND');
     } else {
       this.#products.splice(existIndex, 1)[0];
     }
@@ -66,7 +70,8 @@ export default class Cart {
    * @param {string} productId
    */
   #productExist(productId) {
-    if (!productId) throw new Error(`The productId is required`);
+    winston.error("cart -->el productId es requerido");
+    if (!productId) throw new Error('MISSING_REQUIRED_PARAM');
     const index = this.#products.findIndex((p) => p.id == productId);
     if (index == -1) {
       return false;

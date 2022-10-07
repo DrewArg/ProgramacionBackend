@@ -1,3 +1,4 @@
+import { winston } from "../controllers/loggersControllers.js";
 import Id from "./Id.js";
 
 export default class Order {
@@ -17,7 +18,8 @@ export default class Order {
    * @param {Product[]} cartProducts
    */
   setProducts(cartProducts) {
-    if (!cartProducts) throw new Error(`The products are required`);
+    winston.error("order --> los cartProducts son requeridos");
+    if (!cartProducts) throw new Error("MISSING_REQUIRED_PARAM");
     this.#products = products;
   }
 

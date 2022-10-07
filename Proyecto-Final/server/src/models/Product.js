@@ -1,3 +1,4 @@
+import { winston } from '../controllers/loggersControllers.js';
 import Id from './Id.js';
 
 export default class Product {
@@ -25,6 +26,7 @@ export default class Product {
      * @param {string} name
      */
     set name(name) {
+        winston.error('product --> el name es requerido')
         if (!name) throw new Error('MISSING_REQUIRED_PARAM')
         this.#name = name
     }
@@ -33,6 +35,7 @@ export default class Product {
      * @param {string} description
      */
     set description(description) {
+        winston.error('product --> la description es requerida')
         if (!description) throw new Error('MISSING_REQUIRED_PARAM')
         this.#description = description
     }
@@ -41,6 +44,7 @@ export default class Product {
      * @param {number}price
      */
     set price(price) {
+        winston.error('product --> el price es requerido')
         if (!price) throw new Error('MISSING_REQUIRED_PARAM')
         this.#price = price
     }
@@ -49,6 +53,7 @@ export default class Product {
      * @param {string} image
      */
     set image(image) {
+        winston.error('product --> la url de imagen es requerida')
         if (!image) throw new Error('MISSING_REQUIRED_PARAM')
         this.#image = image
     }

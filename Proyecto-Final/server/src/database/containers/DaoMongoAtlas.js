@@ -36,6 +36,7 @@ export default class DaoMongoAtlas {
   }
 
   async listById(id) {
+    winston.error("daoMongoAtlas --> el id es requerido");
     if (!id) throw new Error("MISSING_REQUIRED_PARAM");
     const objs = await this.listAll();
     const index = objs.findIndex((o) => o.id == id);
@@ -44,6 +45,8 @@ export default class DaoMongoAtlas {
         "warn",
         `MongoDb container --> error buscando, no se encontró el id`
       );
+      winston.warn("daoMongoAtlas --> objeto no encontrado");
+
       throw new Error("NOT_FOUND");
     } else {
       winston.log(
@@ -91,6 +94,7 @@ export default class DaoMongoAtlas {
   }
 
   async deleteById(id) {
+    winston.error("daoMongoAtlas --> el id es requerido");
     if (!id) throw new Error("BAD_REQUEST");
     const prod = await this.listById(id);
 

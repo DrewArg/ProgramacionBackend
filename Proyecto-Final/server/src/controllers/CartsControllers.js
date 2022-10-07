@@ -1,5 +1,6 @@
 import CartsService from "../service/CartsService.js";
 import { usersControllers } from "./index.js";
+import { winston } from "./loggersControllers.js";
 
 export default class CartsControllers {
   #cartsService;
@@ -28,6 +29,7 @@ export default class CartsControllers {
         const userCart = await this.#cartsService.getBydId(userCartId);
         res.json(userCart.products);
       } else {
+        winston.warn("carts controllers --> usuario no encontrado");
         throw new Error("NOT_FOUND");
       }
     } catch (error) {
@@ -41,6 +43,8 @@ export default class CartsControllers {
       //TODO verificar que el producto exista antes de guardarlo
       // const prod = await productsControllers.getById(req.params.id);
       // if (!prod) {
+      // winston.warn("carts controllers --> producto no encontrado")
+
       //   throw new Error("NOT_FOUND");
       // }
       const users = await usersControllers.getDbUsers();
@@ -64,6 +68,8 @@ export default class CartsControllers {
 
         res.status(201).json(savedCart);
       } else {
+        winston.warn("carts controllers --> usuario no encontrado");
+
         throw new Error("NOT_FOUND");
       }
     } catch (error) {
@@ -103,9 +109,11 @@ export default class CartsControllers {
           await this.#cartsService.updateCart(cartId, cart);
           res.status(200).json("ok");
         } else {
+          winston.warn("carts controllers --> producto no encontrado")
           throw new Error("NOT_FOUND");
         }
       } else {
+        winston.warn("carts controllers --> usuario no encontrado")
         throw new Error("NOT_FOUND");
       }
       //primero hay que verificar que exista en el carrito el item

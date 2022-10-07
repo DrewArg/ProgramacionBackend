@@ -1,3 +1,4 @@
+import { winston } from "../controllers/loggersControllers.js";
 import Id from "./Id.js";
 
 export default class Image {
@@ -17,16 +18,14 @@ export default class Image {
   }
 
   #setTitle(title) {
-    if (!title) throw new Error(`The title value is required`);
-    if (typeof title !== "string")
-      throw new Error(`The datatype of title must be a string`);
+    winston.error("image -->el title es requerido");
+    if (!title) throw new Error('MISSING_REQUIRED_PARAM');
     this.#title = title;
   }
 
   #setDescription(description) {
-    if (!description) throw new Error(`The description value is required`);
-    if (typeof description !== "string")
-      throw new Error(`The datatype of description must be a string`);
+    winston.error("image -->la description es requerido");
+    if (!description) throw new Error('MISSING_REQUIRED_PARAM');
     this.#description = description;
   }
 
@@ -34,9 +33,8 @@ export default class Image {
    * @param {string} url
    */
   set url(url) {
-    if (!url) throw new Error(`The url value is required`);
-    if (typeof url !== "string")
-      throw new Error(`The datatype of url must be a string`);
+    winston.error('image --> la url es requerida')
+    if (!url) throw new Error('MISSING_REQUIRED_PARAM');
     this.#url = url;
   }
 

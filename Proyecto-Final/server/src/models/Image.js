@@ -1,4 +1,4 @@
-import Id from './Id';
+import Id from './Id.js';
 
 export default class Image {
     #id
@@ -43,12 +43,12 @@ export default class Image {
     get url() { return this.#url }
 
     getImageData() {
-        return Object.freeze({
+        return JSON.parse(JSON.stringify(Object.freeze({
             id: this.#id,
             title: this.#title,
             description: this.#description,
             url: this.#url
 
-        })
+        })))
     }
 }

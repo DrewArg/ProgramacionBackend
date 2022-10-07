@@ -1,6 +1,6 @@
 import Product from '../models/Product.js'
 
-export default class ProductService {
+export default class ProductsService {
     #productsDao
     /**
     * @param {dao} productsDao

@@ -1,4 +1,4 @@
-import Cart from "./Cart.js";
+import Order from "./Order.js";
 import Id from "./Id.js";
 
 export default class User {
@@ -36,12 +36,12 @@ export default class User {
     this.#orders = [];
   }
 
-  /**
-   * @param {Order} order
-   */
-  addOrder(order) {
-    if (!order) throw new Error(`The order is required`);
-    this.#orders.push(order);
+  addOrder() {
+    //nO ESTA ENTRANDO ACA
+    console.log("ACA");
+    const newOrderId = new Order().getId()
+    this.#orders.push(newOrderId);
+    return newOrderId
   }
 
   #setEmail(email) {

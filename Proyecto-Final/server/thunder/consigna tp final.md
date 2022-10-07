@@ -21,7 +21,6 @@ DATA ON WIRE
 ## carritos
 - GET /api/shoppingcartproducts: devuelve los productos de un carrito (solo usuarios registrados)
 - POST /api/shoppingcartproducts: agrega producto al carrito segun su id (solo usuarios registrados)
-# FALTA
 - DELETE /api/shoppingcartproducts/{id}: quita un producto de un carrito (solo usuarios registrados)
 
 ## ordenes

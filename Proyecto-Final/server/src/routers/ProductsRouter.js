@@ -1,11 +1,11 @@
 import { Router } from "express";
-import ProductsController from '../controllers/ProductsControllers.js'
+import ProductsControllers from '../controllers/ProductsControllers.js'
 
 export default class ProductsRouter {
     #productsRouter
 
     /**
-    * @param {ProductsController} productsController
+    * @param {ProductsControllers} productsController
     */
     constructor(productsController) {
         this.#productsRouter = Router()

@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import CartsControllers from '../controllers/CartsControllers.js'
 
+//TODO agregar middleware que controle si el usuario está registrado y logeado antes de mostrar el carrito
+
 export default class CartsRouter {
     #cartsRouter
 

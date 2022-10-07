@@ -1,4 +1,4 @@
-import Id from './Id';
+import Id from './Id.js';
 
 export default class Order {
     #id
@@ -26,10 +26,10 @@ export default class Order {
     get timestamp() { return this.#timestamp }
 
     getOrderData() {
-        return Object.freeze({
+        return JSON.parse(JSON.stringify(Object.freeze({
             id: this.#id,
             products: this.#products,
             timestamp: this.#timestamp
-        })
+        })))
     }
 }

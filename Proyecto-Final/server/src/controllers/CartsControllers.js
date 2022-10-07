@@ -85,9 +85,31 @@ export default class CartsControllers {
 
   removeProductFromCart = async (req, res, next) => {
     try {
-      //TODO DESCOMENTAR Y CODEAR
-      console.log(req.params.id);
+      const users = await usersControllers.getDbUsers();
+      const index = users.findIndex((u) => u.email == req.user.email);
+      if (index !== -1) {
+        const cartId = users[index].cartId;
+        const cart = await this.#cartsService.getBydId(cartId);
+        const products = cart.products;
+        const productIndex = products.findIndex(
+          (p) => p.productId == req.params.id
+        );
+        if (productIndex !== -1) {
+          if (products[productIndex].quantity >= 2) {
+            products[productIndex].quantity -= 1;
+          } else {
+            products.splice(productIndex, 1);
+          }
+          await this.#cartsService.updateCart(cartId, cart);
+          res.status(200).json("ok");
+        } else {
+          throw new Error("NOT_FOUND");
+        }
+      } else {
+        throw new Error("NOT_FOUND");
+      }
       //primero hay que verificar que exista en el carrito el item
+
       const deletedCart = await this.#cartsService.removeProductFromCart(
         req.params.id
       );

@@ -19,10 +19,7 @@ DATA ON WIRE
 [ el nombre de usuario del admin se puede HARDCODEAR en el archivo config ]
 
 ## carritos
-
-# FALTA
 - GET /api/shoppingcartproducts: devuelve los productos de un carrito (solo usuarios registrados)
-# FALTA
 - POST /api/shoppingcartproducts: agrega producto al carrito segun su id (solo usuarios registrados)
 # FALTA
 - DELETE /api/shoppingcartproducts/{id}: quita un producto de un carrito (solo usuarios registrados)

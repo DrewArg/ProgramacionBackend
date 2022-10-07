@@ -1,5 +1,5 @@
 import CartsService from "../service/CartsService.js";
-import { cartsControllers, usersControllers } from "./index.js";
+import { usersControllers } from "./index.js";
 
 export default class CartsControllers {
   #cartsService;
@@ -21,8 +21,15 @@ export default class CartsControllers {
 
   getProducts = async (req, res, next) => {
     try {
-      const productsInCart = await this.#cartsService.getProducts();
-      res.json(productsInCart);
+      const users = await usersControllers.getDbUsers();
+      const index = users.findIndex((u) => u.email == req.user.email);
+      if (index !== -1) {
+        const userCartId = users[index].cartId;
+        const userCart = await this.#cartsService.getBydId(userCartId);
+        res.json(userCart.products);
+      } else {
+        throw new Error("NOT_FOUND");
+      }
     } catch (error) {
       next(error);
     }
@@ -31,7 +38,11 @@ export default class CartsControllers {
   //TODO ver si este metodo hay que usarlo o bien deberia ser save Product in cart
   saveProductInCart = async (req, res, next) => {
     try {
-      //TODO DESCOMENTAR Y CODEAR REVISAR ESTO!
+      //TODO verificar que el producto exista antes de guardarlo
+      // const prod = await productsControllers.getById(req.params.id);
+      // if (!prod) {
+      //   throw new Error("NOT_FOUND");
+      // }
       const users = await usersControllers.getDbUsers();
       const index = users.findIndex((u) => u.email == req.user.email);
       if (index != -1) {
@@ -55,7 +66,9 @@ export default class CartsControllers {
       } else {
         throw new Error("NOT_FOUND");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   updateCart = async (req, res, next) => {
@@ -73,7 +86,11 @@ export default class CartsControllers {
   removeProductFromCart = async (req, res, next) => {
     try {
       //TODO DESCOMENTAR Y CODEAR
-      // const deletedCart = await this.#cartsService.removeProductFromCart(req.params.id)
+      console.log(req.params.id);
+      //primero hay que verificar que exista en el carrito el item
+      const deletedCart = await this.#cartsService.removeProductFromCart(
+        req.params.id
+      );
       res.json(deletedCart);
     } catch (error) {
       next(error);

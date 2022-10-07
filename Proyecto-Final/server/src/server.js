@@ -1,6 +1,6 @@
 import express from 'express'
 import { Server as HttpServer } from 'http'
-import productsRouter from './routers/index.js'
+import { productsRouter, cartsRouter } from './routers/index.js'
 import { errorHandler } from './middlewares/errorHandler.js'
 
 const app = express()
@@ -10,6 +10,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use('/api/products', productsRouter)
+app.use('/api/shoppingcartproducts', cartsRouter)
 app.use(errorHandler)
 
 

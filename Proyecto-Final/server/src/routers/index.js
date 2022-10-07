@@ -1,6 +1,8 @@
 import ProductsRouter from "./ProductsRouter.js";
-import productsControllers from '../controllers/index.js'
+import CartsRouter from './CartsRouter.js'
+import { cartsControllers, productsControllers } from '../controllers/index.js'
 
-const productsRouter = new ProductsRouter(productsControllers)
+export const productsRouter = new ProductsRouter(productsControllers).get()
 
-export default productsRouter.get()
+export const cartsRouter = new CartsRouter(cartsControllers).get()
+

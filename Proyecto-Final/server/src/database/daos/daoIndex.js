@@ -3,12 +3,13 @@ import { PERSISTANCE } from '../../config/config.js';
 import DaoMongoAtlas from '../containers/DaoMongoAtlas.js'
 
 
-let productsDao
+let productsDao, cartsDao
 
 switch (PERSISTANCE) {
     case "mongoAtlas":
         try {
             productsDao = new DaoMongoAtlas('products')
+            cartsDao = new DaoMongoAtlas('carts')
         } catch (error) {
             winston.log('error', `daoIndex -->  ${error}`)
         }
@@ -17,10 +18,11 @@ switch (PERSISTANCE) {
     default:
         try {
             productsDao = new DaoMongoAtlas('products')
+            cartsDao = new DaoMongoAtlas('carts')
         } catch (error) {
             winston.log('error', `daoIndex -->  ${error}`)
         }
         break;
 }
 
-export { productsDao }
+export { productsDao, cartsDao }

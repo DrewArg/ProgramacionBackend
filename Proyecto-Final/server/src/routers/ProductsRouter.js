@@ -1,7 +1,7 @@
 import { Router } from "express";
 import ProductsController from '../controllers/ProductsControllers.js'
 
-export default class ProductRouter {
+export default class ProductsRouter {
     #productsRouter
 
     /**

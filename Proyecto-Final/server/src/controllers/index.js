@@ -1,6 +1,7 @@
-import productService from "../service/index.js";
+import { cartsService, productsService } from "../service/index.js";
+import CartsControllers from "./CartsControllers.js";
 import ProductsControllers from "./ProductsControllers.js";
 
-const productsController = new ProductsControllers(productService)
+export const productsControllers = new ProductsControllers(productsService)
 
-export default productsController
+export const cartsControllers = new CartsControllers(cartsService)

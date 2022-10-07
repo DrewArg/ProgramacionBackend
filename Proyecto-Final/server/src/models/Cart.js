@@ -1,4 +1,4 @@
-import Id from './Id';
+import Id from './Id.js';
 export default class Cart {
     #id
     #products
@@ -10,7 +10,11 @@ export default class Cart {
 
     //TODO ver si esto va acá o en la base de datos
     //TODO ver si hace falta agregar un ListadoDeProductos como mostró marian
-    
+
+    /**
+    * @param {string} productId
+    * @param {number} quantity
+   */
     addProduct(productId, quantity) {
         if (!productId) throw new Error(`The productId is required`)
 
@@ -27,6 +31,9 @@ export default class Cart {
         }
     }
 
+    /**
+   * @param {string} productId
+  */
     removeOneProduct(productId) {
         const existIndex = this.#productExist(productId)
         if (!existIndex) {
@@ -40,6 +47,9 @@ export default class Cart {
         }
     }
 
+    /**
+   * @param {string} productId
+  */
     removeWholeProduct(productId) {
         const existIndex = this.#productExist(productId)
         if (!existIndex) {
@@ -48,6 +58,7 @@ export default class Cart {
             this.#products.splice(existIndex, 1)[0];
         }
     }
+
 
     emptyCart() {
         this.#products = []
@@ -71,9 +82,9 @@ export default class Cart {
     get products() { return this.#products }
 
     getCartData() {
-        return Object.freeze({
+        return JSON.parse(JSON.stringifyObject.freeze({
             id: this.#id,
             products: this.#products
-        })
+        }))
     }
 }

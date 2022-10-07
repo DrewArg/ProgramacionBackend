@@ -1,4 +1,3 @@
-import { winston } from '../controllers/loggersControllers.js'
 import Product from '../models/Product.js'
 
 export default class ProductService {

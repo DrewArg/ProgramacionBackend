@@ -56,7 +56,6 @@ DATA ON WIRE
 # FALTA
 - - se notifica al usuario del nuevo pedido (vía mail)
 
-# FALTA
 [ el mail del admin se puede hardcodear en el archivo config ]
 
 -------------------------------------------------------
@@ -151,7 +150,6 @@ ejemplo 2:
 - fecha
 - texto
 
-# FALTA
 todo esto se persiste en MongoDB Local (dev) / Mongo Atlas (prod)
 
 ----------------------------------------------------------

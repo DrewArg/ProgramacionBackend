@@ -21,7 +21,7 @@ export function authorize(req, res, next) {
 
     try {
         const decoded = jwt.verify(token, SECRET)
-        req.email = decoded
+        req.user = decoded
     } catch (error) {
         throw new Error('FORBIDDEN')
     }

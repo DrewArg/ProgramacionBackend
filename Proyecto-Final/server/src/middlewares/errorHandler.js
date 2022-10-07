@@ -1,5 +1,4 @@
 export function errorHandler(err, req, res, next) {
-    console.log(err.message);
 
     const map = new Map()
     map.set('MISSING_REQUIRED_PARAM', 400)

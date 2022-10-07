@@ -2,6 +2,7 @@ import { mongoConfig } from '../../config/config.js'
 import { default as mongodb, ObjectId } from 'mongodb'
 import { winston } from '../../controllers/loggersControllers.js'
 import { DB_NAME } from '../../config/config.js'
+import { json } from 'express'
 
 const MongoClient = mongodb.MongoClient
 const client = new MongoClient(mongoConfig.mongodb.url, mongoConfig.mongodb.client)
@@ -80,9 +81,11 @@ export default class DaoMongoAtlas {
 
         const updatedProd = { ...prod, ...objectData }
 
+        delete updatedProd._id
+
         await mongoDb
             .collection(this.#collection)
-            .replaceOne({ id: objectId }, { updatedProd })
+            .replaceOne({ id: objectId }, updatedProd)
 
         return updatedProd
     }

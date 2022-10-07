@@ -1,4 +1,6 @@
 import ProductsService from "../service/ProductsService.js";
+import { productListController } from "./index.js";
+import { winston } from "./loggersControllers.js";
 
 export default class ProductsControllers {
   #productsService;
@@ -29,8 +31,9 @@ export default class ProductsControllers {
 
   saveProduct = async (req, res, next) => {
     try {
-      const savedProd = await this.#productsService.saveProduct(req.body);
-      res.status(201).json(savedProd);
+      const savedProdId = await this.#productsService.saveProduct(req.body);
+      await productListController.saveProduct(savedProdId);
+      res.status(201).json(savedProdId);
     } catch (error) {
       next(error);
     }

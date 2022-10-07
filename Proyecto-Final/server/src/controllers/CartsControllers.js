@@ -1,5 +1,8 @@
 import CartsService from "../service/CartsService.js";
-import { usersControllers, productsControllers } from "./index.js";
+import {
+  usersControllers,
+  productListController,
+} from "./index.js";
 import { winston } from "./loggersControllers.js";
 
 export default class CartsControllers {
@@ -37,12 +40,13 @@ export default class CartsControllers {
     }
   };
 
-  //TODO ver si este metodo hay que usarlo o bien deberia ser save Product in cart
   saveProductInCart = async (req, res, next) => {
     try {
-      //TODO verificar que el producto exista antes de guardarlo
-      const prod = await productsControllers.getById(req.params.id);
-      if (!prod) {
+      const productList = await productListController.getAllProducts();
+      const indexProdList = productList.findIndex(
+        (pl) => pl.id == req.body.productId
+      );
+      if (indexProdList === -1) {
         winston.warn("carts controllers --> producto no encontrado");
         throw new Error("NOT_FOUND");
       }

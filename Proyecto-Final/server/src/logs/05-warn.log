@@ -26,3 +26,11 @@
 {"level":"error","message":"daoMongoAtlas --> el id es requerido","timestamp":"2022-10-07T22:14:39.836Z"}
 {"level":"warn","message":"carts controllers --> producto no encontrado","timestamp":"2022-10-07T22:31:05.759Z"}
 {"level":"warn","message":"carts controllers --> producto no encontrado","timestamp":"2022-10-07T22:37:35.297Z"}
+{"level":"warn","message":"carts controllers --> producto no encontrado","timestamp":"2022-10-07T23:25:38.868Z"}
+{"level":"warn","message":"daoMongoAtlas --> objeto no encontrado","timestamp":"2022-10-07T23:25:38.920Z"}
+{"level":"warn","message":"carts controllers --> producto no encontrado","timestamp":"2022-10-07T23:26:39.367Z"}
+{"level":"warn","message":"daoMongoAtlas --> objeto no encontrado","timestamp":"2022-10-07T23:26:39.412Z"}
+{"level":"warn","message":"carts controllers --> producto no encontrado","timestamp":"2022-10-07T23:32:20.697Z"}
+{"level":"warn","message":"carts controllers --> producto no encontrado","timestamp":"2022-10-07T23:32:23.161Z"}
+{"level":"warn","message":"carts controllers --> producto no encontrado","timestamp":"2022-10-07T23:32:23.874Z"}
+{"level":"warn","message":"carts controllers --> producto no encontrado","timestamp":"2022-10-07T23:32:24.505Z"}

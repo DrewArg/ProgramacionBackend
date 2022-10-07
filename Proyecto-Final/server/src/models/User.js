@@ -9,7 +9,7 @@ export default class User {
   #lastname;
   #phone;
   #image;
-  #cartId
+  #cartId;
   #orders;
 
   //TODO CAMBIAR LOS THROW DE LOS ERRORES EN TODOS LOS MODELOS PARA QUE UTILICEN EL ERROR HANDLER
@@ -21,16 +21,18 @@ export default class User {
    * @param {string} lastname
    * @param {string} phone
    * @param {string} image
+   * @param {string} cartId
    */
-  constructor(email, password, name, lastname, phone, image) {
+  constructor(email, password, name, lastname, phone, image, cartId) {
     this.#setEmail(email);
     this.#setPassword(password);
     this.setName(name);
     this.setLastname(lastname);
     this.setPhone(phone);
     this.setImage(image);
+    this.#setCartId(cartId);
+    // this.#cartId = new Cart().getId();
     this.#id = new Id().getNewId();
-    this.#cartId = new Cart().getId();
     this.#orders = [];
   }
 
@@ -82,6 +84,11 @@ export default class User {
   setImage(image) {
     if (!image) throw new Error("MISSING_REQUIRED_PARAM");
     this.#image = image;
+  }
+
+  #setCartId(cartId) {
+    if (cartId) throw new Error("MISSING_REQUIRED_PARAM");
+    this.#cartId = cartId;
   }
 
   getId() {

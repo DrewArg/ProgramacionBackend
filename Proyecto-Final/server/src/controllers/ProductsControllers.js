@@ -16,6 +16,7 @@ export default class ProductsControllers {
       const prod = await this.#productsService.getById(req.params.id);
       res.json(prod);
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -25,6 +26,7 @@ export default class ProductsControllers {
       const products = await this.#productsService.getAllProducts();
       res.json(products);
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -35,6 +37,7 @@ export default class ProductsControllers {
       await productListController.saveProduct(savedProdId);
       res.status(201).json(savedProdId);
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -47,6 +50,7 @@ export default class ProductsControllers {
       );
       res.json(updatedProduct);
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -58,6 +62,7 @@ export default class ProductsControllers {
       );
       res.json(deletedProdut);
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };

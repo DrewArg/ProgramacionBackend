@@ -23,6 +23,7 @@ export default class DaoMongoAtlas {
     try {
       await mongoDb.createCollection(collectionName);
     } catch (error) {
+      winston.error(error)
       winston.log("info", `Colección ya existente, no se realizaron cambios`);
     }
   }

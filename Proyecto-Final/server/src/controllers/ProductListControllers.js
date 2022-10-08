@@ -1,4 +1,5 @@
 import ProductListService from "../service/ProductListService.js";
+import { winston } from "./loggersControllers.js";
 
 export default class ProductListControllers {
   #productListService;
@@ -14,6 +15,7 @@ export default class ProductListControllers {
     try {
       return await this.#productListService.getAllProducts();
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };

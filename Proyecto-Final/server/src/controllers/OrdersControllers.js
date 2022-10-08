@@ -21,6 +21,7 @@ export default class OrdersControllers {
       const ord = await this.#ordersService.getById(req.params.id);
       res.json(ord);
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -28,8 +29,24 @@ export default class OrdersControllers {
   getAll = async (req, res, next) => {
     try {
       const orders = await this.#ordersService.getAll();
-      res.json(orders);
+      const users = await usersControllers.getDbUsers();
+      const index = users.findIndex((u) => u.email == req.user.email);
+      if (index == -1) {
+        winston.error("order controllers --> no se encontró el usuario");
+        throw new Error("NOT_FOUND");
+      } else {
+        const userOrders = orders.filter((o) => o.userId == users[index].id);
+        if (userOrders.length === 0) {
+          winston.error(
+            "order controllers --> el usuario no tiene ordernes actualmente"
+          );
+          throw new Error("NOT_FOUND");
+        } else {
+          res.json(userOrders);
+        }
+      }
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -63,6 +80,7 @@ export default class OrdersControllers {
         throw new Error("NOT_FOUND");
       }
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -75,6 +93,7 @@ export default class OrdersControllers {
       );
       res.json(updatedOrder);
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -84,6 +103,7 @@ export default class OrdersControllers {
       const deletedOrder = await this.#ordersService.deleteOrder(req.params.id);
       res.json(deletedOrder);
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };

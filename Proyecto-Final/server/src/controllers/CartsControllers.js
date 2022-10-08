@@ -16,6 +16,7 @@ export default class CartsControllers {
       const cart = await this.#cartsService.getBydId(req.params.id);
       res.json(cart);
     } catch (error) {
+      winston.error(error);
       next(error);
     }
   };
@@ -33,6 +34,7 @@ export default class CartsControllers {
         throw new Error("NOT_FOUND");
       }
     } catch (error) {
+      winston.error(error);
       next(error);
     }
   };
@@ -73,6 +75,7 @@ export default class CartsControllers {
         throw new Error("NOT_FOUND");
       }
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -85,6 +88,7 @@ export default class CartsControllers {
       );
       res.json(updatedCart);
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -117,6 +121,7 @@ export default class CartsControllers {
         throw new Error("NOT_FOUND");
       }
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };

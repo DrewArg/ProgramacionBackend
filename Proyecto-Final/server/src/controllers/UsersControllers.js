@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import UsersService from "../service/UsersService.js";
 import { generateAuthToken } from "../middlewares/jwt.js";
+import { winston } from "./loggersControllers.js";
 
 export default class UsersControllers {
   #usersService;
@@ -17,6 +18,7 @@ export default class UsersControllers {
       const usr = await this.#usersService.getById(req.params.id);
       res.json(id);
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -26,6 +28,7 @@ export default class UsersControllers {
       const users = await this.#usersService.getAllUsers();
       return users;
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -35,6 +38,7 @@ export default class UsersControllers {
       const users = await this.#usersService.getAllUsers();
       res.json(users);
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -58,6 +62,7 @@ export default class UsersControllers {
         res.status(201).json(token);
       }
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -70,6 +75,7 @@ export default class UsersControllers {
       );
       res.json(updatedUser);
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };
@@ -79,6 +85,7 @@ export default class UsersControllers {
       const deletedUser = await this.#usersService.deleteUser(req.params.id);
       res.json(deletedUser);
     } catch (error) {
+      winston.error(error)
       next(error);
     }
   };

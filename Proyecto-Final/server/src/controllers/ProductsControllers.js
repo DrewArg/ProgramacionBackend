@@ -15,7 +15,11 @@ export default class ProductsControllers {
   getById = async (req, res, next) => {
     try {
       const prod = await this.#productsService.getById(req.params.id);
-      res.json(prod);
+      if (!prod) {
+        throw new Error("NOT_FOUND");
+      } else {
+        res.json(prod);
+      }
     } catch (error) {
       winston.error(error);
       next(error);

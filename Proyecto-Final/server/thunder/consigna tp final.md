@@ -24,12 +24,10 @@ DATA ON WIRE
 - DELETE /api/shoppingcartproducts/{id}: quita un producto de un carrito (solo usuarios registrados)
 
 ## ordenes
-# FALTA
 - POST /api/orders: crea una nueva orden (compra todo el contenido de un carrito y lo vacía, solo usuarios registrados)
-# FALTA
 - GET /api/orders: devuelve todas las ordenes de un usuario (solo usuarios registrados)
 
-# FALTA
+# REVISAR
 ## autenticacion
 - POST /login: autentica a un usuario (ok? => JWT)
 
@@ -37,7 +35,6 @@ DATA ON WIRE
 
 # detalles del negocio:
 - para crear entidades, tienen que ser validas en su formato y contenido (usar modelos!).
-# FALTA
 - para agregar productos al carrito, debe existir el producto (validar regla de negocio!)
 - al generar nuevas entidades, utilizar ids alfanumericos al azar (opcion: usar uuid para generar ids únicos)
 - al almacenar contraseñas en la BD, guardarlas encriptadas (opcion: usar crypto)
@@ -45,7 +42,6 @@ DATA ON WIRE
 +++
 
 - cuando se realiza una compra (crear orden):
-# FALTA
 - - se vacía el carrito
 # FALTA
 - - se notifica al admin de la nueva venta (vía mail)
@@ -163,7 +159,6 @@ todo esto se persiste en MongoDB Local (dev) / Mongo Atlas (prod)
 - renderizar usando algun motor de plantillas
 
 ----------------------------------------------------------
-# FALTA
 # despliegue en Heroku
 - a tener en cuenta, en heroku no se cargan los .env, sino que las variables de entorno se cargan desde la configuracion del proyecto, desde el sitio de heroku.
 

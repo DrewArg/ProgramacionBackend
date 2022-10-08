@@ -1,35 +1,36 @@
-import Order from '../models/Order.js'
+import Order from "../models/Order.js";
 
 export default class OrdersService {
-    #ordersDao
+  #ordersDao;
 
-    /**
-    * @param {dao} ordersDao
-    */
-    constructor(ordersDao) {
-        this.#ordersDao = ordersDao
-    }
+  /**
+   * @param {dao} ordersDao
+   */
+  constructor(ordersDao) {
+    this.#ordersDao = ordersDao;
+  }
 
-    async getById(id) {
-        return await this.#ordersDao.listById(id)
-    }
+  async getById(id) {
+    return await this.#ordersDao.listById(id);
+  }
 
-    async getAll() {
-        return await this.#ordersDao.listAll()
-    }
+  async getAll() {
+    return await this.#ordersDao.listAll();
+  }
 
-    async saveOrder(cart) {
-        const order = new Order(cart)
-        return await this.#ordersDao.saveObject(order.getOrderData())
-    }
+  async saveOrder(order) {
+    return await this.#ordersDao.saveObject(order);
+  }
 
-    async updateOrder(orderId, orderData) {
-        const updated = await this.#ordersDao.updateObject(orderId, JSON.parse(JSON.stringify(orderData)))
+  async updateOrder(orderId, orderData) {
+    const updated = await this.#ordersDao.updateObject(
+      orderId,
+      JSON.parse(JSON.stringify(orderData))
+    );
+    return updated;
+  }
 
-        return updated
-    }
-
-    async deleteOrder(orderId) {
-        await this.#ordersDao.deleteById(orderId)
-    }
+  async deleteOrder(orderId) {
+    await this.#ordersDao.deleteById(orderId);
+  }
 }

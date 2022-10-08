@@ -5,10 +5,12 @@ export default class Order {
   #id;
   #products;
   #timestamp;
+  #userId;
 
-  constructor() {
+  constructor(userId) {
     this.#id = new Id().getNewId();
     this.#timestamp = new Date();
+    this.#userId = userId;
   }
 
   /**
@@ -31,6 +33,9 @@ export default class Order {
   getTimestamp() {
     return this.#timestamp;
   }
+  getUserId() {
+    return this.#userId;
+  }
 
   getOrderData() {
     return JSON.parse(
@@ -39,6 +44,7 @@ export default class Order {
           id: this.#id,
           products: this.#products,
           timestamp: this.#timestamp,
+          userId: this.#userId,
         })
       )
     );

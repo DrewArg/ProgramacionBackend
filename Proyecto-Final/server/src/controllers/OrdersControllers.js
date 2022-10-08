@@ -1,6 +1,9 @@
 import { usersControllers } from "./index.js";
 import OrdersService from "../service/OrdersService.js";
 import { cartsService } from "../service/index.js";
+import User from "../models/User.js";
+import Order from "../models/Order.js";
+import { winston } from "./loggersControllers.js";
 
 export default class OrdersControllers {
   #ordersService;
@@ -39,10 +42,26 @@ export default class OrdersControllers {
         const cartId = users[index].cartId;
         const cart = await cartsService.getBydId(cartId);
         const cartProds = cart.products;
-        const orderId = users[index].addOrder();
+        const order = new Order(users[index].id);
+        if (cartProds.length === 0) {
+          winston.error(
+            "orders controllers --> el carrito no tiene productos actualmente"
+          );
+          throw new Error("BAD_REQUEST");
+        } else {
+          order.setProducts(cartProds);
+          await this.#ordersService.saveOrder(order.getOrderData());
+          cart.products = [];
+          await cartsService.updateCart(cartId, cart);
+
+          //TODO NOTIFICAR AL ADMIN DE LA VENTA VIA MAIL
+          //TODO NOTIFICAR AL USUARIO DEL NUEVO PEDIDO REALIZADO VIA MAIL
+          res.status(201).send();
+        }
+      } else {
+        winston.error("orders controllers --> usuario no encontrado");
+        throw new Error("NOT_FOUND");
       }
-      const savedOrder = await this.#ordersService.saveOrder(req.body);
-      res.status(201).json(savedOrder);
     } catch (error) {
       next(error);
     }

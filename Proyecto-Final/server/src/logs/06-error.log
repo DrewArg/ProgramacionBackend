@@ -26,3 +26,6 @@
 {"level":"error","message":"daoMongoAtlas --> el id es requerido","timestamp":"2022-10-07T22:14:37.319Z"}
 {"level":"error","message":"daoMongoAtlas --> el id es requerido","timestamp":"2022-10-07T22:14:39.797Z"}
 {"level":"error","message":"daoMongoAtlas --> el id es requerido","timestamp":"2022-10-07T22:14:39.837Z"}
+{"level":"error","message":"user --> el password es requerido","timestamp":"2022-10-08T00:04:39.882Z"}
+{"level":"error","message":"user --> el password es requerido","timestamp":"2022-10-08T00:06:37.903Z"}
+{"level":"error","message":"orders controllers --> el carrito no tiene productos actualmente","timestamp":"2022-10-08T00:35:20.699Z"}

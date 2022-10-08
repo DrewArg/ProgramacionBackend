@@ -1,8 +1,5 @@
 import CartsService from "../service/CartsService.js";
-import {
-  usersControllers,
-  productListController,
-} from "./index.js";
+import { usersControllers, productListController } from "./index.js";
 import { winston } from "./loggersControllers.js";
 
 export default class CartsControllers {
@@ -44,7 +41,7 @@ export default class CartsControllers {
     try {
       const productList = await productListController.getAllProducts();
       const indexProdList = productList.findIndex(
-        (pl) => pl.id == req.body.productId
+        (pl) => pl.productId == req.body.productId
       );
       if (indexProdList === -1) {
         winston.warn("carts controllers --> producto no encontrado");

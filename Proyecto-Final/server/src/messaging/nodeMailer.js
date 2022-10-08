@@ -15,7 +15,7 @@ export const sendBuyEtherealEmailToAdmin = async (buyer, orders, orderId) => {
   try {
     const mailOptions = {
       from: adminEthereal,
-      to: buyer.email,
+      to: adminEthereal,
       subject: `Nuevo pedido de ${buyer.name} - ${buyer.email}`,
       html: `
       <p>Orden de compra: ${orderId}</p>
@@ -36,7 +36,7 @@ export const sendBuyEtherealEmailToBuyer = async (buyer, orders, orderId) => {
     const mailOptions = {
       from: adminEthereal,
       to: buyer.email,
-      subject: `Nuevo pedido de realizado ${buyer.email}`,
+      subject: `Nuevo pedido ${buyer.name}`,
       html: `
       <p>Tu ID de orden de compra es ${orderId}
       <p>Se han comprado los siguientes productos: </p>

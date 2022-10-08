@@ -18,7 +18,7 @@ export default class UsersControllers {
       const usr = await this.#usersService.getById(req.params.id);
       res.json(id);
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -28,7 +28,7 @@ export default class UsersControllers {
       const users = await this.#usersService.getAllUsers();
       return users;
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -38,14 +38,14 @@ export default class UsersControllers {
       const users = await this.#usersService.getAllUsers();
       res.json(users);
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
 
   isUniqueUsername = async (email) => {
     const users = await await this.#usersService.getAllUsers();
-    const user = users.find((u) => u.email === email);
+    const user = users.find((u) => u.email == email);
     if (!user) {
       return true;
     } else {
@@ -57,12 +57,15 @@ export default class UsersControllers {
     try {
       if (this.isUniqueUsername(req.body.email)) {
         req.body.password = await bcrypt.hash(req.body.password, 10);
-        await this.#usersService.saveUser(req.body);
-        const token = generateAuthToken(req.body.email, req.body.password);
-        res.status(201).json(token);
+        const userId = await this.#usersService.saveUser(req.body);
+        // const token = generateAuthToken(req.body.email, req.body.password);
+        res.status(201).json(userId);
+      } else {
+        winston.error("user controllers --> el usuario ya existe");
+        throw new Error("BAD_REQUEST");
       }
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -75,7 +78,7 @@ export default class UsersControllers {
       );
       res.json(updatedUser);
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -85,7 +88,7 @@ export default class UsersControllers {
       const deletedUser = await this.#usersService.deleteUser(req.params.id);
       res.json(deletedUser);
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };

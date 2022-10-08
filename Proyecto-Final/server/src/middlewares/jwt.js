@@ -16,14 +16,13 @@ export async function authorize(req, res, next) {
 
     if (!authHeader) {
       winston.error("jwt --> el usuario no está autenticado");
-      throw new Error("UNAUNTHORIZED");
+      res.status(401).json("UNAUNTHORIZED");
     }
 
     const token = authHeader.split(" ")[1];
-
     if (!token) {
       winston.error("jwt --> el usuario no está autenticado");
-      throw new Error("UNAUNTHORIZED");
+      res.status(401).json("UNAUNTHORIZED");
     }
 
     const decoded = jwt.verify(token, SECRET);
@@ -33,11 +32,15 @@ export async function authorize(req, res, next) {
     const index = users.findIndex((u) => u.email === req.user.email);
 
     if (index != -1) {
-      if (users[index].password !== req.user.password) {
+      const isAllowed = bcrypt.compareSync(
+        req.user.password,
+        users[index].password
+      );
+      if (!isAllowed) {
         winston.error("jwt --> las contraseñas no coinciden");
-        throw new Error("FORBIDDEN");
-      }else{
-        next()
+        res.status(403).json("FORBIDDEN");
+      } else {
+        next();
       }
     } else {
       winston.error("jwt --> usuario no encontrado");
@@ -45,11 +48,11 @@ export async function authorize(req, res, next) {
     }
   } catch (error) {
     winston.error(`Error --> ${error}`);
-    next(error)
   }
 }
 
 export async function authenticate(req, res, next) {
+  console.log(req.body);
   try {
     const email = req.body.email;
     const password = req.body.password;

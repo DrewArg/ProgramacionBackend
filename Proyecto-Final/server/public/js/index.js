@@ -2,8 +2,6 @@ const socket = io.connect();
 
 socket.emit("getAllMessages");
 
-let btnSendMessage;
-
 socket.on("messages", handleAllMessages);
 
 async function handleAllMessages(messages) {
@@ -14,10 +12,7 @@ async function handleAllMessages(messages) {
   document.getElementById("globalChat").innerHTML = html;
 }
 
-btnSendMessage = document.getElementById("btn__sendMessage");
-btnSendMessage.addEventListener("click", addMessage);
-
-async function addMessage() {
+function addMessage() {
   const userEmail = document.getElementById("userEmail").value;
   const msgContent = document.getElementById("msgContent").value;
   const timestamp = getTimestamp();

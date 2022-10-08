@@ -14,14 +14,14 @@
     </div>
     <div class="userMessage">
         <input type="text" id="msgContent" class="formInupt" placeholder="ingresa el mensaje">
-        <button id="btn__sendMessage">Send!</button>
+        <button id="btn__sendMessage" onclick="addMessage()">Send!</button>
         {{else}}
         <div class="chatMessages">
             <p class="mensajesFaltantes">no hay mensajes en el sistema actualmente...</p>
         </div>
         <div class="userMessage">
             <input type="text" id="msgContent" class="formInupt" placeholder="ingresa el mensaje">
-            <button id="btn__sendMessage">Send!</button>
+            <button id="btn__sendMessage" onclick="addMessage()">Send!</button>
             {{/if}}
         </div>
     </div>

@@ -5,10 +5,10 @@ import { winston } from "./loggersControllers.js";
 function socketController(server) {
   const io = new Socket(server);
   io.on("connection", (socket) => {
-    winston.info("conexión nueva")
+    winston.info("conexión nueva");
 
     socket.on("disconnect", () => {
-        winston.info("desconexión")
+      winston.info("desconexión");
     });
 
     socket.on("getAllMessages", async () => {

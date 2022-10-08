@@ -3,7 +3,7 @@ export function errorHandler(err, req, res, next) {
     const map = new Map()
     map.set('MISSING_REQUIRED_PARAM', 400)
     map.set('BAD_REQUEST', 400)
-    map.set('UNAUNTHENTICATED', 401)
+    map.set('UNAUTHORIZED', 401)
     map.set('FORBIDDEN', 403)
     map.set('NOT_FOUND', 404)
     map.set('METHOD_NOT_ALLOWED', 405)

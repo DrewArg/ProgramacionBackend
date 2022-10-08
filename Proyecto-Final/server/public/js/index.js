@@ -52,8 +52,8 @@ async function addFile(e) {
   e.preventDefault();
   const formData = new FormData();
   formData.append("newImage", fileInput.files[0]);
-  const url = "https://afternoon-eyrie-75480.herokuapp.com";
-  // const url = "http://localhost:8080";
+  // const url = "https://afternoon-eyrie-75480.herokuapp.com";
+  const url = "http://localhost:8080";
 
   fetch(`${url}/api/images`, {
     method: "POST",

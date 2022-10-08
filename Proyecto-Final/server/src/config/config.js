@@ -1,6 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+export const adminEthereal = "lesly65@ethereal.email"
+export const adminEtherealPass = process.env.ADMIN_PASS
+
 export const ADMIN_EMAIL = "admin@admin.com";
 
 export const PORT = process.env.PORT;

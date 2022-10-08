@@ -71,7 +71,6 @@ export default class CartsControllers {
         res.status(201).json(savedCart);
       } else {
         winston.warn("carts controllers --> usuario no encontrado");
-
         throw new Error("NOT_FOUND");
       }
     } catch (error) {

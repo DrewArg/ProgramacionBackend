@@ -10,22 +10,22 @@ export function generateAuthToken(email, password) {
 }
 
 export async function authorize(req, res, next) {
-  const authHeader =
-    req.headers["authorization"] || req.headers["Authorization"] || "";
-
-  if (!authHeader) {
-    winston.error("jwt --> el usuario no está autenticado");
-    throw new Error("UNAUNTHENTICATED");
-  }
-
-  const token = authHeader.split(" ")[1];
-
-  if (!token) {
-    winston.error("jwt --> el usuario no está autenticado");
-    throw new Error("UNAUNTHENTICATED");
-  }
-
   try {
+    const authHeader =
+      req.headers["authorization"] || req.headers["Authorization"] || "";
+
+    if (!authHeader) {
+      winston.error("jwt --> el usuario no está autenticado");
+      throw new Error("UNAUNTHORIZED");
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    if (!token) {
+      winston.error("jwt --> el usuario no está autenticado");
+      throw new Error("UNAUNTHORIZED");
+    }
+
     const decoded = jwt.verify(token, SECRET);
     req.user = decoded;
 
@@ -36,6 +36,8 @@ export async function authorize(req, res, next) {
       if (users[index].password !== req.user.password) {
         winston.error("jwt --> las contraseñas no coinciden");
         throw new Error("FORBIDDEN");
+      }else{
+        next()
       }
     } else {
       winston.error("jwt --> usuario no encontrado");
@@ -43,10 +45,8 @@ export async function authorize(req, res, next) {
     }
   } catch (error) {
     winston.error(`Error --> ${error}`);
-    throw new Error("FORBIDDEN");
+    next(error)
   }
-
-  next();
 }
 
 export async function authenticate(req, res, next) {
@@ -60,12 +60,13 @@ export async function authenticate(req, res, next) {
     const isAllowed = bcrypt.compareSync(password, users[index].password);
     if (!isAllowed) {
       winston.log("warn", `Authenticate --> las contraseñas no coinciden`);
-      throw new Error("UNAUNTHENTICATED");
+      res.status(401).json("UNAUTHORIZED");
     } else {
       const token = generateAuthToken(email, password);
       res.json(token);
     }
   } catch (error) {
     winston.log("error", `Authenticate --> ${error}`);
+    next(error);
   }
 }

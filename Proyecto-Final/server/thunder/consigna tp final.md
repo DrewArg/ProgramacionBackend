@@ -3,7 +3,6 @@ DATA ON WIRE
 (no sirve paginas, solo json)
 
 ## imagenes (para usuarios y productos)
-# REVISAR
 - POST /api/images: agrega una nueva imagen al servidor (multer), y devuelve su url pública (express.static) 
 
 ## usuarios
@@ -43,9 +42,7 @@ DATA ON WIRE
 
 - cuando se realiza una compra (crear orden):
 - - se vacía el carrito
-# FALTA
 - - se notifica al admin de la nueva venta (vía mail)
-# FALTA
 - - se notifica al usuario del nuevo pedido (vía mail)
 
 [ el mail del admin se puede hardcodear en el archivo config ]

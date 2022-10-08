@@ -1,9 +1,16 @@
-import { usersControllers } from "./index.js";
+import { productsControllers, usersControllers } from "./index.js";
 import OrdersService from "../service/OrdersService.js";
-import { cartsService } from "../service/index.js";
-import User from "../models/User.js";
+import {
+  cartsService,
+  productsService,
+  usersService,
+} from "../service/index.js";
 import Order from "../models/Order.js";
 import { winston } from "./loggersControllers.js";
+import {
+  sendBuyEtherealEmailToAdmin,
+  sendBuyEtherealEmailToBuyer,
+} from "../messaging/nodeMailer.js";
 
 export default class OrdersControllers {
   #ordersService;
@@ -21,7 +28,7 @@ export default class OrdersControllers {
       const ord = await this.#ordersService.getById(req.params.id);
       res.json(ord);
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -46,7 +53,7 @@ export default class OrdersControllers {
         }
       }
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -59,28 +66,39 @@ export default class OrdersControllers {
         const cartId = users[index].cartId;
         const cart = await cartsService.getBydId(cartId);
         const cartProds = cart.products;
+
         const order = new Order(users[index].id);
         if (cartProds.length === 0) {
           winston.error(
             "orders controllers --> el carrito no tiene productos actualmente"
           );
-          throw new Error("BAD_REQUEST");
+          throw new Error("NOT_FOUND");
         } else {
           order.setProducts(cartProds);
-          await this.#ordersService.saveOrder(order.getOrderData());
+          const orderId = await this.#ordersService.saveOrder(
+            order.getOrderData()
+          );
+
           cart.products = [];
           await cartsService.updateCart(cartId, cart);
 
-          //TODO NOTIFICAR AL ADMIN DE LA VENTA VIA MAIL
-          //TODO NOTIFICAR AL USUARIO DEL NUEVO PEDIDO REALIZADO VIA MAIL
-          res.status(201).send();
+          const orders = order.getProducts();
+          users[index].orders.push(orders);
+          await usersService.updateUser(users[index].id, users[index]);
+
+         
+
+          sendBuyEtherealEmailToAdmin(users[index], orders, orderId);
+          sendBuyEtherealEmailToBuyer(users[index], orders, orderId);
+
+          res.status(201).send(orderId);
         }
       } else {
         winston.error("orders controllers --> usuario no encontrado");
         throw new Error("NOT_FOUND");
       }
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -93,7 +111,7 @@ export default class OrdersControllers {
       );
       res.json(updatedOrder);
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -103,7 +121,7 @@ export default class OrdersControllers {
       const deletedOrder = await this.#ordersService.deleteOrder(req.params.id);
       res.json(deletedOrder);
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };

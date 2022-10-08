@@ -1,17 +1,23 @@
-import { Router } from 'express'
-import ImagesControllers from '../controllers/ImagesControllers.js'
+import { Router } from "express";
+import ImagesControllers from "../controllers/ImagesControllers.js";
+import { oneFileMiddleware } from "../middlewares/multer.js";
 
 export default class ImagesRouter {
-    #imagesRouter
+  #imagesRouter;
 
-    /**
-    * @param {ImagesControllers} imagesControllers
-    */
+  /**
+   * @param {ImagesControllers} imagesControllers
+   */
 
-    constructor(imagesControllers) {
-        this.#imagesRouter = Router()
-            .post('/', (req, res, next) => imagesControllers.saveImage(req, res, next))
-    }
+  constructor(imagesControllers) {
+    this.#imagesRouter = Router().post(
+      "/",
+      oneFileMiddleware,
+      (req, res, next) => imagesControllers.saveImage(req, res, next)
+    );
+  }
 
-    get() { return this.#imagesRouter }
+  get() {
+    return this.#imagesRouter;
+  }
 }

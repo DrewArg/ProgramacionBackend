@@ -3,59 +3,153 @@ import Id from "./Id.js";
 
 export default class Image {
   #id;
-  #title;
-  #description;
-  #url;
+  #fieldName;
+  #originalName;
+  #encoding;
+  #mimetype;
+  #destination;
+  #fileName;
+  #path;
+  #size;
 
   /**
-   * @param {string} title
-   * @param {string} description
+   * @param {string} fieldName
+   * @param {string} originalName
+   * @param {string} encoding
+   * @param {string} mimetype
+   * @param {string} destination
+   * @param {string} fileName
+   * @param {string} path
+   * @param {string} size
    */
-  constructor(title, description) {
-    this.#setTitle(title);
-    this.#setDescription(description);
+  constructor(
+    fieldName,
+    originalName,
+    encoding,
+    mimetype,
+    destination,
+    fileName,
+    path,
+    size
+  ) {
+    this.#setFieldName(fieldName);
+    this.#setOriginalName(originalName);
+    this.#setEncoding(encoding);
+    this.#setMimeType(mimetype);
+    this.#setDestination(destination);
+    this.#setFileName(fileName);
+    this.#setPath(path);
+    this.#setSize(size);
     this.#id = new Id().getNewId();
   }
 
-  #setTitle(title) {
-    if (!title) {
-      winston.error("image -->el title es requerido");
-      throw new Error('MISSING_REQUIRED_PARAM');
-    }
-    this.#title = title;
-  }
-
-  #setDescription(description) {
-    if (!description){
-      winston.error("image -->la description es requerido");
-      throw new Error('MISSING_REQUIRED_PARAM');
-    } 
-    this.#description = description;
-  }
-
   /**
-   * @param {string} url
+   * @param {string} fieldName
    */
-  set url(url) {
-    if (!url){
-      winston.error('image --> la url es requerida')
-      throw new Error('MISSING_REQUIRED_PARAM');
-    } 
-      
-    this.#url = url;
+  #setFieldName(fieldName) {
+    if (!fieldName) {
+      winston.error("image --> el fieldName es requerida");
+      throw new Error("MISSING_REQUIRED_PARAM");
+    }
+    this.#fieldName = fieldName;
+  }
+  /**
+   * @param {string} description
+   */
+  #setOriginalName(originalName) {
+    if (!originalName) {
+      winston.error("image --> la originalName es requerida");
+      throw new Error("MISSING_REQUIRED_PARAM");
+    }
+    this.#originalName = originalName;
+  }
+  /**
+   * @param {string} encoding
+   */
+  #setEncoding(encoding) {
+    if (!encoding) {
+      winston.error("image --> la encoding es requerida");
+      throw new Error("MISSING_REQUIRED_PARAM");
+    }
+    this.#encoding = encoding;
+  }
+  /**
+   * @param {string} mimetype
+   */
+  #setMimeType(mimetype) {
+    if (!mimetype) {
+      winston.error("image --> la mimetype es requerida");
+      throw new Error("MISSING_REQUIRED_PARAM");
+    }
+    this.#mimetype = mimetype;
+  }
+  /**
+   * @param {string} destination
+   */
+  #setDestination(destination) {
+    if (!destination) {
+      winston.error("image --> la destination es requerida");
+      throw new Error("MISSING_REQUIRED_PARAM");
+    }
+    this.#destination = destination;
+  }
+  /**
+   * @param {string} fileName
+   */
+  #setFileName(fileName) {
+    if (!fileName) {
+      winston.error("image --> la fileName es requerida");
+      throw new Error("MISSING_REQUIRED_PARAM");
+    }
+    this.#fileName = fileName;
+  }
+  /**
+   * @param {string} path
+   */
+  #setPath(path) {
+    if (!path) {
+      winston.error("image --> la path es requerida");
+      throw new Error("MISSING_REQUIRED_PARAM");
+    }
+    this.#path = path;
+  }
+  /**
+   * @param {number} size
+   */
+  #setSize(size) {
+    if (!size) {
+      winston.error("image --> la size es requerida");
+      throw new Error("MISSING_REQUIRED_PARAM");
+    }
+    this.#size = size;
   }
 
-  getId() {
-    return this.#id;
+  getFieldName() {
+    return this.#fieldName;
   }
-  getTitle() {
-    return this.#title;
+  getOriginalName() {
+    return this.#originalName;
   }
-  getDescription() {
-    return this.#description;
+  getEncoding() {
+    return this.#encoding;
   }
-  getUrl() {
-    return this.#url;
+  getMimeType() {
+    return this.#mimetype;
+  }
+  getFileName() {
+    return this.#fileName;
+  }
+
+  getDestination() {
+    return this.#destination;
+  }
+
+  getPath() {
+    return this.#path;
+  }
+
+  getSize() {
+    return this.#size;
   }
 
   getImageData() {
@@ -63,9 +157,14 @@ export default class Image {
       JSON.stringify(
         Object.freeze({
           id: this.#id,
-          title: this.#title,
-          description: this.#description,
-          url: this.#url,
+          mimetype: this.#mimetype,
+          encoding: this.#encoding,
+          fieldName: this.#fieldName,
+          originalName: this.#originalName,
+          fileName: this.#fileName,
+          destination: this.#destination,
+          path: this.#path,
+          size: this.#size,
         })
       )
     );

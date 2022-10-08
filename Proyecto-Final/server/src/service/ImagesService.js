@@ -1,36 +1,57 @@
 import Image from "../models/Image.js";
 
 export default class ImagesService {
-    #imagesDao
+  #imagesDao;
 
-    /**
-    * @param {dao} imagesDao
-    */
+  /**
+   * @param {dao} imagesDao
+   */
 
-    constructor(imagesDao) {
-        this.#imagesDao = imagesDao
-    }
+  constructor(imagesDao) {
+    this.#imagesDao = imagesDao;
+  }
 
-    async getById(id) {
-        return await this.#imagesDao.listById(id)
-    }
+  async getById(id) {
+    return await this.#imagesDao.listById(id);
+  }
 
-    async getAllImages() {
-        return await this.#imagesDao.listAll()
-    }
+  async getAllImages() {
+    return await this.#imagesDao.listAll();
+  }
 
-    //TODO ver si es totalmente necesario que una imagen tentga estos parametros, revisar el code de marian
-    async saveImage({ title, description }) {
-        const image = new Image(title, description)
-        return await this.#imagesDao.saveObject(image.getImageData())
-    }
+  async saveImage({
+    fieldname,
+    originalname,
+    encoding,
+    mimetype,
+    destination,
+    filename,
+    path,
+    size,
+  }) {
+    const image = new Image(
+      fieldname,
+      originalname,
+      encoding,
+      mimetype,
+      destination,
+      filename,
+      path,
+      size
+    );
 
-    async updateImage(imageId, imageData) {
-        const updated = await this.#imagesDao.updateObject(imageId, JSON.parse(JSON.stringify(imageData)))
-        return updated
-    }
+    return await this.#imagesDao.saveObject(image.getImageData());
+  }
 
-    async deleteImage(imageId) {
-        await this.#imagesDao.deleteById(imageId)
-    }
+  async updateImage(imageId, imageData) {
+    const updated = await this.#imagesDao.updateObject(
+      imageId,
+      JSON.parse(JSON.stringify(imageData))
+    );
+    return updated;
+  }
+
+  async deleteImage(imageId) {
+    await this.#imagesDao.deleteById(imageId);
+  }
 }

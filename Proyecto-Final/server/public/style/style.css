@@ -150,7 +150,8 @@ main {
 
 input[type=text],
 [type=number],
-[type=password] {
+[type=password],
+[type=file] {
   padding-top: 1rem;
   background: none;
   outline: none;
@@ -166,8 +167,9 @@ input[type=text],
 }
 
 input[type=text],
-[type=number],
-[type=passowrd]:focus {
+input[type=number],
+input[type=passowrd],
+input[type=file]:focus {
   outline: none;
 }
 
@@ -191,7 +193,8 @@ input[type=text],
 }
 
 input[type=text],
-[type=number] {
+input[type=number],
+input[type=file] {
   padding-top: 1rem;
   background: none;
   outline: none;
@@ -207,7 +210,7 @@ input[type=text],
 }
 
 input[type=text],
-[type=number]:focus {
+input[type=number], input[type=file]:focus {
   outline: none;
 }
 
@@ -245,7 +248,8 @@ input[type=text],
   color: rgb(5, 5, 52);
 }
 
-#globalChat {
+#globalChat,
+#fileLoader {
   background-color: rgb(167, 194, 218);
   display: flex;
   flex-direction: column;
@@ -262,11 +266,28 @@ input[type=text],
 .chatContainer {
   color: white;
   background-color: rgb(5, 5, 52);
-  width: 70%;
+  width: 90%;
   border-radius: 5px;
   align-items: left;
   justify-content: center;
   text-align: left;
+  margin-top: 1rem;
+}
+
+.fileLoaderContainer {
+  background-color: rgb(5, 5, 52);
+  width: 90%;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.fileLoaderForm {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  color: white;
 }
 
 .header,

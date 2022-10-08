@@ -136,7 +136,6 @@ ejemplo 2:
  ],
 }
 
-# FALTA
 ## mensajes
 - email
 - fecha
@@ -145,7 +144,6 @@ ejemplo 2:
 todo esto se persiste en MongoDB Local (dev) / Mongo Atlas (prod)
 
 ----------------------------------------------------------
-# FALTA
 # chat via sockets:
 
 - envío de mensajes

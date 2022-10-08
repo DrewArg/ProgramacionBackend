@@ -4,8 +4,6 @@ import DaoMongoAtlas from "../containers/DaoMongoAtlas.js";
 
 let imagesDao, usersDao, productsDao, cartsDao, ordersDao, productListDao, messagesDao;
 
-//TODO agregar conexion a mongodb local para desarrollo
-
 switch (PERSISTANCE) {
   case "mongoAtlas":
     try {

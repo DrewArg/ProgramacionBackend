@@ -66,7 +66,6 @@ export async function authenticate(req, res, next) {
       res.json(token);
     }
   } catch (error) {
-    console.log(error);
     winston.log("error", `Authenticate --> ${error}`);
   }
 }

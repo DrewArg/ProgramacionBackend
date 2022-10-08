@@ -11,7 +11,6 @@ async function handleAllMessages(messages) {
   const templateText = await chat.text();
   const templateFunction = Handlebars.compile(templateText);
   const html = templateFunction({ messages });
-  console.log(html);
   document.getElementById("globalChat").innerHTML = html;
 }
 
@@ -43,4 +42,25 @@ function getTimestamp() {
   const builtDate =
     day + "/" + month + "/" + year + " " + hour + ":" + minutes + ":" + seconds;
   return builtDate;
+}
+
+const fileInput = document.getElementById("image_uploads");
+const btnFileUpload = document.getElementById("btn__fileUpload");
+btnFileUpload.addEventListener("click", addFile);
+
+async function addFile(e) {
+  e.preventDefault();
+  const formData = new FormData();
+  formData.append("newImage", fileInput.files[0]);
+  const url = "https://afternoon-eyrie-75480.herokuapp.com";
+
+  fetch(`${url}/api/images`, {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }

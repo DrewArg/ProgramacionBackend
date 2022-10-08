@@ -13,8 +13,6 @@ export default class User {
   #cartId;
   #orders;
 
-  //TODO CAMBIAR LOS THROW DE LOS ERRORES EN TODOS LOS MODELOS PARA QUE UTILICEN EL ERROR HANDLER
-  //TODO ver si el usuario no tiene mas requeridos al registrarse
   /**
    * @param {string} email
    * @param {string} password
@@ -32,13 +30,11 @@ export default class User {
     this.setPhone(phone);
     this.setImage(image);
     this.#setCartId(cartId);
-    // this.#cartId = new Cart().getId();
     this.#id = new Id().getNewId();
     this.#orders = [];
   }
 
   addOrder() {
-    //nO ESTA ENTRANDO ACA
     const newOrderId = new Order().getId()
     this.#orders.push(newOrderId);
     return newOrderId

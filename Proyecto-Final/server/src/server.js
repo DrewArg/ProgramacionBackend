@@ -11,6 +11,7 @@ import {
 } from "./routers/index.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import { engine } from "express-handlebars";
+import infoRouter from "./routers/InfoRouter.js";
 
 const app = express();
 
@@ -28,7 +29,15 @@ app.use("/api/products", productsRouter);
 app.use("/api/shoppingcartproducts", cartsRouter);
 app.use("/api/orders", ordersRouter);
 app.use("/login", loginRouter);
+app.use("/info", infoRouter);
 app.use("/", templateRouter);
+
+app.use("*", (req, res) => {
+  res.status(404).json({
+    error: 404,
+    description: `ruta ${req.url} método ${req.method} no encontrada`,
+  });
+});
 
 app.use(errorHandler);
 

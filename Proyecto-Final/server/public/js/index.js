@@ -1,5 +1,31 @@
 const socket = io.connect();
 
+const url = "https://afternoon-eyrie-75480.herokuapp.com";
+// const url = "http://localhost:8080";
+
+async function handleInfo(info) {
+  console.log(info);
+  const infoTemplate = await fetch("/views/partials/info.handlebars");
+  const templateText = await infoTemplate.text();
+  const templateFunction = Handlebars.compile(templateText);
+  const html = templateFunction( info );
+  document.getElementById("serverInfo").innerHTML = html;
+}
+
+function addMessage() {
+  const userEmail = document.getElementById("userEmail").value;
+  const msgContent = document.getElementById("msgContent").value;
+  const timestamp = getTimestamp();
+
+  const message = {
+    author: userEmail,
+    text: msgContent,
+    timestamp: timestamp,
+  };
+
+  socket.emit("saveMessage", message);
+}
+
 socket.emit("getAllMessages");
 
 socket.on("messages", handleAllMessages);
@@ -10,6 +36,16 @@ async function handleAllMessages(messages) {
   const templateFunction = Handlebars.compile(templateText);
   const html = templateFunction({ messages });
   document.getElementById("globalChat").innerHTML = html;
+
+  const info = await fetch(`${url}/info`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
+  await handleInfo(info);
 }
 
 function addMessage() {
@@ -47,8 +83,6 @@ async function addFile(e) {
   e.preventDefault();
   const formData = new FormData();
   formData.append("newImage", fileInput.files[0]);
-  // const url = "https://afternoon-eyrie-75480.herokuapp.com";
-  const url = "http://localhost:8080";
 
   fetch(`${url}/api/images`, {
     method: "POST",

@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { SECRET } from "../config/config.js";
 import { winston } from "../controllers/loggersControllers.js";
 import { usersService } from "../service/index.js";
+import bcrypt from "bcryptjs";
 
 export function generateAuthToken(email, password) {
   const token = jwt.sign({ email, password }, SECRET, { expiresIn: 86400 });
@@ -46,4 +47,26 @@ export async function authorize(req, res, next) {
   }
 
   next();
+}
+
+export async function authenticate(req, res, next) {
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const users = await usersService.getAllUsers();
+    const index = users.findIndex((u) => u.email === email);
+
+    const isAllowed = bcrypt.compareSync(password, users[index].password);
+    if (!isAllowed) {
+      winston.log("warn", `Authenticate --> las contraseñas no coinciden`);
+      throw new Error("UNAUNTHENTICATED");
+    } else {
+      const token = generateAuthToken(email, password);
+      res.json(token);
+    }
+  } catch (error) {
+    console.log(error);
+    winston.log("error", `Authenticate --> ${error}`);
+  }
 }

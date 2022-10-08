@@ -63,6 +63,7 @@ export const sendNewRegisterEtherealToAdmin = async (user) => {
             <li>username: ${user.email}</li>
             <li>full name: ${user.name} ${user.lastname}</li>
             <li>phone: ${user.phoneNumber}</li>
+            <li>image: <img src="${process.env.SERVER}/${user.image}" style="max-width:20%"></li>
             </ul>`,
     };
     await transporter.sendMail(mailOptions);
@@ -75,12 +76,14 @@ export const sendNewRegisterEtherealToUser = async (user) => {
     const mailOptions = {
       from: adminEthereal,
       to: user.email,
-      subject: `Nuevo registro`,
+      subject: `Bienvenid@ ${user.email}`,
       html: `<p>Te has registrado! </p>
+            <p>Estos son los datos de tu registro </p>
             <ul>
             <li>username: ${user.email}</li>
             <li>full name: ${user.name} ${user.lastname}</li>
             <li>phone: ${user.phoneNumber}</li>
+            <li>image: <img src="${process.env.SERVER}/${user.image}" style="max-width:20%"></li>
             </ul>`,
     };
     await transporter.sendMail(mailOptions);

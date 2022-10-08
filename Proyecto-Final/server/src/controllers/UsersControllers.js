@@ -2,6 +2,10 @@ import bcrypt from "bcryptjs";
 import UsersService from "../service/UsersService.js";
 import { generateAuthToken } from "../middlewares/jwt.js";
 import { winston } from "./loggersControllers.js";
+import {
+  sendNewRegisterEtherealToAdmin,
+  sendNewRegisterEtherealToUser,
+} from "../messaging/nodeMailer.js";
 
 export default class UsersControllers {
   #usersService;
@@ -44,7 +48,7 @@ export default class UsersControllers {
   };
 
   isUniqueUsername = async (email) => {
-    const users = await await this.#usersService.getAllUsers();
+    const users = await this.#usersService.getAllUsers();
     const user = users.find((u) => u.email == email);
     if (!user) {
       return true;
@@ -55,10 +59,13 @@ export default class UsersControllers {
 
   saveUser = async (req, res, next) => {
     try {
-      if (this.isUniqueUsername(req.body.email)) {
+      const unique = await this.isUniqueUsername(req.body.email)
+      if (unique) {
         req.body.password = await bcrypt.hash(req.body.password, 10);
         const userId = await this.#usersService.saveUser(req.body);
-        // const token = generateAuthToken(req.body.email, req.body.password);
+        const user = await this.#usersService.getById(userId);
+        await sendNewRegisterEtherealToAdmin(user);
+        await sendNewRegisterEtherealToUser(user);
         res.status(201).json(userId);
       } else {
         winston.error("user controllers --> el usuario ya existe");

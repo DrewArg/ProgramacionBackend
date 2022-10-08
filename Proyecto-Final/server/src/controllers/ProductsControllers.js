@@ -1,3 +1,4 @@
+import { productListService } from "../service/index.js";
 import ProductsService from "../service/ProductsService.js";
 import { productListController } from "./index.js";
 import { winston } from "./loggersControllers.js";
@@ -16,7 +17,7 @@ export default class ProductsControllers {
       const prod = await this.#productsService.getById(req.params.id);
       res.json(prod);
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -26,7 +27,7 @@ export default class ProductsControllers {
       const products = await this.#productsService.getAllProducts();
       res.json(products);
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -37,7 +38,7 @@ export default class ProductsControllers {
       await productListController.saveProduct(savedProdId);
       res.status(201).json(savedProdId);
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -50,7 +51,7 @@ export default class ProductsControllers {
       );
       res.json(updatedProduct);
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -60,9 +61,10 @@ export default class ProductsControllers {
       const deletedProdut = await this.#productsService.deleteProduct(
         req.params.id
       );
+      await productListService.deleteProduct(req.params.id);
       res.json(deletedProdut);
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };

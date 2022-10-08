@@ -43,7 +43,7 @@ export default class CartsControllers {
     try {
       const productList = await productListController.getAllProducts();
       const indexProdList = productList.findIndex(
-        (pl) => pl.productId == req.body.productId
+        (pl) => pl.id == req.body.productId
       );
       if (indexProdList === -1) {
         winston.warn("carts controllers --> producto no encontrado");
@@ -74,7 +74,7 @@ export default class CartsControllers {
         throw new Error("NOT_FOUND");
       }
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -87,7 +87,7 @@ export default class CartsControllers {
       );
       res.json(updatedCart);
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };
@@ -120,7 +120,7 @@ export default class CartsControllers {
         throw new Error("NOT_FOUND");
       }
     } catch (error) {
-      winston.error(error)
+      winston.error(error);
       next(error);
     }
   };

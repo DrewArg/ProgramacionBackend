@@ -17,7 +17,7 @@ export default class ProductListService {
   }
 
   async saveProduct(productId) {
-    const product = { productId: productId };
+    const product = { id: productId };
     return await this.#productListDao.saveObject(product);
   }
 

@@ -15,7 +15,7 @@ const password = process.env.DB_SHH;
 if (PERSISTANCE == "mongoAtlas") {
   mongoConfig = {
     mongodb: {
-      url: `mongodb+srv://${username}:${password}@cluster0.vcbuwku.mongodb.net/?retryWrites=true&w=majority`,
+      url: `mongodb+srv://${username}:${password}@cluster0.wc8fbuf.mongodb.net/?retryWrites=true&w=majority`,
       options: {
         useNewUrlParser: true,
         useUnifiedTopology: true,

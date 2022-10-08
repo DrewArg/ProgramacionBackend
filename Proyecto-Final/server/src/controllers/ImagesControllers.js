@@ -39,7 +39,6 @@ export default class ImagesControllers {
       res.json(imageUrl);
     } catch (error) {
       winston.error(error);
-      console.log(error);
       next(error);
     }
   };

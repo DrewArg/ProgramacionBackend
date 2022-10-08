@@ -2,13 +2,13 @@
     "type": "module",
     "name": "proyecto-final-andres-fabbiano",
     "version": "1.0.0",
-    "description": "",
+    "description": "proyecto-final-backend",
     "main": "src/main.js",
     "scripts": {
         "start": "nodemon main"
     },
     "keywords": [],
-    "author": "",
+    "author": "andrés ezequiel fabbiano",
     "license": "ISC",
     "devDependencies": {
         "nodemon": "^2.0.20"

@@ -13,8 +13,6 @@ export default class CartsRouter {
             .get('/', authorize, (req, res, next) => cartsControllers.getProducts(req, res, next))
             .post('/', authorize, (req, res, next) => cartsControllers.saveProductInCart(req, res, next))
             .delete('/:id?', authorize, (req, res, next) => cartsControllers.removeProductFromCart(req, res, next))
-        //TODO VER SI LA LINEA DE ABAJO VA ACA O EN EL APIROUTER
-        // .all('/*', () => { throw new Error('') })
     }
 
     get() { return this.#cartsRouter }

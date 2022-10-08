@@ -9,9 +9,6 @@ export default class Cart {
     this.#products = [];
   }
 
-  //TODO ver si esto va acá o en la base de datos
-  //TODO ver si hace falta agregar un ListadoDeProductos como mostró marian
-
   /**
    * @param {string} productId
    * @param {number} quantity

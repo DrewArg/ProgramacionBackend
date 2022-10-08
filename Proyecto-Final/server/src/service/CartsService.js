@@ -14,7 +14,6 @@ export default class CartsService {
     return await this.#cartsDao.listById(id);
   }
 
-  //TODO verificar este metodo porque tiene que retornar los productos del carrito y no los carritos
   async getProducts() {
     return await this.#cartsDao.listAll();
   }

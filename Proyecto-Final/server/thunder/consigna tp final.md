@@ -26,7 +26,6 @@ DATA ON WIRE
 - POST /api/orders: crea una nueva orden (compra todo el contenido de un carrito y lo vacía, solo usuarios registrados)
 - GET /api/orders: devuelve todas las ordenes de un usuario (solo usuarios registrados)
 
-# REVISAR
 ## autenticacion
 - POST /login: autentica a un usuario (ok? => JWT)
 
@@ -149,7 +148,6 @@ todo esto se persiste en MongoDB Local (dev) / Mongo Atlas (prod)
 [ esto se saca directamente del proyecto de los desafíos semanales ]
 
 ----------------------------------------------------------
-# FALTA
 # ruta de info del servidor
 - renderizar usando algun motor de plantillas
 
@@ -158,7 +156,6 @@ todo esto se persiste en MongoDB Local (dev) / Mongo Atlas (prod)
 - a tener en cuenta, en heroku no se cargan los .env, sino que las variables de entorno se cargan desde la configuracion del proyecto, desde el sitio de heroku.
 
 ----------------------------------------------------------
-# FALTA
 # observaciones
 
 la carga de las imagenes se hará exclusivamente ANTES de la carga del usuario/producto a través de la ruta correspondiente (/api/images). operatoria:

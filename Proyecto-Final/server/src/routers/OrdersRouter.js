@@ -16,8 +16,6 @@ export default class OrdersRouter {
       .post("/", authorize, (req, res, next) =>
         ordersControllers.saveOrder(req, res, next)
       );
-
-    //TODO armar un router que vaya al final de todo que mande el metodo get no autorizado
   }
 
   get() {

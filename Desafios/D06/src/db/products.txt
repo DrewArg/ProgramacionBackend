@@ -1,8 +1,0 @@
-[
-  {
-    "id": 1654129312889,
-    "title": "prueba imagen",
-    "price": "156",
-    "thumbnail": "https://cdn.searchenginejournal.com/wp-content/uploads/2019/07/the-essential-guide-to-using-images-legally-online-1520x800.png"
-  }
-]

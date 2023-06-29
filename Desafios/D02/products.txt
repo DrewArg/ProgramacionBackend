@@ -1,8 +1,0 @@
-[
-  {
-    "id": 5,
-    "title": "Pantalla",
-    "price": 4500,
-    "thumbnail": "pantalla.png"
-  }
-]

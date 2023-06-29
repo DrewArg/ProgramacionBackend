@@ -1,7 +1,0 @@
-Modelo vista controlador - MVC
-armar la vista desde el backend y no del frontend
-
-
-// $ npm i express-handlebars
-// buscar en documentacion para mas infop
-// a las 13.25 de la clase
